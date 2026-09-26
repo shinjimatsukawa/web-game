@@ -177,7 +177,12 @@ class BubbleGame {
     } else {
       // 違う文字（おしい！）
       soundManager.playBoing();
-      soundManager.playWrongVoice();
+      
+      // ★ 選択した文字（例: 「ね」）をまず発音し、続いて「ちがうよ〜？もういっかい！」を再生
+      soundManager.playLetter(clickedChar, () => {
+        soundManager.playWrongVoice();
+      });
+
       bubble.classList.add('bubble-shake');
       setTimeout(() => bubble.classList.remove('bubble-shake'), 500);
 
@@ -187,7 +192,8 @@ class BubbleGame {
         avatar.classList.add('puzzled');
         setTimeout(() => avatar.classList.remove('puzzled'), 600);
       }
-      this.showSpeechBubble('ちがうよ〜？');
+      // 吹き出しにも選択した文字を明確に表示
+      this.showSpeechBubble(`「${clickedChar}」ちがうよ〜？`);
     }
   }
 
@@ -200,7 +206,7 @@ class BubbleGame {
     setTimeout(() => {
       bubble.classList.remove('speech-pop');
       bubble.classList.add('hidden');
-    }, 1500);
+    }, 2000);
   }
 
   // ★ 全文字揃ったときの大喜びアクション！
