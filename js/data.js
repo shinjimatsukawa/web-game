@@ -1,569 +1,7 @@
-// 4歳児向け知育ゲーム データ集（全100種類の言葉）
+// 4歳児向け知育ゲーム データ集（くるま・どうぶつ・たべもの 全75種類）
 
-// 1. 「うごく！文字あつめ」データ（全100種類：きょうりゅう・はたらくくるま・どうぶつ・たべもの）
+// 1. 「うごく！文字あつめ」データ（全75種類：絵文字すべて一意・恐竜削除済み）
 const CHARACTERS_DATA = [
-  {
-    "id": "tirano",
-    "category": "dino",
-    "nameHira": "てぃらの",
-    "nameKata": "ティラノ",
-    "charsHira": [
-      "て",
-      "ぃ",
-      "ら",
-      "の"
-    ],
-    "charsKata": [
-      "テ",
-      "ィ",
-      "ラ",
-      "ノ"
-    ],
-    "emoji": "🦖",
-    "soundType": "roar",
-    "soundText": "ガオーーッ！",
-    "themeColor": "#ff6b6b",
-    "actionType": "super-jump",
-    "bgDecor": "🦴"
-  },
-  {
-    "id": "torikera",
-    "category": "dino",
-    "nameHira": "とりけら",
-    "nameKata": "トリケラ",
-    "charsHira": [
-      "と",
-      "り",
-      "け",
-      "ら"
-    ],
-    "charsKata": [
-      "ト",
-      "リ",
-      "ケ",
-      "ラ"
-    ],
-    "emoji": "🦕",
-    "soundType": "growl",
-    "soundText": "ズシンズシン！",
-    "themeColor": "#ffd166",
-    "actionType": "dance-butt",
-    "bgDecor": "🌿"
-  },
-  {
-    "id": "putera",
-    "category": "dino",
-    "nameHira": "ぷてら",
-    "nameKata": "プテラ",
-    "charsHira": [
-      "ぷ",
-      "て",
-      "ら"
-    ],
-    "charsKata": [
-      "プ",
-      "テ",
-      "ラ"
-    ],
-    "emoji": "🦅",
-    "soundType": "chirp",
-    "soundText": "バサバサ〜！",
-    "themeColor": "#06d6a0",
-    "actionType": "high-jump",
-    "bgDecor": "☁️"
-  },
-  {
-    "id": "burakio",
-    "category": "dino",
-    "nameHira": "ぶらきお",
-    "nameKata": "ブラキオ",
-    "charsHira": [
-      "ぶ",
-      "ら",
-      "き",
-      "お"
-    ],
-    "charsKata": [
-      "ブ",
-      "ラ",
-      "キ",
-      "オ"
-    ],
-    "emoji": "🦕",
-    "soundType": "trumpet",
-    "soundText": "首がながーい！",
-    "themeColor": "#118ab2",
-    "actionType": "super-jump",
-    "bgDecor": "🍃"
-  },
-  {
-    "id": "sutego",
-    "category": "dino",
-    "nameHira": "すてご",
-    "nameKata": "ステゴ",
-    "charsHira": [
-      "す",
-      "て",
-      "ご"
-    ],
-    "charsKata": [
-      "ス",
-      "テ",
-      "ゴ"
-    ],
-    "emoji": "🦕",
-    "soundType": "growl",
-    "soundText": "トゲトゲかっこいい！",
-    "themeColor": "#f78c6c",
-    "actionType": "dance-butt",
-    "bgDecor": "🌴"
-  },
-  {
-    "id": "supino",
-    "category": "dino",
-    "nameHira": "すぴの",
-    "nameKata": "スピノ",
-    "charsHira": [
-      "す",
-      "ぴ",
-      "の"
-    ],
-    "charsKata": [
-      "ス",
-      "ピ",
-      "ノ"
-    ],
-    "emoji": "🦖",
-    "soundType": "roar",
-    "soundText": "お魚パクッ！",
-    "themeColor": "#4ea8de",
-    "actionType": "spin",
-    "bgDecor": "🌊"
-  },
-  {
-    "id": "ankiro",
-    "category": "dino",
-    "nameHira": "あんきろ",
-    "nameKata": "アンキロ",
-    "charsHira": [
-      "あ",
-      "ん",
-      "き",
-      "ろ"
-    ],
-    "charsKata": [
-      "ア",
-      "ン",
-      "キ",
-      "ロ"
-    ],
-    "emoji": "🦕",
-    "soundType": "growl",
-    "soundText": "しっぽハンマー！",
-    "themeColor": "#70c1b3",
-    "actionType": "dance-butt",
-    "bgDecor": "🪨"
-  },
-  {
-    "id": "raputoru",
-    "category": "dino",
-    "nameHira": "らぷとる",
-    "nameKata": "ラプトル",
-    "charsHira": [
-      "ら",
-      "ぷ",
-      "と",
-      "る"
-    ],
-    "charsKata": [
-      "ラ",
-      "プ",
-      "ト",
-      "ル"
-    ],
-    "emoji": "🦖",
-    "soundType": "roar",
-    "soundText": "すばやいぞ！",
-    "themeColor": "#ffaa00",
-    "actionType": "zoom-dash",
-    "bgDecor": "🐾"
-  },
-  {
-    "id": "aro",
-    "category": "dino",
-    "nameHira": "あろ",
-    "nameKata": "アロ",
-    "charsHira": [
-      "あ",
-      "ろ"
-    ],
-    "charsKata": [
-      "ア",
-      "ロ"
-    ],
-    "emoji": "🦖",
-    "soundType": "roar",
-    "soundText": "ガブッ！",
-    "themeColor": "#e76f51",
-    "actionType": "super-jump",
-    "bgDecor": "🍖"
-  },
-  {
-    "id": "mosa",
-    "category": "dino",
-    "nameHira": "もさ",
-    "nameKata": "モサ",
-    "charsHira": [
-      "も",
-      "さ"
-    ],
-    "charsKata": [
-      "モ",
-      "サ"
-    ],
-    "emoji": "🐋",
-    "soundType": "snap",
-    "soundText": "海の王者だ！",
-    "themeColor": "#2a9d8f",
-    "actionType": "spin",
-    "bgDecor": "🫧"
-  },
-  {
-    "id": "parasau",
-    "category": "dino",
-    "nameHira": "ぱらさう",
-    "nameKata": "パラサウ",
-    "charsHira": [
-      "ぱ",
-      "ら",
-      "さ",
-      "う"
-    ],
-    "charsKata": [
-      "パ",
-      "ラ",
-      "サ",
-      "ウ"
-    ],
-    "emoji": "🦕",
-    "soundType": "trumpet",
-    "soundText": "トサカでブォー！",
-    "themeColor": "#e9c46a",
-    "actionType": "high-jump",
-    "bgDecor": "🎵"
-  },
-  {
-    "id": "iguano",
-    "category": "dino",
-    "nameHira": "いぐあの",
-    "nameKata": "イグアノ",
-    "charsHira": [
-      "い",
-      "ぐ",
-      "あ",
-      "の"
-    ],
-    "charsKata": [
-      "イ",
-      "グ",
-      "ア",
-      "ノ"
-    ],
-    "emoji": "🦕",
-    "soundType": "growl",
-    "soundText": "親指トゲトゲ！",
-    "themeColor": "#588157",
-    "actionType": "jump",
-    "bgDecor": "🌱"
-  },
-  {
-    "id": "kaseki",
-    "category": "dino",
-    "nameHira": "かせき",
-    "nameKata": "カセキ",
-    "charsHira": [
-      "か",
-      "せ",
-      "き"
-    ],
-    "charsKata": [
-      "カ",
-      "セ",
-      "キ"
-    ],
-    "emoji": "🦴",
-    "soundType": "cheer",
-    "soundText": "たからもの発見！",
-    "themeColor": "#d4a373",
-    "actionType": "tap-bounce",
-    "bgDecor": "⛏️"
-  },
-  {
-    "id": "tamago",
-    "category": "dino",
-    "nameHira": "たまご",
-    "nameKata": "タマゴ",
-    "charsHira": [
-      "た",
-      "ま",
-      "ご"
-    ],
-    "charsKata": [
-      "タ",
-      "マ",
-      "ゴ"
-    ],
-    "emoji": "🥚",
-    "soundType": "hop",
-    "soundText": "パカッ！生まれた！",
-    "themeColor": "#fefae0",
-    "actionType": "jump",
-    "bgDecor": "🐣"
-  },
-  {
-    "id": "ryu",
-    "category": "dino",
-    "nameHira": "りゅう",
-    "nameKata": "リュウ",
-    "charsHira": [
-      "り",
-      "ゅ",
-      "う"
-    ],
-    "charsKata": [
-      "リ",
-      "ュ",
-      "ウ"
-    ],
-    "emoji": "🐲",
-    "soundType": "roar",
-    "soundText": "ドカーン！",
-    "themeColor": "#e63946",
-    "actionType": "super-jump",
-    "bgDecor": "🔥"
-  },
-  {
-    "id": "manmosu",
-    "category": "dino",
-    "nameHira": "まんもす",
-    "nameKata": "マンモス",
-    "charsHira": [
-      "ま",
-      "ん",
-      "も",
-      "す"
-    ],
-    "charsKata": [
-      "マ",
-      "ン",
-      "モ",
-      "ス"
-    ],
-    "emoji": "🦣",
-    "soundType": "trumpet",
-    "soundText": "パオーン！",
-    "themeColor": "#bc6c25",
-    "actionType": "dance-butt",
-    "bgDecor": "❄️"
-  },
-  {
-    "id": "dipuro",
-    "category": "dino",
-    "nameHira": "でぃぷろ",
-    "nameKata": "ディプロ",
-    "charsHira": [
-      "で",
-      "ぃ",
-      "ぷ",
-      "ろ"
-    ],
-    "charsKata": [
-      "デ",
-      "ィ",
-      "プ",
-      "ロ"
-    ],
-    "emoji": "🦕",
-    "soundType": "growl",
-    "soundText": "ながーいしっぽ！",
-    "themeColor": "#83c5be",
-    "actionType": "dance-butt",
-    "bgDecor": "🌿"
-  },
-  {
-    "id": "puresio",
-    "category": "dino",
-    "nameHira": "ぷれしお",
-    "nameKata": "プレシオ",
-    "charsHira": [
-      "ぷ",
-      "れ",
-      "し",
-      "お"
-    ],
-    "charsKata": [
-      "プ",
-      "レ",
-      "シ",
-      "オ"
-    ],
-    "emoji": "🦕",
-    "soundType": "snap",
-    "soundText": "首長竜スイスイ！",
-    "themeColor": "#0077b6",
-    "actionType": "spin",
-    "bgDecor": "🌊"
-  },
-  {
-    "id": "pakike",
-    "category": "dino",
-    "nameHira": "ぱきけ",
-    "nameKata": "パキケ",
-    "charsHira": [
-      "ぱ",
-      "き",
-      "け"
-    ],
-    "charsKata": [
-      "パ",
-      "キ",
-      "ケ"
-    ],
-    "emoji": "🦕",
-    "soundType": "growl",
-    "soundText": "頭がカチンコチン！",
-    "themeColor": "#e07a5f",
-    "actionType": "super-jump",
-    "bgDecor": "💥"
-  },
-  {
-    "id": "puterano",
-    "category": "dino",
-    "nameHira": "ぷてらの",
-    "nameKata": "プテラノ",
-    "charsHira": [
-      "ぷ",
-      "て",
-      "ら",
-      "の"
-    ],
-    "charsKata": [
-      "プ",
-      "テ",
-      "ラ",
-      "ノ"
-    ],
-    "emoji": "🦅",
-    "soundType": "chirp",
-    "soundText": "大空をひとっとび！",
-    "themeColor": "#90be6d",
-    "actionType": "high-jump",
-    "bgDecor": "☁️"
-  },
-  {
-    "id": "hadoro",
-    "category": "dino",
-    "nameHira": "はどろ",
-    "nameKata": "ハドロ",
-    "charsHira": [
-      "は",
-      "ど",
-      "ろ"
-    ],
-    "charsKata": [
-      "ハ",
-      "ド",
-      "ロ"
-    ],
-    "emoji": "🦕",
-    "soundType": "trumpet",
-    "soundText": "カモのはしご！",
-    "themeColor": "#f9c74f",
-    "actionType": "jump",
-    "bgDecor": "🌾"
-  },
-  {
-    "id": "megaro",
-    "category": "dino",
-    "nameHira": "めがろ",
-    "nameKata": "メガロ",
-    "charsHira": [
-      "め",
-      "が",
-      "ろ"
-    ],
-    "charsKata": [
-      "メ",
-      "ガ",
-      "ロ"
-    ],
-    "emoji": "🦈",
-    "soundType": "snap",
-    "soundText": "大きな古代サメ！",
-    "themeColor": "#457b9d",
-    "actionType": "spin",
-    "bgDecor": "🌊"
-  },
-  {
-    "id": "kiba",
-    "category": "dino",
-    "nameHira": "きば",
-    "nameKata": "キバ",
-    "charsHira": [
-      "き",
-      "ば"
-    ],
-    "charsKata": [
-      "キ",
-      "バ"
-    ],
-    "emoji": "🦷",
-    "soundType": "roar",
-    "soundText": "するどいキバ！",
-    "themeColor": "#f8f9fa",
-    "actionType": "jump",
-    "bgDecor": "✨"
-  },
-  {
-    "id": "tsuno",
-    "category": "dino",
-    "nameHira": "つの",
-    "nameKata": "ツノ",
-    "charsHira": [
-      "つ",
-      "の"
-    ],
-    "charsKata": [
-      "ツ",
-      "ノ"
-    ],
-    "emoji": "🦏",
-    "soundType": "growl",
-    "soundText": "つよいツノ！",
-    "themeColor": "#e9ecef",
-    "actionType": "super-jump",
-    "bgDecor": "🛡️"
-  },
-  {
-    "id": "hone",
-    "category": "dino",
-    "nameHira": "ほね",
-    "nameKata": "ホネ",
-    "charsHira": [
-      "ほ",
-      "ね"
-    ],
-    "charsKata": [
-      "ホ",
-      "ネ"
-    ],
-    "emoji": "🦴",
-    "soundType": "cheer",
-    "soundText": "おおきなホネ！",
-    "themeColor": "#fff1e6",
-    "actionType": "jump",
-    "bgDecor": "🌟"
-  },
   {
     "id": "shobo",
     "category": "vehicle",
@@ -731,28 +169,30 @@ const CHARACTERS_DATA = [
     "bgDecor": "🪨"
   },
   {
-    "id": "shoberu",
+    "id": "torakuta",
     "category": "vehicle",
-    "nameHira": "しょべる",
-    "nameKata": "ショベル",
+    "nameHira": "とらくたー",
+    "nameKata": "トラクター",
     "charsHira": [
-      "し",
-      "ょ",
-      "べ",
-      "る"
+      "と",
+      "ら",
+      "く",
+      "た",
+      "ー"
     ],
     "charsKata": [
-      "シ",
-      "ョ",
-      "ベ",
-      "ル"
+      "ト",
+      "ラ",
+      "ク",
+      "タ",
+      "ー"
     ],
     "emoji": "🚜",
     "soundType": "vroom",
-    "soundText": "ガガガ！土を掘るよ！",
+    "soundText": "畑をたがやすよ！",
     "themeColor": "#ffbe0b",
     "actionType": "dance-butt",
-    "bgDecor": "⛰️"
+    "bgDecor": "🌾"
   },
   {
     "id": "kuren",
@@ -777,50 +217,6 @@ const CHARACTERS_DATA = [
     "themeColor": "#ff006e",
     "actionType": "super-jump",
     "bgDecor": "🧱"
-  },
-  {
-    "id": "buru",
-    "category": "vehicle",
-    "nameHira": "ぶる",
-    "nameKata": "ブル",
-    "charsHira": [
-      "ぶ",
-      "る"
-    ],
-    "charsKata": [
-      "ブ",
-      "ル"
-    ],
-    "emoji": "🚜",
-    "soundType": "vroom",
-    "soundText": "ぐんぐん押すぞ！",
-    "themeColor": "#ff9e00",
-    "actionType": "zoom-dash",
-    "bgDecor": "🚧"
-  },
-  {
-    "id": "mikisa",
-    "category": "vehicle",
-    "nameHira": "みきさー",
-    "nameKata": "ミキサー",
-    "charsHira": [
-      "み",
-      "き",
-      "さ",
-      "ー"
-    ],
-    "charsKata": [
-      "ミ",
-      "キ",
-      "サ",
-      "ー"
-    ],
-    "emoji": "🚛",
-    "soundType": "vroom",
-    "soundText": "ぐるぐる回るよ！",
-    "themeColor": "#43aa8b",
-    "actionType": "spin",
-    "bgDecor": "🌀"
   },
   {
     "id": "kisha",
@@ -867,6 +263,30 @@ const CHARACTERS_DATA = [
     "themeColor": "#52b788",
     "actionType": "zoom-dash",
     "bgDecor": "🛤️"
+  },
+  {
+    "id": "chikatetsu",
+    "category": "vehicle",
+    "nameHira": "ちかてつ",
+    "nameKata": "チカテツ",
+    "charsHira": [
+      "ち",
+      "か",
+      "て",
+      "つ"
+    ],
+    "charsKata": [
+      "チ",
+      "カ",
+      "テ",
+      "ツ"
+    ],
+    "emoji": "🚇",
+    "soundType": "vroom",
+    "soundText": "地下をびゅーん！",
+    "themeColor": "#4895ef",
+    "actionType": "zoom-dash",
+    "bgDecor": "🚇"
   },
   {
     "id": "hikoki",
@@ -1133,6 +553,30 @@ const CHARACTERS_DATA = [
     "bgDecor": "⚡"
   },
   {
+    "id": "kikyu",
+    "category": "vehicle",
+    "nameHira": "ききゅう",
+    "nameKata": "キキュウ",
+    "charsHira": [
+      "き",
+      "き",
+      "ゅ",
+      "う"
+    ],
+    "charsKata": [
+      "キ",
+      "キ",
+      "ュ",
+      "ウ"
+    ],
+    "emoji": "🎈",
+    "soundType": "jet",
+    "soundText": "ふわふわ空をとぶ！",
+    "themeColor": "#e0aaff",
+    "actionType": "high-jump",
+    "bgDecor": "☁️"
+  },
+  {
     "id": "buta",
     "category": "animal",
     "nameHira": "ぶた",
@@ -1169,7 +613,7 @@ const CHARACTERS_DATA = [
     "soundType": "bark",
     "soundText": "ワンワン！",
     "themeColor": "#ffd166",
-    "actionType": "jump",
+    "actionType": "super-jump",
     "bgDecor": "🦴"
   },
   {
@@ -1187,8 +631,8 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🐱",
     "soundType": "meow",
-    "soundText": "ニャーオ♪",
-    "themeColor": "#cdb4db",
+    "soundText": "ニャオ〜ン♪",
+    "themeColor": "#f8edeb",
     "actionType": "spin",
     "bgDecor": "🐟"
   },
@@ -1207,10 +651,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🐮",
     "soundType": "moo",
-    "soundText": "モ〜〜ッ！",
-    "themeColor": "#b7e4c7",
+    "soundText": "モ〜〜〜ッ！",
+    "themeColor": "#e9ecef",
     "actionType": "dance-butt",
-    "bgDecor": "🍀"
+    "bgDecor": "🥛"
   },
   {
     "id": "kaeru",
@@ -1228,9 +672,9 @@ const CHARACTERS_DATA = [
       "ル"
     ],
     "emoji": "🐸",
-    "soundType": "hop",
-    "soundText": "ケロケロ〜♪",
-    "themeColor": "#a7c957",
+    "soundType": "ribbit",
+    "soundText": "ケロケロ〜！",
+    "themeColor": "#52b788",
     "actionType": "high-jump",
     "bgDecor": "💧"
   },
@@ -1250,9 +694,9 @@ const CHARACTERS_DATA = [
       "ダ"
     ],
     "emoji": "🐼",
-    "soundType": "cheer",
-    "soundText": "ヤッター！",
-    "themeColor": "#e0aaff",
+    "soundType": "squeak",
+    "soundText": "笹おいしいな〜",
+    "themeColor": "#ced4da",
     "actionType": "dance-butt",
     "bgDecor": "🎋"
   },
@@ -1275,8 +719,8 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🦁",
     "soundType": "roar",
-    "soundText": "ガオ〜〜ッ！",
-    "themeColor": "#ffaa00",
+    "soundText": "ガオオオーッ！",
+    "themeColor": "#f39c12",
     "actionType": "super-jump",
     "bgDecor": "👑"
   },
@@ -1295,8 +739,8 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🐯",
     "soundType": "roar",
-    "soundText": "ガオーーッ！",
-    "themeColor": "#ffb703",
+    "soundText": "ガオッ！しましま！",
+    "themeColor": "#e67e22",
     "actionType": "super-jump",
     "bgDecor": "🐾"
   },
@@ -1315,10 +759,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🐘",
     "soundType": "trumpet",
-    "soundText": "パオ〜〜ン！",
-    "themeColor": "#a2d2ff",
-    "actionType": "dance-butt",
-    "bgDecor": "💧"
+    "soundText": "パオオーーン！",
+    "themeColor": "#95a5a6",
+    "actionType": "super-jump",
+    "bgDecor": "🎪"
   },
   {
     "id": "saru",
@@ -1334,10 +778,10 @@ const CHARACTERS_DATA = [
       "ル"
     ],
     "emoji": "🐵",
-    "soundType": "cheer",
-    "soundText": "ウキキ〜ッ！",
-    "themeColor": "#e9c46a",
-    "actionType": "spin",
+    "soundType": "chatter",
+    "soundText": "ウキキキッ！",
+    "themeColor": "#d35400",
+    "actionType": "high-jump",
     "bgDecor": "🍌"
   },
   {
@@ -1355,8 +799,8 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🐻",
     "soundType": "growl",
-    "soundText": "クマーーッ！",
-    "themeColor": "#dda15e",
+    "soundText": "クマー！はちみつ！",
+    "themeColor": "#795548",
     "actionType": "dance-butt",
     "bgDecor": "🍯"
   },
@@ -1376,8 +820,8 @@ const CHARACTERS_DATA = [
       "ギ"
     ],
     "emoji": "🐰",
-    "soundType": "hop",
-    "soundText": "ピョンピョン！",
+    "soundType": "squeak",
+    "soundText": "ぴょんぴょん！",
     "themeColor": "#ffcbf2",
     "actionType": "high-jump",
     "bgDecor": "🥕"
@@ -1397,10 +841,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🐦",
     "soundType": "chirp",
-    "soundText": "ピピピッ！",
-    "themeColor": "#bde0fe",
-    "actionType": "jump",
-    "bgDecor": "🍃"
+    "soundText": "ピピッ！パタパタ！",
+    "themeColor": "#48cae4",
+    "actionType": "high-jump",
+    "bgDecor": "🌿"
   },
   {
     "id": "uma",
@@ -1416,9 +860,9 @@ const CHARACTERS_DATA = [
       "マ"
     ],
     "emoji": "🐴",
-    "soundType": "vroom",
-    "soundText": "ヒヒ〜〜ン！",
-    "themeColor": "#e0aaff",
+    "soundType": "neigh",
+    "soundText": "ヒヒーン！パッカパッカ！",
+    "themeColor": "#a0522d",
     "actionType": "zoom-dash",
     "bgDecor": "🌾"
   },
@@ -1438,11 +882,11 @@ const CHARACTERS_DATA = [
       "ン"
     ],
     "emoji": "🦒",
-    "soundType": "cheer",
-    "soundText": "首がながいね！",
-    "themeColor": "#ffe3a8",
-    "actionType": "jump",
-    "bgDecor": "🌿"
+    "soundType": "squeak",
+    "soundText": "首がたかーい！",
+    "themeColor": "#ffb703",
+    "actionType": "super-jump",
+    "bgDecor": "🍃"
   },
   {
     "id": "wani",
@@ -1459,9 +903,9 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🐊",
     "soundType": "snap",
-    "soundText": "ガブガブ〜ッ！",
-    "themeColor": "#99d98c",
-    "actionType": "spin",
+    "soundText": "ガブガブッ！",
+    "themeColor": "#2d6a4f",
+    "actionType": "dance-butt",
     "bgDecor": "🌊"
   },
   {
@@ -1478,10 +922,10 @@ const CHARACTERS_DATA = [
       "カ"
     ],
     "emoji": "🦌",
-    "soundType": "hop",
-    "soundText": "ツノが立派！",
-    "themeColor": "#cb997e",
-    "actionType": "jump",
+    "soundType": "squeak",
+    "soundText": "ピョンピョン走る！",
+    "themeColor": "#bc6c25",
+    "actionType": "high-jump",
     "bgDecor": "🍁"
   },
   {
@@ -1498,10 +942,10 @@ const CHARACTERS_DATA = [
       "ス"
     ],
     "emoji": "🐿️",
-    "soundType": "chirp",
-    "soundText": "ドングリ大好き！",
-    "themeColor": "#ddbea9",
-    "actionType": "jump",
+    "soundType": "squeak",
+    "soundText": "どんぐりカリカリ！",
+    "themeColor": "#dda15e",
+    "actionType": "spin",
     "bgDecor": "🌰"
   },
   {
@@ -1520,9 +964,9 @@ const CHARACTERS_DATA = [
       "ジ"
     ],
     "emoji": "🐑",
-    "soundType": "cheer",
-    "soundText": "メェ〜！ふわふわ！",
-    "themeColor": "#f8edeb",
+    "soundType": "baa",
+    "soundText": "メェ〜〜メェ〜〜",
+    "themeColor": "#f8f9fa",
     "actionType": "dance-butt",
     "bgDecor": "☁️"
   },
@@ -1540,11 +984,11 @@ const CHARACTERS_DATA = [
       "ギ"
     ],
     "emoji": "🐐",
-    "soundType": "cheer",
-    "soundText": "メェ〜！草モグモグ！",
-    "themeColor": "#faedcd",
+    "soundType": "baa",
+    "soundText": "メェ〜！お手紙モグモグ",
+    "themeColor": "#e9ecef",
     "actionType": "jump",
-    "bgDecor": "🍀"
+    "bgDecor": "📜"
   },
   {
     "id": "koara",
@@ -1562,11 +1006,11 @@ const CHARACTERS_DATA = [
       "ラ"
     ],
     "emoji": "🐨",
-    "soundType": "cheer",
-    "soundText": "ユーカリ大好き！",
-    "themeColor": "#d6ccc2",
-    "actionType": "tap-bounce",
-    "bgDecor": "🌿"
+    "soundType": "squeak",
+    "soundText": "木にギューッ！",
+    "themeColor": "#adb5bd",
+    "actionType": "dance-butt",
+    "bgDecor": "🐨"
   },
   {
     "id": "gorira",
@@ -1585,10 +1029,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🦍",
     "soundType": "growl",
-    "soundText": "ドンドン！胸をたたく！",
-    "themeColor": "#6c757d",
+    "soundText": "ウホウホ！ドラミング！",
+    "themeColor": "#343a40",
     "actionType": "super-jump",
-    "bgDecor": "🍌"
+    "bgDecor": "💪"
   },
   {
     "id": "sai",
@@ -1605,10 +1049,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🦏",
     "soundType": "growl",
-    "soundText": "立派なツノ！",
-    "themeColor": "#ced4da",
-    "actionType": "dance-butt",
-    "bgDecor": "🪨"
+    "soundText": "ツノがかっこいい！",
+    "themeColor": "#6c757d",
+    "actionType": "zoom-dash",
+    "bgDecor": "🛡️"
   },
   {
     "id": "kaba",
@@ -1625,8 +1069,8 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🦛",
     "soundType": "growl",
-    "soundText": "お口アーン！",
-    "themeColor": "#adb5bd",
+    "soundText": "大あくび！ア〜ン！",
+    "themeColor": "#495057",
     "actionType": "dance-butt",
     "bgDecor": "💦"
   },
@@ -1646,8 +1090,8 @@ const CHARACTERS_DATA = [
       "ダ"
     ],
     "emoji": "🐪",
-    "soundType": "cheer",
-    "soundText": "背中にコブ！",
+    "soundType": "growl",
+    "soundText": "コブがポコッ！",
     "themeColor": "#d4a373",
     "actionType": "dance-butt",
     "bgDecor": "🏜️"
@@ -1668,11 +1112,11 @@ const CHARACTERS_DATA = [
       "ネ"
     ],
     "emoji": "🦊",
-    "soundType": "chirp",
-    "soundText": "コンコン！",
+    "soundType": "bark",
+    "soundText": "コンコン♪",
     "themeColor": "#f77f00",
-    "actionType": "jump",
-    "bgDecor": "🍂"
+    "actionType": "spin",
+    "bgDecor": "🌾"
   },
   {
     "id": "penguin",
@@ -1692,7 +1136,7 @@ const CHARACTERS_DATA = [
       "ン"
     ],
     "emoji": "🐧",
-    "soundType": "cheer",
+    "soundType": "chirp",
     "soundText": "ヨチヨチ歩き！",
     "themeColor": "#003049",
     "actionType": "dance-butt",
@@ -1714,8 +1158,8 @@ const CHARACTERS_DATA = [
       "カ"
     ],
     "emoji": "🐬",
-    "soundType": "chirp",
-    "soundText": "キュイ！大ジャンプ！",
+    "soundType": "whistle",
+    "soundText": "キュイ〜ン！ジャンプ！",
     "themeColor": "#48cae4",
     "actionType": "high-jump",
     "bgDecor": "🌊"
@@ -1736,11 +1180,11 @@ const CHARACTERS_DATA = [
       "ラ"
     ],
     "emoji": "🐳",
-    "soundType": "trumpet",
-    "soundText": "潮をピュ〜〜ッ！",
+    "soundType": "horn",
+    "soundText": "プシューッ！潮吹き！",
     "themeColor": "#0077b6",
     "actionType": "super-jump",
-    "bgDecor": "🫧"
+    "bgDecor": "💦"
   },
   {
     "id": "same",
@@ -1756,10 +1200,10 @@ const CHARACTERS_DATA = [
       "メ"
     ],
     "emoji": "🦈",
-    "soundType": "snap",
-    "soundText": "海のスプリンター！",
-    "themeColor": "#5c6b73",
-    "actionType": "spin",
+    "soundType": "growl",
+    "soundText": "するどい歯！スイスイ！",
+    "themeColor": "#1d3557",
+    "actionType": "zoom-dash",
     "bgDecor": "🌊"
   },
   {
@@ -1779,8 +1223,8 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍎",
     "soundType": "cheer",
-    "soundText": "まっかなりんご！",
-    "themeColor": "#e63946",
+    "soundText": "シャキシャキ甘い！",
+    "themeColor": "#ff4d6d",
     "actionType": "jump",
     "bgDecor": "🍏"
   },
@@ -1801,10 +1245,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍊",
     "soundType": "cheer",
-    "soundText": "あまーいみかん！",
-    "themeColor": "#f77f00",
-    "actionType": "spin",
-    "bgDecor": "🌱"
+    "soundText": "ジューシーおいしい！",
+    "themeColor": "#ff9e00",
+    "actionType": "jump",
+    "bgDecor": "🍊"
   },
   {
     "id": "banana",
@@ -1823,10 +1267,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍌",
     "soundType": "cheer",
-    "soundText": "もぐもぐバナナ！",
-    "themeColor": "#fcbf49",
-    "actionType": "jump",
-    "bgDecor": "🐒"
+    "soundText": "もぐもぐあまい！",
+    "themeColor": "#ffd166",
+    "actionType": "dance-butt",
+    "bgDecor": "🍌"
   },
   {
     "id": "suika",
@@ -1845,10 +1289,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍉",
     "soundType": "cheer",
-    "soundText": "あまいすいか！",
-    "themeColor": "#2a9d8f",
+    "soundText": "夏はすいか！シャキッ！",
+    "themeColor": "#06d6a0",
     "actionType": "jump",
-    "bgDecor": "☀️"
+    "bgDecor": "🍉"
   },
   {
     "id": "budo",
@@ -1869,7 +1313,7 @@ const CHARACTERS_DATA = [
     "soundType": "cheer",
     "soundText": "つぶつぶジューシー！",
     "themeColor": "#7209b7",
-    "actionType": "jump",
+    "actionType": "spin",
     "bgDecor": "🍇"
   },
   {
@@ -1889,10 +1333,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍓",
     "soundType": "cheer",
-    "soundText": "あまーいいちご！",
-    "themeColor": "#f72585",
+    "soundText": "あまくておいしい！",
+    "themeColor": "#e63946",
     "actionType": "jump",
-    "bgDecor": "🍰"
+    "bgDecor": "🍓"
   },
   {
     "id": "meron",
@@ -1911,10 +1355,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍈",
     "soundType": "cheer",
-    "soundText": "いいにおい！",
+    "soundText": "あみあみ高級メロン！",
     "themeColor": "#99d98c",
-    "actionType": "spin",
-    "bgDecor": "✨"
+    "actionType": "jump",
+    "bgDecor": "🍈"
   },
   {
     "id": "tomato",
@@ -1933,10 +1377,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍅",
     "soundType": "cheer",
-    "soundText": "まあるいトマト！",
-    "themeColor": "#d90429",
+    "soundText": "真っ赤なトマト！",
+    "themeColor": "#ef233c",
     "actionType": "jump",
-    "bgDecor": "🥗"
+    "bgDecor": "🍅"
   },
   {
     "id": "pan",
@@ -1954,8 +1398,8 @@ const CHARACTERS_DATA = [
     "emoji": "🍞",
     "soundType": "cheer",
     "soundText": "焼きたてふかふか！",
-    "themeColor": "#e9c46a",
-    "actionType": "dance-butt",
+    "themeColor": "#f4a261",
+    "actionType": "jump",
     "bgDecor": "🥐"
   },
   {
@@ -1975,9 +1419,9 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🎂",
     "soundType": "cheer",
-    "soundText": "おいしいケーキ！",
-    "themeColor": "#ffb703",
-    "actionType": "jump",
+    "soundText": "ハッピーバースデー！",
+    "themeColor": "#ffb4a2",
+    "actionType": "super-jump",
     "bgDecor": "🎉"
   },
   {
@@ -1998,7 +1442,7 @@ const CHARACTERS_DATA = [
     "emoji": "🍨",
     "soundType": "cheer",
     "soundText": "つめたくておいしい！",
-    "themeColor": "#90e0ef",
+    "themeColor": "#a2d2ff",
     "actionType": "spin",
     "bgDecor": "🍦"
   },
@@ -2019,9 +1463,9 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍮",
     "soundType": "cheer",
-    "soundText": "ぷるぷるプリン！",
-    "themeColor": "#f39c12",
-    "actionType": "jump",
+    "soundText": "ぷるぷるおいしい！",
+    "themeColor": "#ffe3a0",
+    "actionType": "dance-butt",
     "bgDecor": "🍮"
   },
   {
@@ -2039,9 +1483,9 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍬",
     "soundType": "cheer",
-    "soundText": "あまいキャンディ！",
-    "themeColor": "#ff4d6d",
-    "actionType": "spin",
+    "soundText": "あまーいキャンディ！",
+    "themeColor": "#ffc6ff",
+    "actionType": "jump",
     "bgDecor": "🍭"
   },
   {
@@ -2063,10 +1507,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍙",
     "soundType": "cheer",
-    "soundText": "モグモグおいしい！",
-    "themeColor": "#333333",
+    "soundText": "もぐもぐおいしい！",
+    "themeColor": "#f8f9fa",
     "actionType": "jump",
-    "bgDecor": "🍘"
+    "bgDecor": "🍙"
   },
   {
     "id": "sushi",
@@ -2084,9 +1528,9 @@ const CHARACTERS_DATA = [
     "emoji": "🍣",
     "soundType": "cheer",
     "soundText": "へい、おまち！",
-    "themeColor": "#e63946",
+    "themeColor": "#f72585",
     "actionType": "jump",
-    "bgDecor": "🍵"
+    "bgDecor": "🍣"
   },
   {
     "id": "kare",
@@ -2105,10 +1549,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🍛",
     "soundType": "cheer",
-    "soundText": "おいしいカレー！",
-    "themeColor": "#d4a373",
+    "soundText": "おいしいカレーライス！",
+    "themeColor": "#e76f51",
     "actionType": "jump",
-    "bgDecor": "🥄"
+    "bgDecor": "🍛"
   },
   {
     "id": "tsuki",
@@ -2125,10 +1569,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🌙",
     "soundType": "cheer",
-    "soundText": "おつきさまピカピカ！",
-    "themeColor": "#f4a261",
-    "actionType": "high-jump",
-    "bgDecor": "⭐"
+    "soundText": "お月さま、ピカピカ！",
+    "themeColor": "#ffd166",
+    "actionType": "spin",
+    "bgDecor": "✨"
   },
   {
     "id": "hoshi",
@@ -2145,10 +1589,10 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "⭐",
     "soundType": "cheer",
-    "soundText": "キラキラお星さま！",
-    "themeColor": "#ffd166",
-    "actionType": "spin",
-    "bgDecor": "✨"
+    "soundText": "きらきらお星さま！",
+    "themeColor": "#ffbe0b",
+    "actionType": "super-jump",
+    "bgDecor": "🌟"
   },
   {
     "id": "niji",
@@ -2165,9 +1609,9 @@ const CHARACTERS_DATA = [
     ],
     "emoji": "🌈",
     "soundType": "cheer",
-    "soundText": "なないろの虹！",
-    "themeColor": "#06d6a0",
-    "actionType": "high-jump",
+    "soundText": "きれいな七色の虹！",
+    "themeColor": "#b5179e",
+    "actionType": "super-jump",
     "bgDecor": "☀️"
   },
   {
@@ -2190,94 +1634,9 @@ const CHARACTERS_DATA = [
     "emoji": "☀️",
     "soundType": "cheer",
     "soundText": "ポカポカお日さま！",
-    "themeColor": "#e76f51",
-    "actionType": "super-jump",
-    "bgDecor": "🌻"
+    "themeColor": "#f77f00",
+    "actionType": "spin",
+    "bgDecor": "✨"
   }
 ];
 
-const RANDOM_DISTRACTORS_HIRA = ['あ', 'か', 'さ', 'た', 'な', 'は', 'ま', 'や', 'ら', 'わ', 'み', 'り', 'も', 'す', 'き'];
-const RANDOM_DISTRACTORS_KATA = ['ア', 'カ', 'サ', 'タ', 'ナ', 'ハ', 'マ', 'ヤ', 'ラ', 'ワ', 'ミ', 'リ', 'モ', 'ス', 'キ'];
-
-// 2. 「おしゃべり 50おんずかん」50音表データ
-const KANA_TABLE_DATA = [
-  // あ行
-  { id: 'a', hira: 'あ', kata: 'ア', word: 'アイス', emoji: '🍦', sound: 'アイスクリーム！' },
-  { id: 'i', hira: 'い', kata: 'イ', word: 'いぬ', emoji: '🐶', sound: 'いぬ！ワンワン！' },
-  { id: 'u', hira: 'う', kata: 'ウ', word: 'うさぎ', emoji: '🐰', sound: 'うさぎ！ピョンピョン！' },
-  { id: 'e', hira: 'え', kata: 'エ', word: 'えんぴつ', emoji: '✏️', sound: 'えんぴつ！カキカキ！' },
-  { id: 'o', hira: 'お', kata: 'オ', word: 'おにぎり', emoji: '🍙', sound: 'おにぎり！モグモグ！' },
-
-  // か行
-  { id: 'ka', hira: 'か', kata: 'カ', word: 'かめ', emoji: '🐢', sound: 'かめ！のっしのっし！' },
-  { id: 'ki', hira: 'き', kata: 'キ', word: 'きりん', emoji: '🦒', sound: 'きりん！首がながいね！' },
-  { id: 'ku', hira: 'く', kata: 'ク', word: 'くるま', emoji: '🚗', sound: 'くるま！ブーーン！' },
-  { id: 'ke', hira: 'け', kata: 'ケ', word: 'ケーキ', emoji: '🎂', sound: 'ケーキ！おいしそう！' },
-  { id: 'ko', hira: 'こ', kata: 'コ', word: 'コアラ', emoji: '🐨', sound: 'コアラ！ユーカリだいすき！' },
-
-  // さ行
-  { id: 'sa', hira: 'さ', kata: 'サ', word: 'さかな', emoji: '🐟', sound: 'さかな！スイスイ！' },
-  { id: 'shi', hira: 'し', kata: 'シ', word: 'しんかんせん', emoji: '🚄', sound: 'しんかんせん！はやーい！' },
-  { id: 'su', hira: 'す', kata: 'ス', word: 'すいか', emoji: '🍉', sound: 'すいか！あまーい！' },
-  { id: 'se', hira: 'せ', kata: 'セ', word: 'せみ', emoji: '🪲', sound: 'せみ！ミーンミーン！' },
-  { id: 'so', hira: 'そ', kata: 'ソ', word: 'そら', emoji: '🌈', sound: 'にじの そら！きれいだね！' },
-
-  // た行
-  { id: 'ta', hira: 'た', kata: 'タ', word: 'たいよう', emoji: '☀️', sound: 'たいよう！ポカポカ！' },
-  { id: 'chi', hira: 'ち', kata: 'チ', word: 'チューリップ', emoji: '🌷', sound: 'チューリップ！かわいいね！' },
-  { id: 'tsu', hira: 'つ', kata: 'ツ', word: 'つき', emoji: '🌙', sound: 'おつきさま！ピカピカ！' },
-  { id: 'te', hira: 'て', kata: 'テ', word: 'てんとうむし', emoji: '🐞', sound: 'てんとうむし！てくてく！' },
-  { id: 'to', hira: 'と', kata: 'ト', word: 'トマト', emoji: '🍅', sound: 'トマト！まあるいね！' },
-
-  // な行
-  { id: 'na', hira: 'な', kata: 'ナ', word: 'なす', emoji: '🍆', sound: 'なすび！むらさきいろ！' },
-  { id: 'ni', hira: 'に', kata: 'ニ', word: 'にじ', emoji: '🌈', sound: 'にじ！７色だね！' },
-  { id: 'nu', hira: 'ぬ', kata: 'ヌ', word: 'ぬいぐるみ', emoji: '🧸', sound: 'ぬいぐるみ！ふわふわ！' },
-  { id: 'ne', hira: 'ね', kata: 'ネ', word: 'ねこ', emoji: '🐱', sound: 'ねこ！ニャーオ！' },
-  { id: 'no', hira: 'の', kata: 'ノ', word: 'のりまき', emoji: '🍣', sound: 'のりまき！パクッ！' },
-
-  // は行
-  { id: 'ha', hira: 'は', kata: 'ハ', word: 'はな', emoji: '🌸', sound: 'おはな！いいにおい！' },
-  { id: 'hi', hira: 'ひ', kata: 'ヒ', word: 'ひこうき', emoji: '✈️', sound: 'ひこうき！ビュイーン！' },
-  { id: 'fu', hira: 'ふ', kata: 'フ', word: 'ふうせん', emoji: '🎈', sound: 'ふうせん！ふわふわ！' },
-  { id: 'he', hira: 'へ', kata: 'ヘ', word: 'へび', emoji: '🐍', sound: 'へび！ニョロニョロ！' },
-  { id: 'ho', hira: 'ほ', kata: 'ホ', word: 'ほし', emoji: '⭐', sound: 'きらきら おほしさま！' },
-
-  // ま行
-  { id: 'ma', hira: 'ま', kata: 'マ', word: 'マイク', emoji: '🎤', sound: 'マイク！ラララ〜♪' },
-  { id: 'mi', hira: 'み', kata: 'ミ', word: 'みかん', emoji: '🍊', sound: 'みかん！おいしいね！' },
-  { id: 'mu', hira: 'む', kata: 'ム', word: 'むしば', emoji: '🦷', sound: 'はみがき シャカシャカ！' },
-  { id: 'me', hira: 'め', kata: 'メ', word: 'めがね', emoji: '👓', sound: 'めがね！よくみえる！' },
-  { id: 'mo', hira: 'も', kata: 'モ', word: 'もも', emoji: '🍑', sound: 'もも！ピンクいろ！' },
-
-  // や行
-  { id: 'ya', hira: 'や', kata: 'ヤ', word: 'やま', emoji: '⛰️', sound: 'おやま！たかーい！' },
-  { id: 'yu', hira: 'ゆ', kata: 'ユ', word: 'ゆきだるま', emoji: '⛄', sound: 'ゆきだるま！コロコロ！' },
-  { id: 'yo', hira: 'よ', kata: 'ヨ', word: 'ようちえん', emoji: '🏫', sound: 'ようちえん！たのしいね！' },
-
-  // ら行
-  { id: 'ra', hira: 'ら', kata: 'ラ', word: 'ライオン', emoji: '🦁', sound: 'ライオン！ガオ〜ッ！' },
-  { id: 'ri', hira: 'り', kata: 'リ', word: 'りんご', emoji: '🍎', sound: 'まっかな りんご！' },
-  { id: 'ru', hira: 'る', kata: 'ル', word: 'ルビー', emoji: '💎', sound: 'ルビー！キラキラ！' },
-  { id: 're', hira: 'れ', kata: 'レ', word: 'レモン', emoji: '🍋', sound: 'レモン！すっぱーい！' },
-  { id: 'ro', hira: 'ろ', kata: 'ロ', word: 'ロケット', emoji: '🚀', sound: 'ロケット！３・２・１発射！' },
-
-  // わ行
-  { id: 'wa', hira: 'わ', kata: 'ワ', word: 'わに', emoji: '🐊', sound: 'わに！ガブガブ！' },
-  { id: 'wo', hira: 'を', kata: 'ヲ', word: '「手を洗う」のを', emoji: '🖐️', sound: 'てをあらうの を！キレイキレイ！' },
-  { id: 'nn', hira: 'ん', kata: 'ン', word: 'パンダのん', emoji: '🐼', sound: 'パンダの ん！' }
-];
-
-// 行ごとのグループ（タブ表示用）
-const KANA_ROWS = [
-  { name: 'あ〜お', chars: ['あ', 'い', 'う', 'え', 'お'] },
-  { name: 'か〜こ', chars: ['か', 'き', 'く', 'け', 'こ'] },
-  { name: 'さ〜そ', chars: ['さ', 'し', 'す', 'せ', 'そ'] },
-  { name: 'た〜と', chars: ['た', 'ち', 'つ', 'て', 'と'] },
-  { name: 'な〜の', chars: ['な', 'に', 'ぬ', 'ね', 'の'] },
-  { name: 'は〜ほ', chars: ['は', 'ひ', 'ふ', 'へ', 'ほ'] },
-  { name: 'ま〜も', chars: ['ま', 'み', 'む', 'め', 'も'] },
-  { name: 'や・ゆ・よ', chars: ['や', 'ゆ', 'よ'] },
-  { name: 'ら〜ろ', chars: ['ら', 'り', 'る', 'れ', 'ろ'] },
-  { name: 'わ・を・ん', chars: ['わ', 'を', 'ん'] }
-];

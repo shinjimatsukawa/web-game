@@ -12,8 +12,7 @@ class App {
     this.screens = {
       home: document.getElementById('screen-home'),
       bubble: document.getElementById('screen-bubble'),
-      board: document.getElementById('screen-board'),
-      fossil: document.getElementById('screen-fossil')
+      board: document.getElementById('screen-board')
     };
 
     this.headerTitle = document.getElementById('header-title');
@@ -78,14 +77,6 @@ class App {
       this.switchScreen('board', true);
     });
 
-    const cardFossil = document.getElementById('card-game-fossil');
-    if (cardFossil) {
-      cardFossil.addEventListener('click', () => {
-        this.handleFirstInteraction();
-        this.switchScreen('fossil', true);
-      });
-    }
-
     // ブラウザの戻る・進むボタン（Safariスワイプ含む）への対応
     window.addEventListener('popstate', (e) => {
       const screen = (e.state && e.state.screen) || this.getScreenFromPath(window.location.pathname);
@@ -127,8 +118,6 @@ class App {
       bubbleGame.setKanaMode(mode);
     } else if (this.currentScreen === 'board') {
       boardGame.setKanaMode(mode);
-    } else if (this.currentScreen === 'fossil') {
-      fossilGame.setKanaMode(mode);
     }
   }
 
@@ -160,16 +149,12 @@ class App {
       this.headerTitle.textContent = '🌟 もじあそび パーク 🌟';
     } else if (screenName === 'bubble') {
       this.btnBackHome.classList.remove('hidden');
-      this.headerTitle.textContent = '🐷 うごく！もじあつめ';
+      this.headerTitle.textContent = '🚒 うごく！もじあつめ';
       bubbleGame.init(document.getElementById('bubble-game-content'), this.currentKanaMode);
     } else if (screenName === 'board') {
       this.btnBackHome.classList.remove('hidden');
       this.headerTitle.textContent = '📖 おしゃべり 50おんずかん';
       boardGame.init(document.getElementById('board-game-content'), this.currentKanaMode);
-    } else if (screenName === 'fossil') {
-      this.btnBackHome.classList.remove('hidden');
-      this.headerTitle.textContent = '⛏️ ほりだせ！かせきハント';
-      fossilGame.init(document.getElementById('fossil-game-content'), this.currentKanaMode);
     }
   }
 }

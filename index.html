@@ -11,7 +11,7 @@
   <base href="/">
   <title>もじあそび パーク - 4さいの ひらがな・カタカナ</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌟</text></svg>">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=2">
 </head>
 <body>
   <!-- 背景の浮遊デコレーション -->
@@ -63,10 +63,10 @@
         <div class="game-select-grid">
           <!-- ゲーム1: うごく！もじあつめ -->
           <button id="card-game-bubble" class="game-select-card card-pink">
-            <div class="card-badge">100しゅるい！</div>
-            <div class="card-hero-emoji">🦖</div>
-            <div class="card-title">うごく！もじあつめ<br>きょうりゅう・くるま</div>
-            <div class="card-desc">恐竜や 消防車が大集合！<br>シャボン玉を タッチしよう！</div>
+            <div class="card-badge">75しゅるい！</div>
+            <div class="card-hero-emoji">🚒</div>
+            <div class="card-title">うごく！もじあつめ<br>くるま・どうぶつ</div>
+            <div class="card-desc">しょうぼうしゃや 動物が大集合！<br>シャボン玉を タッチしよう！</div>
           </button>
 
           <!-- ゲーム2: おしゃべり 50おんずかん -->
@@ -75,14 +75,6 @@
             <div class="card-hero-emoji">📖</div>
             <div class="card-title">おしゃべり<br>50おんずかん</div>
             <div class="card-desc">アイスや いぬを タッチすると<br>元気に おしゃべりするよ！</div>
-          </button>
-
-          <!-- ゲーム3: ほりだせ！きょうりゅう かせきハント -->
-          <button id="card-game-fossil" class="game-select-card card-orange">
-            <div class="card-badge">新とうじょう！</div>
-            <div class="card-hero-emoji">⛏️</div>
-            <div class="card-title">ほりだせ！恐竜<br>かせきハント</div>
-            <div class="card-desc">岩をトントン叩いて発掘！<br>文字をあつめて恐竜復活！</div>
           </button>
         </div>
       </section>
@@ -96,11 +88,6 @@
       <section id="screen-board" class="screen-view hidden">
         <div id="board-game-content" class="game-content-wrap"></div>
       </section>
-
-      <!-- 画面④: ほりだせ！恐竜かせきハント -->
-      <section id="screen-fossil" class="screen-view hidden">
-        <div id="fossil-game-content" class="game-content-wrap"></div>
-      </section>
     </main>
   </div>
 
@@ -108,11 +95,10 @@
   <canvas id="confetti-canvas" class="confetti-canvas" pointer-events="none"></canvas>
 
   <!-- スクリプト群 -->
-  <script src="/js/data.js"></script>
-  <script src="/js/audio.js"></script>
-  <script src="/js/game-bubble.js"></script>
-  <script src="/js/game-board.js"></script>
-  <script src="/js/game-fossil.js"></script>
-  <script src="/js/app.js"></script>
+  <script src="/js/data.js?v=2"></script>
+  <script src="/js/audio.js?v=2"></script>
+  <script src="/js/game-bubble.js?v=2"></script>
+  <script src="/js/game-board.js?v=2"></script>
+  <script src="/js/app.js?v=2"></script>
 </body>
 </html>

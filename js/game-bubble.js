@@ -95,12 +95,11 @@ class BubbleGame {
     const stage = document.createElement('div');
     stage.className = 'bubble-stage';
 
-    // 0-A. カテゴリ選択タブ（きょうりゅう・くるま・どうぶつ・たべもの・ぜんぶ）
+    // 0-A. カテゴリ選択タブ（くるま・どうぶつ・たべもの・ぜんぶ）
     const catBar = document.createElement('div');
     catBar.className = 'category-tabs-bar';
     const categories = [
-      { id: 'all', label: '🌟 ぜんぶ (100)' },
-      { id: 'dino', label: '🦖 きょうりゅう (25)' },
+      { id: 'all', label: '🌟 ぜんぶ (75)' },
       { id: 'vehicle', label: '🚒 くるま (25)' },
       { id: 'animal', label: '🐶 どうぶつ (30)' },
       { id: 'food', label: '🍎 たべもの (20)' }
