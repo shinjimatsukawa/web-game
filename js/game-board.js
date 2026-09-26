@@ -1,11 +1,26 @@
 // 「おしゃべり 50おんずかん」ゲームエンジン
-// 全文字一覧表示 ＆ タップ即座おしゃべり（モーダル不要・iPad 11インチ最適化）
+// 日本伝統の縦並び五十音表（右1列が「あいうえお」、iPad 11インチ最適化）
 
 class BoardGame {
   constructor() {
     this.container = null;
     this.currentMode = 'hira'; // 'hira' | 'kata'
     this.activeItemId = null;
+
+    // 五十音図マトリクス（行 = あ段〜お段, 列 = 左の「わ行」から右の「あ行」へ）
+    // これにより一番右の列が上から「あ、い、う、え、お」になる！
+    this.matrix = [
+      // あ段 (row 0)
+      ['わ', 'ら', 'や', 'ま', 'は', 'な', 'た', 'さ', 'か', 'あ'],
+      // い段 (row 1)
+      [null, 'り', null, 'み', 'ひ', 'に', 'ち', 'し', 'き', 'い'],
+      // う段 (row 2)
+      ['を', 'る', 'ゆ', 'む', 'ふ', 'ぬ', 'つ', 'す', 'く', 'う'],
+      // え段 (row 3)
+      [null, 'れ', null, 'め', 'へ', 'ね', 'て', 'せ', 'け', 'え'],
+      // お段 (row 4)
+      ['ん', 'ろ', 'よ', 'も', 'ほ', 'の', 'と', 'そ', 'こ', 'お']
+    ];
   }
 
   init(container, mode = 'hira') {
@@ -25,10 +40,9 @@ class BoardGame {
     this.container.innerHTML = '';
 
     const boardWrapper = document.createElement('div');
-    boardWrapper.className = 'board-full-wrapper';
+    boardWrapper.className = 'board-traditional-wrapper';
 
-    // 1. リアルタイムおしゃべりプレビューバー（画面上部）
-    // タッチした文字とおしゃべりを大きく表示（モーダルを開かずに画面を塞がない）
+    // 1. 上部のリアルタイムおしゃべりプレビューバー
     const previewBar = document.createElement('div');
     previewBar.className = 'board-preview-bar';
     previewBar.id = 'board-preview-bar';
@@ -37,28 +51,41 @@ class BoardGame {
     `;
     boardWrapper.appendChild(previewBar);
 
-    // 2. 50音 全文字グリッド（全46音をスクロールなし〜快適スクロールで一覧）
+    // 2. 伝統の五十音図グリッド（10列 × 5行、右端が「あいうえお」）
     const gridContainer = document.createElement('div');
-    gridContainer.className = 'board-full-grid';
+    gridContainer.className = 'board-traditional-grid';
 
-    KANA_TABLE_DATA.forEach(data => {
-      const displayChar = this.currentMode === 'hira' ? data.hira : data.kata;
-      const subChar = this.currentMode === 'hira' ? data.kata : data.hira;
+    // 5段 × 10列を展開
+    this.matrix.forEach(row => {
+      row.forEach(char => {
+        if (!char) {
+          // 空白マス（や行・わ行の空き）
+          const emptyCell = document.createElement('div');
+          emptyCell.className = 'traditional-empty-cell';
+          gridContainer.appendChild(emptyCell);
+          return;
+        }
 
-      const card = document.createElement('button');
-      card.className = 'full-board-card';
-      card.id = `board-card-${data.id}`;
-      card.innerHTML = `
-        <span class="card-char-big">${displayChar}</span>
-        <span class="card-emoji-icon">${data.emoji}</span>
-        <span class="card-word-label">${data.word}</span>
-      `;
+        const data = KANA_TABLE_DATA.find(k => k.hira === char);
+        if (!data) return;
 
-      card.addEventListener('click', () => {
-        this.handleCardClick(data, card);
+        const displayChar = this.currentMode === 'hira' ? data.hira : data.kata;
+
+        const card = document.createElement('button');
+        card.className = 'traditional-board-card';
+        card.id = `board-card-${data.id}`;
+        card.innerHTML = `
+          <span class="trad-char">${displayChar}</span>
+          <span class="trad-emoji">${data.emoji}</span>
+          <span class="trad-word">${data.word}</span>
+        `;
+
+        card.addEventListener('click', () => {
+          this.handleCardClick(data, card);
+        });
+
+        gridContainer.appendChild(card);
       });
-
-      gridContainer.appendChild(card);
     });
 
     boardWrapper.appendChild(gridContainer);
@@ -68,12 +95,12 @@ class BoardGame {
   handleCardClick(data, card) {
     this.activeItemId = data.id;
 
-    // 前のカードのアクティブ解除
-    document.querySelectorAll('.full-board-card.card-active').forEach(c => {
+    // 前のアクティブカード解除
+    document.querySelectorAll('.traditional-board-card.card-active').forEach(c => {
       c.classList.remove('card-active', 'card-bounce-anim');
     });
 
-    // 今回のカードをハイライト＆ポヨンとバウンド
+    // 今回のカードをハイライト＆バウンド
     card.classList.add('card-active', 'card-bounce-anim');
     setTimeout(() => card.classList.remove('card-bounce-anim'), 400);
 
@@ -81,7 +108,7 @@ class BoardGame {
     soundManager.playBubblePop();
     soundManager.playTableItem(data.id);
 
-    // プレビューバーを更新（モーダルを開かずに大きく見せる）
+    // プレビューバーを更新
     this.updatePreviewBar(data);
   }
 
