@@ -2,65 +2,38 @@
 
 class App {
   constructor() {
-    this.currentScreen = 'home';
     this.currentKanaMode = 'hira'; // 'hira' | 'kata'
+    this.currentTab = 'play'; // 'play' | 'collection'
     this.init();
   }
 
   init() {
-    // 画面要素
-    this.screens = {
-      home: document.getElementById('screen-home'),
-      quiz: document.getElementById('screen-quiz'),
-      board: document.getElementById('screen-board'),
-      puzzle: document.getElementById('screen-puzzle'),
-      stickers: document.getElementById('screen-stickers')
-    };
+    this.screenPlay = document.getElementById('screen-play');
+    this.screenCollection = document.getElementById('screen-collection');
 
-    this.btnHira = document.getElementById('btn-mode-hira');
-    this.btnKata = document.getElementById('btn-mode-kata');
-    this.btnBackHome = document.getElementById('btn-back-home');
-    this.headerTitle = document.getElementById('header-title');
+    this.btnModeHira = document.getElementById('btn-mode-hira');
+    this.btnModeKata = document.getElementById('btn-mode-kata');
+    this.btnTabPlay = document.getElementById('btn-tab-play');
+    this.btnTabCollection = document.getElementById('btn-tab-collection');
 
-    // イベントバインド
     this.setupEvents();
+
+    // 初期化：開いてすぐにゲーム開始！
+    bubbleGame.init(document.getElementById('play-content'), this.currentKanaMode);
   }
 
   setupEvents() {
     // ひらがな・カタカナ切り替え
-    this.btnHira.addEventListener('click', () => this.setKanaMode('hira'));
-    this.btnKata.addEventListener('click', () => this.setKanaMode('kata'));
+    this.btnModeHira.addEventListener('click', () => this.setKanaMode('hira'));
+    this.btnModeKata.addEventListener('click', () => this.setKanaMode('kata'));
 
-    // ホームへもどる
-    this.btnBackHome.addEventListener('click', () => {
-      soundManager.playPop();
-      this.switchScreen('home');
-    });
+    // タブ切り替え（あそぶ / ずかん）
+    this.btnTabPlay.addEventListener('click', () => this.switchTab('play'));
+    this.btnTabCollection.addEventListener('click', () => this.switchTab('collection'));
 
-    // メニューボタン
-    document.getElementById('menu-card-quiz').addEventListener('click', () => {
-      this.handleUserInteraction();
-      this.switchScreen('quiz');
-    });
-
-    document.getElementById('menu-card-board').addEventListener('click', () => {
-      this.handleUserInteraction();
-      this.switchScreen('board');
-    });
-
-    document.getElementById('menu-card-puzzle').addEventListener('click', () => {
-      this.handleUserInteraction();
-      this.switchScreen('puzzle');
-    });
-
-    document.getElementById('menu-card-stickers').addEventListener('click', () => {
-      this.handleUserInteraction();
-      this.switchScreen('stickers');
-    });
-
-    // 画面全体のどこかを最初にタッチしたときにもオーディオアンロック
+    // 初回タッチでオーディオアンロック
     const unlockHandler = () => {
-      this.handleUserInteraction();
+      soundManager.unlock();
       window.removeEventListener('touchstart', unlockHandler);
       window.removeEventListener('click', unlockHandler);
     };
@@ -68,67 +41,73 @@ class App {
     window.addEventListener('click', unlockHandler, { once: true });
   }
 
-  handleUserInteraction() {
-    soundManager.unlock();
-  }
-
   setKanaMode(mode) {
-    soundManager.playPop();
+    soundManager.playBubblePop();
     this.currentKanaMode = mode;
 
-    this.btnHira.classList.toggle('active', mode === 'hira');
-    this.btnKata.classList.toggle('active', mode === 'kata');
+    this.btnModeHira.classList.toggle('active', mode === 'hira');
+    this.btnModeKata.classList.toggle('active', mode === 'kata');
 
-    // 現在の画面にモード変更を通知
-    if (this.currentScreen === 'quiz') {
-      quizGame.setKanaMode(mode);
-    } else if (this.currentScreen === 'board') {
-      boardGame.setKanaMode(mode);
-    } else if (this.currentScreen === 'puzzle') {
-      puzzleGame.setKanaMode(mode);
+    if (this.currentTab === 'play') {
+      bubbleGame.setKanaMode(mode);
+    } else {
+      this.renderCollection();
     }
   }
 
-  switchScreen(screenName) {
-    this.currentScreen = screenName;
+  switchTab(tab) {
+    soundManager.playBubblePop();
+    this.currentTab = tab;
 
-    // 画面の表示切り替え
-    Object.keys(this.screens).forEach(key => {
-      const el = this.screens[key];
-      if (key === screenName) {
-        el.classList.remove('hidden');
-        el.classList.add('active');
-      } else {
-        el.classList.add('hidden');
-        el.classList.remove('active');
-      }
+    this.btnTabPlay.classList.toggle('active', tab === 'play');
+    this.btnTabCollection.classList.toggle('active', tab === 'collection');
+
+    if (tab === 'play') {
+      this.screenPlay.classList.remove('hidden');
+      this.screenCollection.classList.add('hidden');
+    } else {
+      this.screenPlay.classList.add('hidden');
+      this.screenCollection.classList.remove('hidden');
+      this.renderCollection();
+    }
+  }
+
+  // なかまたち図鑑の描画
+  renderCollection() {
+    const container = document.getElementById('collection-content');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const grid = document.createElement('div');
+    grid.className = 'collection-grid';
+
+    CHARACTERS_DATA.forEach((item, index) => {
+      const card = document.createElement('button');
+      card.className = 'collection-card';
+      const name = this.currentKanaMode === 'hira' ? item.nameHira : item.nameKata;
+
+      card.innerHTML = `
+        <div class="collection-emoji">${item.emoji}</div>
+        <div class="collection-name">${name}</div>
+      `;
+
+      card.addEventListener('click', () => {
+        soundManager.playBubblePop();
+        soundManager.playCharacterAction(item.soundType);
+        // このキャラクターで遊ぶ画面へ遷移
+        bubbleGame.currentCharIndex = index;
+        this.switchTab('play');
+        bubbleGame.loadCharacter();
+      });
+
+      grid.appendChild(card);
     });
 
-    // ヘッダー制御
-    if (screenName === 'home') {
-      this.btnBackHome.classList.add('hidden');
-      this.headerTitle.textContent = '🌟 もじあそび ランド 🌟';
-    } else {
-      this.btnBackHome.classList.remove('hidden');
-
-      if (screenName === 'quiz') {
-        this.headerTitle.textContent = '🎯 もじ あてっこ';
-        quizGame.init(document.getElementById('quiz-content'), this.currentKanaMode);
-      } else if (screenName === 'board') {
-        this.headerTitle.textContent = '📖 あいうえお ひょう';
-        boardGame.init(document.getElementById('board-content'), this.currentKanaMode);
-      } else if (screenName === 'puzzle') {
-        this.headerTitle.textContent = '🧩 ことば パズル';
-        puzzleGame.init(document.getElementById('puzzle-content'), this.currentKanaMode);
-      } else if (screenName === 'stickers') {
-        this.headerTitle.textContent = '✨ シールちょう';
-        stickerBook.render(document.getElementById('stickers-content'));
-      }
-    }
+    container.appendChild(grid);
   }
 }
 
-// 画面いっぱいの紙吹雪エフェクト（外部ライブラリ不要の軽量Canvas実装）
+// 画面いっぱいの星・紙吹雪パーティクル
 function triggerConfetti() {
   const canvas = document.getElementById('confetti-canvas');
   if (!canvas) return;
@@ -138,19 +117,20 @@ function triggerConfetti() {
   canvas.height = window.innerHeight;
 
   const pieces = [];
-  const numberOfPieces = 70;
-  const colors = ['#f43f5e', '#ec4899', '#8b5cf6', '#3b82f6', '#10b981', '#f59e0b', '#fbbf24'];
+  const numberOfPieces = 60;
+  const colors = ['#ff477e', '#ffb703', '#06d6a0', '#118ab2', '#8338ec', '#ff006e'];
+  const symbols = ['⭐', '✨', '💖', '🎉', '🌟'];
 
   for (let i = 0; i < numberOfPieces; i++) {
     pieces.push({
       x: Math.random() * canvas.width,
       y: -20 - Math.random() * 50,
-      size: Math.random() * 12 + 8,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      speedY: Math.random() * 4 + 3,
-      speedX: (Math.random() - 0.5) * 4,
+      size: Math.random() * 16 + 14,
+      symbol: symbols[Math.floor(Math.random() * symbols.length)],
+      speedY: Math.random() * 5 + 3,
+      speedX: (Math.random() - 0.5) * 5,
       rotation: Math.random() * 360,
-      rotationSpeed: (Math.random() - 0.5) * 10
+      rotationSpeed: (Math.random() - 0.5) * 8
     });
   }
 
@@ -168,12 +148,14 @@ function triggerConfetti() {
       ctx.save();
       ctx.translate(p.x, p.y);
       ctx.rotate((p.rotation * Math.PI) / 180);
-      ctx.fillStyle = p.color;
-      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+      ctx.font = `${p.size}px sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(p.symbol, 0, 0);
       ctx.restore();
     });
 
-    if (Date.now() - startTime < 2000) {
+    if (Date.now() - startTime < 2500) {
       animationFrame = requestAnimationFrame(update);
     } else {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -184,7 +166,6 @@ function triggerConfetti() {
   update();
 }
 
-// 起動
 window.addEventListener('DOMContentLoaded', () => {
   window.app = new App();
 });

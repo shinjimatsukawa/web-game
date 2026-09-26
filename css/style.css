@@ -1,27 +1,21 @@
 /* ==========================================================================
-   4歳児向け ひらがな・カタカナ学習ゲーム スタイルシート
-   iPad Safari 最適化 / パステルポップデザイン
+   うごく！どうぶつ・のりもの 文字あつめ スタイルシート
+   4歳児向け / iPad Safari 最適化 / 豊かなアニメーション
    ========================================================================== */
 
 :root {
+  --bg-color: #fff8f0;
+  --text-main: #333333;
   --primary-pink: #ff6b8b;
   --primary-yellow: #ffd166;
   --primary-blue: #4ea8de;
   --primary-green: #06d6a0;
-  --primary-purple: #9d4edd;
-  --bg-cream: #fffbf0;
-  --card-bg: #ffffff;
-  --text-main: #333333;
-  --text-muted: #666666;
-  --shadow-soft: 0 8px 24px rgba(149, 157, 165, 0.2);
-  --shadow-button: 0 6px 0 rgba(0, 0, 0, 0.15);
-  --radius-lg: 24px;
-  --radius-md: 16px;
+  --radius-lg: 28px;
+  --radius-md: 18px;
   --radius-full: 9999px;
-  --font-family-kids: "Hiragino Maru Gothic ProN", "Yu Gothic", "UD デジタル 教科書体 N-R", "Zen Maru Gothic", sans-serif;
+  --font-family-kids: "Hiragino Maru Gothic ProN", "Yu Gothic", "Zen Maru Gothic", sans-serif;
 }
 
-/* リセット＆基本設定 */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -32,55 +26,23 @@
 html, body {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  background-color: var(--bg-cream);
+  overflow: hidden;
+  background-color: var(--bg-color);
   color: var(--text-main);
   font-family: var(--font-family-kids);
   font-weight: bold;
-  /* iPad Safari 誤操作防止 */
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
   touch-action: manipulation;
 }
 
-/* 背景デコレーション */
-.bg-decorations {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 0;
-  overflow: hidden;
-}
-
-.decor-item {
-  position: absolute;
-  font-size: 2.5rem;
-  opacity: 0.25;
-  animation: floatDecor 8s ease-in-out infinite alternate;
-}
-
-.d1 { top: 8%; left: 5%; animation-delay: 0s; }
-.d2 { top: 12%; right: 8%; animation-delay: 1.5s; font-size: 3rem; }
-.d3 { bottom: 15%; left: 8%; animation-delay: 3s; font-size: 3.5rem; }
-.d4 { bottom: 10%; right: 10%; animation-delay: 2s; }
-.d5 { top: 45%; right: 4%; animation-delay: 4s; }
-
-@keyframes floatDecor {
-  0% { transform: translateY(0px) rotate(0deg); }
-  100% { transform: translateY(-25px) rotate(15deg); }
-}
-
-/* アプリ全体レイアウト */
 #app-container {
-  position: relative;
-  z-index: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  position: relative;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
@@ -89,866 +51,463 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 24px;
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 3px solid #f0e6d2;
-  position: sticky;
-  top: 0;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-bottom: 3px solid #f3e9dc;
   z-index: 100;
 }
 
-.header-left {
-  width: 60px;
-}
-
-.header-title {
-  font-size: 1.6rem;
-  color: #ff5e7e;
-  text-shadow: 1px 1px 0 #fff;
-  text-align: center;
-  flex: 1;
-  letter-spacing: 1px;
-}
-
-.header-right {
+.header-tabs {
   display: flex;
-  align-items: center;
+  gap: 10px;
 }
 
-/* 戻るボタン */
-.btn-circle-nav {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-full);
+.btn-tab {
   background: #ffffff;
-  border: 3px solid #ffbe0b;
-  box-shadow: 0 4px 0 #e0a300;
-  font-size: 1.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.btn-circle-nav:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #e0a300;
-}
-
-/* ひらがな / カタカナ 切り替えトグル */
-.mode-toggle {
-  display: flex;
-  background: #eee;
-  padding: 4px;
+  border: 2px solid #ffd166;
+  padding: 8px 18px;
   border-radius: var(--radius-full);
-  border: 2px solid #ddd;
-}
-
-.btn-toggle {
-  border: none;
-  background: transparent;
-  padding: 8px 16px;
-  border-radius: var(--radius-full);
-  font-family: inherit;
-  font-size: 1.05rem;
-  font-weight: bold;
-  cursor: pointer;
-  color: #777;
-  transition: all 0.2s ease;
-}
-
-.btn-toggle.active {
-  background: #ff6b8b;
-  color: #ffffff;
-  box-shadow: 0 2px 6px rgba(255, 107, 139, 0.4);
-}
-
-/* メインエリア */
-.app-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  max-width: 1024px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.screen {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  animation: fadeIn 0.3s ease;
-}
-
-.hidden {
-  display: none !important;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ----------------------------------------------------
-   ホーム画面 (メニュー)
-   ---------------------------------------------------- */
-.home-hero {
-  text-align: center;
-  margin: 10px 0 24px;
-}
-
-.home-character {
-  font-size: 4rem;
-  display: inline-block;
-  animation: wiggle 3s infinite ease-in-out;
-}
-
-@keyframes wiggle {
-  0%, 100% { transform: rotate(-5deg); }
-  50% { transform: rotate(5deg) scale(1.05); }
-}
-
-.home-welcome {
-  font-size: 1.6rem;
-  color: #4a4a4a;
-  margin-top: 4px;
-}
-
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
-  width: 100%;
-}
-
-.menu-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 28px 16px;
-  border-radius: var(--radius-lg);
-  border: 4px solid rgba(255, 255, 255, 0.8);
-  font-family: inherit;
-  cursor: pointer;
-  box-shadow: var(--shadow-soft);
-  transition: transform 0.15s, box-shadow 0.15s;
-  min-height: 180px;
-  outline: none;
-}
-
-.menu-card:active {
-  transform: scale(0.96) translateY(4px);
-}
-
-.card-pink {
-  background: linear-gradient(135deg, #ffd3e2 0%, #ffadc6 100%);
-  border-color: #ff91b2;
-}
-
-.card-blue {
-  background: linear-gradient(135deg, #d0f0fd 0%, #a2defc 100%);
-  border-color: #7ecef5;
-}
-
-.card-yellow {
-  background: linear-gradient(135deg, #fff3c4 0%, #ffe27d 100%);
-  border-color: #ffd152;
-}
-
-.card-green {
-  background: linear-gradient(135deg, #d3f9d8 0%, #a3f7b5 100%);
-  border-color: #72ec8f;
-}
-
-.card-badge {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #ff3366;
-  color: #fff;
-  font-size: 0.85rem;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  font-weight: bold;
-}
-
-.card-icon {
-  font-size: 4rem;
-  margin-bottom: 8px;
-}
-
-.card-title {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 4px;
-}
-
-.card-desc {
-  font-size: 0.95rem;
-  color: #555;
-}
-
-/* ----------------------------------------------------
-   ゲーム共通コンテナ
-   ---------------------------------------------------- */
-.game-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-/* クイズ・パズル ヘッダー */
-.quiz-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 16px;
-  padding: 8px 16px;
-  background: #ffffff;
-  border-radius: var(--radius-md);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.quiz-progress-stars {
-  font-size: 1.6rem;
-  letter-spacing: 4px;
-}
-
-.quiz-star {
-  display: inline-block;
-  transition: transform 0.3s;
-}
-
-.quiz-star.active {
-  transform: scale(1.2);
-}
-
-.quiz-question-number {
-  font-size: 1.3rem;
-  color: #ff6b8b;
-}
-
-/* ----------------------------------------------------
-   クイズ画面 (もじ あてっこ)
-   ---------------------------------------------------- */
-.quiz-prompt-box {
-  background: #ffffff;
-  border: 4px dashed #ff9bb2;
-  border-radius: var(--radius-lg);
-  padding: 20px 24px;
-  text-align: center;
-  width: 100%;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow-soft);
-}
-
-.quiz-prompt-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 8px;
-}
-
-.quiz-prompt-speaker-icon {
-  font-size: 2.4rem;
-  animation: wiggle 2s infinite ease-in-out;
-}
-
-.quiz-prompt-title {
-  font-size: 2rem;
-  color: #333;
-}
-
-.quiz-prompt-hint-box {
-  background: #fff8db;
-  border: 2px dashed #f59e0b;
-  border-radius: var(--radius-md);
-  padding: 10px 16px;
-  font-size: 1.35rem;
-  color: #78350f;
-  margin: 10px auto 14px;
-  max-width: 480px;
-  animation: fadeIn 0.25s ease;
-}
-
-.quiz-prompt-hint-box .hint-emoji {
-  font-size: 1.8rem;
-  vertical-align: middle;
-}
-
-.quiz-prompt-actions {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.quiz-replay-voice-btn, .quiz-hint-btn {
-  border: none;
   font-family: inherit;
   font-size: 1.15rem;
   font-weight: bold;
-  padding: 10px 24px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.quiz-replay-voice-btn {
-  background: #4ea8de;
-  color: #ffffff;
-  box-shadow: 0 4px 0 #287bb0;
-}
-
-.quiz-replay-voice-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #287bb0;
-}
-
-.quiz-hint-btn {
-  background: #ffd166;
-  color: #593900;
-  box-shadow: 0 4px 0 #cfa024;
-}
-
-.quiz-hint-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 #cfa024;
-}
-
-.quiz-choices-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  width: 100%;
-}
-
-.quiz-choice-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  border: 4px solid #bde0fe;
-  border-radius: var(--radius-lg);
-  padding: 20px 16px;
-  cursor: pointer;
-  box-shadow: 0 8px 0 #a2c4e0;
-  transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
-  min-height: 160px;
-}
-
-.quiz-choice-card:active {
-  transform: translateY(5px);
-  box-shadow: 0 3px 0 #a2c4e0;
-}
-
-.quiz-choice-card.correct {
-  background: #d3f9d8;
-  border-color: #06d6a0;
-  box-shadow: 0 8px 0 #059669;
-  animation: bounceCorrect 0.6s ease;
-}
-
-.quiz-choice-card.shake {
-  animation: shake 0.5s ease-in-out;
-  border-color: #ffb703;
-}
-
-.quiz-choice-card .choice-emoji {
-  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.choice-char {
-  font-size: 4.5rem;
-  color: #ff477e;
-  line-height: 1.1;
-}
-
-.choice-emoji {
-  font-size: 2.5rem;
-  margin-top: 4px;
-}
-
-@keyframes bounceCorrect {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-12px); }
-  40%, 80% { transform: translateX(12px); }
-}
-
-/* クイズ ゴール画面 */
-.quiz-goal-card {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  border: 5px solid #ffd166;
-  padding: 36px 24px;
-  text-align: center;
-  width: 100%;
-  box-shadow: var(--shadow-soft);
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes popIn {
-  0% { transform: scale(0.7); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.goal-crown {
-  font-size: 5rem;
-  animation: wiggle 2s infinite ease-in-out;
-}
-
-.goal-title {
-  font-size: 2.4rem;
-  color: #ff3366;
-  margin: 10px 0;
-}
-
-.goal-subtitle {
-  font-size: 1.4rem;
   color: #555;
-  margin-bottom: 24px;
-}
-
-.goal-sticker-award {
-  background: #fff8e7;
-  border: 3px dashed #f59e0b;
-  border-radius: var(--radius-md);
-  padding: 20px;
-  display: inline-block;
-  margin-bottom: 28px;
-}
-
-.award-text {
-  font-size: 1.2rem;
-  color: #d97706;
-  margin-bottom: 8px;
-}
-
-.award-sticker-emoji {
-  font-size: 4.5rem;
-  animation: floatDecor 3s infinite alternate;
-}
-
-.award-sticker-name {
-  font-size: 1.3rem;
-  color: #333;
-}
-
-.goal-actions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.btn-goal-again, .btn-goal-stickers {
-  font-family: inherit;
-  font-size: 1.25rem;
-  font-weight: bold;
-  padding: 16px 28px;
-  border-radius: var(--radius-full);
-  border: none;
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-
-.btn-goal-again {
-  background: #ff6b8b;
-  color: #fff;
-  box-shadow: 0 6px 0 #d93d62;
-}
-
-.btn-goal-again:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 #d93d62;
-}
-
-.btn-goal-stickers {
-  background: #06d6a0;
-  color: #fff;
-  box-shadow: 0 6px 0 #059669;
-}
-
-.btn-goal-stickers:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 #059669;
-}
-
-/* ----------------------------------------------------
-   あいうえお表 (おしゃべり図鑑)
-   ---------------------------------------------------- */
-.board-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.board-tab-btn {
-  background: #ffffff;
-  border: 2px solid #ffd166;
-  color: #555;
-  font-family: inherit;
-  font-size: 1.1rem;
-  font-weight: bold;
-  padding: 10px 18px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  box-shadow: 0 3px 0 #e0a300;
+  box-shadow: 0 4px 0 #e0a300;
   transition: all 0.15s;
 }
 
-.board-tab-btn.active {
+.btn-tab.active {
   background: #ffd166;
   color: #333;
   transform: translateY(2px);
   box-shadow: 0 1px 0 #e0a300;
 }
 
-.board-cards-area {
-  width: 100%;
-}
-
-.board-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 16px;
-  width: 100%;
-}
-
-.board-card {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  border: 3px solid #ffcad4;
-  padding: 16px 10px;
+.mode-toggle {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 6px 0 #e8a9b7;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  background: #eee;
+  padding: 4px;
+  border-radius: var(--radius-full);
 }
 
-.board-card:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 #e8a9b7;
-}
-
-.board-card.pop-anim {
-  animation: bounceCorrect 0.4s ease;
-}
-
-.board-card-char {
-  font-size: 3rem;
-  color: #ff477e;
-  line-height: 1;
-}
-
-.board-card-emoji {
-  font-size: 2.2rem;
-  margin: 6px 0 2px;
-}
-
-.board-card-word {
+.btn-toggle {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-family: inherit;
   font-size: 1rem;
-  color: #333;
+  font-weight: bold;
+  color: #777;
+  cursor: pointer;
 }
 
-.board-card-sub {
-  font-size: 0.85rem;
-  color: #888;
+.btn-toggle.active {
+  background: var(--primary-pink);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(255, 107, 139, 0.4);
 }
 
-/* ポップアップモーダル */
-.board-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+/* メインステージ */
+.app-main {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen-view {
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ----------------------------------------------------
+   ゲームステージ
+   ---------------------------------------------------- */
+.game-stage-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
   justify-content: center;
-  z-index: 1000;
-  animation: fadeIn 0.2s ease;
+  align-items: center;
 }
 
-.board-modal-overlay.fade-out {
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-
-.board-modal-content {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  border: 6px solid #ffbe0b;
-  padding: 30px;
+.bubble-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 900px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 380px;
-  width: 85%;
-  text-align: center;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+  justify-content: space-between;
+  padding: 20px 20px 30px;
+}
+
+/* 背景デコレーション */
+.stage-bg-decor {
+  position: absolute;
+  top: 15%;
+  font-size: 14rem;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+/* 1. キャラクター */
+.stage-character-box {
+  position: relative;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.character-avatar {
+  font-size: 8rem;
+  line-height: 1;
+  transform-origin: bottom center;
+  transition: transform 0.2s;
+  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.12));
+}
+
+.character-avatar.tap-bounce {
+  animation: tapSquish 0.4s ease;
+}
+
+.character-avatar.puzzled {
+  animation: headTilt 0.6s ease-in-out;
+}
+
+/* キャラクターの吹き出し */
+.character-speech-bubble {
+  position: absolute;
+  top: -45px;
+  background: #ffffff;
+  border: 3px solid #ff6b8b;
+  color: #ff3366;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 1.3rem;
+  box-shadow: 0 4px 12px rgba(255, 107, 139, 0.25);
+  white-space: nowrap;
+}
+
+.character-speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px 10px 0;
+  border-style: solid;
+  border-color: #ff6b8b transparent;
+}
+
+.speech-pop {
   animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.modal-char-large {
-  font-size: 6rem;
-  color: #ff3366;
-  line-height: 1;
+/* 2. 文字スロット */
+.slots-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 10px 0 20px;
+  z-index: 10;
 }
 
-.modal-emoji-large {
-  font-size: 5rem;
-  margin: 10px 0;
+.word-slot {
+  width: 90px;
+  height: 90px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
+  font-weight: bold;
+  transition: all 0.25s ease;
 }
 
-.modal-word-large {
-  font-size: 2.2rem;
+.word-slot.empty {
+  background: #ffffff;
+  border: 4px dashed #ffcad4;
+  color: #ffcad4;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.word-slot.filled {
+  background: #ffd166;
+  border: 4px solid #f4a261;
   color: #333;
-  margin-bottom: 4px;
+  box-shadow: 0 8px 0 #e76f51;
 }
 
-.modal-sub-large {
-  font-size: 1.15rem;
-  color: #666;
-  margin-bottom: 20px;
+.slot-absorb {
+  animation: slotPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.modal-speak-btn {
-  background: #4ea8de;
+/* 3. シャボン玉エリア */
+.bubbles-area {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  min-height: 120px;
+  align-items: center;
+  z-index: 20;
+}
+
+.letter-bubble {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #d8f3dc 50%, #95d5b2 100%);
+  border: 4px solid #74c69d;
+  color: #1b4332;
+  font-family: inherit;
+  font-size: 3.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(116, 198, 157, 0.35), inset 0 -6px 12px rgba(255, 255, 255, 0.6);
+  transition: transform 0.15s;
+}
+
+.letter-bubble:nth-child(2n) {
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #ffccd5 50%, #ff758f 100%);
+  border-color: #ff4d6d;
+  color: #590d22;
+  box-shadow: 0 10px 20px rgba(255, 77, 109, 0.35);
+}
+
+.letter-bubble:nth-child(3n) {
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #e0c3fc 50%, #bbadff 100%);
+  border-color: #9d4edd;
+  color: #3c096c;
+  box-shadow: 0 10px 20px rgba(157, 78, 221, 0.35);
+}
+
+.letter-bubble:nth-child(4n) {
+  background: radial-gradient(circle at 30% 30%, #ffffff 0%, #caf0f8 50%, #90e0ef 100%);
+  border-color: #00b4d8;
+  color: #03045e;
+  box-shadow: 0 10px 20px rgba(0, 180, 216, 0.35);
+}
+
+.letter-bubble:active {
+  transform: scale(0.9);
+}
+
+/* シャボン玉浮遊アニメーション */
+.bubble-float-1 { animation: floatY 3s ease-in-out infinite alternate; }
+.bubble-float-2 { animation: floatY 3.5s ease-in-out infinite alternate 0.5s; }
+.bubble-float-3 { animation: floatY 2.8s ease-in-out infinite alternate 1s; }
+.bubble-float-4 { animation: floatY 3.2s ease-in-out infinite alternate 1.5s; }
+
+@keyframes floatY {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-16px) rotate(8deg); }
+}
+
+.pop-burst {
+  animation: burst 0.25s ease-out forwards;
+}
+
+@keyframes burst {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.bubble-shake {
+  animation: shakeBubble 0.5s ease-in-out;
+}
+
+@keyframes shakeBubble {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-12px); }
+  75% { transform: translateX(12px); }
+}
+
+/* 4. クリア時「つぎへ」ナビゲーション */
+.stage-nav-box {
+  margin-top: 10px;
+  z-index: 30;
+}
+
+.btn-next-friend {
+  background: #ff6b8b;
   color: #ffffff;
   border: none;
   font-family: inherit;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  padding: 14px 28px;
+  padding: 16px 36px;
   border-radius: var(--radius-full);
-  box-shadow: 0 6px 0 #2b84ba;
+  box-shadow: 0 8px 0 #d93d62;
   cursor: pointer;
-  margin-bottom: 12px;
-  width: 100%;
+  animation: pulseNext 1.5s infinite ease-in-out;
 }
 
-.modal-speak-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 2px 0 #2b84ba;
-}
-
-.modal-close-btn {
-  background: #e9ecef;
-  color: #495057;
-  border: none;
-  font-family: inherit;
-  font-size: 1.1rem;
-  font-weight: bold;
-  padding: 10px 24px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  width: 100%;
-}
-
-/* ----------------------------------------------------
-   ことばパズル (文字ならべ)
-   ---------------------------------------------------- */
-.puzzle-prompt-box {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  border: 4px solid #ffd166;
-  padding: 20px;
-  text-align: center;
-  width: 100%;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow-soft);
-}
-
-.puzzle-emoji {
-  font-size: 5.5rem;
-  display: inline-block;
-  margin-bottom: 4px;
-}
-
-.puzzle-emoji.bounce {
-  animation: bounceCorrect 0.7s ease infinite alternate;
-}
-
-.puzzle-prompt-title {
-  font-size: 1.4rem;
-  color: #555;
-}
-
-/* スロット（受け皿） */
-.puzzle-slots-container {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 30px;
-  width: 100%;
-}
-
-.puzzle-slot {
-  width: 80px;
-  height: 80px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.8rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.puzzle-slot.empty {
-  background: #f1f3f5;
-  border: 3px dashed #adb5bd;
-  color: #adb5bd;
-}
-
-.puzzle-slot.filled {
-  background: #ffd166;
-  border: 3px solid #f4a261;
-  color: #333;
-  box-shadow: 0 6px 0 #e76f51;
-  animation: popIn 0.2s ease;
-}
-
-/* 文字プール */
-.puzzle-pool-container {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  width: 100%;
-}
-
-.puzzle-char-btn {
-  width: 85px;
-  height: 85px;
-  border-radius: var(--radius-md);
-  background: #ffffff;
-  border: 3px solid #4ea8de;
-  color: #1d3557;
-  font-family: inherit;
-  font-size: 3rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 6px 0 #2a6f97;
-  transition: transform 0.15s, opacity 0.2s;
-}
-
-.puzzle-char-btn:active {
+.btn-next-friend:active {
   transform: translateY(4px);
-  box-shadow: 0 2px 0 #2a6f97;
+  box-shadow: 0 4px 0 #d93d62;
 }
 
-.puzzle-char-btn.used {
-  opacity: 0.2;
-  pointer-events: none;
-  box-shadow: none;
-  border-color: #ccc;
+@keyframes pulseNext {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
 }
 
 /* ----------------------------------------------------
-   ごほうびシール帳
+   ★ 豚のお尻フリフリ＆キャラクターのアクションアニメーション
    ---------------------------------------------------- */
-.sticker-header {
+
+/* お尻フリフリダンス（豚・牛） */
+.dance-butt {
+  animation: buttDance 1.8s infinite ease-in-out;
+}
+
+@keyframes buttDance {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-10deg) scaleX(1.1) translateX(-8px); }
+  75% { transform: rotate(10deg) scaleX(1.1) translateX(8px); }
+}
+
+/* ピョンピョンジャンプ（犬・カエル） */
+.jump {
+  animation: happyJump 1.2s infinite ease-in-out;
+}
+
+@keyframes happyJump {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-24px) scaleY(1.08); }
+}
+
+/* 車のビュンビュンダッシュ */
+.zoom-dash {
+  animation: carDash 2s infinite ease-in-out;
+}
+
+@keyframes carDash {
+  0%, 100% { transform: translateX(-15px); }
+  50% { transform: translateX(15px); }
+}
+
+/* ★ 完成時の全身大喜びダンス（超巨大化 ＆ 大はしゃぎ！） */
+.celebration-dance {
+  animation: megaParty 0.8s infinite alternate ease-in-out;
+}
+
+@keyframes megaParty {
+  0% {
+    transform: scale(1.25) rotate(-15deg) translateY(-20px);
+  }
+  100% {
+    transform: scale(1.35) rotate(15deg) translateY(-45px);
+  }
+}
+
+/* 首かしげ（ちがうよ〜？） */
+@keyframes headTilt {
+  0%, 100% { transform: rotate(0deg); }
+  30% { transform: rotate(-18deg); }
+  70% { transform: rotate(18deg); }
+}
+
+@keyframes tapSquish {
+  0%, 100% { transform: scale(1); }
+  40% { transform: scale(1.2, 0.85); }
+  70% { transform: scale(0.9, 1.15); }
+}
+
+@keyframes slotPop {
+  0% { transform: scale(0.5); }
+  60% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ----------------------------------------------------
+   なかまたち図鑑
+   ---------------------------------------------------- */
+.collection-title-box {
   text-align: center;
-  margin-bottom: 24px;
+  padding: 16px 20px 10px;
 }
 
-.sticker-header h2 {
+.collection-title-box h2 {
   font-size: 1.8rem;
-  color: #f59e0b;
-  margin-bottom: 6px;
+  color: #ff6b8b;
 }
 
-.sticker-count {
-  font-size: 1.25rem;
-  color: #555;
+.collection-title-box p {
+  font-size: 1.15rem;
+  color: #666;
 }
 
-.sticker-count strong {
-  font-size: 1.6rem;
-  color: #ff3366;
-}
-
-.sticker-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 16px;
+.collection-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 20px 40px;
+  max-width: 800px;
+  margin: 0 auto;
   width: 100%;
 }
 
-.sticker-slot {
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 16px;
+}
+
+.collection-card {
   background: #ffffff;
-  border-radius: var(--radius-md);
-  border: 3px solid #dee2e6;
-  padding: 16px 8px;
+  border: 3px solid #ffd166;
+  border-radius: var(--radius-lg);
+  padding: 20px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  min-height: 120px;
-  justify-content: center;
-}
-
-.sticker-slot.unlocked {
-  border-color: #ffd166;
-  background: #fffdf5;
-  box-shadow: 0 4px 12px rgba(255, 209, 102, 0.3);
+  box-shadow: 0 6px 0 #e0a300;
   cursor: pointer;
+  font-family: inherit;
+  transition: transform 0.15s;
 }
 
-.sticker-slot.unlocked.bounce {
-  animation: bounceCorrect 0.5s ease;
+.collection-card:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #e0a300;
 }
 
-.sticker-slot.locked {
-  opacity: 0.45;
-  background: #f8f9fa;
+.collection-emoji {
+  font-size: 4rem;
+  margin-bottom: 6px;
 }
 
-.sticker-emoji {
-  font-size: 3rem;
-  margin-bottom: 4px;
+.collection-name {
+  font-size: 1.25rem;
+  color: #333;
 }
 
-.sticker-emoji-locked {
-  font-size: 2.2rem;
-  color: #bbb;
-  margin-bottom: 4px;
-}
-
-.sticker-name {
-  font-size: 0.95rem;
-  color: #444;
-}
-
-/* ----------------------------------------------------
-   紙吹雪 Canvas
-   ---------------------------------------------------- */
+/* 紙吹雪 Canvas */
 .confetti-canvas {
   position: fixed;
   top: 0;
@@ -957,36 +516,4 @@ html, body {
   height: 100vh;
   pointer-events: none;
   z-index: 9999;
-}
-
-/* ----------------------------------------------------
-   レスポンシブ / iPad 横向き・縦向き調整
-   ---------------------------------------------------- */
-@media (max-width: 600px) {
-  .header-title {
-    font-size: 1.2rem;
-  }
-  .btn-toggle {
-    font-size: 0.85rem;
-    padding: 6px 10px;
-  }
-  .quiz-prompt-title {
-    font-size: 1.6rem;
-  }
-  .quiz-prompt-title strong {
-    font-size: 2.2rem;
-  }
-  .choice-char {
-    font-size: 3.5rem;
-  }
-  .puzzle-slot {
-    width: 65px;
-    height: 65px;
-    font-size: 2.2rem;
-  }
-  .puzzle-char-btn {
-    width: 65px;
-    height: 65px;
-    font-size: 2.2rem;
-  }
 }
