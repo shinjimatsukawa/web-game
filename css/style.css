@@ -352,41 +352,79 @@ html, body {
   box-shadow: var(--shadow-soft);
 }
 
-.quiz-prompt-title {
-  font-size: 2.2rem;
-  color: #333;
+.quiz-prompt-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   margin-bottom: 8px;
 }
 
-.quiz-prompt-title strong {
-  color: #ff3366;
-  font-size: 2.8rem;
-  text-decoration: underline wavy #ffd166;
+.quiz-prompt-speaker-icon {
+  font-size: 2.4rem;
+  animation: wiggle 2s infinite ease-in-out;
 }
 
-.quiz-prompt-hint {
-  font-size: 1.5rem;
-  color: #666;
-  margin-bottom: 12px;
+.quiz-prompt-title {
+  font-size: 2rem;
+  color: #333;
 }
 
-.quiz-replay-voice-btn {
-  background: #4ea8de;
-  color: #ffffff;
+.quiz-prompt-hint-box {
+  background: #fff8db;
+  border: 2px dashed #f59e0b;
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  font-size: 1.35rem;
+  color: #78350f;
+  margin: 10px auto 14px;
+  max-width: 480px;
+  animation: fadeIn 0.25s ease;
+}
+
+.quiz-prompt-hint-box .hint-emoji {
+  font-size: 1.8rem;
+  vertical-align: middle;
+}
+
+.quiz-prompt-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.quiz-replay-voice-btn, .quiz-hint-btn {
   border: none;
   font-family: inherit;
   font-size: 1.15rem;
   font-weight: bold;
   padding: 10px 24px;
   border-radius: var(--radius-full);
-  box-shadow: 0 4px 0 #287bb0;
   cursor: pointer;
   transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.quiz-replay-voice-btn {
+  background: #4ea8de;
+  color: #ffffff;
+  box-shadow: 0 4px 0 #287bb0;
 }
 
 .quiz-replay-voice-btn:active {
   transform: translateY(3px);
   box-shadow: 0 1px 0 #287bb0;
+}
+
+.quiz-hint-btn {
+  background: #ffd166;
+  color: #593900;
+  box-shadow: 0 4px 0 #cfa024;
+}
+
+.quiz-hint-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #cfa024;
 }
 
 .quiz-choices-grid {
@@ -404,11 +442,11 @@ html, body {
   background: #ffffff;
   border: 4px solid #bde0fe;
   border-radius: var(--radius-lg);
-  padding: 24px 16px;
+  padding: 20px 16px;
   cursor: pointer;
   box-shadow: 0 8px 0 #a2c4e0;
   transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
-  min-height: 150px;
+  min-height: 160px;
 }
 
 .quiz-choice-card:active {
@@ -426,6 +464,10 @@ html, body {
 .quiz-choice-card.shake {
   animation: shake 0.5s ease-in-out;
   border-color: #ffb703;
+}
+
+.quiz-choice-card .choice-emoji {
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .choice-char {

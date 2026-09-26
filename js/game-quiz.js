@@ -67,18 +67,26 @@ class QuizGame {
     `;
     this.container.appendChild(header);
 
-    // 問題提示エリア
+    // 問題提示エリア（答えの文字は隠し、音声を聞いて選ぶ）
     const promptBox = document.createElement('div');
     promptBox.className = 'quiz-prompt-box';
     promptBox.innerHTML = `
-      <div class="quiz-prompt-title">「<strong>${char}</strong>」は どれかな？</div>
-      <div class="quiz-prompt-hint">ヒント: ${this.targetItem.emoji} ${this.targetItem.word}</div>
-      <button class="quiz-replay-voice-btn">🔊 もういっかい きく</button>
+      <div class="quiz-prompt-header">
+        <span class="quiz-prompt-speaker-icon">👂🔊</span>
+        <div class="quiz-prompt-title">おとを きいて えらんでね！</div>
+      </div>
+      <div class="quiz-prompt-hint-box hidden" id="quiz-hint-box">
+        💡 ヒント: <span class="hint-emoji">${this.targetItem.emoji}</span> <strong>${this.targetItem.word}</strong> の もじ だよ！
+      </div>
+      <div class="quiz-prompt-actions">
+        <button class="quiz-replay-voice-btn">🔊 もういっかい きく</button>
+        <button class="quiz-hint-btn">💡 ヒントを みる</button>
+      </div>
     `;
 
-    // 音声出題: 「あ！アイス！」「どれかな？」
+    // 音声出題: 「あ」「どれかな？」
     const speakPrompt = () => {
-      soundManager.playKana(this.targetItem.id, () => {
+      soundManager.playChar(this.targetItem.id, () => {
         soundManager.playPhrase('dorekana');
       });
     };
@@ -88,9 +96,18 @@ class QuizGame {
       speakPrompt();
     });
 
+    // ヒントボタン
+    const hintBox = promptBox.querySelector('#quiz-hint-box');
+    const hintBtn = promptBox.querySelector('.quiz-hint-btn');
+    hintBtn.addEventListener('click', () => {
+      soundManager.playPop();
+      hintBox.classList.toggle('hidden');
+      soundManager.playKana(this.targetItem.id);
+    });
+
     this.container.appendChild(promptBox);
 
-    // 選択肢カード（4枚）
+    // 選択肢カード（4枚・文字のみ表示）
     const choicesGrid = document.createElement('div');
     choicesGrid.className = 'quiz-choices-grid';
 
@@ -100,7 +117,7 @@ class QuizGame {
       card.className = 'quiz-choice-card';
       card.innerHTML = `
         <span class="choice-char">${optChar}</span>
-        <span class="choice-emoji">${opt.emoji}</span>
+        <span class="choice-emoji hidden">${opt.emoji}</span>
       `;
 
       card.addEventListener('click', () => this.handleChoice(card, opt));
@@ -120,15 +137,23 @@ class QuizGame {
       // 正解！
       this.isAnswering = true;
       card.classList.add('correct');
+      // 絵文字をふわっと出現させる
+      const emojiEl = card.querySelector('.choice-emoji');
+      if (emojiEl) emojiEl.classList.remove('hidden');
+
       soundManager.playCorrect();
 
       // 紙吹雪エフェクト
       triggerConfetti();
 
-      // 高品質音声による褒め言葉
-      const phraseIds = ['correct_1', 'correct_2', 'correct_3'];
-      const chosenPhrase = phraseIds[Math.floor(Math.random() * phraseIds.length)];
-      setTimeout(() => soundManager.playPhrase(chosenPhrase), 300);
+      // 「あ！アイス！」＋褒め言葉の再生
+      setTimeout(() => {
+        soundManager.playKana(this.targetItem.id, () => {
+          const phraseIds = ['correct_1', 'correct_2', 'correct_3'];
+          const chosenPhrase = phraseIds[Math.floor(Math.random() * phraseIds.length)];
+          soundManager.playPhrase(chosenPhrase);
+        });
+      }, 400);
 
       this.currentQuestionIndex++;
 
@@ -138,7 +163,7 @@ class QuizGame {
         } else {
           this.nextQuestion();
         }
-      }, 1600);
+      }, 2200);
 
     } else {
       // おしい！
