@@ -17,21 +17,19 @@ class KidsGameHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
 
-    def do_GET(self):
-        # パスをパース
-        parsed_path = urllib.parse.urlparse(self.path).path
-        local_path = self.translate_path(parsed_path)
+    def translate_path(self, path):
+        # 標準のパス変換
+        translated = super().translate_path(path)
+        # ファイルが存在する場合はそのまま
+        if os.path.exists(translated) and not os.path.isdir(translated):
+            return translated
 
-        # ファイルが存在する場合は通常配信
-        if os.path.exists(local_path) and not os.path.isdir(local_path):
-            return super().do_GET()
-
-        # ルートディレクトリまたはSPAパス（/bubble, /board等）は index.html を返す
+        # 拡張子のないSPAパス（/bubble, /board 等）は index.html のパスを返す
+        parsed_path = urllib.parse.urlsplit(path).path
         if '.' not in os.path.basename(parsed_path):
-            self.path = '/index.html'
-            return super().do_GET()
+            return os.path.join(self.directory, 'index.html')
 
-        return super().do_GET()
+        return translated
 
     def end_headers(self):
         # iPad Safariでのキャッシュ対策とCORS許可
