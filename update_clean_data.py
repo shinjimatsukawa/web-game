@@ -506,21 +506,20 @@ async def main():
     }
     js_chars.append(clean_dict)
 
-  # 50音表（AIUEO_DATA）を維持
+  # RANDOM_DISTRACTORS と 50音表（KANA_TABLE_DATA）を維持
   with open("js/data.js", "r", encoding="utf-8") as f:
     orig_content = f.read()
 
-  # AIUEO_DATA の部分を取り出す
-  aiueo_idx = orig_content.find("const AIUEO_DATA =")
-  if aiueo_idx != -1:
-    aiueo_part = orig_content[aiueo_idx:]
+  distractor_idx = orig_content.find("const RANDOM_DISTRACTORS_HIRA =")
+  if distractor_idx != -1:
+    trailing_part = orig_content[distractor_idx:]
   else:
-    aiueo_part = ""
+    trailing_part = ""
 
   new_js = "// 4歳児向け知育ゲーム データ集（くるま・どうぶつ・たべもの 全75種類）\n\n"
   new_js += "// 1. 「うごく！文字あつめ」データ（全75種類：絵文字すべて一意・恐竜削除済み）\n"
   new_js += "const CHARACTERS_DATA = " + json.dumps(js_chars, ensure_ascii=False, indent=2) + ";\n\n"
-  new_js += aiueo_part
+  new_js += trailing_part
 
   with open("js/data.js", "w", encoding="utf-8") as f:
     f.write(new_js)
