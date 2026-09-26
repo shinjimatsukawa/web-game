@@ -215,5 +215,5 @@ function triggerConfetti() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  window.app = new App();
+  window.app = window.appInstance = new App();
 });

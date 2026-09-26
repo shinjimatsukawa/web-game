@@ -111,6 +111,11 @@ class SoundManager {
     this.playVoiceFile(`/audio/neural/reactions/wrong.mp3`, onEnd);
   }
 
+  // ステージクリア時の特大褒め言葉: 「ぜんぶ できたね！すごーい！たいへんよくできました！パーフェクト！」
+  playStageClearVoice(onEnd = null) {
+    this.playVoiceFile(`/audio/neural/reactions/stage_clear.mp3`, onEnd);
+  }
+
   // ----------------------------------------------------
   // 🎵 トイポップ BGM ジェネレータ (Web Audio API)
   // ----------------------------------------------------

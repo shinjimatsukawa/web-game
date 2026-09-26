@@ -10,6 +10,11 @@ class BubbleGame {
     this.targetChars = []; // 例: ['ぶ', 'た']
     this.filledSlots = {}; // { 0: 'ぶ', 1: 'た' }
     this.isCompleted = false;
+
+    // ステージクリア設定（5問でクリア）
+    this.maxQuestions = 5;
+    this.clearedCount = 0;
+    this.clearedAnimals = [];
   }
 
   // 動物の出現順序をランダムシャッフル（全種出るまで被らない＆直前と同じ動物が出ない）
@@ -33,6 +38,8 @@ class BubbleGame {
   init(container, mode = 'hira') {
     this.container = container;
     this.currentMode = mode;
+    this.clearedCount = 0;
+    this.clearedAnimals = [];
     this.refillQueue();
     this.nextCharacter();
   }
@@ -70,6 +77,24 @@ class BubbleGame {
     // ゲームメインステージ
     const stage = document.createElement('div');
     stage.className = 'bubble-stage';
+
+    // 0. 星プログレスバー（何問できたか可視化）
+    const progressElem = document.createElement('div');
+    progressElem.className = 'progress-stars-bar';
+    let starsHtml = '';
+    for (let i = 0; i < this.maxQuestions; i++) {
+      if (i < this.clearedCount) {
+        starsHtml += '<span class="star-item filled">⭐</span>';
+      } else {
+        starsHtml += '<span class="star-item empty">☆</span>';
+      }
+    }
+    progressElem.innerHTML = `
+      <span class="progress-label">🌟 あつめた ほし:</span>
+      <div class="stars-list">${starsHtml}</div>
+      <span class="progress-count">${this.clearedCount} / ${this.maxQuestions}</span>
+    `;
+    stage.appendChild(progressElem);
 
     // 背景デコレーション
     const bgElem = document.createElement('div');
@@ -237,6 +262,26 @@ class BubbleGame {
   // ★ 全文字揃ったときの大喜びアクション！
   handleComplete() {
     this.isCompleted = true;
+    this.clearedCount++;
+    this.clearedAnimals.push(this.currentChar.emoji);
+
+    // 上部の星表示を更新
+    const starsList = document.querySelector('.stars-list');
+    const countLabel = document.querySelector('.progress-count');
+    if (starsList) {
+      let starsHtml = '';
+      for (let i = 0; i < this.maxQuestions; i++) {
+        if (i < this.clearedCount) {
+          starsHtml += '<span class="star-item filled">⭐</span>';
+        } else {
+          starsHtml += '<span class="star-item empty">☆</span>';
+        }
+      }
+      starsList.innerHTML = starsHtml;
+    }
+    if (countLabel) {
+      countLabel.textContent = `${this.clearedCount} / ${this.maxQuestions}`;
+    }
 
     // 残りのシャボン玉を優しく消去
     const bubblesArea = document.getElementById('bubbles-area');
@@ -270,14 +315,88 @@ class BubbleGame {
       soundManager.playPraise(this.currentChar.id);
     }, 500);
 
-    // 「つぎの おともだち ➡」ボタンを表示
-    const nav = document.getElementById('stage-nav');
-    if (nav) {
+    // 規定問題数（5問）クリアしたか判定
+    if (this.clearedCount >= this.maxQuestions) {
+      // ★ 5問達成！ステージクリア特別演出へ！
       setTimeout(() => {
-        nav.classList.remove('hidden');
-        nav.classList.add('pop-in');
-      }, 1200);
+        this.handleStageClear();
+      }, 1900);
+    } else {
+      // 通常の「つぎの おともだち ➡」ボタンを表示
+      const nav = document.getElementById('stage-nav');
+      if (nav) {
+        setTimeout(() => {
+          nav.classList.remove('hidden');
+          nav.classList.add('pop-in');
+        }, 1200);
+      }
     }
+  }
+
+  // 🏆 5問クリア！特大ご褒美画面
+  handleStageClear() {
+    soundManager.playFanfare();
+    soundManager.playStageClearVoice();
+
+    // 紙吹雪を連続発射
+    if (typeof triggerConfetti === 'function') {
+      triggerConfetti();
+      setTimeout(triggerConfetti, 400);
+      setTimeout(triggerConfetti, 800);
+    }
+
+    // クリアモーダル作成
+    const overlay = document.createElement('div');
+    overlay.className = 'stage-clear-overlay';
+    overlay.id = 'stage-clear-overlay';
+
+    // 集めた動物たちの絵文字パレード
+    const paradeHtml = this.clearedAnimals
+      .map(emoji => `<span class="parade-animal">${emoji}</span>`)
+      .join('');
+
+    overlay.innerHTML = `
+      <div class="stage-clear-card">
+        <div class="clear-badge">💮 たいへんよくできました 💮</div>
+        <div class="clear-trophy">🏆✨</div>
+        <h2 class="clear-title">ステージ クリア！！</h2>
+        <p class="clear-sub">${this.maxQuestions}もん ぜんぶ せいかい！すごーい！</p>
+        <div class="clear-friends-parade">
+          ${paradeHtml}
+        </div>
+        <div class="clear-actions">
+          <button class="btn-clear-retry" id="btn-clear-retry">
+            🔄 もういっかい あそぶ
+          </button>
+          <button class="btn-clear-home" id="btn-clear-home">
+            🏠 ホームへ もどる
+          </button>
+        </div>
+      </div>
+    `;
+
+    // もう一回あそぶ
+    overlay.querySelector('#btn-clear-retry').addEventListener('click', () => {
+      soundManager.playBubblePop();
+      overlay.remove();
+      this.clearedCount = 0;
+      this.clearedAnimals = [];
+      this.refillQueue();
+      this.nextCharacter();
+    });
+
+    // ホームへもどる
+    overlay.querySelector('#btn-clear-home').addEventListener('click', () => {
+      soundManager.playBubblePop();
+      overlay.remove();
+      if (window.appInstance) {
+        window.appInstance.switchScreen('home', true);
+      } else {
+        window.location.pathname = '/';
+      }
+    });
+
+    document.body.appendChild(overlay);
   }
 }
 
