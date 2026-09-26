@@ -1,23 +1,15 @@
-// サウンドマネージャー ＆ トイポップBGMシーケンサー
+// 高品質オーディオマネージャー（NanamiNeural AI音声ファイル ＋ トイポップBGM ＋ Web Audio効果音）
 
 class SoundManager {
   constructor() {
     this.ctx = null;
-    this.synth = window.speechSynthesis || null;
-    this.voice = null;
     this.isUnlocked = false;
+    this.currentVoiceAudio = null;
 
     // BGM関連
     this.isBgmOn = false;
     this.bgmTimer = null;
     this.bgmStep = 0;
-
-    if (this.synth) {
-      if (this.synth.onvoiceschanged !== undefined) {
-        this.synth.onvoiceschanged = () => this.initVoice();
-      }
-      this.initVoice();
-    }
   }
 
   unlock() {
@@ -30,24 +22,10 @@ class SoundManager {
           this.ctx.resume();
         }
       }
-      if (this.synth) {
-        const dummy = new SpeechSynthesisUtterance('');
-        this.synth.speak(dummy);
-      }
       this.isUnlocked = true;
-      this.initVoice();
     } catch (e) {
       console.warn('Audio unlock error:', e);
     }
-  }
-
-  initVoice() {
-    if (!this.synth) return;
-    const voices = this.synth.getVoices();
-    const jaVoices = voices.filter(v => v.lang.startsWith('ja') || v.lang === 'ja_JP');
-    this.voice = jaVoices.find(v => v.name.includes('Siri') || v.name.includes('Enhanced') || v.name.includes('Kyoko'))
-      || jaVoices[0]
-      || null;
   }
 
   ensureContext() {
@@ -59,6 +37,66 @@ class SoundManager {
       this.ctx.resume();
     }
     return this.ctx;
+  }
+
+  // ----------------------------------------------------
+  // 🎙️ 高品質音声ファイル再生（機械音TTSは一切不使用！）
+  // ----------------------------------------------------
+  stopVoice() {
+    if (this.currentVoiceAudio) {
+      this.currentVoiceAudio.pause();
+      this.currentVoiceAudio.currentTime = 0;
+      this.currentVoiceAudio = null;
+    }
+  }
+
+  playVoiceFile(src, onEnd = null) {
+    this.stopVoice();
+
+    const audio = new Audio(src);
+    this.currentVoiceAudio = audio;
+
+    const cleanup = () => {
+      if (this.currentVoiceAudio === audio) {
+        this.currentVoiceAudio = null;
+      }
+      if (onEnd) onEnd();
+    };
+
+    audio.onended = cleanup;
+    audio.onerror = (e) => {
+      console.warn(`Voice file load error [${src}]:`, e);
+      cleanup();
+    };
+
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(err => {
+        console.warn('Voice play catch:', err);
+        cleanup();
+      });
+    }
+  }
+
+  // 1文字シャボン玉音声: 「あ！」「ぶ！」
+  playLetter(char, onEnd = null) {
+    const encoded = encodeURIComponent(char);
+    this.playVoiceFile(`audio/neural/letters/${encoded}.mp3`, onEnd);
+  }
+
+  // 50音図鑑音声: 「あ！アイスクリーム！」
+  playTableItem(itemId, onEnd = null) {
+    this.playVoiceFile(`audio/neural/table/${itemId}.mp3`, onEnd);
+  }
+
+  // 単語完成時の褒め言葉: 「ぶた！できたー！ブヒブヒ〜♪すごーい！」
+  playPraise(charId, onEnd = null) {
+    this.playVoiceFile(`audio/neural/praises/${charId}.mp3`, onEnd);
+  }
+
+  // 違う文字をタッチしたときのリアクション: 「ちがうよ〜？もういっかい！」
+  playWrongVoice(onEnd = null) {
+    this.playVoiceFile(`audio/neural/reactions/wrong.mp3`, onEnd);
   }
 
   // ----------------------------------------------------
@@ -79,31 +117,29 @@ class SoundManager {
     this.isBgmOn = true;
     if (this.bgmTimer) clearInterval(this.bgmTimer);
 
-    // 明るく楽しいハッピーコード進行 (C - G - Am - F)
-    // マリンバ風のペンタトニックノート
     const melody = [
-      523.25, 659.25, 783.99, 659.25, // C - E - G - E
-      392.00, 493.88, 587.33, 493.88, // G - B - D - B
-      440.00, 523.25, 659.25, 523.25, // A - C - E - C
-      349.23, 440.00, 523.25, 440.00  // F - A - C - A
+      523.25, 659.25, 783.99, 659.25,
+      392.00, 493.88, 587.33, 493.88,
+      440.00, 523.25, 659.25, 523.25,
+      349.23, 440.00, 523.25, 440.00
     ];
 
     const bass = [
-      261.63, 261.63, // C
-      196.00, 196.00, // G
-      220.00, 220.00, // A
-      174.61, 174.61  // F
+      261.63, 261.63,
+      196.00, 196.00,
+      220.00, 220.00,
+      174.61, 174.61
     ];
 
     this.bgmStep = 0;
-    const tempoMs = 280; // 軽快なテンポ
+    const tempoMs = 280;
 
     this.bgmTimer = setInterval(() => {
       if (!this.isBgmOn || !this.ctx) return;
       const ctx = this.ctx;
       const now = ctx.currentTime;
 
-      // 1. マリンバ調の主旋律
+      // 主旋律（マリンバ風サイン波）
       const freq = melody[this.bgmStep % melody.length];
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -118,7 +154,7 @@ class SoundManager {
       osc.start(now);
       osc.stop(now + 0.24);
 
-      // 2. 優しいベース音（偶数ステップのみ）
+      // ベース
       if (this.bgmStep % 2 === 0) {
         const bassFreq = bass[Math.floor(this.bgmStep / 2) % bass.length];
         const bOsc = ctx.createOscillator();
@@ -148,72 +184,9 @@ class SoundManager {
   }
 
   // ----------------------------------------------------
-  // 🗣️ 音声発声
+  // 🔊 効果音 (Web Audio API)
   // ----------------------------------------------------
 
-  // 1文字「ぶ」「た」のテンポの良い発声
-  speakChar(char, onEnd = null) {
-    if (!this.synth) {
-      if (onEnd) onEnd();
-      return;
-    }
-    try {
-      this.synth.cancel();
-      const utter = new SpeechSynthesisUtterance(char);
-      utter.lang = 'ja-JP';
-      if (this.voice) utter.voice = this.voice;
-      utter.rate = 1.0;
-      utter.pitch = 1.1;
-      if (onEnd) utter.onend = () => onEnd();
-      this.synth.speak(utter);
-    } catch (e) {
-      if (onEnd) onEnd();
-    }
-  }
-
-  // 50音図鑑でのおしゃべり（「あ！アイスクリーム！」）
-  speakKanaItem(item, isKata = false) {
-    if (!this.synth) return;
-    try {
-      this.synth.cancel();
-      const char = isKata ? item.kata : item.hira;
-      const text = `${char}！ ${item.sound}`;
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = 'ja-JP';
-      if (this.voice) utter.voice = this.voice;
-      utter.rate = 0.95;
-      utter.pitch = 1.15;
-      this.synth.speak(utter);
-    } catch (e) {
-      console.warn('speak error:', e);
-    }
-  }
-
-  // 完成時の掛け声: 「ぶ！た！ ぶた〜！ やったね！」
-  speakPraise(name, onEnd = null) {
-    if (!this.synth) {
-      if (onEnd) onEnd();
-      return;
-    }
-    try {
-      this.synth.cancel();
-      const utter = new SpeechSynthesisUtterance(`${name}！できたー！すごい！`);
-      utter.lang = 'ja-JP';
-      if (this.voice) utter.voice = this.voice;
-      utter.rate = 1.0;
-      utter.pitch = 1.15;
-      if (onEnd) utter.onend = () => onEnd();
-      this.synth.speak(utter);
-    } catch (e) {
-      if (onEnd) onEnd();
-    }
-  }
-
-  // ----------------------------------------------------
-  // 🔊 効果音
-  // ----------------------------------------------------
-
-  // シャボン玉ポップ音
   playBubblePop() {
     const ctx = this.ensureContext();
     if (!ctx) return;
@@ -234,7 +207,6 @@ class SoundManager {
     osc.stop(now + 0.09);
   }
 
-  // ボヨヨ〜ン音
   playBoing() {
     const ctx = this.ensureContext();
     if (!ctx) return;
@@ -257,7 +229,6 @@ class SoundManager {
     osc.stop(now + 0.46);
   }
 
-  // 動物や乗り物の鳴き声・アクション音
   playCharacterAction(soundType) {
     const ctx = this.ensureContext();
     if (!ctx) return;
@@ -344,7 +315,6 @@ class SoundManager {
     }
   }
 
-  // 大完成のファンファーレ
   playFanfare() {
     const ctx = this.ensureContext();
     if (!ctx) return;

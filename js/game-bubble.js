@@ -151,7 +151,7 @@ class BubbleGame {
     if (matchedIndex !== -1) {
       // ★ 正解！
       soundManager.playBubblePop();
-      soundManager.speakChar(clickedChar);
+      soundManager.playLetter(clickedChar);
 
       // スロットに記録
       this.filledSlots[matchedIndex] = clickedChar;
@@ -177,6 +177,7 @@ class BubbleGame {
     } else {
       // 違う文字（おしい！）
       soundManager.playBoing();
+      soundManager.playWrongVoice();
       bubble.classList.add('bubble-shake');
       setTimeout(() => bubble.classList.remove('bubble-shake'), 500);
 
@@ -233,10 +234,9 @@ class BubbleGame {
     // 吹き出し表示
     this.showSpeechBubble(this.currentChar.soundText);
 
-    // 音声褒め言葉: 「ぶた！できたー！すごい！」
-    const name = this.currentMode === 'hira' ? this.currentChar.nameHira : this.currentChar.nameKata;
+    // ★ お姉さんの高音質音声による褒め言葉: 「ぶた！できたー！ブヒブヒ〜♪すごーい！」
     setTimeout(() => {
-      soundManager.speakPraise(name);
+      soundManager.playPraise(this.currentChar.id);
     }, 500);
 
     // 「つぎの おともだち ➡」ボタンを表示

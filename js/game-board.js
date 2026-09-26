@@ -116,8 +116,8 @@ class BoardGame {
     const displayChar = isKata ? data.kata : data.hira;
     const subChar = isKata ? data.hira : data.kata;
 
-    // おしゃべり発声: 「あ！アイスクリーム！」
-    soundManager.speakKanaItem(data, isKata);
+    // お姉さんの高音質おしゃべり音声: 「あ！アイスクリーム！」
+    soundManager.playTableItem(data.id);
 
     // ポップアップ拡大モーダル
     const modal = document.createElement('div');
@@ -137,7 +137,7 @@ class BoardGame {
     modal.querySelector('.popup-btn-speak').addEventListener('click', (e) => {
       e.stopPropagation();
       soundManager.playBubblePop();
-      soundManager.speakKanaItem(data, isKata);
+      soundManager.playTableItem(data.id);
     });
 
     const closeModal = () => {
