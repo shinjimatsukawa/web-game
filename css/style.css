@@ -479,12 +479,29 @@ html, body {
   100% { transform: translateY(-16px) rotate(8deg); }
 }
 
-.pop-burst { animation: burst 0.25s ease-out forwards; }
+/* 選択されたシャボン玉: 位置は一切変えず、その場で薄く半透明にしてタップ無効 */
+.letter-bubble.bubble-collected {
+  opacity: 0.22 !important;
+  pointer-events: none !important;
+  cursor: default !important;
+  box-shadow: none !important;
+  border: 3px dashed #a0a0a0 !important;
+  background: rgba(255, 255, 255, 0.4) !important;
+  color: #888888 !important;
+  animation: none !important; /* 揺れも止めて完全に位置固定 */
+  transform: scale(0.9) !important;
+  transition: all 0.3s ease;
+}
 
-@keyframes burst {
+/* タップした瞬間のポヨンと弾けるアニメーション */
+.bubble-pop-collect {
+  animation: popToCollected 0.35s ease forwards !important;
+}
+
+@keyframes popToCollected {
   0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.35); opacity: 0.8; }
-  100% { transform: scale(1.6); opacity: 0; }
+  40% { transform: scale(1.22); opacity: 0.85; }
+  100% { transform: scale(0.9); opacity: 0.22; }
 }
 
 .bubble-shake { animation: shakeBubble 0.5s ease-in-out; }

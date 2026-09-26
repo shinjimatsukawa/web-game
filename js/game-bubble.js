@@ -230,7 +230,7 @@ class BubbleGame {
 
   // シャボン玉クリック時（順不同OKの文字スロット判定）
   handleBubbleClick(bubble, clickedChar) {
-    if (this.isCompleted) return;
+    if (this.isCompleted || bubble.classList.contains('bubble-collected')) return;
 
     // クリックされた文字が、まだ埋まっていない正解文字に含まれるか？
     const matchedIndex = this.targetChars.findIndex((char, idx) => {
@@ -245,9 +245,9 @@ class BubbleGame {
       // スロットに記録
       this.filledSlots[matchedIndex] = clickedChar;
 
-      // シャボン玉の弾けアニメーション
-      bubble.classList.add('pop-burst');
-      setTimeout(() => bubble.remove(), 250);
+      // ★ 位置は1ミリも変えず、その場で弾けて半透明に薄くするだけ（remove()しない）
+      bubble.classList.add('bubble-collected', 'bubble-pop-collect');
+      setTimeout(() => bubble.classList.remove('bubble-pop-collect'), 350);
 
       // スロットに吸い込まれる演出
       const targetSlot = document.getElementById(`slot-${matchedIndex}`);
