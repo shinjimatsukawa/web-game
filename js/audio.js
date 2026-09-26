@@ -101,7 +101,12 @@ class SoundManager {
     this.playVoiceFile(`/audio/neural/table/${itemId}.mp3`, onEnd);
   }
 
-  // 単語完成時の褒め言葉: 「ぶた！できたー！ブヒブヒ〜♪すごーい！」
+  // 出題クイズ音声: 「どんぐり だいすき！この どうぶつは？」
+  playQuestion(charId, onEnd = null) {
+    this.playVoiceFile(`/audio/neural/questions/${charId}.mp3`, onEnd);
+  }
+
+  // 単語完成時の褒め言葉: 「せいかい！〇〇！すごーい！」
   playPraise(charId, onEnd = null) {
     this.playVoiceFile(`/audio/neural/praises/${charId}.mp3`, onEnd);
   }

@@ -89,17 +89,24 @@ class BubbleGame {
     this.stopAllAudioAndTimers();
     this.currentMode = mode;
     if (this.currentChar) {
-      this.loadCharacter(this.currentChar);
+      this.loadCharacter(this.currentChar, false);
     }
   }
 
-  loadCharacter(charData) {
+  loadCharacter(charData, playAudio = true) {
     this.currentChar = charData;
     this.lastCharId = charData.id;
     this.targetChars = this.currentMode === 'hira' ? this.currentChar.charsHira : this.currentChar.charsKata;
     this.filledSlots = {};
     this.isCompleted = false;
     this.render();
+
+    // 出題クイズナレーションを自動再生（例: 「どんぐり だいすき！この どうぶつは？」）
+    if (playAudio && window.soundManager && typeof soundManager.playQuestion === 'function') {
+      this.setTimer(() => {
+        soundManager.playQuestion(charData.id);
+      }, 350);
+    }
   }
 
   nextCharacter() {
@@ -172,24 +179,46 @@ class BubbleGame {
     const charBox = document.createElement('div');
     charBox.className = 'stage-character-box';
     charBox.id = 'stage-character';
+
+    const qText = this.currentChar.questionText || this.currentChar.soundText;
     charBox.innerHTML = `
       <div class="character-avatar ${this.currentChar.actionType}" id="char-avatar">
         ${this.currentChar.emoji}
       </div>
-      <div class="character-speech-bubble hidden" id="char-speech">
-        ${this.currentChar.soundText}
+      <div class="character-speech-bubble speech-pop" id="char-speech">
+        <span class="speech-text" id="speech-text">${qText}</span>
+        <button class="btn-replay-question" id="btn-replay-question" type="button" aria-label="もういちど きく">📢</button>
       </div>
     `;
 
-    // キャラクターをタップするといつでも鳴き声＆プチアクション
+    // 📢 スピーカーボタンを押したとき、問いかけ音声をもう一度再生
+    const replayBtn = charBox.querySelector('#btn-replay-question');
+    if (replayBtn) {
+      replayBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.stopAllAudioAndTimers();
+        soundManager.playQuestion(this.currentChar.id);
+        const avatar = document.getElementById('char-avatar');
+        if (avatar) {
+          avatar.classList.add('tap-bounce');
+          setTimeout(() => avatar.classList.remove('tap-bounce'), 400);
+        }
+      });
+    }
+
+    // キャラクター自身をタップしたときも、問いかけ音声を再生（完成後はアクション音）
     charBox.addEventListener('click', () => {
-      soundManager.playCharacterAction(this.currentChar.soundType);
+      this.stopAllAudioAndTimers();
+      if (this.isCompleted) {
+        soundManager.playCharacterAction(this.currentChar.soundType);
+      } else {
+        soundManager.playQuestion(this.currentChar.id);
+      }
       const avatar = document.getElementById('char-avatar');
       if (avatar) {
         avatar.classList.add('tap-bounce');
-        setTimeout(() => avatar.classList.remove('tap-bounce'), 500);
+        setTimeout(() => avatar.classList.remove('tap-bounce'), 400);
       }
-      this.showSpeechBubble(this.currentChar.soundText);
     });
 
     stage.appendChild(charBox);
@@ -313,16 +342,28 @@ class BubbleGame {
     }
   }
 
-  showSpeechBubble(text) {
+  showSpeechBubble(text, duration = 2000) {
     const bubble = document.getElementById('char-speech');
+    const textEl = document.getElementById('speech-text');
     if (!bubble) return;
-    bubble.textContent = text;
+
+    if (textEl) {
+      textEl.textContent = text;
+    } else {
+      bubble.textContent = text;
+    }
+
     bubble.classList.remove('hidden');
+    bubble.classList.remove('speech-pop');
+    void bubble.offsetWidth;
     bubble.classList.add('speech-pop');
-    setTimeout(() => {
-      bubble.classList.remove('speech-pop');
-      bubble.classList.add('hidden');
-    }, 2000);
+
+    this.setTimer(() => {
+      // 未完了なら元のクイズ文に戻す
+      if (!this.isCompleted && textEl) {
+        textEl.textContent = this.currentChar.questionText || this.currentChar.soundText;
+      }
+    }, duration);
   }
 
   // ★ 全文字揃ったときの大喜びアクション！
@@ -356,10 +397,6 @@ class BubbleGame {
       bubblesArea.style.pointerEvents = 'none';
     }
 
-    // 動物の鳴き声＆ファンファーレ
-    soundManager.playCharacterAction(this.currentChar.soundType);
-    soundManager.playFanfare();
-
     // 画面いっぱいの紙吹雪
     if (typeof triggerConfetti === 'function') {
       triggerConfetti();
@@ -373,13 +410,14 @@ class BubbleGame {
       avatar.classList.add('celebration-dance');
     }
 
-    // 吹き出し表示
-    this.showSpeechBubble(this.currentChar.soundText);
+    // 吹き出し表示（「せいかい！🎉」）
+    this.showSpeechBubble(`せいかい！🎉 ${this.currentChar.soundText}`);
 
-    // ★ お姉さんの高音質音声による褒め言葉: 「ぶた！できたー！ブヒブヒ〜♪すごーい！」
+    // ★ 短縮版の褒め言葉（「せいかい！〇〇！すごーい！」）を再生
     this.setTimer(() => {
+      soundManager.playFanfare();
       soundManager.playPraise(this.currentChar.id);
-    }, 500);
+    }, 200);
 
     // 規定問題数（5問）クリアしたか判定
     if (this.clearedCount >= this.maxQuestions) {

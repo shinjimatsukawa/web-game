@@ -1,6 +1,6 @@
 // 4歳児向け知育ゲーム データ集（くるま・どうぶつ・たべもの 全75種類）
 
-// 1. 「うごく！文字あつめ」データ（全75種類：絵文字すべて一意・恐竜削除済み）
+// 1. 「うごく！文字あつめ」データ（出題クイズ questionText つき）
 const CHARACTERS_DATA = [
   {
     "id": "shobo",
@@ -26,7 +26,8 @@ const CHARACTERS_DATA = [
     "soundText": "ウ〜カンカン！放水！",
     "themeColor": "#ff4d6d",
     "actionType": "zoom-dash",
-    "bgDecor": "💦"
+    "bgDecor": "💦",
+    "questionText": "ウ〜カンカン！火をけす この くるまは？"
   },
   {
     "id": "patoka",
@@ -50,7 +51,8 @@ const CHARACTERS_DATA = [
     "soundText": "ウ〜〜！パトロール！",
     "themeColor": "#3a86ff",
     "actionType": "zoom-dash",
-    "bgDecor": "🚨"
+    "bgDecor": "🚨",
+    "questionText": "パトロールしゅっぱつ！この くるまは？"
   },
   {
     "id": "resukyu",
@@ -76,7 +78,8 @@ const CHARACTERS_DATA = [
     "soundText": "ピーポーピーポー！",
     "themeColor": "#ff758f",
     "actionType": "zoom-dash",
-    "bgDecor": "🩹"
+    "bgDecor": "🩹",
+    "questionText": "ピーポーピーポー！たすけにいく この くるまは？"
   },
   {
     "id": "basu",
@@ -96,7 +99,8 @@ const CHARACTERS_DATA = [
     "soundText": "ぷっぷー！乗ってね！",
     "themeColor": "#ffb703",
     "actionType": "dance-butt",
-    "bgDecor": "🚏"
+    "bgDecor": "🚏",
+    "questionText": "ぷっぷー！みんなを乗せる この くるまは？"
   },
   {
     "id": "takushi",
@@ -120,7 +124,8 @@ const CHARACTERS_DATA = [
     "soundText": "どこへ行きますか？",
     "themeColor": "#ffd166",
     "actionType": "zoom-dash",
-    "bgDecor": "🚖"
+    "bgDecor": "🚖",
+    "questionText": "どこへ行きますか？この くるまは？"
   },
   {
     "id": "torakku",
@@ -144,7 +149,8 @@ const CHARACTERS_DATA = [
     "soundText": "荷物を運ぶよ！",
     "themeColor": "#06d6a0",
     "actionType": "zoom-dash",
-    "bgDecor": "📦"
+    "bgDecor": "📦",
+    "questionText": "荷物をいっぱい運ぶ この くるまは？"
   },
   {
     "id": "danpu",
@@ -166,7 +172,8 @@ const CHARACTERS_DATA = [
     "soundText": "荷台がガッターン！",
     "themeColor": "#fb8500",
     "actionType": "dance-butt",
-    "bgDecor": "🪨"
+    "bgDecor": "🪨",
+    "questionText": "荷台がガッターン！この くるまは？"
   },
   {
     "id": "torakuta",
@@ -192,7 +199,8 @@ const CHARACTERS_DATA = [
     "soundText": "畑をたがやすよ！",
     "themeColor": "#ffbe0b",
     "actionType": "dance-butt",
-    "bgDecor": "🌾"
+    "bgDecor": "🌾",
+    "questionText": "畑をたがやす 力持ちの この くるまは？"
   },
   {
     "id": "kuren",
@@ -216,7 +224,8 @@ const CHARACTERS_DATA = [
     "soundText": "ウィーン！たかーい！",
     "themeColor": "#ff006e",
     "actionType": "super-jump",
-    "bgDecor": "🧱"
+    "bgDecor": "🧱",
+    "questionText": "重いものを高く持ち上げる この くるまは？"
   },
   {
     "id": "kisha",
@@ -238,7 +247,8 @@ const CHARACTERS_DATA = [
     "soundText": "シュッシュッポッポー！",
     "themeColor": "#2b2d42",
     "actionType": "zoom-dash",
-    "bgDecor": "💨"
+    "bgDecor": "💨",
+    "questionText": "シュッシュッポッポー！煙を出す この 乗り物は？"
   },
   {
     "id": "densha",
@@ -262,7 +272,8 @@ const CHARACTERS_DATA = [
     "soundText": "ガタゴトガタゴト！",
     "themeColor": "#52b788",
     "actionType": "zoom-dash",
-    "bgDecor": "🛤️"
+    "bgDecor": "🛤️",
+    "questionText": "線路をガタゴト走る この 乗り物は？"
   },
   {
     "id": "chikatetsu",
@@ -286,7 +297,8 @@ const CHARACTERS_DATA = [
     "soundText": "地下をびゅーん！",
     "themeColor": "#4895ef",
     "actionType": "zoom-dash",
-    "bgDecor": "🚇"
+    "bgDecor": "🚇",
+    "questionText": "地下をビュンビュン走る この 乗り物は？"
   },
   {
     "id": "hikoki",
@@ -310,7 +322,8 @@ const CHARACTERS_DATA = [
     "soundText": "ビュイーーーッ！",
     "themeColor": "#caf0f8",
     "actionType": "zoom-dash",
-    "bgDecor": "☁️"
+    "bgDecor": "☁️",
+    "questionText": "お空をビュイーーッ！この 乗り物は？"
   },
   {
     "id": "heri",
@@ -330,7 +343,8 @@ const CHARACTERS_DATA = [
     "soundText": "パタパタ空をとぶ！",
     "themeColor": "#e76f51",
     "actionType": "high-jump",
-    "bgDecor": "🌤️"
+    "bgDecor": "🌤️",
+    "questionText": "プロペラパタパタ！この 乗り物は？"
   },
   {
     "id": "roketto",
@@ -354,7 +368,8 @@ const CHARACTERS_DATA = [
     "soundText": "３・２・１発射！",
     "themeColor": "#ff758f",
     "actionType": "super-jump",
-    "bgDecor": "⭐"
+    "bgDecor": "⭐",
+    "questionText": "３・２・１発射！宇宙へ行く この 乗り物は？"
   },
   {
     "id": "fune",
@@ -374,7 +389,8 @@ const CHARACTERS_DATA = [
     "soundText": "ボォーーッ！波スイスイ！",
     "themeColor": "#8ecae6",
     "actionType": "dance-butt",
-    "bgDecor": "⚓"
+    "bgDecor": "⚓",
+    "questionText": "ボォーーッ！海をスイスイ進む この 乗り物は？"
   },
   {
     "id": "boto",
@@ -396,7 +412,8 @@ const CHARACTERS_DATA = [
     "soundText": "びゅんびゅん走る！",
     "themeColor": "#00b4d8",
     "actionType": "zoom-dash",
-    "bgDecor": "🌊"
+    "bgDecor": "🌊",
+    "questionText": "波をビュンビュン走る この 乗り物は？"
   },
   {
     "id": "yotto",
@@ -418,7 +435,8 @@ const CHARACTERS_DATA = [
     "soundText": "風にのってスイスイ！",
     "themeColor": "#90e0ef",
     "actionType": "dance-butt",
-    "bgDecor": "🌬️"
+    "bgDecor": "🌬️",
+    "questionText": "風をうけてスイスイ進む この 乗り物は？"
   },
   {
     "id": "baiku",
@@ -440,7 +458,8 @@ const CHARACTERS_DATA = [
     "soundText": "ブルルン！はやい！",
     "themeColor": "#d90429",
     "actionType": "zoom-dash",
-    "bgDecor": "🏁"
+    "bgDecor": "🏁",
+    "questionText": "ブルルン！２つのタイヤの この 乗り物は？"
   },
   {
     "id": "kuruma",
@@ -462,7 +481,8 @@ const CHARACTERS_DATA = [
     "soundText": "ブーーン！ドライブ！",
     "themeColor": "#ef233c",
     "actionType": "zoom-dash",
-    "bgDecor": "🚦"
+    "bgDecor": "🚦",
+    "questionText": "ブーーンとおでかけ！この くるまは？"
   },
   {
     "id": "sori",
@@ -482,7 +502,8 @@ const CHARACTERS_DATA = [
     "soundText": "雪の上をシューッ！",
     "themeColor": "#8338ec",
     "actionType": "zoom-dash",
-    "bgDecor": "❄️"
+    "bgDecor": "❄️",
+    "questionText": "雪の上をシューッ！この 乗り物は？"
   },
   {
     "id": "jipu",
@@ -504,7 +525,8 @@ const CHARACTERS_DATA = [
     "soundText": "山道もへっちゃら！",
     "themeColor": "#2b9348",
     "actionType": "jump",
-    "bgDecor": "🌲"
+    "bgDecor": "🌲",
+    "questionText": "山道もへっちゃら！この くるまは？"
   },
   {
     "id": "nozomi",
@@ -526,7 +548,8 @@ const CHARACTERS_DATA = [
     "soundText": "新幹線ビュイーン！",
     "themeColor": "#0077b6",
     "actionType": "zoom-dash",
-    "bgDecor": "🚄"
+    "bgDecor": "🚄",
+    "questionText": "白くて速い新幹線！この 乗り物は？"
   },
   {
     "id": "hayabusa",
@@ -550,7 +573,8 @@ const CHARACTERS_DATA = [
     "soundText": "みどり色の新幹線！",
     "themeColor": "#55a630",
     "actionType": "zoom-dash",
-    "bgDecor": "⚡"
+    "bgDecor": "⚡",
+    "questionText": "緑色のかっこいい新幹線！この 乗り物は？"
   },
   {
     "id": "kikyu",
@@ -574,7 +598,8 @@ const CHARACTERS_DATA = [
     "soundText": "ふわふわ空をとぶ！",
     "themeColor": "#e0aaff",
     "actionType": "high-jump",
-    "bgDecor": "☁️"
+    "bgDecor": "☁️",
+    "questionText": "ふわふわお空をとぶ この 乗り物は？"
   },
   {
     "id": "buta",
@@ -594,7 +619,8 @@ const CHARACTERS_DATA = [
     "soundText": "ブヒブヒ〜♪",
     "themeColor": "#ffb3c6",
     "actionType": "dance-butt",
-    "bgDecor": "🌸"
+    "bgDecor": "🌸",
+    "questionText": "ブヒブヒお鼻の この どうぶつは？"
   },
   {
     "id": "inu",
@@ -614,7 +640,8 @@ const CHARACTERS_DATA = [
     "soundText": "ワンワン！",
     "themeColor": "#ffd166",
     "actionType": "super-jump",
-    "bgDecor": "🦴"
+    "bgDecor": "🦴",
+    "questionText": "ワンワンほえるよ！この どうぶつは？"
   },
   {
     "id": "neko",
@@ -634,7 +661,8 @@ const CHARACTERS_DATA = [
     "soundText": "ニャオ〜ン♪",
     "themeColor": "#f8edeb",
     "actionType": "spin",
-    "bgDecor": "🐟"
+    "bgDecor": "🐟",
+    "questionText": "ニャオ〜ンと鳴く この どうぶつは？"
   },
   {
     "id": "ushi",
@@ -654,7 +682,8 @@ const CHARACTERS_DATA = [
     "soundText": "モ〜〜〜ッ！",
     "themeColor": "#e9ecef",
     "actionType": "dance-butt",
-    "bgDecor": "🥛"
+    "bgDecor": "🥛",
+    "questionText": "モ〜〜！ミルクをくれる この どうぶつは？"
   },
   {
     "id": "kaeru",
@@ -676,7 +705,8 @@ const CHARACTERS_DATA = [
     "soundText": "ケロケロ〜！",
     "themeColor": "#52b788",
     "actionType": "high-jump",
-    "bgDecor": "💧"
+    "bgDecor": "💧",
+    "questionText": "ケロケロピョンピョン！この 生き物は？"
   },
   {
     "id": "panda",
@@ -698,7 +728,8 @@ const CHARACTERS_DATA = [
     "soundText": "笹おいしいな〜",
     "themeColor": "#ced4da",
     "actionType": "dance-butt",
-    "bgDecor": "🎋"
+    "bgDecor": "🎋",
+    "questionText": "白黒もようで笹モグモグ！この どうぶつは？"
   },
   {
     "id": "lion",
@@ -722,7 +753,8 @@ const CHARACTERS_DATA = [
     "soundText": "ガオオオーッ！",
     "themeColor": "#f39c12",
     "actionType": "super-jump",
-    "bgDecor": "👑"
+    "bgDecor": "👑",
+    "questionText": "百獣の王、ガオー！この どうぶつは？"
   },
   {
     "id": "tora",
@@ -742,7 +774,8 @@ const CHARACTERS_DATA = [
     "soundText": "ガオッ！しましま！",
     "themeColor": "#e67e22",
     "actionType": "super-jump",
-    "bgDecor": "🐾"
+    "bgDecor": "🐾",
+    "questionText": "かっこいいシマシマ！強い この どうぶつは？"
   },
   {
     "id": "zou",
@@ -762,7 +795,8 @@ const CHARACTERS_DATA = [
     "soundText": "パオオーーン！",
     "themeColor": "#95a5a6",
     "actionType": "super-jump",
-    "bgDecor": "🎪"
+    "bgDecor": "🎪",
+    "questionText": "お鼻がながーい！この どうぶつは？"
   },
   {
     "id": "saru",
@@ -782,7 +816,8 @@ const CHARACTERS_DATA = [
     "soundText": "ウキキキッ！",
     "themeColor": "#d35400",
     "actionType": "high-jump",
-    "bgDecor": "🍌"
+    "bgDecor": "🍌",
+    "questionText": "ウキキキッ！バナナが大好きな この どうぶつは？"
   },
   {
     "id": "kuma",
@@ -802,7 +837,8 @@ const CHARACTERS_DATA = [
     "soundText": "クマー！はちみつ！",
     "themeColor": "#795548",
     "actionType": "dance-butt",
-    "bgDecor": "🍯"
+    "bgDecor": "🍯",
+    "questionText": "はちみつがだいすき！力持ちの この どうぶつは？"
   },
   {
     "id": "usagi",
@@ -824,7 +860,8 @@ const CHARACTERS_DATA = [
     "soundText": "ぴょんぴょん！",
     "themeColor": "#ffcbf2",
     "actionType": "high-jump",
-    "bgDecor": "🥕"
+    "bgDecor": "🥕",
+    "questionText": "お耳がながくて ピョンピョン！この どうぶつは？"
   },
   {
     "id": "tori",
@@ -844,7 +881,8 @@ const CHARACTERS_DATA = [
     "soundText": "ピピッ！パタパタ！",
     "themeColor": "#48cae4",
     "actionType": "high-jump",
-    "bgDecor": "🌿"
+    "bgDecor": "🌿",
+    "questionText": "ピピピッとお空で歌う この 鳥は？"
   },
   {
     "id": "uma",
@@ -864,7 +902,8 @@ const CHARACTERS_DATA = [
     "soundText": "ヒヒーン！パッカパッカ！",
     "themeColor": "#a0522d",
     "actionType": "zoom-dash",
-    "bgDecor": "🌾"
+    "bgDecor": "🌾",
+    "questionText": "ヒヒーン！パッカパッカ走る この どうぶつは？"
   },
   {
     "id": "kirin",
@@ -886,7 +925,8 @@ const CHARACTERS_DATA = [
     "soundText": "首がたかーい！",
     "themeColor": "#ffb703",
     "actionType": "super-jump",
-    "bgDecor": "🍃"
+    "bgDecor": "🍃",
+    "questionText": "首が長くて背が高い！この どうぶつは？"
   },
   {
     "id": "wani",
@@ -906,7 +946,8 @@ const CHARACTERS_DATA = [
     "soundText": "ガブガブッ！",
     "themeColor": "#2d6a4f",
     "actionType": "dance-butt",
-    "bgDecor": "🌊"
+    "bgDecor": "🌊",
+    "questionText": "大きなお口でガブッ！この 生き物は？"
   },
   {
     "id": "shika",
@@ -926,7 +967,8 @@ const CHARACTERS_DATA = [
     "soundText": "ピョンピョン走る！",
     "themeColor": "#bc6c25",
     "actionType": "high-jump",
-    "bgDecor": "🍁"
+    "bgDecor": "🍁",
+    "questionText": "きれいなツノがある この どうぶつは？"
   },
   {
     "id": "risu",
@@ -946,7 +988,8 @@ const CHARACTERS_DATA = [
     "soundText": "どんぐりカリカリ！",
     "themeColor": "#dda15e",
     "actionType": "spin",
-    "bgDecor": "🌰"
+    "bgDecor": "🌰",
+    "questionText": "どんぐり だいすき！この どうぶつは？"
   },
   {
     "id": "hitsuji",
@@ -968,7 +1011,8 @@ const CHARACTERS_DATA = [
     "soundText": "メェ〜〜メェ〜〜",
     "themeColor": "#f8f9fa",
     "actionType": "dance-butt",
-    "bgDecor": "☁️"
+    "bgDecor": "☁️",
+    "questionText": "もこもこ毛糸の この どうぶつは？"
   },
   {
     "id": "yagi",
@@ -988,7 +1032,8 @@ const CHARACTERS_DATA = [
     "soundText": "メェ〜！お手紙モグモグ",
     "themeColor": "#e9ecef",
     "actionType": "jump",
-    "bgDecor": "📜"
+    "bgDecor": "📜",
+    "questionText": "高いところもピョンピョン！この どうぶつは？"
   },
   {
     "id": "koara",
@@ -1010,7 +1055,8 @@ const CHARACTERS_DATA = [
     "soundText": "木にギューッ！",
     "themeColor": "#adb5bd",
     "actionType": "dance-butt",
-    "bgDecor": "🐨"
+    "bgDecor": "🐨",
+    "questionText": "ユーカリの木にギューッ！この どうぶつは？"
   },
   {
     "id": "gorira",
@@ -1032,7 +1078,8 @@ const CHARACTERS_DATA = [
     "soundText": "ウホウホ！ドラミング！",
     "themeColor": "#343a40",
     "actionType": "super-jump",
-    "bgDecor": "💪"
+    "bgDecor": "💪",
+    "questionText": "胸をトントンたたく！強い この どうぶつは？"
   },
   {
     "id": "sai",
@@ -1052,7 +1099,8 @@ const CHARACTERS_DATA = [
     "soundText": "ツノがかっこいい！",
     "themeColor": "#6c757d",
     "actionType": "zoom-dash",
-    "bgDecor": "🛡️"
+    "bgDecor": "🛡️",
+    "questionText": "鼻の上に強いツノ！この どうぶつは？"
   },
   {
     "id": "kaba",
@@ -1072,7 +1120,8 @@ const CHARACTERS_DATA = [
     "soundText": "大あくび！ア〜ン！",
     "themeColor": "#495057",
     "actionType": "dance-butt",
-    "bgDecor": "💦"
+    "bgDecor": "💦",
+    "questionText": "大きなお口をアーン！この どうぶつは？"
   },
   {
     "id": "rakuda",
@@ -1094,7 +1143,8 @@ const CHARACTERS_DATA = [
     "soundText": "コブがポコッ！",
     "themeColor": "#d4a373",
     "actionType": "dance-butt",
-    "bgDecor": "🏜️"
+    "bgDecor": "🏜️",
+    "questionText": "お背中にコブがある この どうぶつは？"
   },
   {
     "id": "kitsune",
@@ -1116,7 +1166,8 @@ const CHARACTERS_DATA = [
     "soundText": "コンコン♪",
     "themeColor": "#f77f00",
     "actionType": "spin",
-    "bgDecor": "🌾"
+    "bgDecor": "🌾",
+    "questionText": "コンコン！お耳がピン！この どうぶつは？"
   },
   {
     "id": "penguin",
@@ -1140,7 +1191,8 @@ const CHARACTERS_DATA = [
     "soundText": "ヨチヨチ歩き！",
     "themeColor": "#003049",
     "actionType": "dance-butt",
-    "bgDecor": "🧊"
+    "bgDecor": "🧊",
+    "questionText": "よちよち歩き！氷の上の この 鳥は？"
   },
   {
     "id": "iruka",
@@ -1162,7 +1214,8 @@ const CHARACTERS_DATA = [
     "soundText": "キュイ〜ン！ジャンプ！",
     "themeColor": "#48cae4",
     "actionType": "high-jump",
-    "bgDecor": "🌊"
+    "bgDecor": "🌊",
+    "questionText": "海をスイスイ大ジャンプ！この 生き物は？"
   },
   {
     "id": "kujira",
@@ -1184,7 +1237,8 @@ const CHARACTERS_DATA = [
     "soundText": "プシューッ！潮吹き！",
     "themeColor": "#0077b6",
     "actionType": "super-jump",
-    "bgDecor": "💦"
+    "bgDecor": "💦",
+    "questionText": "潮をプシューッ！海で一番大きな この 生き物は？"
   },
   {
     "id": "same",
@@ -1204,7 +1258,8 @@ const CHARACTERS_DATA = [
     "soundText": "するどい歯！スイスイ！",
     "themeColor": "#1d3557",
     "actionType": "zoom-dash",
-    "bgDecor": "🌊"
+    "bgDecor": "🌊",
+    "questionText": "するどい歯でスイスイ！この 生き物は？"
   },
   {
     "id": "ringo",
@@ -1226,7 +1281,8 @@ const CHARACTERS_DATA = [
     "soundText": "シャキシャキ甘い！",
     "themeColor": "#ff4d6d",
     "actionType": "jump",
-    "bgDecor": "🍏"
+    "bgDecor": "🍏",
+    "questionText": "赤くて甘くてシャキシャキ！この くだものは？"
   },
   {
     "id": "mikan",
@@ -1248,7 +1304,8 @@ const CHARACTERS_DATA = [
     "soundText": "ジューシーおいしい！",
     "themeColor": "#ff9e00",
     "actionType": "jump",
-    "bgDecor": "🍊"
+    "bgDecor": "🍊",
+    "questionText": "オレンジ色でジューシー！この くだものは？"
   },
   {
     "id": "banana",
@@ -1270,7 +1327,8 @@ const CHARACTERS_DATA = [
     "soundText": "もぐもぐあまい！",
     "themeColor": "#ffd166",
     "actionType": "dance-butt",
-    "bgDecor": "🍌"
+    "bgDecor": "🍌",
+    "questionText": "黄色くてあまーい！この くだものは？"
   },
   {
     "id": "suika",
@@ -1292,7 +1350,8 @@ const CHARACTERS_DATA = [
     "soundText": "夏はすいか！シャキッ！",
     "themeColor": "#06d6a0",
     "actionType": "jump",
-    "bgDecor": "🍉"
+    "bgDecor": "🍉",
+    "questionText": "緑と黒のしましま！この たべものは？"
   },
   {
     "id": "budo",
@@ -1314,7 +1373,8 @@ const CHARACTERS_DATA = [
     "soundText": "つぶつぶジューシー！",
     "themeColor": "#7209b7",
     "actionType": "spin",
-    "bgDecor": "🍇"
+    "bgDecor": "🍇",
+    "questionText": "紫のつぶつぶ！この くだものは？"
   },
   {
     "id": "ichigo",
@@ -1336,7 +1396,8 @@ const CHARACTERS_DATA = [
     "soundText": "あまくておいしい！",
     "themeColor": "#e63946",
     "actionType": "jump",
-    "bgDecor": "🍓"
+    "bgDecor": "🍓",
+    "questionText": "赤くてつぶつぶかわいい！この くだものは？"
   },
   {
     "id": "meron",
@@ -1358,7 +1419,8 @@ const CHARACTERS_DATA = [
     "soundText": "あみあみ高級メロン！",
     "themeColor": "#99d98c",
     "actionType": "jump",
-    "bgDecor": "🍈"
+    "bgDecor": "🍈",
+    "questionText": "あみあみ模様の高級な この くだものは？"
   },
   {
     "id": "tomato",
@@ -1380,7 +1442,8 @@ const CHARACTERS_DATA = [
     "soundText": "真っ赤なトマト！",
     "themeColor": "#ef233c",
     "actionType": "jump",
-    "bgDecor": "🍅"
+    "bgDecor": "🍅",
+    "questionText": "真っ赤でまあるい この お野菜は？"
   },
   {
     "id": "pan",
@@ -1400,7 +1463,8 @@ const CHARACTERS_DATA = [
     "soundText": "焼きたてふかふか！",
     "themeColor": "#f4a261",
     "actionType": "jump",
-    "bgDecor": "🥐"
+    "bgDecor": "🥐",
+    "questionText": "焼きたてふかふか！この たべものは？"
   },
   {
     "id": "keki",
@@ -1422,7 +1486,8 @@ const CHARACTERS_DATA = [
     "soundText": "ハッピーバースデー！",
     "themeColor": "#ffb4a2",
     "actionType": "super-jump",
-    "bgDecor": "🎉"
+    "bgDecor": "🎉",
+    "questionText": "お誕生日のあまーい この たべものは？"
   },
   {
     "id": "aisu",
@@ -1444,7 +1509,8 @@ const CHARACTERS_DATA = [
     "soundText": "つめたくておいしい！",
     "themeColor": "#a2d2ff",
     "actionType": "spin",
-    "bgDecor": "🍦"
+    "bgDecor": "🍦",
+    "questionText": "つめたくておいしい！この おやつは？"
   },
   {
     "id": "purin",
@@ -1466,7 +1532,8 @@ const CHARACTERS_DATA = [
     "soundText": "ぷるぷるおいしい！",
     "themeColor": "#ffe3a0",
     "actionType": "dance-butt",
-    "bgDecor": "🍮"
+    "bgDecor": "🍮",
+    "questionText": "ぷるぷるカラメル！この おやつは？"
   },
   {
     "id": "ame",
@@ -1486,7 +1553,8 @@ const CHARACTERS_DATA = [
     "soundText": "あまーいキャンディ！",
     "themeColor": "#ffc6ff",
     "actionType": "jump",
-    "bgDecor": "🍭"
+    "bgDecor": "🍭",
+    "questionText": "あまーいキャンディ！この おやつは？"
   },
   {
     "id": "onigiri",
@@ -1510,7 +1578,8 @@ const CHARACTERS_DATA = [
     "soundText": "もぐもぐおいしい！",
     "themeColor": "#f8f9fa",
     "actionType": "jump",
-    "bgDecor": "🍙"
+    "bgDecor": "🍙",
+    "questionText": "三角海苔のまあるい この ごはんは？"
   },
   {
     "id": "sushi",
@@ -1530,7 +1599,8 @@ const CHARACTERS_DATA = [
     "soundText": "へい、おまち！",
     "themeColor": "#f72585",
     "actionType": "jump",
-    "bgDecor": "🍣"
+    "bgDecor": "🍣",
+    "questionText": "へい、おまち！魚をのせた この たべものは？"
   },
   {
     "id": "kare",
@@ -1552,7 +1622,8 @@ const CHARACTERS_DATA = [
     "soundText": "おいしいカレーライス！",
     "themeColor": "#e76f51",
     "actionType": "jump",
-    "bgDecor": "🍛"
+    "bgDecor": "🍛",
+    "questionText": "おいしいカレーライス！この ごはんは？"
   },
   {
     "id": "tsuki",
@@ -1572,7 +1643,8 @@ const CHARACTERS_DATA = [
     "soundText": "お月さま、ピカピカ！",
     "themeColor": "#ffd166",
     "actionType": "spin",
-    "bgDecor": "✨"
+    "bgDecor": "✨",
+    "questionText": "夜のお空でピカピカ！これは なーんだ？"
   },
   {
     "id": "hoshi",
@@ -1592,7 +1664,8 @@ const CHARACTERS_DATA = [
     "soundText": "きらきらお星さま！",
     "themeColor": "#ffbe0b",
     "actionType": "super-jump",
-    "bgDecor": "🌟"
+    "bgDecor": "🌟",
+    "questionText": "夜のお空できらきら！これは なーんだ？"
   },
   {
     "id": "niji",
@@ -1612,7 +1685,8 @@ const CHARACTERS_DATA = [
     "soundText": "きれいな七色の虹！",
     "themeColor": "#b5179e",
     "actionType": "super-jump",
-    "bgDecor": "☀️"
+    "bgDecor": "☀️",
+    "questionText": "雨上がりの空に七色！これは なーんだ？"
   },
   {
     "id": "taiyo",
@@ -1636,7 +1710,8 @@ const CHARACTERS_DATA = [
     "soundText": "ポカポカお日さま！",
     "themeColor": "#f77f00",
     "actionType": "spin",
-    "bgDecor": "✨"
+    "bgDecor": "✨",
+    "questionText": "お空でポカポカ！これは なーんだ？"
   }
 ];
 
