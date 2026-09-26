@@ -4,13 +4,14 @@ class BubbleGame {
   constructor() {
     this.container = null;
     this.currentMode = 'hira'; // 'hira' | 'kata'
-    this.currentCategory = 'all'; // 'all' | 'dino' | 'vehicle' | 'animal' | 'food'
+    this.currentCategory = 'all'; // 'all' | 'vehicle' | 'animal' | 'food'
     this.characterQueue = [];
     this.lastCharId = null;
     this.currentChar = null;
     this.targetChars = []; // 例: ['ぶ', 'た']
     this.filledSlots = {}; // { 0: 'ぶ', 1: 'た' }
     this.isCompleted = false;
+    this.activeTimers = [];
 
     // ステージクリア設定（5問でクリア）
     this.maxQuestions = 5;
@@ -18,7 +19,28 @@ class BubbleGame {
     this.clearedAnimals = [];
   }
 
-  // 動物・のりもの・恐竜の出現順序をランダムシャッフル
+  // タイマー登録（画面遷移や次へボタン押下時に確実に一括破棄）
+  setTimer(fn, delay) {
+    const timerId = setTimeout(() => {
+      this.activeTimers = this.activeTimers.filter(id => id !== timerId);
+      fn();
+    }, delay);
+    this.activeTimers.push(timerId);
+    return timerId;
+  }
+
+  // 進行中のタイマーと音声を完全停止
+  stopAllAudioAndTimers() {
+    if (typeof clearTimeout === 'function') {
+      this.activeTimers.forEach(id => clearTimeout(id));
+    }
+    this.activeTimers = [];
+    if (typeof window !== 'undefined' && window.soundManager && typeof soundManager.stopVoice === 'function') {
+      soundManager.stopVoice();
+    }
+  }
+
+  // 動物・のりものの出現順序をランダムシャッフル
   refillQueue() {
     // 選択中のカテゴリで絞り込み
     const filtered = this.currentCategory === 'all'
@@ -45,6 +67,7 @@ class BubbleGame {
 
   setCategory(category) {
     if (this.currentCategory === category) return;
+    this.stopAllAudioAndTimers();
     this.currentCategory = category;
     this.clearedCount = 0;
     this.clearedAnimals = [];
@@ -53,6 +76,7 @@ class BubbleGame {
   }
 
   init(container, mode = 'hira') {
+    this.stopAllAudioAndTimers();
     this.container = container;
     this.currentMode = mode;
     this.clearedCount = 0;
@@ -62,6 +86,7 @@ class BubbleGame {
   }
 
   setKanaMode(mode) {
+    this.stopAllAudioAndTimers();
     this.currentMode = mode;
     if (this.currentChar) {
       this.loadCharacter(this.currentChar);
@@ -78,6 +103,9 @@ class BubbleGame {
   }
 
   nextCharacter() {
+    // 前のキャラクターのナレーションや褒め音声・タイマーを即座に完全停止
+    this.stopAllAudioAndTimers();
+
     if (this.characterQueue.length === 0) {
       this.refillQueue();
     }
@@ -349,21 +377,21 @@ class BubbleGame {
     this.showSpeechBubble(this.currentChar.soundText);
 
     // ★ お姉さんの高音質音声による褒め言葉: 「ぶた！できたー！ブヒブヒ〜♪すごーい！」
-    setTimeout(() => {
+    this.setTimer(() => {
       soundManager.playPraise(this.currentChar.id);
     }, 500);
 
     // 規定問題数（5問）クリアしたか判定
     if (this.clearedCount >= this.maxQuestions) {
       // ★ 5問達成！ステージクリア特別演出へ！
-      setTimeout(() => {
+      this.setTimer(() => {
         this.handleStageClear();
       }, 1900);
     } else {
       // 通常の「つぎの おともだち ➡」ボタンを表示
       const nav = document.getElementById('stage-nav');
       if (nav) {
-        setTimeout(() => {
+        this.setTimer(() => {
           nav.classList.remove('hidden');
           nav.classList.add('pop-in');
         }, 1200);
@@ -373,14 +401,15 @@ class BubbleGame {
 
   // 🏆 5問クリア！特大ご褒美画面
   handleStageClear() {
+    this.stopAllAudioAndTimers();
     soundManager.playFanfare();
     soundManager.playStageClearVoice();
 
     // 紙吹雪を連続発射
     if (typeof triggerConfetti === 'function') {
       triggerConfetti();
-      setTimeout(triggerConfetti, 400);
-      setTimeout(triggerConfetti, 800);
+      this.setTimer(triggerConfetti, 400);
+      this.setTimer(triggerConfetti, 800);
     }
 
     // クリアモーダル作成
@@ -415,6 +444,7 @@ class BubbleGame {
 
     // もう一回あそぶ
     overlay.querySelector('#btn-clear-retry').addEventListener('click', () => {
+      this.stopAllAudioAndTimers();
       soundManager.playBubblePop();
       overlay.remove();
       this.clearedCount = 0;
@@ -425,6 +455,7 @@ class BubbleGame {
 
     // ホームへもどる
     overlay.querySelector('#btn-clear-home').addEventListener('click', () => {
+      this.stopAllAudioAndTimers();
       soundManager.playBubblePop();
       overlay.remove();
       if (window.appInstance) {

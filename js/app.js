@@ -122,6 +122,13 @@ class App {
   }
 
   switchScreen(screenName, updateHistory = true) {
+    if (window.soundManager && typeof soundManager.stopVoice === 'function') {
+      soundManager.stopVoice();
+    }
+    if (window.bubbleGame && typeof bubbleGame.stopAllAudioAndTimers === 'function') {
+      bubbleGame.stopAllAudioAndTimers();
+    }
+
     this.currentScreen = screenName;
     const targetPath = this.getPathFromScreen(screenName);
 
