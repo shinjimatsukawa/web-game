@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <!-- iPad Safari 最適化メタタグ: ピンチズーム無効化、セーフエリア対応 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="もじあそび">
+  <meta name="theme-color" content="#fff5e6">
+  <title>もじあそび ランド - 4さいからの ひらがな・カタカナ</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 背景の浮遊デコレーション（星や風船） -->
+  <div class="bg-decorations" aria-hidden="true">
+    <span class="decor-item d1">⭐</span>
+    <span class="decor-item d2">🎈</span>
+    <span class="decor-item d3">🌈</span>
+    <span class="decor-item d4">✨</span>
+    <span class="decor-item d5">🌸</span>
+  </div>
+
+  <div id="app-container">
+    <!-- ヘッダー（ナビゲーション ＆ モード切り替え） -->
+    <header class="app-header">
+      <div class="header-left">
+        <button id="btn-back-home" class="btn-circle-nav hidden" aria-label="ホームへもどる">
+          🏠
+        </button>
+      </div>
+      <h1 id="header-title" class="header-title">🌟 もじあそび ランド 🌟</h1>
+      <div class="header-right">
+        <div class="mode-toggle">
+          <button id="btn-mode-hira" class="btn-toggle active">あ (ひらがな)</button>
+          <button id="btn-mode-kata" class="btn-toggle">ア (カタカナ)</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- メインコンテンツ領域 -->
+    <main class="app-main">
+      <!-- 画面①: ホームメニュー -->
+      <section id="screen-home" class="screen active">
+        <div class="home-hero">
+          <div class="home-character">🐻</div>
+          <h2 class="home-welcome">すきな あそびを えらんでね！</h2>
+        </div>
+
+        <div class="menu-grid">
+          <!-- クイズ -->
+          <button id="menu-card-quiz" class="menu-card card-pink">
+            <div class="card-badge">人気</div>
+            <div class="card-icon">🎯</div>
+            <div class="card-title">もじ あてっこ</div>
+            <div class="card-desc">おとを きいて えらぼう！</div>
+          </button>
+
+          <!-- 50音表 -->
+          <button id="menu-card-board" class="menu-card card-blue">
+            <div class="card-icon">📖</div>
+            <div class="card-title">あいうえお ひょう</div>
+            <div class="card-desc">おしゃべり 50おんずかん</div>
+          </button>
+
+          <!-- パズル -->
+          <button id="menu-card-puzzle" class="menu-card card-yellow">
+            <div class="card-icon">🧩</div>
+            <div class="card-title">ことば パズル</div>
+            <div class="card-desc">もじを ならべて つくろう！</div>
+          </button>
+
+          <!-- シール帳 -->
+          <button id="menu-card-stickers" class="menu-card card-green">
+            <div class="card-icon">✨</div>
+            <div class="card-title">シールちょう</div>
+            <div class="card-desc">あつめた シールを みよう！</div>
+          </button>
+        </div>
+      </section>
+
+      <!-- 画面②: クイズ画面 -->
+      <section id="screen-quiz" class="screen hidden">
+        <div id="quiz-content" class="game-container"></div>
+      </section>
+
+      <!-- 画面③: 50音表画面 -->
+      <section id="screen-board" class="screen hidden">
+        <div id="board-content" class="game-container"></div>
+      </section>
+
+      <!-- 画面④: パズル画面 -->
+      <section id="screen-puzzle" class="screen hidden">
+        <div id="puzzle-content" class="game-container"></div>
+      </section>
+
+      <!-- 画面⑤: シール帳画面 -->
+      <section id="screen-stickers" class="screen hidden">
+        <div id="stickers-content" class="game-container"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- 紙吹雪用 Canvas -->
+  <canvas id="confetti-canvas" class="confetti-canvas" pointer-events="none"></canvas>
+
+  <!-- スクリプト群 -->
+  <script src="js/data.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/stickers.js"></script>
+  <script src="js/game-board.js"></script>
+  <script src="js/game-quiz.js"></script>
+  <script src="js/game-puzzle.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
