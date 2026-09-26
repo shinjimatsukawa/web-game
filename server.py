@@ -8,6 +8,7 @@ import http.server
 import socketserver
 import os
 import sys
+import urllib.parse
 
 PORT = 8090
 DIRECTORY = os.path.dirname(os.path.abspath(__file__))
@@ -15,6 +16,22 @@ DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 class KidsGameHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=DIRECTORY, **kwargs)
+
+    def do_GET(self):
+        # パスをパース
+        parsed_path = urllib.parse.urlparse(self.path).path
+        local_path = self.translate_path(parsed_path)
+
+        # ファイルが存在する場合は通常配信
+        if os.path.exists(local_path) and not os.path.isdir(local_path):
+            return super().do_GET()
+
+        # ルートディレクトリまたはSPAパス（/bubble, /board等）は index.html を返す
+        if '.' not in os.path.basename(parsed_path):
+            self.path = '/index.html'
+            return super().do_GET()
+
+        return super().do_GET()
 
     def end_headers(self):
         # iPad Safariでのキャッシュ対策とCORS許可

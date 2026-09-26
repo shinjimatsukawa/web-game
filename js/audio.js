@@ -6,14 +6,22 @@ class SoundManager {
     this.isUnlocked = false;
     this.currentVoiceAudio = null;
 
-    // BGM関連
-    this.isBgmOn = false;
+    // BGM関連（ブラウザのlocalStorageに設定を保持）
+    const storedBgm = localStorage.getItem('kids_web_game_bgm');
+    // 保存されていればその値、初回はデフォルトON（子ども向けに楽しい音楽）
+    this.isBgmConfigured = storedBgm !== null ? (storedBgm === 'true') : true;
+    this.isBgmPlaying = false;
     this.bgmTimer = null;
     this.bgmStep = 0;
   }
 
   unlock() {
-    if (this.isUnlocked) return;
+    if (this.isUnlocked) {
+      if (this.isBgmConfigured && !this.isBgmPlaying) {
+        this.startBgm();
+      }
+      return;
+    }
     try {
       const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
       if (AudioCtxClass) {
@@ -23,6 +31,10 @@ class SoundManager {
         }
       }
       this.isUnlocked = true;
+      // BGMが有効設定なら自動再生スタート
+      if (this.isBgmConfigured && !this.isBgmPlaying) {
+        this.startBgm();
+      }
     } catch (e) {
       console.warn('Audio unlock error:', e);
     }
@@ -81,40 +93,47 @@ class SoundManager {
   // 1文字シャボン玉音声: 「あ！」「ぶ！」
   playLetter(char, onEnd = null) {
     const encoded = encodeURIComponent(char);
-    this.playVoiceFile(`audio/neural/letters/${encoded}.mp3`, onEnd);
+    this.playVoiceFile(`/audio/neural/letters/${encoded}.mp3`, onEnd);
   }
 
   // 50音図鑑音声: 「あ！アイスクリーム！」
   playTableItem(itemId, onEnd = null) {
-    this.playVoiceFile(`audio/neural/table/${itemId}.mp3`, onEnd);
+    this.playVoiceFile(`/audio/neural/table/${itemId}.mp3`, onEnd);
   }
 
   // 単語完成時の褒め言葉: 「ぶた！できたー！ブヒブヒ〜♪すごーい！」
   playPraise(charId, onEnd = null) {
-    this.playVoiceFile(`audio/neural/praises/${charId}.mp3`, onEnd);
+    this.playVoiceFile(`/audio/neural/praises/${charId}.mp3`, onEnd);
   }
 
   // 違う文字をタッチしたときのリアクション: 「ちがうよ〜？もういっかい！」
   playWrongVoice(onEnd = null) {
-    this.playVoiceFile(`audio/neural/reactions/wrong.mp3`, onEnd);
+    this.playVoiceFile(`/audio/neural/reactions/wrong.mp3`, onEnd);
   }
 
   // ----------------------------------------------------
   // 🎵 トイポップ BGM ジェネレータ (Web Audio API)
   // ----------------------------------------------------
   toggleBgm() {
-    if (this.isBgmOn) {
-      this.stopBgm();
-      return false;
-    } else {
+    this.isBgmConfigured = !this.isBgmConfigured;
+    try {
+      localStorage.setItem('kids_web_game_bgm', this.isBgmConfigured ? 'true' : 'false');
+    } catch (e) {
+      console.warn('LocalStorage save failed:', e);
+    }
+
+    if (this.isBgmConfigured) {
       this.startBgm();
       return true;
+    } else {
+      this.stopBgm();
+      return false;
     }
   }
 
   startBgm() {
     this.ensureContext();
-    this.isBgmOn = true;
+    this.isBgmPlaying = true;
     if (this.bgmTimer) clearInterval(this.bgmTimer);
 
     const melody = [
@@ -176,11 +195,15 @@ class SoundManager {
   }
 
   stopBgm() {
-    this.isBgmOn = false;
+    this.isBgmPlaying = false;
     if (this.bgmTimer) {
       clearInterval(this.bgmTimer);
       this.bgmTimer = null;
     }
+  }
+
+  get isBgmOn() {
+    return this.isBgmConfigured;
   }
 
   // ----------------------------------------------------

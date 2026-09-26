@@ -21,17 +21,39 @@ class App {
     this.btnModeHira = document.getElementById('btn-mode-hira');
     this.btnModeKata = document.getElementById('btn-mode-kata');
 
+    // BGMボタンの初期状態（localStorageから復元された状態を反映）
+    this.updateBgmButton(soundManager.isBgmOn);
+
     this.setupEvents();
+
+    // 初期URLに応じた画面を表示（例: /bubble, /board）
+    const initialScreen = this.getScreenFromPath(window.location.pathname);
+    this.switchScreen(initialScreen, false);
+  }
+
+  // URLパスから画面名を取得
+  getScreenFromPath(pathname) {
+    const clean = pathname.replace(/\/+$/, '') || '/';
+    if (clean === '/bubble' || clean === '/atsume') return 'bubble';
+    if (clean === '/board' || clean === '/zukan') return 'board';
+    return 'home';
+  }
+
+  // 画面名からURLパスを取得
+  getPathFromScreen(screen) {
+    if (screen === 'bubble') return '/bubble';
+    if (screen === 'board') return '/board';
+    return '/';
   }
 
   setupEvents() {
     // 1. ホームへ戻るボタン
     this.btnBackHome.addEventListener('click', () => {
       soundManager.playBubblePop();
-      this.switchScreen('home');
+      this.switchScreen('home', true);
     });
 
-    // 2. BGM ON/OFF トグル
+    // 2. BGM ON/OFF トグル（設定はlocalStorageに保存）
     this.btnBgmToggle.addEventListener('click', () => {
       soundManager.unlock();
       const isOn = soundManager.toggleBgm();
@@ -45,12 +67,18 @@ class App {
     // 4. トップ画面のゲーム選択カード
     document.getElementById('card-game-bubble').addEventListener('click', () => {
       this.handleFirstInteraction();
-      this.switchScreen('bubble');
+      this.switchScreen('bubble', true);
     });
 
     document.getElementById('card-game-board').addEventListener('click', () => {
       this.handleFirstInteraction();
-      this.switchScreen('board');
+      this.switchScreen('board', true);
+    });
+
+    // ブラウザの戻る・進むボタン（Safariスワイプ含む）への対応
+    window.addEventListener('popstate', (e) => {
+      const screen = (e.state && e.state.screen) || this.getScreenFromPath(window.location.pathname);
+      this.switchScreen(screen, false);
     });
 
     // 画面全体のどこかを最初にタッチしたときにもオーディオアンロック
@@ -65,11 +93,6 @@ class App {
 
   handleFirstInteraction() {
     soundManager.unlock();
-    // 初回ゲーム開始時にBGMをスタート
-    if (!soundManager.isBgmOn) {
-      soundManager.startBgm();
-      this.updateBgmButton(true);
-    }
   }
 
   updateBgmButton(isOn) {
@@ -96,8 +119,14 @@ class App {
     }
   }
 
-  switchScreen(screenName) {
+  switchScreen(screenName, updateHistory = true) {
     this.currentScreen = screenName;
+    const targetPath = this.getPathFromScreen(screenName);
+
+    // URLのパスを更新（History API）
+    if (updateHistory && window.location.pathname !== targetPath) {
+      history.pushState({ screen: screenName }, '', targetPath);
+    }
 
     // 画面の切り替え
     Object.keys(this.screens).forEach(key => {
