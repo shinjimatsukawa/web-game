@@ -578,200 +578,167 @@ html, body {
 }
 
 /* ----------------------------------------------------
-   画面③: おしゃべり 50おんずかん
+   画面③: おしゃべり 50おんずかん（iPad 11インチ最適化・全文字一覧）
    ---------------------------------------------------- */
-.board-game-wrapper {
+.board-full-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 12px 18px 20px;
-  max-width: 900px;
+  padding: 8px 16px 16px;
+  max-width: 1140px;
   margin: 0 auto;
   width: 100%;
 }
 
-.board-row-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 14px;
-}
-
-.board-row-btn {
+/* リアルタイムおしゃべりプレビューバー（画面上部） */
+.board-preview-bar {
   background: #ffffff;
-  border: 2px solid #ffd166;
-  color: #555;
-  font-family: inherit;
-  font-size: 1.1rem;
-  font-weight: bold;
-  padding: 8px 16px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  box-shadow: 0 3px 0 #e0a300;
-  transition: all 0.15s;
+  border: 3px solid #ffd166;
+  border-radius: var(--radius-md);
+  padding: 8px 18px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(255, 209, 102, 0.25);
+  flex-shrink: 0;
 }
 
-.board-row-btn.active {
-  background: #ffd166;
-  color: #333;
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 #e0a300;
+.preview-placeholder {
+  font-size: 1.3rem;
+  color: #888;
+  animation: pulseNext 2s infinite ease-in-out;
 }
 
-.board-cards-area {
-  flex: 1;
-  overflow-y: auto;
-  padding-bottom: 20px;
-}
-
-.board-grid-50 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+.preview-content {
+  display: flex;
+  align-items: center;
   gap: 16px;
   width: 100%;
-}
-
-.board-item-card {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  border: 3px solid #ffcad4;
-  padding: 16px 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: 0 6px 0 #e8a9b7;
-  cursor: pointer;
-  font-family: inherit;
-  transition: transform 0.15s;
-}
-
-.board-item-card:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 #e8a9b7;
-}
-
-.board-item-card.card-pop-bounce {
-  animation: tapSquish 0.45s ease;
-}
-
-.card-char-main {
-  font-size: 3.2rem;
-  color: #ff477e;
-  line-height: 1;
-}
-
-.card-emoji-main {
-  font-size: 2.6rem;
-  margin: 6px 0 2px;
-}
-
-.card-word-title {
-  font-size: 1.1rem;
-  color: #333;
-}
-
-.card-char-sub {
-  font-size: 0.85rem;
-  color: #888;
-}
-
-/* 50音 ポップアップモーダル */
-.board-popup-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.55);
-  display: flex;
-  align-items: center;
   justify-content: center;
-  z-index: 1000;
-  animation: fadeIn 0.2s ease;
 }
 
-.board-popup-modal.fade-out {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.popup-modal-content {
-  background: #ffffff;
-  border-radius: var(--radius-lg);
-  border: 6px solid #ffd166;
-  padding: 28px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 380px;
-  width: 85%;
-  text-align: center;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
-  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.popup-char-huge {
-  font-size: 6.5rem;
+.preview-char {
+  font-size: 3.2rem;
   color: #ff3366;
   line-height: 1;
 }
 
-.popup-emoji-huge {
-  font-size: 5.5rem;
-  margin: 8px 0;
-  animation: happyJump 1.5s infinite ease-in-out;
+.preview-emoji {
+  font-size: 2.8rem;
+  animation: tapSquish 0.5s ease;
 }
 
-.popup-word-title {
-  font-size: 2.4rem;
+.preview-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.preview-word {
+  font-size: 1.5rem;
   color: #333;
-  margin-bottom: 4px;
 }
 
-.popup-sound-desc {
-  font-size: 1.3rem;
+.preview-sound-desc {
+  font-size: 1.1rem;
   color: #06d6a0;
-  margin-bottom: 6px;
 }
 
-.popup-sub-text {
+.preview-sub-char {
   font-size: 1.1rem;
   color: #777;
-  margin-bottom: 20px;
 }
 
-.popup-btn-speak {
+.preview-replay-btn {
   background: #4ea8de;
   color: #ffffff;
   border: none;
   font-family: inherit;
-  font-size: 1.3rem;
+  font-size: 1.05rem;
   font-weight: bold;
-  padding: 14px 28px;
+  padding: 8px 18px;
   border-radius: var(--radius-full);
-  box-shadow: 0 6px 0 #2b84ba;
+  box-shadow: 0 3px 0 #2b84ba;
   cursor: pointer;
-  margin-bottom: 12px;
-  width: 100%;
+  margin-left: 12px;
 }
 
-.popup-btn-speak:active {
-  transform: translateY(3px);
-  box-shadow: 0 2px 0 #2b84ba;
+.preview-replay-btn:active {
+  transform: translateY(2px);
+  box-shadow: none;
 }
 
-.popup-btn-close {
-  background: #e9ecef;
-  color: #495057;
-  border: none;
+/* 50音全文字グリッド */
+.board-full-grid {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+  gap: 10px;
+  padding-bottom: 25px;
+}
+
+/* iPad 11インチ（横向き 1194px）の場合にぴったり10列 */
+@media (min-width: 900px) {
+  .board-full-grid {
+    grid-template-columns: repeat(10, 1fr);
+    gap: 10px;
+  }
+}
+
+.full-board-card {
+  background: #ffffff;
+  border: 3px solid #ffccd5;
+  border-radius: var(--radius-md);
+  padding: 8px 4px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 0 #ffb3c1;
+  cursor: pointer;
   font-family: inherit;
-  font-size: 1.15rem;
-  font-weight: bold;
-  padding: 10px 24px;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  width: 100%;
+  outline: none;
+  transition: transform 0.1s, box-shadow 0.1s, border-color 0.2s, background-color 0.2s;
+  min-height: 82px;
+}
+
+.full-board-card:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #ffb3c1;
+}
+
+/* タップして現在再生中のカードのハイライト＆バウンド */
+.full-board-card.card-active {
+  background: #fff8db;
+  border-color: #ffd166;
+  box-shadow: 0 6px 0 #f4a261, 0 0 16px rgba(255, 209, 102, 0.6);
+}
+
+.card-bounce-anim {
+  animation: tapSquish 0.4s ease;
+}
+
+.card-char-big {
+  font-size: 2.2rem;
+  color: #ff3366;
+  line-height: 1;
+}
+
+.card-emoji-icon {
+  font-size: 1.8rem;
+  margin: 3px 0 1px;
+}
+
+.card-word-label {
+  font-size: 0.82rem;
+  color: #444;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 84px;
 }
 
 /* 紙吹雪 Canvas */

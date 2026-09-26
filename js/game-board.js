@@ -1,16 +1,17 @@
 // 「おしゃべり 50おんずかん」ゲームエンジン
+// 全文字一覧表示 ＆ タップ即座おしゃべり（モーダル不要・iPad 11インチ最適化）
 
 class BoardGame {
   constructor() {
     this.container = null;
     this.currentMode = 'hira'; // 'hira' | 'kata'
-    this.selectedRowIndex = 0;
+    this.activeItemId = null;
   }
 
   init(container, mode = 'hira') {
     this.container = container;
     this.currentMode = mode;
-    this.selectedRowIndex = 0;
+    this.activeItemId = null;
     this.render();
   }
 
@@ -24,134 +25,91 @@ class BoardGame {
     this.container.innerHTML = '';
 
     const boardWrapper = document.createElement('div');
-    boardWrapper.className = 'board-game-wrapper';
+    boardWrapper.className = 'board-full-wrapper';
 
-    // 1. 行選択タブ（あ〜お、か〜こ ...）
-    const tabContainer = document.createElement('div');
-    tabContainer.className = 'board-row-tabs';
+    // 1. リアルタイムおしゃべりプレビューバー（画面上部）
+    // タッチした文字とおしゃべりを大きく表示（モーダルを開かずに画面を塞がない）
+    const previewBar = document.createElement('div');
+    previewBar.className = 'board-preview-bar';
+    previewBar.id = 'board-preview-bar';
+    previewBar.innerHTML = `
+      <div class="preview-placeholder">👆 すきな もじを タッチしてみてね！</div>
+    `;
+    boardWrapper.appendChild(previewBar);
 
-    KANA_ROWS.forEach((row, idx) => {
-      const tabBtn = document.createElement('button');
-      tabBtn.className = `board-row-btn ${this.selectedRowIndex === idx ? 'active' : ''}`;
-      
-      let label = row.name;
-      if (this.currentMode === 'kata') {
-        const first = KANA_TABLE_DATA.find(k => k.hira === row.chars[0]);
-        const last = KANA_TABLE_DATA.find(k => k.hira === row.chars[row.chars.length - 1]);
-        if (first && last && row.chars.length > 2) {
-          label = `${first.kata}〜${last.kata}`;
-        } else if (first) {
-          label = row.chars.map(c => {
-            const item = KANA_TABLE_DATA.find(k => k.hira === c);
-            return item ? item.kata : c;
-          }).join('・');
-        }
-      }
+    // 2. 50音 全文字グリッド（全46音をスクロールなし〜快適スクロールで一覧）
+    const gridContainer = document.createElement('div');
+    gridContainer.className = 'board-full-grid';
 
-      tabBtn.textContent = label;
-      tabBtn.addEventListener('click', () => {
-        soundManager.playBubblePop();
-        this.selectedRowIndex = idx;
-        this.renderCards();
-        tabContainer.querySelectorAll('.board-row-btn').forEach((b, i) => {
-          b.classList.toggle('active', i === idx);
-        });
-      });
-      tabContainer.appendChild(tabBtn);
-    });
-
-    boardWrapper.appendChild(tabContainer);
-
-    // 2. カード一覧グリッド
-    const cardsArea = document.createElement('div');
-    cardsArea.className = 'board-cards-area';
-    cardsArea.id = 'board-cards-area';
-    boardWrapper.appendChild(cardsArea);
-
-    this.container.appendChild(boardWrapper);
-    this.renderCards();
-  }
-
-  renderCards() {
-    const cardsArea = document.getElementById('board-cards-area');
-    if (!cardsArea) return;
-    cardsArea.innerHTML = '';
-
-    const selectedRow = KANA_ROWS[this.selectedRowIndex];
-    const grid = document.createElement('div');
-    grid.className = 'board-grid-50';
-
-    selectedRow.chars.forEach(char => {
-      const data = KANA_TABLE_DATA.find(k => k.hira === char);
-      if (!data) return;
-
+    KANA_TABLE_DATA.forEach(data => {
       const displayChar = this.currentMode === 'hira' ? data.hira : data.kata;
       const subChar = this.currentMode === 'hira' ? data.kata : data.hira;
 
       const card = document.createElement('button');
-      card.className = 'board-item-card';
+      card.className = 'full-board-card';
+      card.id = `board-card-${data.id}`;
       card.innerHTML = `
-        <div class="card-char-main">${displayChar}</div>
-        <div class="card-emoji-main">${data.emoji}</div>
-        <div class="card-word-title">${data.word}</div>
-        <div class="card-char-sub">(${subChar})</div>
+        <span class="card-char-big">${displayChar}</span>
+        <span class="card-emoji-icon">${data.emoji}</span>
+        <span class="card-word-label">${data.word}</span>
       `;
 
       card.addEventListener('click', () => {
-        soundManager.playBubblePop();
-        card.classList.add('card-pop-bounce');
-        setTimeout(() => card.classList.remove('card-pop-bounce'), 450);
-
-        this.showPopup(data);
+        this.handleCardClick(data, card);
       });
 
-      grid.appendChild(card);
+      gridContainer.appendChild(card);
     });
 
-    cardsArea.appendChild(grid);
+    boardWrapper.appendChild(gridContainer);
+    this.container.appendChild(boardWrapper);
   }
 
-  showPopup(data) {
-    const isKata = this.currentMode === 'kata';
-    const displayChar = isKata ? data.kata : data.hira;
-    const subChar = isKata ? data.hira : data.kata;
+  handleCardClick(data, card) {
+    this.activeItemId = data.id;
 
-    // お姉さんの高音質おしゃべり音声: 「あ！アイスクリーム！」
+    // 前のカードのアクティブ解除
+    document.querySelectorAll('.full-board-card.card-active').forEach(c => {
+      c.classList.remove('card-active', 'card-bounce-anim');
+    });
+
+    // 今回のカードをハイライト＆ポヨンとバウンド
+    card.classList.add('card-active', 'card-bounce-anim');
+    setTimeout(() => card.classList.remove('card-bounce-anim'), 400);
+
+    // ポップ音 ＋ お姉さんの自然な高音質音声（「あ。アイスクリーム。」）
+    soundManager.playBubblePop();
     soundManager.playTableItem(data.id);
 
-    // ポップアップ拡大モーダル
-    const modal = document.createElement('div');
-    modal.className = 'board-popup-modal';
-    modal.innerHTML = `
-      <div class="popup-modal-content">
-        <div class="popup-char-huge">${displayChar}</div>
-        <div class="popup-emoji-huge">${data.emoji}</div>
-        <div class="popup-word-title">${data.word}</div>
-        <div class="popup-sound-desc">「${data.sound}」</div>
-        <div class="popup-sub-text">もうひとつの もじ: ${subChar}</div>
-        <button class="popup-btn-speak">🔊 もういっかい きく</button>
-        <button class="popup-btn-close">✖ とじる</button>
+    // プレビューバーを更新（モーダルを開かずに大きく見せる）
+    this.updatePreviewBar(data);
+  }
+
+  updatePreviewBar(data) {
+    const previewBar = document.getElementById('board-preview-bar');
+    if (!previewBar) return;
+
+    const displayChar = this.currentMode === 'hira' ? data.hira : data.kata;
+    const subChar = this.currentMode === 'hira' ? data.kata : data.hira;
+
+    previewBar.innerHTML = `
+      <div class="preview-content pop-in">
+        <div class="preview-char">${displayChar}</div>
+        <div class="preview-emoji">${data.emoji}</div>
+        <div class="preview-text-group">
+          <div class="preview-word">${data.word}</div>
+          <div class="preview-sound-desc">「${data.sound}」</div>
+        </div>
+        <div class="preview-sub-char">（${subChar}）</div>
+        <button class="preview-replay-btn" id="preview-replay-btn">🔊 もういっかい</button>
       </div>
     `;
 
-    modal.querySelector('.popup-btn-speak').addEventListener('click', (e) => {
+    previewBar.querySelector('#preview-replay-btn').addEventListener('click', (e) => {
       e.stopPropagation();
       soundManager.playBubblePop();
       soundManager.playTableItem(data.id);
     });
-
-    const closeModal = () => {
-      soundManager.playBubblePop();
-      modal.classList.add('fade-out');
-      setTimeout(() => modal.remove(), 200);
-    };
-
-    modal.querySelector('.popup-btn-close').addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) closeModal();
-    });
-
-    document.body.appendChild(modal);
   }
 }
 
