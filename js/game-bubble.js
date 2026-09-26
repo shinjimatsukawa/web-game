@@ -4,27 +4,49 @@ class BubbleGame {
   constructor() {
     this.container = null;
     this.currentMode = 'hira'; // 'hira' | 'kata'
-    this.currentCharIndex = 0;
+    this.characterQueue = [];
+    this.lastCharId = null;
     this.currentChar = null;
     this.targetChars = []; // 例: ['ぶ', 'た']
     this.filledSlots = {}; // { 0: 'ぶ', 1: 'た' }
     this.isCompleted = false;
   }
 
+  // 動物の出現順序をランダムシャッフル（全種出るまで被らない＆直前と同じ動物が出ない）
+  refillQueue() {
+    const indices = CHARACTERS_DATA.map((_, i) => i);
+    // Fisher-Yates シャッフル
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
+    }
+
+    // 先頭が直前のキャラクターと同じ場合は2番目以降と入れ替える（連続出題防止）
+    if (this.lastCharId && CHARACTERS_DATA[indices[0]].id === this.lastCharId && indices.length > 1) {
+      const swapIdx = 1 + Math.floor(Math.random() * (indices.length - 1));
+      [indices[0], indices[swapIdx]] = [indices[swapIdx], indices[0]];
+    }
+
+    this.characterQueue = indices;
+  }
+
   init(container, mode = 'hira') {
     this.container = container;
     this.currentMode = mode;
-    this.currentCharIndex = 0;
-    this.loadCharacter();
+    this.refillQueue();
+    this.nextCharacter();
   }
 
   setKanaMode(mode) {
     this.currentMode = mode;
-    this.loadCharacter();
+    if (this.currentChar) {
+      this.loadCharacter(this.currentChar);
+    }
   }
 
-  loadCharacter() {
-    this.currentChar = CHARACTERS_DATA[this.currentCharIndex];
+  loadCharacter(charData) {
+    this.currentChar = charData;
+    this.lastCharId = charData.id;
     this.targetChars = this.currentMode === 'hira' ? this.currentChar.charsHira : this.currentChar.charsKata;
     this.filledSlots = {};
     this.isCompleted = false;
@@ -32,8 +54,11 @@ class BubbleGame {
   }
 
   nextCharacter() {
-    this.currentCharIndex = (this.currentCharIndex + 1) % CHARACTERS_DATA.length;
-    this.loadCharacter();
+    if (this.characterQueue.length === 0) {
+      this.refillQueue();
+    }
+    const nextIndex = this.characterQueue.shift();
+    this.loadCharacter(CHARACTERS_DATA[nextIndex]);
   }
 
   render() {

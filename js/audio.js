@@ -305,12 +305,12 @@ class SoundManager {
       gain.connect(ctx.destination);
       osc.start(now);
       osc.stop(now + 0.46);
-    } else if (soundType === 'vroom') {
+    } else if (soundType === 'vroom' || soundType === 'jet') {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'sawtooth';
       osc.frequency.setValueAtTime(120, now);
-      osc.frequency.exponentialRampToValueAtTime(320, now + 0.35);
+      osc.frequency.exponentialRampToValueAtTime(380, now + 0.35);
 
       gain.gain.setValueAtTime(0.2, now);
       gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
@@ -319,6 +319,53 @@ class SoundManager {
       gain.connect(ctx.destination);
       osc.start(now);
       osc.stop(now + 0.52);
+    } else if (soundType === 'roar' || soundType === 'growl') {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(90, now);
+      osc.frequency.linearRampToValueAtTime(180, now + 0.2);
+      osc.frequency.linearRampToValueAtTime(70, now + 0.5);
+
+      gain.gain.setValueAtTime(0.3, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.55);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.58);
+    } else if (soundType === 'trumpet') {
+      [330, 440, 554].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+
+        gain.gain.setValueAtTime(0.25, now + idx * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.08 + 0.3);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + idx * 0.08);
+        osc.stop(now + idx * 0.08 + 0.32);
+      });
+    } else if (soundType === 'chirp') {
+      [600, 900, 1200].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.06);
+
+        gain.gain.setValueAtTime(0.2, now + idx * 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.06 + 0.1);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + idx * 0.06);
+        osc.stop(now + idx * 0.06 + 0.11);
+      });
+    } else if (soundType === 'hop') {
+      this.playBoing();
     } else {
       const notes = [440, 554.37, 659.25];
       notes.forEach((freq, i) => {
