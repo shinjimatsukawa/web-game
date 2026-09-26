@@ -2,36 +2,58 @@
 
 class App {
   constructor() {
+    this.currentScreen = 'home'; // 'home' | 'bubble' | 'board'
     this.currentKanaMode = 'hira'; // 'hira' | 'kata'
-    this.currentTab = 'play'; // 'play' | 'collection'
     this.init();
   }
 
   init() {
-    this.screenPlay = document.getElementById('screen-play');
-    this.screenCollection = document.getElementById('screen-collection');
+    // 画面要素
+    this.screens = {
+      home: document.getElementById('screen-home'),
+      bubble: document.getElementById('screen-bubble'),
+      board: document.getElementById('screen-board')
+    };
 
+    this.headerTitle = document.getElementById('header-title');
+    this.btnBackHome = document.getElementById('btn-back-home');
+    this.btnBgmToggle = document.getElementById('btn-bgm-toggle');
     this.btnModeHira = document.getElementById('btn-mode-hira');
     this.btnModeKata = document.getElementById('btn-mode-kata');
-    this.btnTabPlay = document.getElementById('btn-tab-play');
-    this.btnTabCollection = document.getElementById('btn-tab-collection');
 
     this.setupEvents();
-
-    // 初期化：開いてすぐにゲーム開始！
-    bubbleGame.init(document.getElementById('play-content'), this.currentKanaMode);
   }
 
   setupEvents() {
-    // ひらがな・カタカナ切り替え
+    // 1. ホームへ戻るボタン
+    this.btnBackHome.addEventListener('click', () => {
+      soundManager.playBubblePop();
+      this.switchScreen('home');
+    });
+
+    // 2. BGM ON/OFF トグル
+    this.btnBgmToggle.addEventListener('click', () => {
+      soundManager.unlock();
+      const isOn = soundManager.toggleBgm();
+      this.updateBgmButton(isOn);
+    });
+
+    // 3. ひらがな・カタカナ切り替え
     this.btnModeHira.addEventListener('click', () => this.setKanaMode('hira'));
     this.btnModeKata.addEventListener('click', () => this.setKanaMode('kata'));
 
-    // タブ切り替え（あそぶ / ずかん）
-    this.btnTabPlay.addEventListener('click', () => this.switchTab('play'));
-    this.btnTabCollection.addEventListener('click', () => this.switchTab('collection'));
+    // 4. トップ画面のゲーム選択カード
+    document.getElementById('card-game-bubble').addEventListener('click', () => {
+      this.handleFirstInteraction();
+      this.switchScreen('bubble');
+    });
 
-    // 初回タッチでオーディオアンロック
+    document.getElementById('card-game-board').addEventListener('click', () => {
+      this.handleFirstInteraction();
+      this.switchScreen('board');
+    });
+
+    // 画面全体のどこかを最初にタッチしたときにもオーディオアンロック
     const unlockHandler = () => {
       soundManager.unlock();
       window.removeEventListener('touchstart', unlockHandler);
@@ -41,6 +63,25 @@ class App {
     window.addEventListener('click', unlockHandler, { once: true });
   }
 
+  handleFirstInteraction() {
+    soundManager.unlock();
+    // 初回ゲーム開始時にBGMをスタート
+    if (!soundManager.isBgmOn) {
+      soundManager.startBgm();
+      this.updateBgmButton(true);
+    }
+  }
+
+  updateBgmButton(isOn) {
+    if (isOn) {
+      this.btnBgmToggle.textContent = '🎵 BGM: ON';
+      this.btnBgmToggle.classList.add('bgm-active');
+    } else {
+      this.btnBgmToggle.textContent = '🔇 BGM: OFF';
+      this.btnBgmToggle.classList.remove('bgm-active');
+    }
+  }
+
   setKanaMode(mode) {
     soundManager.playBubblePop();
     this.currentKanaMode = mode;
@@ -48,62 +89,41 @@ class App {
     this.btnModeHira.classList.toggle('active', mode === 'hira');
     this.btnModeKata.classList.toggle('active', mode === 'kata');
 
-    if (this.currentTab === 'play') {
+    if (this.currentScreen === 'bubble') {
       bubbleGame.setKanaMode(mode);
-    } else {
-      this.renderCollection();
+    } else if (this.currentScreen === 'board') {
+      boardGame.setKanaMode(mode);
     }
   }
 
-  switchTab(tab) {
-    soundManager.playBubblePop();
-    this.currentTab = tab;
+  switchScreen(screenName) {
+    this.currentScreen = screenName;
 
-    this.btnTabPlay.classList.toggle('active', tab === 'play');
-    this.btnTabCollection.classList.toggle('active', tab === 'collection');
-
-    if (tab === 'play') {
-      this.screenPlay.classList.remove('hidden');
-      this.screenCollection.classList.add('hidden');
-    } else {
-      this.screenPlay.classList.add('hidden');
-      this.screenCollection.classList.remove('hidden');
-      this.renderCollection();
-    }
-  }
-
-  // なかまたち図鑑の描画
-  renderCollection() {
-    const container = document.getElementById('collection-content');
-    if (!container) return;
-    container.innerHTML = '';
-
-    const grid = document.createElement('div');
-    grid.className = 'collection-grid';
-
-    CHARACTERS_DATA.forEach((item, index) => {
-      const card = document.createElement('button');
-      card.className = 'collection-card';
-      const name = this.currentKanaMode === 'hira' ? item.nameHira : item.nameKata;
-
-      card.innerHTML = `
-        <div class="collection-emoji">${item.emoji}</div>
-        <div class="collection-name">${name}</div>
-      `;
-
-      card.addEventListener('click', () => {
-        soundManager.playBubblePop();
-        soundManager.playCharacterAction(item.soundType);
-        // このキャラクターで遊ぶ画面へ遷移
-        bubbleGame.currentCharIndex = index;
-        this.switchTab('play');
-        bubbleGame.loadCharacter();
-      });
-
-      grid.appendChild(card);
+    // 画面の切り替え
+    Object.keys(this.screens).forEach(key => {
+      const el = this.screens[key];
+      if (key === screenName) {
+        el.classList.remove('hidden');
+        el.classList.add('active');
+      } else {
+        el.classList.add('hidden');
+        el.classList.remove('active');
+      }
     });
 
-    container.appendChild(grid);
+    // ヘッダータイトルの制御
+    if (screenName === 'home') {
+      this.btnBackHome.classList.add('hidden');
+      this.headerTitle.textContent = '🌟 もじあそび パーク 🌟';
+    } else if (screenName === 'bubble') {
+      this.btnBackHome.classList.remove('hidden');
+      this.headerTitle.textContent = '🐷 うごく！もじあつめ';
+      bubbleGame.init(document.getElementById('bubble-game-content'), this.currentKanaMode);
+    } else if (screenName === 'board') {
+      this.btnBackHome.classList.remove('hidden');
+      this.headerTitle.textContent = '📖 おしゃべり 50おんずかん';
+      boardGame.init(document.getElementById('board-game-content'), this.currentKanaMode);
+    }
   }
 }
 
@@ -118,7 +138,6 @@ function triggerConfetti() {
 
   const pieces = [];
   const numberOfPieces = 60;
-  const colors = ['#ff477e', '#ffb703', '#06d6a0', '#118ab2', '#8338ec', '#ff006e'];
   const symbols = ['⭐', '✨', '💖', '🎉', '🌟'];
 
   for (let i = 0; i < numberOfPieces; i++) {

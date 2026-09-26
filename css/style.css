@@ -1,15 +1,16 @@
 /* ==========================================================================
-   うごく！どうぶつ・のりもの 文字あつめ スタイルシート
-   4歳児向け / iPad Safari 最適化 / 豊かなアニメーション
+   もじあそび パーク スタイルシート
+   4歳児向け / iPad Safari 最適化 / 楽しい遊園地テイスト
    ========================================================================== */
 
 :root {
-  --bg-color: #fff8f0;
+  --bg-color: #fff9f2;
   --text-main: #333333;
   --primary-pink: #ff6b8b;
   --primary-yellow: #ffd166;
   --primary-blue: #4ea8de;
   --primary-green: #06d6a0;
+  --primary-purple: #9d4edd;
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-full: 9999px;
@@ -37,56 +38,130 @@ html, body {
   touch-action: manipulation;
 }
 
+/* 背景浮遊デコレーション */
+.bg-decorations {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.decor {
+  position: absolute;
+  font-size: 2.8rem;
+  opacity: 0.18;
+  animation: floatDecor 7s ease-in-out infinite alternate;
+}
+
+.d1 { top: 10%; left: 6%; animation-delay: 0s; }
+.d2 { top: 14%; right: 8%; animation-delay: 1.5s; font-size: 3.2rem; }
+.d3 { bottom: 12%; left: 8%; animation-delay: 3s; font-size: 3.8rem; }
+.d4 { bottom: 15%; right: 10%; animation-delay: 2s; }
+
+@keyframes floatDecor {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-20px) rotate(12deg); }
+}
+
 #app-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   height: 100dvh;
   position: relative;
+  z-index: 1;
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
-/* ヘッダー */
+/* ----------------------------------------------------
+   ヘッダー
+   ---------------------------------------------------- */
 .app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.9);
-  border-bottom: 3px solid #f3e9dc;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 3px solid #f2e3d5;
   z-index: 100;
 }
 
-.header-tabs {
-  display: flex;
-  gap: 10px;
+.header-left {
+  width: 50px;
 }
 
-.btn-tab {
-  background: #ffffff;
-  border: 2px solid #ffd166;
-  padding: 8px 18px;
+.btn-circle-home {
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-full);
-  font-family: inherit;
-  font-size: 1.15rem;
-  font-weight: bold;
-  color: #555;
-  cursor: pointer;
+  background: #ffffff;
+  border: 3px solid #ffbe0b;
   box-shadow: 0 4px 0 #e0a300;
-  transition: all 0.15s;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.1s;
 }
 
-.btn-tab.active {
-  background: #ffd166;
-  color: #333;
-  transform: translateY(2px);
+.btn-circle-home:active {
+  transform: translateY(3px);
   box-shadow: 0 1px 0 #e0a300;
 }
 
+.header-title {
+  font-size: 1.5rem;
+  color: #ff5e7e;
+  text-align: center;
+  flex: 1;
+  letter-spacing: 1px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* BGMボタン */
+.btn-bgm {
+  background: #f1f3f5;
+  border: 2px solid #ced4da;
+  color: #495057;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #adb5bd;
+  transition: all 0.15s;
+}
+
+.btn-bgm.bgm-active {
+  background: #d8f3dc;
+  border-color: #52b788;
+  color: #1b4332;
+  box-shadow: 0 3px 0 #40916c;
+}
+
+.btn-bgm:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+/* ひらがな / カタカナ 切り替えスイッチ */
 .mode-toggle {
   display: flex;
   background: #eee;
-  padding: 4px;
+  padding: 3px;
   border-radius: var(--radius-full);
 }
 
@@ -108,7 +183,7 @@ html, body {
   box-shadow: 0 2px 6px rgba(255, 107, 139, 0.4);
 }
 
-/* メインステージ */
+/* メイン領域 */
 .app-main {
   flex: 1;
   position: relative;
@@ -127,14 +202,109 @@ html, body {
 }
 
 /* ----------------------------------------------------
-   ゲームステージ
+   画面①: トップページ（ゲーム選択画面）
    ---------------------------------------------------- */
-.game-stage-wrapper {
+.home-hero {
+  text-align: center;
+  margin: 20px 0 15px;
+}
+
+.hero-character-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: 4rem;
+  margin-bottom: 6px;
+}
+
+.hero-char.c1 { animation: wiggle 2s infinite ease-in-out; }
+.hero-char.c2 { animation: happyJump 1.4s infinite ease-in-out 0.3s; }
+.hero-char.c3 { animation: carDash 2.5s infinite ease-in-out 0.6s; font-size: 3.5rem; }
+
+.home-title {
+  font-size: 1.8rem;
+  color: #4a4a4a;
+}
+
+.game-select-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 780px;
+  width: 90%;
+  margin: 10px auto 0;
+  padding-bottom: 30px;
+}
+
+.game-select-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  font-family: inherit;
+  outline: none;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s, box-shadow 0.15s;
+  min-height: 240px;
+  justify-content: center;
+}
+
+.game-select-card:active {
+  transform: scale(0.96) translateY(4px);
+}
+
+.card-pink {
+  background: linear-gradient(135deg, #ffe5ec 0%, #ffb3c6 100%);
+  border: 4px solid #ff8fa3;
+}
+
+.card-yellow {
+  background: linear-gradient(135deg, #fff3b0 0%, #ffd166 100%);
+  border: 4px solid #f4a261;
+}
+
+.card-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #ff3366;
+  color: #ffffff;
+  font-size: 0.9rem;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.card-hero-emoji {
+  font-size: 5rem;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.1));
+}
+
+.card-title {
+  font-size: 1.7rem;
+  line-height: 1.25;
+  color: #2b2d42;
+  margin-bottom: 8px;
+}
+
+.card-desc {
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: #555555;
+}
+
+/* ----------------------------------------------------
+   画面②: うごく！もじあつめゲーム
+   ---------------------------------------------------- */
+.game-content-wrap {
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 }
 
 .bubble-stage {
@@ -147,10 +317,9 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 20px 30px;
+  padding: 16px 20px 24px;
 }
 
-/* 背景デコレーション */
 .stage-bg-decor {
   position: absolute;
   top: 15%;
@@ -158,10 +327,8 @@ html, body {
   opacity: 0.08;
   pointer-events: none;
   z-index: 0;
-  user-select: none;
 }
 
-/* 1. キャラクター */
 .stage-character-box {
   position: relative;
   margin-top: 10px;
@@ -180,15 +347,9 @@ html, body {
   filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.12));
 }
 
-.character-avatar.tap-bounce {
-  animation: tapSquish 0.4s ease;
-}
+.character-avatar.tap-bounce { animation: tapSquish 0.4s ease; }
+.character-avatar.puzzled { animation: headTilt 0.6s ease-in-out; }
 
-.character-avatar.puzzled {
-  animation: headTilt 0.6s ease-in-out;
-}
-
-/* キャラクターの吹き出し */
 .character-speech-bubble {
   position: absolute;
   top: -45px;
@@ -213,16 +374,13 @@ html, body {
   border-color: #ff6b8b transparent;
 }
 
-.speech-pop {
-  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+.speech-pop { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-/* 2. 文字スロット */
 .slots-container {
   display: flex;
   justify-content: center;
   gap: 16px;
-  margin: 10px 0 20px;
+  margin: 10px 0 16px;
   z-index: 10;
 }
 
@@ -252,18 +410,15 @@ html, body {
   box-shadow: 0 8px 0 #e76f51;
 }
 
-.slot-absorb {
-  animation: slotPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+.slot-absorb { animation: slotPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-/* 3. シャボン玉エリア */
 .bubbles-area {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 18px;
   width: 100%;
-  min-height: 120px;
+  min-height: 110px;
   align-items: center;
   z-index: 20;
 }
@@ -282,7 +437,7 @@ html, body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(116, 198, 157, 0.35), inset 0 -6px 12px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 10px 20px rgba(116, 198, 157, 0.35);
   transition: transform 0.15s;
 }
 
@@ -307,11 +462,8 @@ html, body {
   box-shadow: 0 10px 20px rgba(0, 180, 216, 0.35);
 }
 
-.letter-bubble:active {
-  transform: scale(0.9);
-}
+.letter-bubble:active { transform: scale(0.9); }
 
-/* シャボン玉浮遊アニメーション */
 .bubble-float-1 { animation: floatY 3s ease-in-out infinite alternate; }
 .bubble-float-2 { animation: floatY 3.5s ease-in-out infinite alternate 0.5s; }
 .bubble-float-3 { animation: floatY 2.8s ease-in-out infinite alternate 1s; }
@@ -322,9 +474,7 @@ html, body {
   100% { transform: translateY(-16px) rotate(8deg); }
 }
 
-.pop-burst {
-  animation: burst 0.25s ease-out forwards;
-}
+.pop-burst { animation: burst 0.25s ease-out forwards; }
 
 @keyframes burst {
   0% { transform: scale(1); opacity: 1; }
@@ -332,9 +482,7 @@ html, body {
   100% { transform: scale(1.6); opacity: 0; }
 }
 
-.bubble-shake {
-  animation: shakeBubble 0.5s ease-in-out;
-}
+.bubble-shake { animation: shakeBubble 0.5s ease-in-out; }
 
 @keyframes shakeBubble {
   0%, 100% { transform: translateX(0); }
@@ -342,7 +490,6 @@ html, body {
   75% { transform: translateX(12px); }
 }
 
-/* 4. クリア時「つぎへ」ナビゲーション */
 .stage-nav-box {
   margin-top: 10px;
   z-index: 30;
@@ -372,14 +519,8 @@ html, body {
   50% { transform: scale(1.06); }
 }
 
-/* ----------------------------------------------------
-   ★ 豚のお尻フリフリ＆キャラクターのアクションアニメーション
-   ---------------------------------------------------- */
-
-/* お尻フリフリダンス（豚・牛） */
-.dance-butt {
-  animation: buttDance 1.8s infinite ease-in-out;
-}
+/* アニメーション */
+.dance-butt { animation: buttDance 1.8s infinite ease-in-out; }
 
 @keyframes buttDance {
   0%, 100% { transform: rotate(0deg) scale(1); }
@@ -387,41 +528,27 @@ html, body {
   75% { transform: rotate(10deg) scaleX(1.1) translateX(8px); }
 }
 
-/* ピョンピョンジャンプ（犬・カエル） */
-.jump {
-  animation: happyJump 1.2s infinite ease-in-out;
-}
+.jump { animation: happyJump 1.2s infinite ease-in-out; }
 
 @keyframes happyJump {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-24px) scaleY(1.08); }
 }
 
-/* 車のビュンビュンダッシュ */
-.zoom-dash {
-  animation: carDash 2s infinite ease-in-out;
-}
+.zoom-dash { animation: carDash 2s infinite ease-in-out; }
 
 @keyframes carDash {
   0%, 100% { transform: translateX(-15px); }
   50% { transform: translateX(15px); }
 }
 
-/* ★ 完成時の全身大喜びダンス（超巨大化 ＆ 大はしゃぎ！） */
-.celebration-dance {
-  animation: megaParty 0.8s infinite alternate ease-in-out;
-}
+.celebration-dance { animation: megaParty 0.8s infinite alternate ease-in-out; }
 
 @keyframes megaParty {
-  0% {
-    transform: scale(1.25) rotate(-15deg) translateY(-20px);
-  }
-  100% {
-    transform: scale(1.35) rotate(15deg) translateY(-45px);
-  }
+  0% { transform: scale(1.25) rotate(-15deg) translateY(-20px); }
+  100% { transform: scale(1.35) rotate(15deg) translateY(-45px); }
 }
 
-/* 首かしげ（ちがうよ〜？） */
 @keyframes headTilt {
   0%, 100% { transform: rotate(0deg); }
   30% { transform: rotate(-18deg); }
@@ -445,66 +572,206 @@ html, body {
   100% { transform: scale(1); opacity: 1; }
 }
 
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(6deg); }
+}
+
 /* ----------------------------------------------------
-   なかまたち図鑑
+   画面③: おしゃべり 50おんずかん
    ---------------------------------------------------- */
-.collection-title-box {
-  text-align: center;
-  padding: 16px 20px 10px;
-}
-
-.collection-title-box h2 {
-  font-size: 1.8rem;
-  color: #ff6b8b;
-}
-
-.collection-title-box p {
-  font-size: 1.15rem;
-  color: #666;
-}
-
-.collection-wrapper {
-  flex: 1;
-  overflow-y: auto;
-  padding: 10px 20px 40px;
-  max-width: 800px;
+.board-game-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 12px 18px 20px;
+  max-width: 900px;
   margin: 0 auto;
   width: 100%;
 }
 
-.collection-grid {
+.board-row-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.board-row-btn {
+  background: #ffffff;
+  border: 2px solid #ffd166;
+  color: #555;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: 0 3px 0 #e0a300;
+  transition: all 0.15s;
+}
+
+.board-row-btn.active {
+  background: #ffd166;
+  color: #333;
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #e0a300;
+}
+
+.board-cards-area {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.board-grid-50 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 16px;
+  width: 100%;
 }
 
-.collection-card {
+.board-item-card {
   background: #ffffff;
-  border: 3px solid #ffd166;
   border-radius: var(--radius-lg);
-  padding: 20px 10px;
+  border: 3px solid #ffcad4;
+  padding: 16px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 6px 0 #e0a300;
+  box-shadow: 0 6px 0 #e8a9b7;
   cursor: pointer;
   font-family: inherit;
   transition: transform 0.15s;
 }
 
-.collection-card:active {
+.board-item-card:active {
   transform: translateY(4px);
-  box-shadow: 0 2px 0 #e0a300;
+  box-shadow: 0 2px 0 #e8a9b7;
 }
 
-.collection-emoji {
-  font-size: 4rem;
+.board-item-card.card-pop-bounce {
+  animation: tapSquish 0.45s ease;
+}
+
+.card-char-main {
+  font-size: 3.2rem;
+  color: #ff477e;
+  line-height: 1;
+}
+
+.card-emoji-main {
+  font-size: 2.6rem;
+  margin: 6px 0 2px;
+}
+
+.card-word-title {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.card-char-sub {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* 50音 ポップアップモーダル */
+.board-popup-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+.board-popup-modal.fade-out {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.popup-modal-content {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 6px solid #ffd166;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 380px;
+  width: 85%;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.popup-char-huge {
+  font-size: 6.5rem;
+  color: #ff3366;
+  line-height: 1;
+}
+
+.popup-emoji-huge {
+  font-size: 5.5rem;
+  margin: 8px 0;
+  animation: happyJump 1.5s infinite ease-in-out;
+}
+
+.popup-word-title {
+  font-size: 2.4rem;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.popup-sound-desc {
+  font-size: 1.3rem;
+  color: #06d6a0;
   margin-bottom: 6px;
 }
 
-.collection-name {
-  font-size: 1.25rem;
-  color: #333;
+.popup-sub-text {
+  font-size: 1.1rem;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.popup-btn-speak {
+  background: #4ea8de;
+  color: #ffffff;
+  border: none;
+  font-family: inherit;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 6px 0 #2b84ba;
+  cursor: pointer;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.popup-btn-speak:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #2b84ba;
+}
+
+.popup-btn-close {
+  background: #e9ecef;
+  color: #495057;
+  border: none;
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: bold;
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  width: 100%;
 }
 
 /* 紙吹雪 Canvas */

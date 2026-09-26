@@ -1,15 +1,16 @@
-// モード②: あいうえお表（おしゃべり図鑑）
+// 「おしゃべり 50おんずかん」ゲームエンジン
 
 class BoardGame {
   constructor() {
     this.container = null;
-    this.currentMode = 'hira'; // 'hira' または 'kata'
-    this.selectedRowIndex = 0; // 0: あ行, 1: か行, ...
+    this.currentMode = 'hira'; // 'hira' | 'kata'
+    this.selectedRowIndex = 0;
   }
 
   init(container, mode = 'hira') {
     this.container = container;
     this.currentMode = mode;
+    this.selectedRowIndex = 0;
     this.render();
   }
 
@@ -22,47 +23,52 @@ class BoardGame {
     if (!this.container) return;
     this.container.innerHTML = '';
 
-    // タブ（行選択ボタン）
+    const boardWrapper = document.createElement('div');
+    boardWrapper.className = 'board-game-wrapper';
+
+    // 1. 行選択タブ（あ〜お、か〜こ ...）
     const tabContainer = document.createElement('div');
-    tabContainer.className = 'board-tabs';
+    tabContainer.className = 'board-row-tabs';
 
     KANA_ROWS.forEach((row, idx) => {
       const tabBtn = document.createElement('button');
-      tabBtn.className = `board-tab-btn ${this.selectedRowIndex === idx ? 'active' : ''}`;
-      // カタカナ対応
+      tabBtn.className = `board-row-btn ${this.selectedRowIndex === idx ? 'active' : ''}`;
+      
       let label = row.name;
       if (this.currentMode === 'kata') {
-        label = row.chars.map(c => {
-          const item = KANA_DATA.find(k => k.hira === c);
-          return item ? item.kata : c;
-        }).join('・');
-        if (row.chars.length > 2) {
-          const first = KANA_DATA.find(k => k.hira === row.chars[0]);
-          const last = KANA_DATA.find(k => k.hira === row.chars[row.chars.length - 1]);
-          label = `${first ? first.kata : ''}〜${last ? last.kata : ''}`;
+        const first = KANA_TABLE_DATA.find(k => k.hira === row.chars[0]);
+        const last = KANA_TABLE_DATA.find(k => k.hira === row.chars[row.chars.length - 1]);
+        if (first && last && row.chars.length > 2) {
+          label = `${first.kata}〜${last.kata}`;
+        } else if (first) {
+          label = row.chars.map(c => {
+            const item = KANA_TABLE_DATA.find(k => k.hira === c);
+            return item ? item.kata : c;
+          }).join('・');
         }
       }
+
       tabBtn.textContent = label;
       tabBtn.addEventListener('click', () => {
-        soundManager.playPop();
+        soundManager.playBubblePop();
         this.selectedRowIndex = idx;
         this.renderCards();
-        // アクティブ表示更新
-        tabContainer.querySelectorAll('.board-tab-btn').forEach((b, i) => {
+        tabContainer.querySelectorAll('.board-row-btn').forEach((b, i) => {
           b.classList.toggle('active', i === idx);
         });
       });
       tabContainer.appendChild(tabBtn);
     });
 
-    this.container.appendChild(tabContainer);
+    boardWrapper.appendChild(tabContainer);
 
-    // カード表示領域
+    // 2. カード一覧グリッド
     const cardsArea = document.createElement('div');
     cardsArea.className = 'board-cards-area';
     cardsArea.id = 'board-cards-area';
-    this.container.appendChild(cardsArea);
+    boardWrapper.appendChild(cardsArea);
 
+    this.container.appendChild(boardWrapper);
     this.renderCards();
   }
 
@@ -73,28 +79,28 @@ class BoardGame {
 
     const selectedRow = KANA_ROWS[this.selectedRowIndex];
     const grid = document.createElement('div');
-    grid.className = 'board-grid';
+    grid.className = 'board-grid-50';
 
     selectedRow.chars.forEach(char => {
-      const data = KANA_DATA.find(k => k.hira === char);
+      const data = KANA_TABLE_DATA.find(k => k.hira === char);
       if (!data) return;
 
       const displayChar = this.currentMode === 'hira' ? data.hira : data.kata;
       const subChar = this.currentMode === 'hira' ? data.kata : data.hira;
 
-      const card = document.createElement('div');
-      card.className = 'board-card';
+      const card = document.createElement('button');
+      card.className = 'board-item-card';
       card.innerHTML = `
-        <div class="board-card-char">${displayChar}</div>
-        <div class="board-card-emoji">${data.emoji}</div>
-        <div class="board-card-word">${data.word}</div>
-        <div class="board-card-sub">(${subChar})</div>
+        <div class="card-char-main">${displayChar}</div>
+        <div class="card-emoji-main">${data.emoji}</div>
+        <div class="card-word-title">${data.word}</div>
+        <div class="card-char-sub">(${subChar})</div>
       `;
 
       card.addEventListener('click', () => {
-        soundManager.playPop();
-        card.classList.add('pop-anim');
-        setTimeout(() => card.classList.remove('pop-anim'), 400);
+        soundManager.playBubblePop();
+        card.classList.add('card-pop-bounce');
+        setTimeout(() => card.classList.remove('card-pop-bounce'), 450);
 
         this.showPopup(data);
       });
@@ -106,39 +112,41 @@ class BoardGame {
   }
 
   showPopup(data) {
-    const displayChar = this.currentMode === 'hira' ? data.hira : data.kata;
-    const subChar = this.currentMode === 'hira' ? data.kata : data.hira;
+    const isKata = this.currentMode === 'kata';
+    const displayChar = isKata ? data.kata : data.hira;
+    const subChar = isKata ? data.hira : data.kata;
 
-    // 高音質音声ファイル再生: 「あ！アイス！」
-    soundManager.playKana(data.id);
+    // おしゃべり発声: 「あ！アイスクリーム！」
+    soundManager.speakKanaItem(data, isKata);
 
-    // ポップアップモーダル表示
+    // ポップアップ拡大モーダル
     const modal = document.createElement('div');
-    modal.className = 'board-modal-overlay';
+    modal.className = 'board-popup-modal';
     modal.innerHTML = `
-      <div class="board-modal-content">
-        <div class="modal-char-large">${displayChar}</div>
-        <div class="modal-emoji-large">${data.emoji}</div>
-        <div class="modal-word-large">${data.word}</div>
-        <div class="modal-sub-large">もうひとつの もじ: ${subChar}</div>
-        <button class="modal-speak-btn">🔊 もういっかい きく</button>
-        <button class="modal-close-btn">とじる ✖</button>
+      <div class="popup-modal-content">
+        <div class="popup-char-huge">${displayChar}</div>
+        <div class="popup-emoji-huge">${data.emoji}</div>
+        <div class="popup-word-title">${data.word}</div>
+        <div class="popup-sound-desc">「${data.sound}」</div>
+        <div class="popup-sub-text">もうひとつの もじ: ${subChar}</div>
+        <button class="popup-btn-speak">🔊 もういっかい きく</button>
+        <button class="popup-btn-close">✖ とじる</button>
       </div>
     `;
 
-    modal.querySelector('.modal-speak-btn').addEventListener('click', (e) => {
+    modal.querySelector('.popup-btn-speak').addEventListener('click', (e) => {
       e.stopPropagation();
-      soundManager.playPop();
-      soundManager.playKana(data.id);
+      soundManager.playBubblePop();
+      soundManager.speakKanaItem(data, isKata);
     });
 
     const closeModal = () => {
-      soundManager.playPop();
+      soundManager.playBubblePop();
       modal.classList.add('fade-out');
-      setTimeout(() => modal.remove(), 250);
+      setTimeout(() => modal.remove(), 200);
     };
 
-    modal.querySelector('.modal-close-btn').addEventListener('click', closeModal);
+    modal.querySelector('.popup-btn-close').addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
     });
