@@ -109,9 +109,8 @@ class BoardGame {
     const displayChar = this.currentMode === 'hira' ? data.hira : data.kata;
     const subChar = this.currentMode === 'hira' ? data.kata : data.hira;
 
-    // 音声読み上げ: 「あ！アイスクリーム！」
-    const phrase = `${displayChar}！ ${data.word}！`;
-    soundManager.speak(phrase);
+    // 高音質音声ファイル再生: 「あ！アイス！」
+    soundManager.playKana(data.id);
 
     // ポップアップモーダル表示
     const modal = document.createElement('div');
@@ -130,7 +129,7 @@ class BoardGame {
     modal.querySelector('.modal-speak-btn').addEventListener('click', (e) => {
       e.stopPropagation();
       soundManager.playPop();
-      soundManager.speak(phrase);
+      soundManager.playKana(data.id);
     });
 
     const closeModal = () => {

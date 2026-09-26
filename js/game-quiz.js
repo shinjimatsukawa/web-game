@@ -76,9 +76,11 @@ class QuizGame {
       <button class="quiz-replay-voice-btn">🔊 もういっかい きく</button>
     `;
 
-    // 音声読み上げ
+    // 音声出題: 「あ！アイス！」「どれかな？」
     const speakPrompt = () => {
-      soundManager.speak(`「${char}」は どれかな？ ${this.targetItem.word}の「${char}」だよ`);
+      soundManager.playKana(this.targetItem.id, () => {
+        soundManager.playPhrase('dorekana');
+      });
     };
 
     promptBox.querySelector('.quiz-replay-voice-btn').addEventListener('click', () => {
@@ -123,10 +125,10 @@ class QuizGame {
       // 紙吹雪エフェクト
       triggerConfetti();
 
-      // 褒め言葉
-      const praises = ['せいかい！', 'やったね！', 'すごーい！', 'かっこいい！', 'たいへんよくできました！'];
-      const praise = praises[Math.floor(Math.random() * praises.length)];
-      setTimeout(() => soundManager.speak(praise), 300);
+      // 高品質音声による褒め言葉
+      const phraseIds = ['correct_1', 'correct_2', 'correct_3'];
+      const chosenPhrase = phraseIds[Math.floor(Math.random() * phraseIds.length)];
+      setTimeout(() => soundManager.playPhrase(chosenPhrase), 300);
 
       this.currentQuestionIndex++;
 
@@ -144,9 +146,9 @@ class QuizGame {
       card.classList.add('shake');
       setTimeout(() => card.classList.remove('shake'), 600);
 
-      const cheers = ['おしい！もういっかい！', 'だいじょうぶ、もういっかい えらんでね！'];
-      const cheer = cheers[Math.floor(Math.random() * cheers.length)];
-      soundManager.speak(cheer);
+      const phraseIds = ['try_again_1', 'try_again_2'];
+      const chosenPhrase = phraseIds[Math.floor(Math.random() * phraseIds.length)];
+      soundManager.playPhrase(chosenPhrase);
     }
   }
 
@@ -188,7 +190,7 @@ class QuizGame {
     });
 
     this.container.appendChild(goalCard);
-    soundManager.speak(`ぜんもん せいかい！すごいね！ごほうびの ${newSticker.name} シールを ゲットしたよ！`);
+    soundManager.playPhrase('goal_quiz');
   }
 }
 

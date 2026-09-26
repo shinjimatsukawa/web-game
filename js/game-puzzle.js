@@ -124,8 +124,8 @@ class PuzzleGame {
     });
     this.container.appendChild(poolArea);
 
-    // 音声ガイド
-    soundManager.speak(`${this.targetWord.name}！文字をならべてね`);
+    // 音声ガイド: 単語名「くるま」
+    soundManager.playAudioFile(`audio/words/char_${this.targetWord.id}.m4a`);
   }
 
   handleCharSelect(item) {
@@ -156,7 +156,8 @@ class PuzzleGame {
       const emojiEl = document.getElementById('puzzle-emoji');
       if (emojiEl) emojiEl.classList.add('bounce');
 
-      soundManager.speak(`${this.targetWord.name}！できたね！すごーい！`);
+      // 高品質音声: 「くるま！できたね！」
+      soundManager.playWord(this.targetWord.id);
       this.currentPuzzleIndex++;
 
       setTimeout(() => {
@@ -169,7 +170,7 @@ class PuzzleGame {
     } else {
       // 順番が違う場合
       soundManager.playTryAgain();
-      soundManager.speak('あれれ？もういっかい ならびかえてみてね');
+      soundManager.playPhrase('try_again_2');
     }
   }
 
@@ -210,7 +211,7 @@ class PuzzleGame {
     });
 
     this.container.appendChild(goalCard);
-    soundManager.speak(`パズル クリア！すごいね！ごほうびの ${newSticker.name} シールを ゲットしたよ！`);
+    soundManager.playPhrase('goal_puzzle');
   }
 }
 

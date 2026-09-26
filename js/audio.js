@@ -1,4 +1,4 @@
-// Web Audio API と Web Speech API を用いた幼児向けサウンドマネージャー
+// 高品質オーディオマネージャー（高音質AAC音声ファイル ＋ Web Audio API効果音 ＋ ナチュラルTTSフォールバック）
 
 class SoundManager {
   constructor() {
@@ -6,6 +6,7 @@ class SoundManager {
     this.synth = window.speechSynthesis || null;
     this.voice = null;
     this.isUnlocked = false;
+    this.currentAudio = null;
 
     // 音声リスト読み込み（非同期対応）
     if (this.synth) {
@@ -29,7 +30,7 @@ class SoundManager {
         }
       }
 
-      // iOS SafariのSpeechSynthesisアンロック用ダミースピーチ
+      // iOS SafariのSpeechSynthesisアンロック用
       if (this.synth) {
         const dummy = new SpeechSynthesisUtterance('');
         this.synth.speak(dummy);
@@ -45,11 +46,74 @@ class SoundManager {
   initVoice() {
     if (!this.synth) return;
     const voices = this.synth.getVoices();
-    // 日本語音声を優先取得（Kyoko / Hattori / ja-JP など）
-    this.voice = voices.find(v => v.lang.startsWith('ja') || v.lang === 'ja_JP') || null;
+    // 日本語音声の中で、SiriやEnhancedなどの自然なボイスを優先取得
+    const jaVoices = voices.filter(v => v.lang.startsWith('ja') || v.lang === 'ja_JP');
+    this.voice = jaVoices.find(v => v.name.includes('Siri') || v.name.includes('Enhanced') || v.name.includes('Kyoko'))
+      || jaVoices[0]
+      || null;
   }
 
-  // テキスト読み上げ（Web Speech API）
+  stopAllSpeech() {
+    if (this.currentAudio) {
+      this.currentAudio.pause();
+      this.currentAudio.currentTime = 0;
+      this.currentAudio = null;
+    }
+    if (this.synth) {
+      this.synth.cancel();
+    }
+  }
+
+  // 高音質音声ファイル（AAC / m4a）の再生
+  playAudioFile(src, onEnd = null) {
+    this.stopAllSpeech();
+
+    const audio = new Audio(src);
+    this.currentAudio = audio;
+
+    const cleanup = () => {
+      if (this.currentAudio === audio) {
+        this.currentAudio = null;
+      }
+      if (onEnd) onEnd();
+    };
+
+    audio.onended = cleanup;
+    audio.onerror = (e) => {
+      console.warn(`Audio load failed for ${src}:`, e);
+      cleanup();
+    };
+
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(err => {
+        console.warn('Audio play catch:', err);
+        cleanup();
+      });
+    }
+  }
+
+  // 50音の「あ！アイス！」再生
+  playKana(id, onEnd = null) {
+    this.playAudioFile(`audio/kana/${id}.m4a`, onEnd);
+  }
+
+  // 1文字「あ」の再生
+  playChar(id, onEnd = null) {
+    this.playAudioFile(`audio/kana/char_${id}.m4a`, onEnd);
+  }
+
+  // 単語「いぬ！できたね！」の再生
+  playWord(id, onEnd = null) {
+    this.playAudioFile(`audio/words/${id}.m4a`, onEnd);
+  }
+
+  // 定型フレーズの再生
+  playPhrase(phraseId, onEnd = null) {
+    this.playAudioFile(`audio/phrases/${phraseId}.m4a`, onEnd);
+  }
+
+  // テキスト読み上げ（Web Speech API: ピッチ加工を廃止し自然な発音に）
   speak(text, onEnd = null) {
     if (!this.synth) {
       if (onEnd) onEnd();
@@ -57,16 +121,16 @@ class SoundManager {
     }
 
     try {
-      this.synth.cancel(); // 既存の読み上げを停止
+      this.stopAllSpeech();
 
       const utter = new SpeechSynthesisUtterance(text);
       utter.lang = 'ja-JP';
       if (this.voice) {
         utter.voice = this.voice;
       }
-      // 4歳児向けに少しゆっくり、明るい高めのピッチ
-      utter.rate = 0.88;
-      utter.pitch = 1.15;
+      // 不自然な機械音・ロボット化の原因となるピッチ変調をなくし、ナチュラルに
+      utter.rate = 0.95;
+      utter.pitch = 1.0;
 
       if (onEnd) {
         utter.onend = () => onEnd();
@@ -91,7 +155,7 @@ class SoundManager {
     return this.ctx;
   }
 
-  // ボタンをタッチしたときの可愛い「ポコン♪」音
+  // タップ時の可愛い「ポコン♪」音
   playPop() {
     const ctx = this.ensureContext();
     if (!ctx) return;
@@ -114,7 +178,7 @@ class SoundManager {
     osc.stop(now + 0.09);
   }
 
-  // 正解したときの「ピンポーン♪」（明快な高音の和音チャイム）
+  // 正解時の「ピンポーン♪」チャイム
   playCorrect() {
     const ctx = this.ensureContext();
     if (!ctx) return;
@@ -126,7 +190,7 @@ class SoundManager {
     const gain1 = ctx.createGain();
     osc1.type = 'triangle';
     osc1.frequency.setValueAtTime(659.25, now);
-    gain1.gain.setValueAtTime(0.3, now);
+    gain1.gain.setValueAtTime(0.25, now);
     gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
     osc1.connect(gain1);
     gain1.connect(ctx.destination);
@@ -137,17 +201,17 @@ class SoundManager {
     const osc2 = ctx.createOscillator();
     const gain2 = ctx.createGain();
     osc2.type = 'triangle';
-    osc2.frequency.setValueAtTime(523.25, now + 0.2);
+    osc2.frequency.setValueAtTime(523.25, now + 0.18);
     gain2.gain.setValueAtTime(0, now);
-    gain2.gain.setValueAtTime(0.3, now + 0.2);
-    gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.75);
+    gain2.gain.setValueAtTime(0.25, now + 0.18);
+    gain2.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
     osc2.connect(gain2);
     gain2.connect(ctx.destination);
-    osc2.start(now + 0.2);
-    osc2.stop(now + 0.75);
+    osc2.start(now + 0.18);
+    osc2.stop(now + 0.7);
   }
 
-  // 間違えたときの「ポヨン？」（不快なブブーではなく、優しく可愛い効果音）
+  // 間違えたときの「ポヨン？」（不快な音ではなく、優しく可愛い効果音）
   playTryAgain() {
     const ctx = this.ensureContext();
     if (!ctx) return;
@@ -157,12 +221,11 @@ class SoundManager {
     const gain = ctx.createGain();
 
     osc.type = 'sine';
-    // 周波数を上下させて「ぷるん」感を出す
     osc.frequency.setValueAtTime(320, now);
     osc.frequency.exponentialRampToValueAtTime(220, now + 0.15);
     osc.frequency.exponentialRampToValueAtTime(260, now + 0.3);
 
-    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.setValueAtTime(0.18, now);
     gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
 
     osc.connect(gain);
@@ -172,12 +235,12 @@ class SoundManager {
     osc.stop(now + 0.35);
   }
 
-  // 星やシールをもらったときの「ティロリン♪」
+  // 星・シールの「ティロリン♪」
   playStar() {
     const ctx = this.ensureContext();
     if (!ctx) return;
 
-    const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+    const notes = [523.25, 659.25, 783.99, 1046.50];
     const now = ctx.currentTime;
 
     notes.forEach((freq, idx) => {
@@ -187,7 +250,7 @@ class SoundManager {
       osc.frequency.setValueAtTime(freq, now + idx * 0.08);
 
       gain.gain.setValueAtTime(0, now);
-      gain.gain.setValueAtTime(0.25, now + idx * 0.08);
+      gain.gain.setValueAtTime(0.2, now + idx * 0.08);
       gain.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.08 + 0.25);
 
       osc.connect(gain);
@@ -198,18 +261,18 @@ class SoundManager {
     });
   }
 
-  // ゴール時のキラキラファンファーレ♪
+  // キラキラファンファーレ♪
   playFanfare() {
     const ctx = this.ensureContext();
     if (!ctx) return;
 
     const notes = [
-      { f: 523.25, d: 0.12 }, // ド
-      { f: 523.25, d: 0.12 }, // ド
-      { f: 523.25, d: 0.12 }, // ド
-      { f: 659.25, d: 0.28 }, // ミ
-      { f: 783.99, d: 0.28 }, // ソ
-      { f: 1046.50, d: 0.6 }  // 高いド
+      { f: 523.25, d: 0.12 },
+      { f: 523.25, d: 0.12 },
+      { f: 523.25, d: 0.12 },
+      { f: 659.25, d: 0.28 },
+      { f: 783.99, d: 0.28 },
+      { f: 1046.50, d: 0.6 }
     ];
 
     let t = ctx.currentTime;
@@ -219,7 +282,7 @@ class SoundManager {
       osc.type = 'triangle';
       osc.frequency.setValueAtTime(note.f, t);
 
-      gain.gain.setValueAtTime(0.3, t);
+      gain.gain.setValueAtTime(0.25, t);
       gain.gain.exponentialRampToValueAtTime(0.01, t + note.d);
 
       osc.connect(gain);

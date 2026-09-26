@@ -79,7 +79,7 @@ class StickerBook {
         `;
         slot.addEventListener('click', () => {
           soundManager.playPop();
-          soundManager.speak(sticker.name);
+          soundManager.playAudioFile(`audio/stickers/${sticker.id}.m4a`);
           slot.classList.add('bounce');
           setTimeout(() => slot.classList.remove('bounce'), 500);
         });
