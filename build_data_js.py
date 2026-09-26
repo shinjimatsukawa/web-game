@@ -1,24 +1,19 @@
-// 4歳児向け知育ゲーム データ集（全100種類の言葉）
+# -*- coding: utf-8 -*-
+"""
+100種類のキャラクターデータを整形して js/data.js を生成するスクリプト
+"""
 
-// 1. 「うごく！文字あつめ」データ（全100種類：きょうりゅう・はたらくくるま・どうぶつ・たべもの）
-const CHARACTERS_DATA = [
+CHARACTERS_100 = [
+  # ----------------------------------------------------
+  # 🦖 きょうりゅう・古代生物（25種類）
+  # ----------------------------------------------------
   {
     "id": "tirano",
     "category": "dino",
     "nameHira": "てぃらの",
     "nameKata": "ティラノ",
-    "charsHira": [
-      "て",
-      "ぃ",
-      "ら",
-      "の"
-    ],
-    "charsKata": [
-      "テ",
-      "ィ",
-      "ラ",
-      "ノ"
-    ],
+    "charsHira": ["て", "ぃ", "ら", "の"],
+    "charsKata": ["テ", "ィ", "ラ", "ノ"],
     "emoji": "🦖",
     "soundType": "roar",
     "soundText": "ガオーーッ！",
@@ -31,18 +26,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "とりけら",
     "nameKata": "トリケラ",
-    "charsHira": [
-      "と",
-      "り",
-      "け",
-      "ら"
-    ],
-    "charsKata": [
-      "ト",
-      "リ",
-      "ケ",
-      "ラ"
-    ],
+    "charsHira": ["と", "り", "け", "ら"],
+    "charsKata": ["ト", "リ", "ケ", "ラ"],
     "emoji": "🦕",
     "soundType": "growl",
     "soundText": "ズシンズシン！",
@@ -55,16 +40,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "ぷてら",
     "nameKata": "プテラ",
-    "charsHira": [
-      "ぷ",
-      "て",
-      "ら"
-    ],
-    "charsKata": [
-      "プ",
-      "テ",
-      "ラ"
-    ],
+    "charsHira": ["ぷ", "て", "ら"],
+    "charsKata": ["プ", "テ", "ラ"],
     "emoji": "🦅",
     "soundType": "chirp",
     "soundText": "バサバサ〜！",
@@ -77,18 +54,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "ぶらきお",
     "nameKata": "ブラキオ",
-    "charsHira": [
-      "ぶ",
-      "ら",
-      "き",
-      "お"
-    ],
-    "charsKata": [
-      "ブ",
-      "ラ",
-      "キ",
-      "オ"
-    ],
+    "charsHira": ["ぶ", "ら", "き", "お"],
+    "charsKata": ["ブ", "ラ", "キ", "オ"],
     "emoji": "🦕",
     "soundType": "trumpet",
     "soundText": "首がながーい！",
@@ -101,16 +68,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "すてご",
     "nameKata": "ステゴ",
-    "charsHira": [
-      "す",
-      "て",
-      "ご"
-    ],
-    "charsKata": [
-      "ス",
-      "テ",
-      "ゴ"
-    ],
+    "charsHira": ["す", "て", "ご"],
+    "charsKata": ["ス", "テ", "ゴ"],
     "emoji": "🦕",
     "soundType": "growl",
     "soundText": "トゲトゲかっこいい！",
@@ -123,16 +82,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "すぴの",
     "nameKata": "スピノ",
-    "charsHira": [
-      "す",
-      "ぴ",
-      "の"
-    ],
-    "charsKata": [
-      "ス",
-      "ピ",
-      "ノ"
-    ],
+    "charsHira": ["す", "ぴ", "の"],
+    "charsKata": ["ス", "ピ", "ノ"],
     "emoji": "🦖",
     "soundType": "roar",
     "soundText": "お魚パクッ！",
@@ -145,18 +96,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "あんきろ",
     "nameKata": "アンキロ",
-    "charsHira": [
-      "あ",
-      "ん",
-      "き",
-      "ろ"
-    ],
-    "charsKata": [
-      "ア",
-      "ン",
-      "キ",
-      "ロ"
-    ],
+    "charsHira": ["あ", "ん", "き", "ろ"],
+    "charsKata": ["ア", "ン", "キ", "ロ"],
     "emoji": "🦕",
     "soundType": "growl",
     "soundText": "しっぽハンマー！",
@@ -169,18 +110,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "らぷとる",
     "nameKata": "ラプトル",
-    "charsHira": [
-      "ら",
-      "ぷ",
-      "と",
-      "る"
-    ],
-    "charsKata": [
-      "ラ",
-      "プ",
-      "ト",
-      "ル"
-    ],
+    "charsHira": ["ら", "ぷ", "と", "る"],
+    "charsKata": ["ラ", "プ", "ト", "ル"],
     "emoji": "🦖",
     "soundType": "roar",
     "soundText": "すばやいぞ！",
@@ -193,14 +124,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "あろ",
     "nameKata": "アロ",
-    "charsHira": [
-      "あ",
-      "ろ"
-    ],
-    "charsKata": [
-      "ア",
-      "ロ"
-    ],
+    "charsHira": ["あ", "ろ"],
+    "charsKata": ["ア", "ロ"],
     "emoji": "🦖",
     "soundType": "roar",
     "soundText": "ガブッ！",
@@ -213,14 +138,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "もさ",
     "nameKata": "モサ",
-    "charsHira": [
-      "も",
-      "さ"
-    ],
-    "charsKata": [
-      "モ",
-      "サ"
-    ],
+    "charsHira": ["も", "さ"],
+    "charsKata": ["モ", "サ"],
     "emoji": "🐋",
     "soundType": "snap",
     "soundText": "海の王者だ！",
@@ -233,18 +152,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "ぱらさう",
     "nameKata": "パラサウ",
-    "charsHira": [
-      "ぱ",
-      "ら",
-      "さ",
-      "う"
-    ],
-    "charsKata": [
-      "パ",
-      "ラ",
-      "サ",
-      "ウ"
-    ],
+    "charsHira": ["ぱ", "ら", "さ", "う"],
+    "charsKata": ["パ", "ラ", "サ", "ウ"],
     "emoji": "🦕",
     "soundType": "trumpet",
     "soundText": "トサカでブォー！",
@@ -257,18 +166,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "いぐあの",
     "nameKata": "イグアノ",
-    "charsHira": [
-      "い",
-      "ぐ",
-      "あ",
-      "の"
-    ],
-    "charsKata": [
-      "イ",
-      "グ",
-      "ア",
-      "ノ"
-    ],
+    "charsHira": ["い", "ぐ", "あ", "の"],
+    "charsKata": ["イ", "グ", "ア", "ノ"],
     "emoji": "🦕",
     "soundType": "growl",
     "soundText": "親指トゲトゲ！",
@@ -281,16 +180,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "かせき",
     "nameKata": "カセキ",
-    "charsHira": [
-      "か",
-      "せ",
-      "き"
-    ],
-    "charsKata": [
-      "カ",
-      "セ",
-      "キ"
-    ],
+    "charsHira": ["か", "せ", "き"],
+    "charsKata": ["カ", "セ", "キ"],
     "emoji": "🦴",
     "soundType": "cheer",
     "soundText": "たからもの発見！",
@@ -303,16 +194,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "たまご",
     "nameKata": "タマゴ",
-    "charsHira": [
-      "た",
-      "ま",
-      "ご"
-    ],
-    "charsKata": [
-      "タ",
-      "マ",
-      "ゴ"
-    ],
+    "charsHira": ["た", "ま", "ご"],
+    "charsKata": ["タ", "マ", "ゴ"],
     "emoji": "🥚",
     "soundType": "hop",
     "soundText": "パカッ！生まれた！",
@@ -325,16 +208,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "りゅう",
     "nameKata": "リュウ",
-    "charsHira": [
-      "り",
-      "ゅ",
-      "う"
-    ],
-    "charsKata": [
-      "リ",
-      "ュ",
-      "ウ"
-    ],
+    "charsHira": ["り", "ゅ", "う"],
+    "charsKata": ["リ", "ュ", "ウ"],
     "emoji": "🐲",
     "soundType": "roar",
     "soundText": "ドカーン！",
@@ -347,18 +222,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "まんもす",
     "nameKata": "マンモス",
-    "charsHira": [
-      "ま",
-      "ん",
-      "も",
-      "す"
-    ],
-    "charsKata": [
-      "マ",
-      "ン",
-      "モ",
-      "ス"
-    ],
+    "charsHira": ["ま", "ん", "も", "す"],
+    "charsKata": ["マ", "ン", "モ", "ス"],
     "emoji": "🦣",
     "soundType": "trumpet",
     "soundText": "パオーン！",
@@ -371,18 +236,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "でぃぷろ",
     "nameKata": "ディプロ",
-    "charsHira": [
-      "で",
-      "ぃ",
-      "ぷ",
-      "ろ"
-    ],
-    "charsKata": [
-      "デ",
-      "ィ",
-      "プ",
-      "ロ"
-    ],
+    "charsHira": ["で", "ぃ", "ぷ", "ろ"],
+    "charsKata": ["デ", "ィ", "プ", "ロ"],
     "emoji": "🦕",
     "soundType": "growl",
     "soundText": "ながーいしっぽ！",
@@ -395,18 +250,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "ぷれしお",
     "nameKata": "プレシオ",
-    "charsHira": [
-      "ぷ",
-      "れ",
-      "し",
-      "お"
-    ],
-    "charsKata": [
-      "プ",
-      "レ",
-      "シ",
-      "オ"
-    ],
+    "charsHira": ["ぷ", "れ", "し", "お"],
+    "charsKata": ["プ", "レ", "シ", "オ"],
     "emoji": "🦕",
     "soundType": "snap",
     "soundText": "首長竜スイスイ！",
@@ -419,16 +264,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "ぱきけ",
     "nameKata": "パキケ",
-    "charsHira": [
-      "ぱ",
-      "き",
-      "け"
-    ],
-    "charsKata": [
-      "パ",
-      "キ",
-      "ケ"
-    ],
+    "charsHira": ["ぱ", "き", "け"],
+    "charsKata": ["パ", "キ", "ケ"],
     "emoji": "🦕",
     "soundType": "growl",
     "soundText": "頭がカチンコチン！",
@@ -441,18 +278,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "ぷてらの",
     "nameKata": "プテラノ",
-    "charsHira": [
-      "ぷ",
-      "て",
-      "ら",
-      "の"
-    ],
-    "charsKata": [
-      "プ",
-      "テ",
-      "ラ",
-      "ノ"
-    ],
+    "charsHira": ["ぷ", "て", "ら", "の"],
+    "charsKata": ["プ", "テ", "ラ", "ノ"],
     "emoji": "🦅",
     "soundType": "chirp",
     "soundText": "大空をひとっとび！",
@@ -465,16 +292,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "はどろ",
     "nameKata": "ハドロ",
-    "charsHira": [
-      "は",
-      "ど",
-      "ろ"
-    ],
-    "charsKata": [
-      "ハ",
-      "ド",
-      "ロ"
-    ],
+    "charsHira": ["は", "ど", "ろ"],
+    "charsKata": ["ハ", "ド", "ロ"],
     "emoji": "🦕",
     "soundType": "trumpet",
     "soundText": "カモのはしご！",
@@ -487,16 +306,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "めがろ",
     "nameKata": "メガロ",
-    "charsHira": [
-      "め",
-      "が",
-      "ろ"
-    ],
-    "charsKata": [
-      "メ",
-      "ガ",
-      "ロ"
-    ],
+    "charsHira": ["め", "が", "ろ"],
+    "charsKata": ["メ", "ガ", "ロ"],
     "emoji": "🦈",
     "soundType": "snap",
     "soundText": "大きな古代サメ！",
@@ -509,14 +320,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "きば",
     "nameKata": "キバ",
-    "charsHira": [
-      "き",
-      "ば"
-    ],
-    "charsKata": [
-      "キ",
-      "バ"
-    ],
+    "charsHira": ["き", "ば"],
+    "charsKata": ["キ", "バ"],
     "emoji": "🦷",
     "soundType": "roar",
     "soundText": "するどいキバ！",
@@ -529,14 +334,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "つの",
     "nameKata": "ツノ",
-    "charsHira": [
-      "つ",
-      "の"
-    ],
-    "charsKata": [
-      "ツ",
-      "ノ"
-    ],
+    "charsHira": ["つ", "の"],
+    "charsKata": ["ツ", "ノ"],
     "emoji": "🦏",
     "soundType": "growl",
     "soundText": "つよいツノ！",
@@ -549,14 +348,8 @@ const CHARACTERS_DATA = [
     "category": "dino",
     "nameHira": "ほね",
     "nameKata": "ホネ",
-    "charsHira": [
-      "ほ",
-      "ね"
-    ],
-    "charsKata": [
-      "ホ",
-      "ネ"
-    ],
+    "charsHira": ["ほ", "ね"],
+    "charsKata": ["ホ", "ネ"],
     "emoji": "🦴",
     "soundType": "cheer",
     "soundText": "おおきなホネ！",
@@ -564,25 +357,17 @@ const CHARACTERS_DATA = [
     "actionType": "jump",
     "bgDecor": "🌟"
   },
+
+  # ----------------------------------------------------
+  # 🚒 はたらくくるま・乗り物（25種類）
+  # ----------------------------------------------------
   {
     "id": "shobo",
     "category": "vehicle",
     "nameHira": "しょうぼう",
     "nameKata": "ショウボウ",
-    "charsHira": [
-      "し",
-      "ょ",
-      "う",
-      "ぼ",
-      "う"
-    ],
-    "charsKata": [
-      "シ",
-      "ョ",
-      "ウ",
-      "ボ",
-      "ウ"
-    ],
+    "charsHira": ["し", "ょ", "う", "ぼ", "う"],
+    "charsKata": ["シ", "ョ", "ウ", "ボ", "ウ"],
     "emoji": "🚒",
     "soundType": "horn",
     "soundText": "ウ〜カンカン！放水！",
@@ -595,18 +380,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "ぱとかー",
     "nameKata": "パトカー",
-    "charsHira": [
-      "ぱ",
-      "と",
-      "か",
-      "ー"
-    ],
-    "charsKata": [
-      "パ",
-      "ト",
-      "カ",
-      "ー"
-    ],
+    "charsHira": ["ぱ", "と", "か", "ー"],
+    "charsKata": ["パ", "ト", "カ", "ー"],
     "emoji": "🚓",
     "soundType": "horn",
     "soundText": "ウ〜〜！パトロール！",
@@ -619,20 +394,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "れすきゅー",
     "nameKata": "レスキュー",
-    "charsHira": [
-      "れ",
-      "す",
-      "き",
-      "ゅ",
-      "ー"
-    ],
-    "charsKata": [
-      "レ",
-      "ス",
-      "キ",
-      "ュ",
-      "ー"
-    ],
+    "charsHira": ["れ", "す", "き", "ゅ", "ー"],
+    "charsKata": ["レ", "ス", "キ", "ュ", "ー"],
     "emoji": "🚑",
     "soundType": "horn",
     "soundText": "ピーポーピーポー！",
@@ -645,14 +408,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "ばす",
     "nameKata": "バス",
-    "charsHira": [
-      "ば",
-      "す"
-    ],
-    "charsKata": [
-      "バ",
-      "ス"
-    ],
+    "charsHira": ["ば", "す"],
+    "charsKata": ["バ", "ス"],
     "emoji": "🚌",
     "soundType": "vroom",
     "soundText": "ぷっぷー！乗ってね！",
@@ -665,18 +422,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "たくしー",
     "nameKata": "タクシー",
-    "charsHira": [
-      "た",
-      "く",
-      "し",
-      "ー"
-    ],
-    "charsKata": [
-      "タ",
-      "ク",
-      "シ",
-      "ー"
-    ],
+    "charsHira": ["た", "く", "し", "ー"],
+    "charsKata": ["タ", "ク", "シ", "ー"],
     "emoji": "🚕",
     "soundType": "vroom",
     "soundText": "どこへ行きますか？",
@@ -689,18 +436,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "とらっく",
     "nameKata": "トラック",
-    "charsHira": [
-      "と",
-      "ら",
-      "っ",
-      "く"
-    ],
-    "charsKata": [
-      "ト",
-      "ラ",
-      "ッ",
-      "ク"
-    ],
+    "charsHira": ["と", "ら", "っ", "く"],
+    "charsKata": ["ト", "ラ", "ッ", "ク"],
     "emoji": "🚚",
     "soundType": "vroom",
     "soundText": "荷物を運ぶよ！",
@@ -713,16 +450,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "だんぷ",
     "nameKata": "ダンプ",
-    "charsHira": [
-      "だ",
-      "ん",
-      "ぷ"
-    ],
-    "charsKata": [
-      "ダ",
-      "ン",
-      "プ"
-    ],
+    "charsHira": ["だ", "ん", "ぷ"],
+    "charsKata": ["ダ", "ン", "プ"],
     "emoji": "🚛",
     "soundType": "vroom",
     "soundText": "荷台がガッターン！",
@@ -735,18 +464,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "しょべる",
     "nameKata": "ショベル",
-    "charsHira": [
-      "し",
-      "ょ",
-      "べ",
-      "る"
-    ],
-    "charsKata": [
-      "シ",
-      "ョ",
-      "ベ",
-      "ル"
-    ],
+    "charsHira": ["し", "ょ", "べ", "る"],
+    "charsKata": ["シ", "ョ", "ベ", "ル"],
     "emoji": "🚜",
     "soundType": "vroom",
     "soundText": "ガガガ！土を掘るよ！",
@@ -759,18 +478,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "くれーん",
     "nameKata": "クレーン",
-    "charsHira": [
-      "く",
-      "れ",
-      "ー",
-      "ん"
-    ],
-    "charsKata": [
-      "ク",
-      "レ",
-      "ー",
-      "ン"
-    ],
+    "charsHira": ["く", "れ", "ー", "ん"],
+    "charsKata": ["ク", "レ", "ー", "ン"],
     "emoji": "🏗️",
     "soundType": "vroom",
     "soundText": "ウィーン！たかーい！",
@@ -783,14 +492,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "ぶる",
     "nameKata": "ブル",
-    "charsHira": [
-      "ぶ",
-      "る"
-    ],
-    "charsKata": [
-      "ブ",
-      "ル"
-    ],
+    "charsHira": ["ぶ", "る"],
+    "charsKata": ["ブ", "ル"],
     "emoji": "🚜",
     "soundType": "vroom",
     "soundText": "ぐんぐん押すぞ！",
@@ -803,18 +506,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "みきさー",
     "nameKata": "ミキサー",
-    "charsHira": [
-      "み",
-      "き",
-      "さ",
-      "ー"
-    ],
-    "charsKata": [
-      "ミ",
-      "キ",
-      "サ",
-      "ー"
-    ],
+    "charsHira": ["み", "き", "さ", "ー"],
+    "charsKata": ["ミ", "キ", "サ", "ー"],
     "emoji": "🚛",
     "soundType": "vroom",
     "soundText": "ぐるぐる回るよ！",
@@ -827,16 +520,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "きしゃ",
     "nameKata": "キシャ",
-    "charsHira": [
-      "き",
-      "し",
-      "ゃ"
-    ],
-    "charsKata": [
-      "キ",
-      "シ",
-      "ャ"
-    ],
+    "charsHira": ["き", "し", "ゃ"],
+    "charsKata": ["キ", "シ", "ャ"],
     "emoji": "🚂",
     "soundType": "vroom",
     "soundText": "シュッシュッポッポー！",
@@ -849,18 +534,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "でんしゃ",
     "nameKata": "デンシャ",
-    "charsHira": [
-      "で",
-      "ん",
-      "し",
-      "ゃ"
-    ],
-    "charsKata": [
-      "デ",
-      "ン",
-      "シ",
-      "ャ"
-    ],
+    "charsHira": ["で", "ん", "し", "ゃ"],
+    "charsKata": ["デ", "ン", "シ", "ャ"],
     "emoji": "🚃",
     "soundType": "vroom",
     "soundText": "ガタゴトガタゴト！",
@@ -873,18 +548,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "ひこうき",
     "nameKata": "ヒコウキ",
-    "charsHira": [
-      "ひ",
-      "こ",
-      "う",
-      "き"
-    ],
-    "charsKata": [
-      "ヒ",
-      "コ",
-      "ウ",
-      "キ"
-    ],
+    "charsHira": ["ひ", "こ", "う", "き"],
+    "charsKata": ["ヒ", "コ", "ウ", "キ"],
     "emoji": "✈️",
     "soundType": "jet",
     "soundText": "ビュイーーーッ！",
@@ -897,14 +562,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "へり",
     "nameKata": "ヘリ",
-    "charsHira": [
-      "へ",
-      "り"
-    ],
-    "charsKata": [
-      "ヘ",
-      "リ"
-    ],
+    "charsHira": ["へ", "り"],
+    "charsKata": ["ヘ", "リ"],
     "emoji": "🚁",
     "soundType": "jet",
     "soundText": "パタパタ空をとぶ！",
@@ -917,18 +576,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "ろけっと",
     "nameKata": "ロケット",
-    "charsHira": [
-      "ろ",
-      "け",
-      "っ",
-      "と"
-    ],
-    "charsKata": [
-      "ロ",
-      "ケ",
-      "ッ",
-      "ト"
-    ],
+    "charsHira": ["ろ", "け", "っ", "と"],
+    "charsKata": ["ロ", "ケ", "ッ", "ト"],
     "emoji": "🚀",
     "soundType": "jet",
     "soundText": "３・２・１発射！",
@@ -941,14 +590,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "ふね",
     "nameKata": "フネ",
-    "charsHira": [
-      "ふ",
-      "ね"
-    ],
-    "charsKata": [
-      "フ",
-      "ネ"
-    ],
+    "charsHira": ["ふ", "ね"],
+    "charsKata": ["フ", "ネ"],
     "emoji": "🚢",
     "soundType": "horn",
     "soundText": "ボォーーッ！波スイスイ！",
@@ -961,16 +604,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "ぼーと",
     "nameKata": "ボート",
-    "charsHira": [
-      "ぼ",
-      "ー",
-      "と"
-    ],
-    "charsKata": [
-      "ボ",
-      "ー",
-      "ト"
-    ],
+    "charsHira": ["ぼ", "ー", "と"],
+    "charsKata": ["ボ", "ー", "ト"],
     "emoji": "🚤",
     "soundType": "vroom",
     "soundText": "びゅんびゅん走る！",
@@ -983,16 +618,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "よっと",
     "nameKata": "ヨット",
-    "charsHira": [
-      "よ",
-      "っ",
-      "と"
-    ],
-    "charsKata": [
-      "ヨ",
-      "ッ",
-      "ト"
-    ],
+    "charsHira": ["よ", "っ", "と"],
+    "charsKata": ["ヨ", "ッ", "ト"],
     "emoji": "⛵",
     "soundType": "vroom",
     "soundText": "風にのってスイスイ！",
@@ -1005,16 +632,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "ばいく",
     "nameKata": "バイク",
-    "charsHira": [
-      "ば",
-      "い",
-      "く"
-    ],
-    "charsKata": [
-      "バ",
-      "イ",
-      "ク"
-    ],
+    "charsHira": ["ば", "い", "く"],
+    "charsKata": ["バ", "イ", "ク"],
     "emoji": "🏍️",
     "soundType": "vroom",
     "soundText": "ブルルン！はやい！",
@@ -1027,16 +646,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "くるま",
     "nameKata": "クルマ",
-    "charsHira": [
-      "く",
-      "る",
-      "ま"
-    ],
-    "charsKata": [
-      "ク",
-      "ル",
-      "マ"
-    ],
+    "charsHira": ["く", "る", "ま"],
+    "charsKata": ["ク", "ル", "マ"],
     "emoji": "🚗",
     "soundType": "vroom",
     "soundText": "ブーーン！ドライブ！",
@@ -1049,14 +660,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "そり",
     "nameKata": "ソリ",
-    "charsHira": [
-      "そ",
-      "り"
-    ],
-    "charsKata": [
-      "ソ",
-      "リ"
-    ],
+    "charsHira": ["そ", "り"],
+    "charsKata": ["ソ", "リ"],
     "emoji": "🛷",
     "soundType": "vroom",
     "soundText": "雪の上をシューッ！",
@@ -1069,16 +674,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "じーぷ",
     "nameKata": "ジープ",
-    "charsHira": [
-      "じ",
-      "ー",
-      "ぷ"
-    ],
-    "charsKata": [
-      "ジ",
-      "ー",
-      "プ"
-    ],
+    "charsHira": ["じ", "ー", "ぷ"],
+    "charsKata": ["ジ", "ー", "プ"],
     "emoji": "🚙",
     "soundType": "vroom",
     "soundText": "山道もへっちゃら！",
@@ -1091,16 +688,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "のぞみ",
     "nameKata": "ノゾミ",
-    "charsHira": [
-      "の",
-      "ぞ",
-      "み"
-    ],
-    "charsKata": [
-      "ノ",
-      "ゾ",
-      "ミ"
-    ],
+    "charsHira": ["の", "ぞ", "み"],
+    "charsKata": ["ノ", "ゾ", "ミ"],
     "emoji": "🚅",
     "soundType": "jet",
     "soundText": "新幹線ビュイーン！",
@@ -1113,18 +702,8 @@ const CHARACTERS_DATA = [
     "category": "vehicle",
     "nameHira": "はやぶさ",
     "nameKata": "ハヤブサ",
-    "charsHira": [
-      "は",
-      "や",
-      "ぶ",
-      "さ"
-    ],
-    "charsKata": [
-      "ハ",
-      "ヤ",
-      "ブ",
-      "サ"
-    ],
+    "charsHira": ["は", "や", "ぶ", "さ"],
+    "charsKata": ["ハ", "ヤ", "ブ", "サ"],
     "emoji": "🚄",
     "soundType": "jet",
     "soundText": "みどり色の新幹線！",
@@ -1132,19 +711,17 @@ const CHARACTERS_DATA = [
     "actionType": "zoom-dash",
     "bgDecor": "⚡"
   },
+
+  # ----------------------------------------------------
+  # 🐶 どうぶつ・海の生き物（30種類）
+  # ----------------------------------------------------
   {
     "id": "buta",
     "category": "animal",
     "nameHira": "ぶた",
     "nameKata": "ブタ",
-    "charsHira": [
-      "ぶ",
-      "た"
-    ],
-    "charsKata": [
-      "ブ",
-      "タ"
-    ],
+    "charsHira": ["ぶ", "た"],
+    "charsKata": ["ブ", "タ"],
     "emoji": "🐷",
     "soundType": "oink",
     "soundText": "ブヒブヒ〜♪",
@@ -1157,14 +734,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "いぬ",
     "nameKata": "イヌ",
-    "charsHira": [
-      "い",
-      "ぬ"
-    ],
-    "charsKata": [
-      "イ",
-      "ヌ"
-    ],
+    "charsHira": ["い", "ぬ"],
+    "charsKata": ["イ", "ヌ"],
     "emoji": "🐶",
     "soundType": "bark",
     "soundText": "ワンワン！",
@@ -1177,14 +748,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "ねこ",
     "nameKata": "ネコ",
-    "charsHira": [
-      "ね",
-      "こ"
-    ],
-    "charsKata": [
-      "ネ",
-      "コ"
-    ],
+    "charsHira": ["ね", "こ"],
+    "charsKata": ["ネ", "コ"],
     "emoji": "🐱",
     "soundType": "meow",
     "soundText": "ニャーオ♪",
@@ -1197,14 +762,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "うし",
     "nameKata": "ウシ",
-    "charsHira": [
-      "う",
-      "し"
-    ],
-    "charsKata": [
-      "ウ",
-      "シ"
-    ],
+    "charsHira": ["う", "し"],
+    "charsKata": ["ウ", "シ"],
     "emoji": "🐮",
     "soundType": "moo",
     "soundText": "モ〜〜ッ！",
@@ -1217,16 +776,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "かえる",
     "nameKata": "カエル",
-    "charsHira": [
-      "か",
-      "え",
-      "る"
-    ],
-    "charsKata": [
-      "カ",
-      "エ",
-      "ル"
-    ],
+    "charsHira": ["か", "え", "る"],
+    "charsKata": ["カ", "エ", "ル"],
     "emoji": "🐸",
     "soundType": "hop",
     "soundText": "ケロケロ〜♪",
@@ -1239,16 +790,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "ぱんだ",
     "nameKata": "パンダ",
-    "charsHira": [
-      "ぱ",
-      "ん",
-      "だ"
-    ],
-    "charsKata": [
-      "パ",
-      "ン",
-      "ダ"
-    ],
+    "charsHira": ["ぱ", "ん", "だ"],
+    "charsKata": ["パ", "ン", "ダ"],
     "emoji": "🐼",
     "soundType": "cheer",
     "soundText": "ヤッター！",
@@ -1261,18 +804,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "らいおん",
     "nameKata": "ライオン",
-    "charsHira": [
-      "ら",
-      "い",
-      "お",
-      "ん"
-    ],
-    "charsKata": [
-      "ラ",
-      "イ",
-      "オ",
-      "ン"
-    ],
+    "charsHira": ["ら", "い", "お", "ん"],
+    "charsKata": ["ラ", "イ", "オ", "ン"],
     "emoji": "🦁",
     "soundType": "roar",
     "soundText": "ガオ〜〜ッ！",
@@ -1285,14 +818,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "とら",
     "nameKata": "トラ",
-    "charsHira": [
-      "と",
-      "ら"
-    ],
-    "charsKata": [
-      "ト",
-      "ラ"
-    ],
+    "charsHira": ["と", "ら"],
+    "charsKata": ["ト", "ラ"],
     "emoji": "🐯",
     "soundType": "roar",
     "soundText": "ガオーーッ！",
@@ -1305,14 +832,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "ぞう",
     "nameKata": "ゾウ",
-    "charsHira": [
-      "ぞ",
-      "う"
-    ],
-    "charsKata": [
-      "ゾ",
-      "ウ"
-    ],
+    "charsHira": ["ぞ", "う"],
+    "charsKata": ["ゾ", "ウ"],
     "emoji": "🐘",
     "soundType": "trumpet",
     "soundText": "パオ〜〜ン！",
@@ -1325,14 +846,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "さる",
     "nameKata": "サル",
-    "charsHira": [
-      "さ",
-      "る"
-    ],
-    "charsKata": [
-      "サ",
-      "ル"
-    ],
+    "charsHira": ["さ", "る"],
+    "charsKata": ["サ", "ル"],
     "emoji": "🐵",
     "soundType": "cheer",
     "soundText": "ウキキ〜ッ！",
@@ -1345,14 +860,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "くま",
     "nameKata": "クマ",
-    "charsHira": [
-      "く",
-      "ま"
-    ],
-    "charsKata": [
-      "ク",
-      "マ"
-    ],
+    "charsHira": ["く", "ま"],
+    "charsKata": ["ク", "マ"],
     "emoji": "🐻",
     "soundType": "growl",
     "soundText": "クマーーッ！",
@@ -1365,16 +874,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "うさぎ",
     "nameKata": "ウサギ",
-    "charsHira": [
-      "う",
-      "さ",
-      "ぎ"
-    ],
-    "charsKata": [
-      "ウ",
-      "サ",
-      "ギ"
-    ],
+    "charsHira": ["う", "さ", "ぎ"],
+    "charsKata": ["ウ", "サ", "ギ"],
     "emoji": "🐰",
     "soundType": "hop",
     "soundText": "ピョンピョン！",
@@ -1387,14 +888,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "とり",
     "nameKata": "トリ",
-    "charsHira": [
-      "と",
-      "り"
-    ],
-    "charsKata": [
-      "ト",
-      "リ"
-    ],
+    "charsHira": ["と", "り"],
+    "charsKata": ["ト", "リ"],
     "emoji": "🐦",
     "soundType": "chirp",
     "soundText": "ピピピッ！",
@@ -1407,14 +902,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "うま",
     "nameKata": "ウマ",
-    "charsHira": [
-      "う",
-      "ま"
-    ],
-    "charsKata": [
-      "ウ",
-      "マ"
-    ],
+    "charsHira": ["う", "ま"],
+    "charsKata": ["ウ", "マ"],
     "emoji": "🐴",
     "soundType": "vroom",
     "soundText": "ヒヒ〜〜ン！",
@@ -1427,16 +916,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "きりん",
     "nameKata": "キリン",
-    "charsHira": [
-      "き",
-      "り",
-      "ん"
-    ],
-    "charsKata": [
-      "キ",
-      "リ",
-      "ン"
-    ],
+    "charsHira": ["き", "り", "ん"],
+    "charsKata": ["キ", "リ", "ン"],
     "emoji": "🦒",
     "soundType": "cheer",
     "soundText": "首がながいね！",
@@ -1449,14 +930,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "わに",
     "nameKata": "ワニ",
-    "charsHira": [
-      "わ",
-      "に"
-    ],
-    "charsKata": [
-      "ワ",
-      "ニ"
-    ],
+    "charsHira": ["わ", "に"],
+    "charsKata": ["ワ", "ニ"],
     "emoji": "🐊",
     "soundType": "snap",
     "soundText": "ガブガブ〜ッ！",
@@ -1469,14 +944,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "しか",
     "nameKata": "シカ",
-    "charsHira": [
-      "し",
-      "か"
-    ],
-    "charsKata": [
-      "シ",
-      "カ"
-    ],
+    "charsHira": ["し", "か"],
+    "charsKata": ["シ", "カ"],
     "emoji": "🦌",
     "soundType": "hop",
     "soundText": "ツノが立派！",
@@ -1489,14 +958,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "りす",
     "nameKata": "リス",
-    "charsHira": [
-      "り",
-      "す"
-    ],
-    "charsKata": [
-      "リ",
-      "ス"
-    ],
+    "charsHira": ["り", "す"],
+    "charsKata": ["リ", "ス"],
     "emoji": "🐿️",
     "soundType": "chirp",
     "soundText": "ドングリ大好き！",
@@ -1509,16 +972,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "ひつじ",
     "nameKata": "ヒツジ",
-    "charsHira": [
-      "ひ",
-      "つ",
-      "じ"
-    ],
-    "charsKata": [
-      "ヒ",
-      "ツ",
-      "ジ"
-    ],
+    "charsHira": ["ひ", "つ", "じ"],
+    "charsKata": ["ヒ", "ツ", "ジ"],
     "emoji": "🐑",
     "soundType": "cheer",
     "soundText": "メェ〜！ふわふわ！",
@@ -1531,14 +986,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "やぎ",
     "nameKata": "ヤギ",
-    "charsHira": [
-      "や",
-      "ぎ"
-    ],
-    "charsKata": [
-      "ヤ",
-      "ギ"
-    ],
+    "charsHira": ["や", "ぎ"],
+    "charsKata": ["ヤ", "ギ"],
     "emoji": "🐐",
     "soundType": "cheer",
     "soundText": "メェ〜！草モグモグ！",
@@ -1551,16 +1000,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "こあら",
     "nameKata": "コアラ",
-    "charsHira": [
-      "こ",
-      "あ",
-      "ら"
-    ],
-    "charsKata": [
-      "コ",
-      "ア",
-      "ラ"
-    ],
+    "charsHira": ["こ", "あ", "ら"],
+    "charsKata": ["コ", "ア", "ラ"],
     "emoji": "🐨",
     "soundType": "cheer",
     "soundText": "ユーカリ大好き！",
@@ -1573,16 +1014,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "ごりら",
     "nameKata": "ゴリラ",
-    "charsHira": [
-      "ご",
-      "り",
-      "ら"
-    ],
-    "charsKata": [
-      "ゴ",
-      "リ",
-      "ラ"
-    ],
+    "charsHira": ["ご", "り", "ら"],
+    "charsKata": ["ゴ", "リ", "ラ"],
     "emoji": "🦍",
     "soundType": "growl",
     "soundText": "ドンドン！胸をたたく！",
@@ -1595,14 +1028,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "さい",
     "nameKata": "サイ",
-    "charsHira": [
-      "さ",
-      "い"
-    ],
-    "charsKata": [
-      "サ",
-      "イ"
-    ],
+    "charsHira": ["さ", "い"],
+    "charsKata": ["サ", "イ"],
     "emoji": "🦏",
     "soundType": "growl",
     "soundText": "立派なツノ！",
@@ -1615,14 +1042,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "かば",
     "nameKata": "カバ",
-    "charsHira": [
-      "か",
-      "ば"
-    ],
-    "charsKata": [
-      "カ",
-      "バ"
-    ],
+    "charsHira": ["か", "ば"],
+    "charsKata": ["カ", "バ"],
     "emoji": "🦛",
     "soundType": "growl",
     "soundText": "お口アーン！",
@@ -1635,16 +1056,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "らくだ",
     "nameKata": "ラクダ",
-    "charsHira": [
-      "ら",
-      "く",
-      "だ"
-    ],
-    "charsKata": [
-      "ラ",
-      "ク",
-      "ダ"
-    ],
+    "charsHira": ["ら", "く", "だ"],
+    "charsKata": ["ラ", "ク", "ダ"],
     "emoji": "🐪",
     "soundType": "cheer",
     "soundText": "背中にコブ！",
@@ -1657,16 +1070,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "きつね",
     "nameKata": "キツネ",
-    "charsHira": [
-      "き",
-      "つ",
-      "ね"
-    ],
-    "charsKata": [
-      "キ",
-      "ツ",
-      "ネ"
-    ],
+    "charsHira": ["き", "つ", "ね"],
+    "charsKata": ["キ", "ツ", "ネ"],
     "emoji": "🦊",
     "soundType": "chirp",
     "soundText": "コンコン！",
@@ -1679,18 +1084,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "ぺんぎん",
     "nameKata": "ペンギン",
-    "charsHira": [
-      "ぺ",
-      "ん",
-      "ぎ",
-      "ん"
-    ],
-    "charsKata": [
-      "ペ",
-      "ン",
-      "ギ",
-      "ン"
-    ],
+    "charsHira": ["ぺ", "ん", "ぎ", "ん"],
+    "charsKata": ["ペ", "ン", "ギ", "ン"],
     "emoji": "🐧",
     "soundType": "cheer",
     "soundText": "ヨチヨチ歩き！",
@@ -1703,16 +1098,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "いるか",
     "nameKata": "イルカ",
-    "charsHira": [
-      "い",
-      "る",
-      "か"
-    ],
-    "charsKata": [
-      "イ",
-      "ル",
-      "カ"
-    ],
+    "charsHira": ["い", "る", "か"],
+    "charsKata": ["イ", "ル", "カ"],
     "emoji": "🐬",
     "soundType": "chirp",
     "soundText": "キュイ！大ジャンプ！",
@@ -1725,16 +1112,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "くじら",
     "nameKata": "クジラ",
-    "charsHira": [
-      "く",
-      "じ",
-      "ら"
-    ],
-    "charsKata": [
-      "ク",
-      "ジ",
-      "ラ"
-    ],
+    "charsHira": ["く", "じ", "ら"],
+    "charsKata": ["ク", "ジ", "ラ"],
     "emoji": "🐳",
     "soundType": "trumpet",
     "soundText": "潮をピュ〜〜ッ！",
@@ -1747,14 +1126,8 @@ const CHARACTERS_DATA = [
     "category": "animal",
     "nameHira": "さめ",
     "nameKata": "サメ",
-    "charsHira": [
-      "さ",
-      "め"
-    ],
-    "charsKata": [
-      "サ",
-      "メ"
-    ],
+    "charsHira": ["さ", "め"],
+    "charsKata": ["サ", "メ"],
     "emoji": "🦈",
     "soundType": "snap",
     "soundText": "海のスプリンター！",
@@ -1762,21 +1135,17 @@ const CHARACTERS_DATA = [
     "actionType": "spin",
     "bgDecor": "🌊"
   },
+
+  # ----------------------------------------------------
+  # 🍎 たべもの・身近なモノ（20種類）
+  # ----------------------------------------------------
   {
     "id": "ringo",
     "category": "food",
     "nameHira": "りんご",
     "nameKata": "リンゴ",
-    "charsHira": [
-      "り",
-      "ん",
-      "ご"
-    ],
-    "charsKata": [
-      "リ",
-      "ン",
-      "ゴ"
-    ],
+    "charsHira": ["り", "ん", "ご"],
+    "charsKata": ["リ", "ン", "ゴ"],
     "emoji": "🍎",
     "soundType": "cheer",
     "soundText": "まっかなりんご！",
@@ -1789,16 +1158,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "みかん",
     "nameKata": "ミカン",
-    "charsHira": [
-      "み",
-      "か",
-      "ん"
-    ],
-    "charsKata": [
-      "ミ",
-      "カ",
-      "ン"
-    ],
+    "charsHira": ["み", "か", "ん"],
+    "charsKata": ["ミ", "カ", "ン"],
     "emoji": "🍊",
     "soundType": "cheer",
     "soundText": "あまーいみかん！",
@@ -1811,16 +1172,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "ばなな",
     "nameKata": "バナナ",
-    "charsHira": [
-      "ば",
-      "な",
-      "な"
-    ],
-    "charsKata": [
-      "バ",
-      "ナ",
-      "ナ"
-    ],
+    "charsHira": ["ば", "な", "な"],
+    "charsKata": ["バ", "ナ", "ナ"],
     "emoji": "🍌",
     "soundType": "cheer",
     "soundText": "もぐもぐバナナ！",
@@ -1833,16 +1186,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "すいか",
     "nameKata": "スイカ",
-    "charsHira": [
-      "す",
-      "い",
-      "か"
-    ],
-    "charsKata": [
-      "ス",
-      "イ",
-      "カ"
-    ],
+    "charsHira": ["す", "い", "か"],
+    "charsKata": ["ス", "イ", "カ"],
     "emoji": "🍉",
     "soundType": "cheer",
     "soundText": "あまいすいか！",
@@ -1855,16 +1200,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "ぶどう",
     "nameKata": "ブドウ",
-    "charsHira": [
-      "ぶ",
-      "ど",
-      "う"
-    ],
-    "charsKata": [
-      "ブ",
-      "ド",
-      "ウ"
-    ],
+    "charsHira": ["ぶ", "ど", "う"],
+    "charsKata": ["ブ", "ド", "ウ"],
     "emoji": "🍇",
     "soundType": "cheer",
     "soundText": "つぶつぶジューシー！",
@@ -1877,16 +1214,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "いちご",
     "nameKata": "イチゴ",
-    "charsHira": [
-      "い",
-      "ち",
-      "ご"
-    ],
-    "charsKata": [
-      "イ",
-      "チ",
-      "ゴ"
-    ],
+    "charsHira": ["い", "ち", "ご"],
+    "charsKata": ["イ", "チ", "ゴ"],
     "emoji": "🍓",
     "soundType": "cheer",
     "soundText": "あまーいいちご！",
@@ -1899,16 +1228,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "めろん",
     "nameKata": "メロン",
-    "charsHira": [
-      "め",
-      "ろ",
-      "ん"
-    ],
-    "charsKata": [
-      "メ",
-      "ロ",
-      "ン"
-    ],
+    "charsHira": ["め", "ろ", "ん"],
+    "charsKata": ["メ", "ロ", "ン"],
     "emoji": "🍈",
     "soundType": "cheer",
     "soundText": "いいにおい！",
@@ -1921,16 +1242,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "とまと",
     "nameKata": "トマト",
-    "charsHira": [
-      "と",
-      "ま",
-      "と"
-    ],
-    "charsKata": [
-      "ト",
-      "マ",
-      "ト"
-    ],
+    "charsHira": ["と", "ま", "と"],
+    "charsKata": ["ト", "マ", "ト"],
     "emoji": "🍅",
     "soundType": "cheer",
     "soundText": "まあるいトマト！",
@@ -1943,14 +1256,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "ぱん",
     "nameKata": "パン",
-    "charsHira": [
-      "ぱ",
-      "ん"
-    ],
-    "charsKata": [
-      "パ",
-      "ン"
-    ],
+    "charsHira": ["ぱ", "ん"],
+    "charsKata": ["パ", "ン"],
     "emoji": "🍞",
     "soundType": "cheer",
     "soundText": "焼きたてふかふか！",
@@ -1963,16 +1270,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "けーき",
     "nameKata": "ケーキ",
-    "charsHira": [
-      "け",
-      "ー",
-      "き"
-    ],
-    "charsKata": [
-      "ケ",
-      "ー",
-      "キ"
-    ],
+    "charsHira": ["け", "ー", "き"],
+    "charsKata": ["ケ", "ー", "キ"],
     "emoji": "🎂",
     "soundType": "cheer",
     "soundText": "おいしいケーキ！",
@@ -1985,16 +1284,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "あいす",
     "nameKata": "アイス",
-    "charsHira": [
-      "あ",
-      "い",
-      "す"
-    ],
-    "charsKata": [
-      "ア",
-      "イ",
-      "ス"
-    ],
+    "charsHira": ["あ", "い", "す"],
+    "charsKata": ["ア", "イ", "ス"],
     "emoji": "🍨",
     "soundType": "cheer",
     "soundText": "つめたくておいしい！",
@@ -2007,16 +1298,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "ぷりん",
     "nameKata": "プリン",
-    "charsHira": [
-      "ぷ",
-      "り",
-      "ん"
-    ],
-    "charsKata": [
-      "プ",
-      "リ",
-      "ン"
-    ],
+    "charsHira": ["ぷ", "り", "ん"],
+    "charsKata": ["プ", "リ", "ン"],
     "emoji": "🍮",
     "soundType": "cheer",
     "soundText": "ぷるぷるプリン！",
@@ -2029,14 +1312,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "あめ",
     "nameKata": "アメ",
-    "charsHira": [
-      "あ",
-      "め"
-    ],
-    "charsKata": [
-      "ア",
-      "メ"
-    ],
+    "charsHira": ["あ", "め"],
+    "charsKata": ["ア", "メ"],
     "emoji": "🍬",
     "soundType": "cheer",
     "soundText": "あまいキャンディ！",
@@ -2049,18 +1326,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "おにぎり",
     "nameKata": "オニギリ",
-    "charsHira": [
-      "お",
-      "に",
-      "ぎ",
-      "り"
-    ],
-    "charsKata": [
-      "オ",
-      "ニ",
-      "ギ",
-      "リ"
-    ],
+    "charsHira": ["お", "に", "ぎ", "り"],
+    "charsKata": ["オ", "ニ", "ギ", "リ"],
     "emoji": "🍙",
     "soundType": "cheer",
     "soundText": "モグモグおいしい！",
@@ -2073,14 +1340,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "すし",
     "nameKata": "スシ",
-    "charsHira": [
-      "す",
-      "し"
-    ],
-    "charsKata": [
-      "ス",
-      "シ"
-    ],
+    "charsHira": ["す", "し"],
+    "charsKata": ["ス", "シ"],
     "emoji": "🍣",
     "soundType": "cheer",
     "soundText": "へい、おまち！",
@@ -2093,16 +1354,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "かれー",
     "nameKata": "カレー",
-    "charsHira": [
-      "か",
-      "れ",
-      "ー"
-    ],
-    "charsKata": [
-      "カ",
-      "レ",
-      "ー"
-    ],
+    "charsHira": ["か", "れ", "ー"],
+    "charsKata": ["カ", "レ", "ー"],
     "emoji": "🍛",
     "soundType": "cheer",
     "soundText": "おいしいカレー！",
@@ -2115,14 +1368,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "つき",
     "nameKata": "ツキ",
-    "charsHira": [
-      "つ",
-      "き"
-    ],
-    "charsKata": [
-      "ツ",
-      "キ"
-    ],
+    "charsHira": ["つ", "き"],
+    "charsKata": ["ツ", "キ"],
     "emoji": "🌙",
     "soundType": "cheer",
     "soundText": "おつきさまピカピカ！",
@@ -2135,14 +1382,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "ほし",
     "nameKata": "ホシ",
-    "charsHira": [
-      "ほ",
-      "し"
-    ],
-    "charsKata": [
-      "ホ",
-      "シ"
-    ],
+    "charsHira": ["ほ", "し"],
+    "charsKata": ["ホ", "シ"],
     "emoji": "⭐",
     "soundType": "cheer",
     "soundText": "キラキラお星さま！",
@@ -2155,14 +1396,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "にじ",
     "nameKata": "ニジ",
-    "charsHira": [
-      "に",
-      "じ"
-    ],
-    "charsKata": [
-      "ニ",
-      "ジ"
-    ],
+    "charsHira": ["に", "じ"],
+    "charsKata": ["ニ", "ジ"],
     "emoji": "🌈",
     "soundType": "cheer",
     "soundText": "なないろの虹！",
@@ -2175,18 +1410,8 @@ const CHARACTERS_DATA = [
     "category": "food",
     "nameHira": "たいよう",
     "nameKata": "タイヨウ",
-    "charsHira": [
-      "た",
-      "い",
-      "よ",
-      "う"
-    ],
-    "charsKata": [
-      "タ",
-      "イ",
-      "ヨ",
-      "ウ"
-    ],
+    "charsHira": ["た", "い", "よ", "う"],
+    "charsKata": ["タ", "イ", "ヨ", "ウ"],
     "emoji": "☀️",
     "soundType": "cheer",
     "soundText": "ポカポカお日さま！",
@@ -2194,90 +1419,26 @@ const CHARACTERS_DATA = [
     "actionType": "super-jump",
     "bgDecor": "🌻"
   }
-];
+]
 
-const RANDOM_DISTRACTORS_HIRA = ['あ', 'か', 'さ', 'た', 'な', 'は', 'ま', 'や', 'ら', 'わ', 'み', 'り', 'も', 'す', 'き'];
-const RANDOM_DISTRACTORS_KATA = ['ア', 'カ', 'サ', 'タ', 'ナ', 'ハ', 'マ', 'ヤ', 'ラ', 'ワ', 'ミ', 'リ', 'モ', 'ス', 'キ'];
+import json
 
-// 2. 「おしゃべり 50おんずかん」50音表データ
-const KANA_TABLE_DATA = [
-  // あ行
-  { id: 'a', hira: 'あ', kata: 'ア', word: 'アイス', emoji: '🍦', sound: 'アイスクリーム！' },
-  { id: 'i', hira: 'い', kata: 'イ', word: 'いぬ', emoji: '🐶', sound: 'いぬ！ワンワン！' },
-  { id: 'u', hira: 'う', kata: 'ウ', word: 'うさぎ', emoji: '🐰', sound: 'うさぎ！ピョンピョン！' },
-  { id: 'e', hira: 'え', kata: 'エ', word: 'えんぴつ', emoji: '✏️', sound: 'えんぴつ！カキカキ！' },
-  { id: 'o', hira: 'お', kata: 'オ', word: 'おにぎり', emoji: '🍙', sound: 'おにぎり！モグモグ！' },
+# 既存のKANA_TABLE_DATAなどを読み込む
+with open('js/data.js', 'r', encoding='utf-8') as f:
+  old_data = f.read()
 
-  // か行
-  { id: 'ka', hira: 'か', kata: 'カ', word: 'かめ', emoji: '🐢', sound: 'かめ！のっしのっし！' },
-  { id: 'ki', hira: 'き', kata: 'キ', word: 'きりん', emoji: '🦒', sound: 'きりん！首がながいね！' },
-  { id: 'ku', hira: 'く', kata: 'ク', word: 'くるま', emoji: '🚗', sound: 'くるま！ブーーン！' },
-  { id: 'ke', hira: 'け', kata: 'ケ', word: 'ケーキ', emoji: '🎂', sound: 'ケーキ！おいしそう！' },
-  { id: 'ko', hira: 'こ', kata: 'コ', word: 'コアラ', emoji: '🐨', sound: 'コアラ！ユーカリだいすき！' },
+# KANA_TABLE_DATA以降の部分を抽出
+idx = old_data.find('// 2. 「おしゃべり 50おんずかん」50音表データ')
+kana_part = old_data[idx:]
 
-  // さ行
-  { id: 'sa', hira: 'さ', kata: 'サ', word: 'さかな', emoji: '🐟', sound: 'さかな！スイスイ！' },
-  { id: 'shi', hira: 'し', kata: 'シ', word: 'しんかんせん', emoji: '🚄', sound: 'しんかんせん！はやーい！' },
-  { id: 'su', hira: 'す', kata: 'ス', word: 'すいか', emoji: '🍉', sound: 'すいか！あまーい！' },
-  { id: 'se', hira: 'せ', kata: 'セ', word: 'せみ', emoji: '🪲', sound: 'せみ！ミーンミーン！' },
-  { id: 'so', hira: 'そ', kata: 'ソ', word: 'そら', emoji: '🌈', sound: 'にじの そら！きれいだね！' },
+js_content = "// 4歳児向け知育ゲーム データ集（全100種類の言葉）\n\n"
+js_content += "// 1. 「うごく！文字あつめ」データ（全100種類：きょうりゅう・はたらくくるま・どうぶつ・たべもの）\n"
+js_content += "const CHARACTERS_DATA = " + json.dumps(CHARACTERS_100, ensure_ascii=False, indent=2) + ";\n\n"
+js_content += "const RANDOM_DISTRACTORS_HIRA = ['あ', 'か', 'さ', 'た', 'な', 'は', 'ま', 'や', 'ら', 'わ', 'み', 'り', 'も', 'す', 'き'];\n"
+js_content += "const RANDOM_DISTRACTORS_KATA = ['ア', 'カ', 'サ', 'タ', 'ナ', 'ハ', 'マ', 'ヤ', 'ラ', 'ワ', 'ミ', 'リ', 'モ', 'ス', 'キ'];\n\n"
+js_content += kana_part
 
-  // た行
-  { id: 'ta', hira: 'た', kata: 'タ', word: 'たいよう', emoji: '☀️', sound: 'たいよう！ポカポカ！' },
-  { id: 'chi', hira: 'ち', kata: 'チ', word: 'チューリップ', emoji: '🌷', sound: 'チューリップ！かわいいね！' },
-  { id: 'tsu', hira: 'つ', kata: 'ツ', word: 'つき', emoji: '🌙', sound: 'おつきさま！ピカピカ！' },
-  { id: 'te', hira: 'て', kata: 'テ', word: 'てんとうむし', emoji: '🐞', sound: 'てんとうむし！てくてく！' },
-  { id: 'to', hira: 'と', kata: 'ト', word: 'トマト', emoji: '🍅', sound: 'トマト！まあるいね！' },
+with open('js/data.js', 'w', encoding='utf-8') as f:
+  f.write(js_content)
 
-  // な行
-  { id: 'na', hira: 'な', kata: 'ナ', word: 'なす', emoji: '🍆', sound: 'なすび！むらさきいろ！' },
-  { id: 'ni', hira: 'に', kata: 'ニ', word: 'にじ', emoji: '🌈', sound: 'にじ！７色だね！' },
-  { id: 'nu', hira: 'ぬ', kata: 'ヌ', word: 'ぬいぐるみ', emoji: '🧸', sound: 'ぬいぐるみ！ふわふわ！' },
-  { id: 'ne', hira: 'ね', kata: 'ネ', word: 'ねこ', emoji: '🐱', sound: 'ねこ！ニャーオ！' },
-  { id: 'no', hira: 'の', kata: 'ノ', word: 'のりまき', emoji: '🍣', sound: 'のりまき！パクッ！' },
-
-  // は行
-  { id: 'ha', hira: 'は', kata: 'ハ', word: 'はな', emoji: '🌸', sound: 'おはな！いいにおい！' },
-  { id: 'hi', hira: 'ひ', kata: 'ヒ', word: 'ひこうき', emoji: '✈️', sound: 'ひこうき！ビュイーン！' },
-  { id: 'fu', hira: 'ふ', kata: 'フ', word: 'ふうせん', emoji: '🎈', sound: 'ふうせん！ふわふわ！' },
-  { id: 'he', hira: 'へ', kata: 'ヘ', word: 'へび', emoji: '🐍', sound: 'へび！ニョロニョロ！' },
-  { id: 'ho', hira: 'ほ', kata: 'ホ', word: 'ほし', emoji: '⭐', sound: 'きらきら おほしさま！' },
-
-  // ま行
-  { id: 'ma', hira: 'ま', kata: 'マ', word: 'マイク', emoji: '🎤', sound: 'マイク！ラララ〜♪' },
-  { id: 'mi', hira: 'み', kata: 'ミ', word: 'みかん', emoji: '🍊', sound: 'みかん！おいしいね！' },
-  { id: 'mu', hira: 'む', kata: 'ム', word: 'むしば', emoji: '🦷', sound: 'はみがき シャカシャカ！' },
-  { id: 'me', hira: 'め', kata: 'メ', word: 'めがね', emoji: '👓', sound: 'めがね！よくみえる！' },
-  { id: 'mo', hira: 'も', kata: 'モ', word: 'もも', emoji: '🍑', sound: 'もも！ピンクいろ！' },
-
-  // や行
-  { id: 'ya', hira: 'や', kata: 'ヤ', word: 'やま', emoji: '⛰️', sound: 'おやま！たかーい！' },
-  { id: 'yu', hira: 'ゆ', kata: 'ユ', word: 'ゆきだるま', emoji: '⛄', sound: 'ゆきだるま！コロコロ！' },
-  { id: 'yo', hira: 'よ', kata: 'ヨ', word: 'ようちえん', emoji: '🏫', sound: 'ようちえん！たのしいね！' },
-
-  // ら行
-  { id: 'ra', hira: 'ら', kata: 'ラ', word: 'ライオン', emoji: '🦁', sound: 'ライオン！ガオ〜ッ！' },
-  { id: 'ri', hira: 'り', kata: 'リ', word: 'りんご', emoji: '🍎', sound: 'まっかな りんご！' },
-  { id: 'ru', hira: 'る', kata: 'ル', word: 'ルビー', emoji: '💎', sound: 'ルビー！キラキラ！' },
-  { id: 're', hira: 'れ', kata: 'レ', word: 'レモン', emoji: '🍋', sound: 'レモン！すっぱーい！' },
-  { id: 'ro', hira: 'ろ', kata: 'ロ', word: 'ロケット', emoji: '🚀', sound: 'ロケット！３・２・１発射！' },
-
-  // わ行
-  { id: 'wa', hira: 'わ', kata: 'ワ', word: 'わに', emoji: '🐊', sound: 'わに！ガブガブ！' },
-  { id: 'wo', hira: 'を', kata: 'ヲ', word: '「手を洗う」のを', emoji: '🖐️', sound: 'てをあらうの を！キレイキレイ！' },
-  { id: 'nn', hira: 'ん', kata: 'ン', word: 'パンダのん', emoji: '🐼', sound: 'パンダの ん！' }
-];
-
-// 行ごとのグループ（タブ表示用）
-const KANA_ROWS = [
-  { name: 'あ〜お', chars: ['あ', 'い', 'う', 'え', 'お'] },
-  { name: 'か〜こ', chars: ['か', 'き', 'く', 'け', 'こ'] },
-  { name: 'さ〜そ', chars: ['さ', 'し', 'す', 'せ', 'そ'] },
-  { name: 'た〜と', chars: ['た', 'ち', 'つ', 'て', 'と'] },
-  { name: 'な〜の', chars: ['な', 'に', 'ぬ', 'ね', 'の'] },
-  { name: 'は〜ほ', chars: ['は', 'ひ', 'ふ', 'へ', 'ほ'] },
-  { name: 'ま〜も', chars: ['ま', 'み', 'む', 'め', 'も'] },
-  { name: 'や・ゆ・よ', chars: ['や', 'ゆ', 'よ'] },
-  { name: 'ら〜ろ', chars: ['ら', 'り', 'る', 'れ', 'ろ'] },
-  { name: 'わ・を・ん', chars: ['わ', 'を', 'ん'] }
-];
+print("js/data.js updated with 100 characters successfully!")

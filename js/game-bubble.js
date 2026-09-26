@@ -4,6 +4,7 @@ class BubbleGame {
   constructor() {
     this.container = null;
     this.currentMode = 'hira'; // 'hira' | 'kata'
+    this.currentCategory = 'all'; // 'all' | 'dino' | 'vehicle' | 'animal' | 'food'
     this.characterQueue = [];
     this.lastCharId = null;
     this.currentChar = null;
@@ -17,9 +18,16 @@ class BubbleGame {
     this.clearedAnimals = [];
   }
 
-  // 動物の出現順序をランダムシャッフル（全種出るまで被らない＆直前と同じ動物が出ない）
+  // 動物・のりもの・恐竜の出現順序をランダムシャッフル
   refillQueue() {
-    const indices = CHARACTERS_DATA.map((_, i) => i);
+    // 選択中のカテゴリで絞り込み
+    const filtered = this.currentCategory === 'all'
+      ? CHARACTERS_DATA
+      : CHARACTERS_DATA.filter(c => c.category === this.currentCategory);
+
+    // 元配列のインデックス一覧
+    const indices = filtered.map(item => CHARACTERS_DATA.indexOf(item));
+
     // Fisher-Yates シャッフル
     for (let i = indices.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -33,6 +41,15 @@ class BubbleGame {
     }
 
     this.characterQueue = indices;
+  }
+
+  setCategory(category) {
+    if (this.currentCategory === category) return;
+    this.currentCategory = category;
+    this.clearedCount = 0;
+    this.clearedAnimals = [];
+    this.refillQueue();
+    this.nextCharacter();
   }
 
   init(container, mode = 'hira') {
@@ -78,7 +95,29 @@ class BubbleGame {
     const stage = document.createElement('div');
     stage.className = 'bubble-stage';
 
-    // 0. 星プログレスバー（何問できたか可視化）
+    // 0-A. カテゴリ選択タブ（きょうりゅう・くるま・どうぶつ・たべもの・ぜんぶ）
+    const catBar = document.createElement('div');
+    catBar.className = 'category-tabs-bar';
+    const categories = [
+      { id: 'all', label: '🌟 ぜんぶ (100)' },
+      { id: 'dino', label: '🦖 きょうりゅう (25)' },
+      { id: 'vehicle', label: '🚒 くるま (25)' },
+      { id: 'animal', label: '🐶 どうぶつ (30)' },
+      { id: 'food', label: '🍎 たべもの (20)' }
+    ];
+    categories.forEach(cat => {
+      const btn = document.createElement('button');
+      btn.className = `cat-tab-btn ${this.currentCategory === cat.id ? 'active' : ''}`;
+      btn.textContent = cat.label;
+      btn.addEventListener('click', () => {
+        soundManager.playBubblePop();
+        this.setCategory(cat.id);
+      });
+      catBar.appendChild(btn);
+    });
+    stage.appendChild(catBar);
+
+    // 0-B. 星プログレスバー（何問できたか可視化）
     const progressElem = document.createElement('div');
     progressElem.className = 'progress-stars-bar';
     let starsHtml = '';
