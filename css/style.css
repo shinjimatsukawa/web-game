@@ -228,10 +228,10 @@ html, body {
 
 .game-select-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  max-width: 780px;
-  width: 90%;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  max-width: 960px;
+  width: 95%;
   margin: 10px auto 0;
   padding-bottom: 30px;
 }
@@ -239,7 +239,7 @@ html, body {
 .game-select-card {
   position: relative;
   border-radius: var(--radius-lg);
-  padding: 30px 20px;
+  padding: 24px 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -249,7 +249,7 @@ html, body {
   outline: none;
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
   transition: transform 0.15s, box-shadow 0.15s;
-  min-height: 240px;
+  min-height: 220px;
   justify-content: center;
 }
 
@@ -265,6 +265,11 @@ html, body {
 .card-yellow {
   background: linear-gradient(135deg, #fff3b0 0%, #ffd166 100%);
   border: 4px solid #f4a261;
+}
+
+.card-orange {
+  background: linear-gradient(135deg, #faedcd 0%, #d4a373 100%);
+  border: 4px solid #bc6c25;
 }
 
 .card-badge {
@@ -1002,3 +1007,395 @@ html, body {
   transform: translateY(4px);
   box-shadow: 0 2px 0 #2b84ba;
 }
+
+/* ----------------------------------------------------
+   画面④: ほりだせ！きょうりゅう かせきハント
+   ---------------------------------------------------- */
+.fossil-stage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 6px 12px 16px;
+  position: relative;
+  background: linear-gradient(180deg, #fdf0d5 0%, #faedcd 45%, #d4a373 100%);
+  border-radius: 28px;
+  border: 4px solid #dda15e;
+  box-shadow: 0 8px 24px rgba(212, 163, 115, 0.35);
+  overflow: hidden;
+}
+
+/* 地響きアニメーション */
+.earthquake-shake {
+  animation: earthShake 0.4s infinite;
+}
+
+@keyframes earthShake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-8px, 6px) rotate(-1deg); }
+  40% { transform: translate(8px, -6px) rotate(1deg); }
+  60% { transform: translate(-6px, -4px) rotate(-0.5deg); }
+  80% { transform: translate(6px, 4px) rotate(0.5deg); }
+}
+
+/* 上部ヘッダー（発掘バッジ） */
+.fossil-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  border: 2px solid #dda15e;
+  margin-bottom: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fossil-header-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #bc6c25;
+}
+
+.fossil-badges-list {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.fossil-badge-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.fossil-badge-icon.empty {
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+
+.fossil-badge-icon.filled {
+  animation: starPop 0.5s ease;
+  filter: drop-shadow(0 0 4px #ffb703);
+}
+
+.fossil-header-count {
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #555;
+  background: #fefae0;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+}
+
+/* 中央: 骨格フレーム ＆ 恐竜復活 */
+.fossil-frame-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-lg);
+  border: 3px dashed #dda15e;
+  padding: 10px 16px;
+  margin-bottom: 12px;
+  position: relative;
+  min-height: 165px;
+}
+
+.fossil-avatar-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 6px;
+  position: relative;
+}
+
+.fossil-dino-avatar {
+  font-size: 4.5rem;
+  line-height: 1;
+  transition: transform 0.3s;
+}
+
+.fossil-dino-avatar.sleeping {
+  opacity: 0.5;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.fossil-dino-avatar.dino-revived-huge {
+  opacity: 1;
+  transform: scale(1.35);
+  animation: dinoHugeEnter 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275), celebrationDance 1s infinite alternate 0.7s;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+}
+
+@keyframes dinoHugeEnter {
+  0% { transform: scale(0.2) rotate(-20deg); opacity: 0; }
+  60% { transform: scale(1.6) rotate(10deg); opacity: 1; }
+  100% { transform: scale(1.35) rotate(0deg); opacity: 1; }
+}
+
+.dino-roar-anim {
+  animation: dinoRoar 0.6s ease;
+}
+
+@keyframes dinoRoar {
+  0% { transform: scale(1.35); }
+  50% { transform: scale(1.65) rotate(-8deg); }
+  100% { transform: scale(1.35); }
+}
+
+.fossil-speech-bubble {
+  position: absolute;
+  top: -24px;
+  background: #ffffff;
+  border: 3px solid #ff6b6b;
+  border-radius: var(--radius-full);
+  padding: 4px 14px;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #ff3366;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.fossil-hint-name {
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: #7f4f24;
+  margin-top: 4px;
+}
+
+/* 骨格スロット */
+.fossil-slots-container {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+.fossil-slot {
+  width: 68px;
+  height: 68px;
+  background: #ffffff;
+  border: 3px dashed #bc6c25;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s;
+  box-shadow: 0 4px 0 #936639;
+}
+
+.fossil-slot.empty .slot-bone-icon {
+  font-size: 1.8rem;
+  opacity: 0.35;
+}
+
+.fossil-slot.empty .slot-char {
+  display: none;
+}
+
+.fossil-slot.filled {
+  background: #fff8db;
+  border-style: solid;
+  border-color: #ffd166;
+  box-shadow: 0 5px 0 #e09f3e;
+}
+
+.fossil-slot.filled .slot-bone-icon {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.fossil-slot.filled .slot-char {
+  font-size: 2.1rem;
+  font-weight: bold;
+  color: #e63946;
+  line-height: 1;
+}
+
+.fossil-slot-absorbed {
+  animation: slotAbsorb 0.4s ease;
+}
+
+.fossil-slot.golden-glow {
+  box-shadow: 0 0 20px #ffd166, 0 6px 0 #f4a261;
+  border-color: #ffaa00;
+  animation: pulseNext 0.8s infinite alternate;
+}
+
+/* 下部: 発掘ピット */
+.fossil-pit-wrap {
+  flex: 1;
+  background: #b08968;
+  border-radius: var(--radius-lg);
+  border: 4px solid #7f4f24;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.pit-title {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  margin-bottom: 10px;
+}
+
+.fossil-rocks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+  gap: 14px;
+  flex: 1;
+  align-items: center;
+  justify-items: center;
+}
+
+/* 岩石アイテム */
+.fossil-rock-item {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.rock-stone {
+  width: 100%;
+  height: 100%;
+  background: #6c584c;
+  border: 4px solid #4a3e36;
+  border-radius: 24px;
+  box-shadow: 0 8px 0 #322822, 0 10px 16px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.rock-stone:active {
+  transform: translateY(4px);
+  box-shadow: 0 4px 0 #322822;
+}
+
+.rock-emoji {
+  font-size: 3.4rem;
+}
+
+/* 叩かれたときのヒビ割れ */
+.fossil-rock-item.cracked .rock-stone {
+  background: #7f4f24;
+  border-color: #dda15e;
+}
+
+.rock-crack-indicator {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  height: 60%;
+  border-top: 3px dashed #ffd166;
+  border-right: 3px dashed #ffd166;
+  pointer-events: none;
+}
+
+.fossil-rock-item.cracked .rock-crack-indicator {
+  display: block;
+}
+
+.rock-hit-anim {
+  animation: tapSquish 0.3s ease;
+}
+
+.shatter-anim {
+  animation: popBurst 0.4s ease;
+}
+
+/* 中から飛び出した化石文字ブロック */
+.fossil-bone-block {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border: 4px solid #ffd166;
+  border-radius: 24px;
+  box-shadow: 0 8px 0 #f4a261, 0 8px 16px rgba(255, 209, 102, 0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.fossil-bone-block:active {
+  transform: scale(0.92);
+}
+
+.bone-char {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #ff3366;
+  line-height: 1;
+}
+
+.bone-sparkle {
+  font-size: 1.2rem;
+  margin-top: -6px;
+  animation: pulseNext 1s infinite alternate;
+}
+
+.bone-pop-anim {
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fossil-rock-item.collected {
+  pointer-events: none;
+  opacity: 0.15;
+  transform: scale(0.7);
+  transition: all 0.4s ease;
+}
+
+/* つぎのかせきへ ナビゲーション */
+.fossil-nav-box {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+}
+
+.btn-next-fossil {
+  background: #ff5964;
+  color: #ffffff;
+  border: none;
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: bold;
+  padding: 14px 36px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 6px 0 #d90429, 0 10px 24px rgba(255, 89, 100, 0.5);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+  animation: pulseNext 1.5s infinite ease-in-out;
+}
+
+.btn-next-fossil:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #d90429;
+}
+

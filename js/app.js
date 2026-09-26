@@ -12,7 +12,8 @@ class App {
     this.screens = {
       home: document.getElementById('screen-home'),
       bubble: document.getElementById('screen-bubble'),
-      board: document.getElementById('screen-board')
+      board: document.getElementById('screen-board'),
+      fossil: document.getElementById('screen-fossil')
     };
 
     this.headerTitle = document.getElementById('header-title');
@@ -26,7 +27,7 @@ class App {
 
     this.setupEvents();
 
-    // 初期URLに応じた画面を表示（例: /bubble, /board）
+    // 初期URLに応じた画面を表示（例: /bubble, /board, /fossil）
     const initialScreen = this.getScreenFromPath(window.location.pathname);
     this.switchScreen(initialScreen, false);
   }
@@ -36,6 +37,7 @@ class App {
     const clean = pathname.replace(/\/+$/, '') || '/';
     if (clean === '/bubble' || clean === '/atsume') return 'bubble';
     if (clean === '/board' || clean === '/zukan') return 'board';
+    if (clean === '/fossil' || clean === '/dino') return 'fossil';
     return 'home';
   }
 
@@ -43,6 +45,7 @@ class App {
   getPathFromScreen(screen) {
     if (screen === 'bubble') return '/bubble';
     if (screen === 'board') return '/board';
+    if (screen === 'fossil') return '/fossil';
     return '/';
   }
 
@@ -74,6 +77,14 @@ class App {
       this.handleFirstInteraction();
       this.switchScreen('board', true);
     });
+
+    const cardFossil = document.getElementById('card-game-fossil');
+    if (cardFossil) {
+      cardFossil.addEventListener('click', () => {
+        this.handleFirstInteraction();
+        this.switchScreen('fossil', true);
+      });
+    }
 
     // ブラウザの戻る・進むボタン（Safariスワイプ含む）への対応
     window.addEventListener('popstate', (e) => {
@@ -116,6 +127,8 @@ class App {
       bubbleGame.setKanaMode(mode);
     } else if (this.currentScreen === 'board') {
       boardGame.setKanaMode(mode);
+    } else if (this.currentScreen === 'fossil') {
+      fossilGame.setKanaMode(mode);
     }
   }
 
@@ -131,6 +144,7 @@ class App {
     // 画面の切り替え
     Object.keys(this.screens).forEach(key => {
       const el = this.screens[key];
+      if (!el) return;
       if (key === screenName) {
         el.classList.remove('hidden');
         el.classList.add('active');
@@ -152,6 +166,10 @@ class App {
       this.btnBackHome.classList.remove('hidden');
       this.headerTitle.textContent = '📖 おしゃべり 50おんずかん';
       boardGame.init(document.getElementById('board-game-content'), this.currentKanaMode);
+    } else if (screenName === 'fossil') {
+      this.btnBackHome.classList.remove('hidden');
+      this.headerTitle.textContent = '⛏️ ほりだせ！かせきハント';
+      fossilGame.init(document.getElementById('fossil-game-content'), this.currentKanaMode);
     }
   }
 }

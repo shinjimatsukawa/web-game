@@ -116,6 +116,16 @@ class SoundManager {
     this.playVoiceFile(`/audio/neural/reactions/stage_clear.mp3`, onEnd);
   }
 
+  // 恐竜大復活の褒め言葉: 「ティラノサウルス、大ふっかつ！ガオーッ！」
+  playFossilReviveVoice(dinoId, onEnd = null) {
+    this.playVoiceFile(`/audio/neural/fossil/${dinoId}.mp3`, onEnd);
+  }
+
+  // かせきマスター全クリア音声
+  playFossilAllClearVoice(onEnd = null) {
+    this.playVoiceFile(`/audio/neural/fossil/all_clear.mp3`, onEnd);
+  }
+
   // ----------------------------------------------------
   // 🎵 トイポップ BGM ジェネレータ (Web Audio API)
   // ----------------------------------------------------
@@ -419,6 +429,76 @@ class SoundManager {
 
       t += note.d * 0.85;
     });
+  }
+
+  // ⛏️ つるはしハンマー音（カチン！と甲高い金属＋打撃）
+  playPickaxe() {
+    const ctx = this.ensureContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    // 金属の打撃音
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(1400, now);
+    osc.frequency.exponentialRampToValueAtTime(450, now + 0.08);
+
+    gain.gain.setValueAtTime(0.35, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.09);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.1);
+  }
+
+  // 🪨 岩石が砕ける音（ガラガラッ）
+  playRockBreak() {
+    const ctx = this.ensureContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    [0, 0.04, 0.09, 0.14].forEach((offset, idx) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      const freq = 180 - idx * 25;
+      osc.frequency.setValueAtTime(freq, now + offset);
+      osc.frequency.exponentialRampToValueAtTime(60, now + offset + 0.08);
+
+      gain.gain.setValueAtTime(0.25, now + offset);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + offset + 0.08);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + offset);
+      osc.stop(now + offset + 0.09);
+    });
+  }
+
+  // 🌋 恐竜復活の地響き（ズズズ…ドカーン！）
+  playEarthquake() {
+    const ctx = this.ensureContext();
+    if (!ctx) return;
+    const now = ctx.currentTime;
+
+    // 低音ランブル
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(60, now);
+    osc.frequency.linearRampToValueAtTime(110, now + 0.3);
+    osc.frequency.exponentialRampToValueAtTime(40, now + 0.8);
+
+    gain.gain.setValueAtTime(0.4, now);
+    gain.gain.linearRampToValueAtTime(0.5, now + 0.3);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.85);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.9);
   }
 }
 
