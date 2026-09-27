@@ -101,11 +101,9 @@ class BubbleGame {
     this.isCompleted = false;
     this.render();
 
-    // 出題クイズナレーションを自動再生（例: 「どんぐり だいすき！この どうぶつは？」）
+    // 出題クイズナレーションを即座に自動再生（ユーザー操作コンテキスト内で遅延なく即時実行）
     if (playAudio && window.soundManager && typeof soundManager.playQuestion === 'function') {
-      this.setTimer(() => {
-        soundManager.playQuestion(charData.id);
-      }, 350);
+      soundManager.playQuestion(charData.id);
     }
   }
 

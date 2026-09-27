@@ -4,7 +4,16 @@ class SoundManager {
   constructor() {
     this.ctx = null;
     this.isUnlocked = false;
+    this.isVoiceUnlocked = false;
     this.currentVoiceAudio = null;
+
+    // iOS Safari対策: 単一のHTMLAudioElementを使い回すことで自動再生制限を回避
+    try {
+      this.sharedVoiceAudio = new Audio();
+      this.sharedVoiceAudio.preload = 'auto';
+    } catch (e) {
+      this.sharedVoiceAudio = null;
+    }
 
     // BGM関連（ブラウザのlocalStorageに設定を保持）
     const storedBgm = localStorage.getItem('kids_web_game_bgm');
@@ -16,27 +25,42 @@ class SoundManager {
   }
 
   unlock() {
-    if (this.isUnlocked) {
-      if (this.isBgmConfigured && !this.isBgmPlaying) {
-        this.startBgm();
-      }
-      return;
-    }
-    try {
-      const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtxClass) {
-        this.ctx = new AudioCtxClass();
-        if (this.ctx.state === 'suspended') {
-          this.ctx.resume();
+    // 1. Web Audio Context アンロック
+    if (!this.isUnlocked) {
+      try {
+        const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtxClass) {
+          this.ctx = new AudioCtxClass();
+          if (this.ctx.state === 'suspended') {
+            this.ctx.resume();
+          }
         }
+        this.isUnlocked = true;
+      } catch (e) {
+        console.warn('AudioContext unlock error:', e);
       }
-      this.isUnlocked = true;
-      // BGMが有効設定なら自動再生スタート
-      if (this.isBgmConfigured && !this.isBgmPlaying) {
-        this.startBgm();
+    }
+
+    // 2. iOS Safari の HTMLMediaElement (Audio) アンロック
+    if (!this.isVoiceUnlocked && this.sharedVoiceAudio) {
+      try {
+        // 短い無音データを同期コンテキストで一瞬再生して即座に停止
+        this.sharedVoiceAudio.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
+        const p = this.sharedVoiceAudio.play();
+        if (p !== undefined) {
+          p.then(() => {
+            this.sharedVoiceAudio.pause();
+            this.isVoiceUnlocked = true;
+          }).catch(() => {});
+        }
+      } catch (e) {
+        console.warn('VoiceAudio unlock error:', e);
       }
-    } catch (e) {
-      console.warn('Audio unlock error:', e);
+    }
+
+    // 3. BGMが有効設定なら自動再生スタート
+    if (this.isBgmConfigured && !this.isBgmPlaying) {
+      this.startBgm();
     }
   }
 
@@ -56,8 +80,10 @@ class SoundManager {
   // ----------------------------------------------------
   stopVoice() {
     if (this.currentVoiceAudio) {
-      this.currentVoiceAudio.pause();
-      this.currentVoiceAudio.currentTime = 0;
+      try {
+        this.currentVoiceAudio.pause();
+        this.currentVoiceAudio.currentTime = 0;
+      } catch (e) {}
       this.currentVoiceAudio = null;
     }
   }
@@ -65,10 +91,13 @@ class SoundManager {
   playVoiceFile(src, onEnd = null) {
     this.stopVoice();
 
-    const audio = new Audio(src);
+    // iOS Safariでアンロック済みの共有Audioインスタンスを優先使用
+    const audio = this.sharedVoiceAudio || new Audio();
     this.currentVoiceAudio = audio;
 
     const cleanup = () => {
+      audio.onended = null;
+      audio.onerror = null;
       if (this.currentVoiceAudio === audio) {
         this.currentVoiceAudio = null;
       }
@@ -81,12 +110,18 @@ class SoundManager {
       cleanup();
     };
 
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(err => {
-        console.warn('Voice play catch:', err);
-        cleanup();
-      });
+    try {
+      audio.src = src;
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(err => {
+          console.warn('Voice play catch:', err);
+          cleanup();
+        });
+      }
+    } catch (err) {
+      console.warn('Voice play exception:', err);
+      cleanup();
     }
   }
 

@@ -83,9 +83,13 @@ class App {
       this.switchScreen(screen, false);
     });
 
-    // 画面全体のどこかを最初にタッチしたときにもオーディオアンロック
+    // 画面全体のどこかを最初にタッチしたときにもオーディオアンロック＆必要なら出題音声開始
     const unlockHandler = () => {
       soundManager.unlock();
+      // もし bubble 画面で直接アクセスして未再生なら、最初のタップで出題音声を再生
+      if (this.currentScreen === 'bubble' && window.bubbleGame && bubbleGame.currentChar && !bubbleGame.isCompleted) {
+        soundManager.playQuestion(bubbleGame.currentChar.id);
+      }
       window.removeEventListener('touchstart', unlockHandler);
       window.removeEventListener('click', unlockHandler);
     };
