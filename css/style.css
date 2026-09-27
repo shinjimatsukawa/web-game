@@ -336,41 +336,33 @@ html, body {
 
 .stage-character-box {
   position: relative;
-  margin-top: 10px;
+  margin-top: 4px;
+  margin-bottom: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 14px; /* 吹き出しと絵文字の間に十分な余白を確保し、絶対に被らない */
   cursor: pointer;
   z-index: 10;
+  width: 100%;
 }
-
-.character-avatar {
-  font-size: 8rem;
-  line-height: 1;
-  transform-origin: bottom center;
-  transition: transform 0.2s;
-  filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.12));
-}
-
-.character-avatar.tap-bounce { animation: tapSquish 0.4s ease; }
-.character-avatar.puzzled { animation: headTilt 0.6s ease-in-out; }
 
 .character-speech-bubble {
-  position: absolute;
-  top: -55px;
+  position: relative; /* absolute を完全撤廃！通常のフレックス配置 */
+  top: auto;
   background: #ffffff;
-  border: 3px solid #ff4d6d;
+  border: 3.5px solid #ff4d6d;
   color: #ff3366;
-  padding: 8px 16px;
+  padding: 10px 22px;
   border-radius: var(--radius-full);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: bold;
-  box-shadow: 0 4px 14px rgba(255, 77, 109, 0.25);
+  box-shadow: 0 6px 18px rgba(255, 77, 109, 0.22);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  max-width: 92vw;
+  gap: 10px;
+  max-width: 90vw;
   text-align: center;
   z-index: 5;
 }
@@ -378,13 +370,24 @@ html, body {
 .character-speech-bubble::after {
   content: "";
   position: absolute;
-  bottom: -10px;
+  bottom: -11px;
   left: 50%;
   transform: translateX(-50%);
-  border-width: 10px 10px 0;
+  border-width: 11px 10px 0;
   border-style: solid;
   border-color: #ff4d6d transparent;
 }
+
+.character-avatar {
+  font-size: 6.8rem; /* iPad 11インチで縦に余裕を持たせる快適サイズ */
+  line-height: 1;
+  transform-origin: bottom center;
+  transition: transform 0.2s;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.12));
+}
+
+.character-avatar.tap-bounce { animation: tapSquish 0.4s ease; }
+.character-avatar.puzzled { animation: headTilt 0.6s ease-in-out; }
 
 .btn-replay-question {
   display: inline-flex;

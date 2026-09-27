@@ -182,12 +182,12 @@ class BubbleGame {
 
     const qText = this.currentChar.questionText || this.currentChar.soundText;
     charBox.innerHTML = `
-      <div class="character-avatar ${this.currentChar.actionType}" id="char-avatar">
-        ${this.currentChar.emoji}
-      </div>
       <div class="character-speech-bubble speech-pop" id="char-speech">
         <span class="speech-text" id="speech-text">${qText}</span>
         <button class="btn-replay-question" id="btn-replay-question" type="button" aria-label="もういちど きく">📢</button>
+      </div>
+      <div class="character-avatar ${this.currentChar.actionType}" id="char-avatar">
+        ${this.currentChar.emoji}
       </div>
     `;
 
