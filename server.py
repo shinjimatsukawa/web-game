@@ -47,6 +47,14 @@ class KidsGameHandler(http.server.SimpleHTTPRequestHandler):
             return 'text/css; charset=utf-8'
         if path.endswith('.html'):
             return 'text/html; charset=utf-8'
+        if path.endswith('.svg'):
+            return 'image/svg+xml'
+        if path.endswith('.ico'):
+            return 'image/x-icon'
+        if path.endswith('.png'):
+            return 'image/png'
+        if path.endswith('.json') or path.endswith('.webmanifest'):
+            return 'application/manifest+json'
         return super().guess_type(path)
 
 def run():
