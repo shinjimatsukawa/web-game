@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <defs>
+    <!-- 紫色の絵の具チューブ / クレヨンパレット グラデーション -->
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b5179e"/>
+      <stop offset="50%" stop-color="#7209b7"/>
+      <stop offset="100%" stop-color="#480ca8"/>
+    </linearGradient>
+    <radialGradient id="purpleSplash" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#d47aff"/>
+      <stop offset="50%" stop-color="#9d4edd"/>
+      <stop offset="100%" stop-color="#5a189a"/>
+    </radialGradient>
+  </defs>
+
+  <!-- まあるい紫色の絵の具ペイント（つやつやの水たまりスプラッシュ） -->
+  <path d="M20 5 C30 5 37 11 37 20 C37 26 34 29 30 33 C26 37 21 36 17 36 C10 36 4 30 4 21 C4 13 10 5 20 5 Z" 
+        fill="url(#purpleSplash)"/>
+
+  <!-- つやつやの白いハイライト光沢 -->
+  <ellipse cx="14" cy="13" rx="5" ry="3" fill="#ffffff" opacity="0.65" transform="rotate(-30 14 13)"/>
+  <circle cx="10" cy="18" r="1.5" fill="#ffffff" opacity="0.5"/>
+
+  <!-- 紫の絵の具チューブまたはクレヨン（手前に配置） -->
+  <g transform="translate(18, 16) rotate(35)">
+    <!-- クレヨン本体 -->
+    <rect x="0" y="0" width="8" height="18" rx="2" fill="#7b2cbf" stroke="#3c096c" stroke-width="1"/>
+    <!-- ラベル巻き紙 -->
+    <rect x="0" y="5" width="8" height="10" fill="#ffd166"/>
+    <line x1="0" y1="8" x2="8" y2="8" stroke="#f4a261" stroke-width="1"/>
+    <!-- クレヨンの先端（三角芯） -->
+    <polygon points="0,0 8,0 4,-5" fill="#5a189a"/>
+  </g>
+
+  <!-- 小さな紫の飛び散りペイント -->
+  <circle cx="34" cy="13" r="2.5" fill="#7209b7"/>
+  <circle cx="7" cy="29" r="2" fill="#9d4edd"/>
+</svg>

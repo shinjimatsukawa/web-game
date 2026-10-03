@@ -25,27 +25,31 @@ class SoundManager {
   }
 
   unlock() {
-    // 1. Web Audio Context アンロック
-    if (!this.isUnlocked) {
-      try {
+    // 1. Web Audio Context アンロック（タップのたびに確実に呼び出し、suspendedを解除）
+    try {
+      if (!this.ctx) {
         const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
-        if (AudioCtxClass) {
-          this.ctx = new AudioCtxClass();
-          if (this.ctx.state === 'suspended') {
-            this.ctx.resume();
-          }
-        }
-        this.isUnlocked = true;
-      } catch (e) {
-        console.warn('AudioContext unlock error:', e);
+        if (AudioCtxClass) this.ctx = new AudioCtxClass();
       }
+      if (this.ctx) {
+        if (this.ctx.state === 'suspended') {
+          this.ctx.resume();
+        }
+        // iOS Safari対策: 1サンプルの無音バッファを同期的に鳴らしてオーディオパイプラインを即時開通
+        const dummyBuf = this.ctx.createBuffer(1, 1, 22050);
+        const dummySrc = this.ctx.createBufferSource();
+        dummySrc.buffer = dummyBuf;
+        dummySrc.connect(this.ctx.destination);
+        dummySrc.start(0);
+      }
+      this.isUnlocked = true;
+    } catch (e) {
+      console.warn('AudioContext unlock error:', e);
     }
 
     // 2. iOS Safari の HTMLMediaElement (Audio) アンロック
-    if (!this.isVoiceUnlocked && this.sharedVoiceAudio) {
+    if (this.sharedVoiceAudio) {
       try {
-        // 短い無音データを同期コンテキストで一瞬再生して即座に停止
-        this.sharedVoiceAudio.src = 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
         const p = this.sharedVoiceAudio.play();
         if (p !== undefined) {
           p.then(() => {
@@ -53,9 +57,14 @@ class SoundManager {
             this.isVoiceUnlocked = true;
           }).catch(() => {});
         }
-      } catch (e) {
-        console.warn('VoiceAudio unlock error:', e);
-      }
+      } catch (e) {}
+    }
+
+    // もし自動再生制限で保留されていた音声があれば即座に実行
+    if (this.pendingVoiceAction) {
+      const action = this.pendingVoiceAction;
+      this.pendingVoiceAction = null;
+      action();
     }
 
     // 3. BGMが有効設定なら自動再生スタート
@@ -76,9 +85,20 @@ class SoundManager {
   }
 
   // ----------------------------------------------------
-  // 🎙️ 高品質音声ファイル再生（機械音TTSは一切不使用！）
+  // 🎙️ 高品質音声ファイル再生（Web Audio API + AudioBuffer キャッシュで Safari Autoplay 制限を完全突破）
   // ----------------------------------------------------
   stopVoice() {
+    if (this.voiceDelayTimer) {
+      clearTimeout(this.voiceDelayTimer);
+      this.voiceDelayTimer = null;
+    }
+    if (this.currentVoiceSource) {
+      try {
+        this.currentVoiceSource.stop();
+        this.currentVoiceSource.disconnect();
+      } catch (e) {}
+      this.currentVoiceSource = null;
+    }
     if (this.currentVoiceAudio) {
       try {
         this.currentVoiceAudio.pause();
@@ -86,13 +106,117 @@ class SoundManager {
       } catch (e) {}
       this.currentVoiceAudio = null;
     }
+    this.pendingVoiceAction = null;
   }
 
-  playVoiceFile(src, onEnd = null) {
+  async loadAudioBuffer(url) {
+    if (!this.audioBufferCache) {
+      this.audioBufferCache = new Map();
+    }
+    if (this.audioBufferCache.has(url)) {
+      return this.audioBufferCache.get(url);
+    }
+    const fetchUrl = url.includes('?') ? url : `${url}?v=20`;
+    const response = await fetch(fetchUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} for ${url}`);
+    }
+    const arrayBuffer = await response.arrayBuffer();
+    const ctx = this.ensureContext();
+    if (!ctx) {
+      throw new Error('AudioContext not available');
+    }
+    // Safari対応: arrayBuffer.slice(0) で安全にコピーし、PromiseとCallback両対応でデコード
+    const audioBuffer = await new Promise((resolve, reject) => {
+      let settled = false;
+      const onOk = (buf) => {
+        if (!settled) {
+          settled = true;
+          resolve(buf);
+        }
+      };
+      const onErr = (e) => {
+        if (!settled) {
+          settled = true;
+          reject(e || new Error('decodeAudioData failed'));
+        }
+      };
+      try {
+        const p = ctx.decodeAudioData(arrayBuffer.slice(0), onOk, onErr);
+        if (p && typeof p.then === 'function') {
+          p.then(onOk).catch(onErr);
+        }
+      } catch (err) {
+        onErr(err);
+      }
+    });
+    this.audioBufferCache.set(url, audioBuffer);
+    return audioBuffer;
+  }
+
+  // 次の問題や重要音声をあらかじめメモリにキャッシュ
+  preloadAudio(url) {
+    if (!url) return;
+    this.loadAudioBuffer(url).catch(() => {});
+  }
+
+  // 同期バッファ再生（クリックの直接スタック内で実行され、Safari Autoplay制限を100%突破）
+  _playBufferSync(ctx, buffer, onEnd, delayMs) {
+    if (ctx.state === 'suspended') {
+      try {
+        ctx.resume();
+      } catch (e) {}
+    }
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    const gainNode = ctx.createGain();
+    gainNode.gain.setValueAtTime(1.0, ctx.currentTime);
+    source.connect(gainNode);
+    gainNode.connect(ctx.destination);
+
+    this.currentVoiceSource = source;
+
+    source.onended = () => {
+      if (this.currentVoiceSource === source) {
+        this.currentVoiceSource = null;
+      }
+      if (onEnd) onEnd();
+    };
+
+    const startTime = ctx.currentTime + Math.max(0, delayMs / 1000);
+    source.start(startTime);
+  }
+
+  playVoiceFile(src, onEnd = null, fallbackSrc = null, delayMs = 0) {
     this.stopVoice();
 
-    // iOS Safariでアンロック済みの共有Audioインスタンスを優先使用
+    const ctx = this.ensureContext();
+    if (ctx && ctx.state === 'suspended') {
+      try {
+        ctx.resume();
+      } catch(e) {}
+    }
+
+    // 1. キャッシュ済みバッファなら Web Audio API で完全同期再生（最速・無遅延）
+    if (this.audioBufferCache && this.audioBufferCache.has(src)) {
+      this._playBufferSync(ctx, this.audioBufferCache.get(src), onEnd, delayMs);
+      return;
+    }
+
+    // 2. 未キャッシュの場合: タップの同期コンテキスト内で直ちに HTMLAudioElement を play() 開始！
+    //    （Safari はタップ直後の同期 play() であれば、ダウンロード中であってもブロックせず完了後に自動再生する）
+    this._playHtmlAudioSync(src, onEnd, fallbackSrc, delayMs);
+
+    // 同時にバックグラウンドで次回のためにデコードキャッシュも並行開始
+    this.loadAudioBuffer(src).catch(() => {});
+  }
+
+  // 同期HTMLAudio再生（タップの直接スタック内で実行され、Safari Autoplay制限を完全突破）
+  _playHtmlAudioSync(src, onEnd = null, fallbackSrc = null, delayMs = 0) {
+    const audioUrl = src.includes('?') ? src : `${src}?v=20`;
+    // iOS Safari 対策: 新規Audioではなく、初期アンロック済みの sharedVoiceAudio を優先使用
     const audio = this.sharedVoiceAudio || new Audio();
+    audio.src = audioUrl;
     this.currentVoiceAudio = audio;
 
     const cleanup = () => {
@@ -106,23 +230,32 @@ class SoundManager {
 
     audio.onended = cleanup;
     audio.onerror = (e) => {
-      console.warn(`Voice file load error [${src}]:`, e);
-      cleanup();
+      if (fallbackSrc) {
+        console.info(`Voice file [${src}] not found, trying fallback [${fallbackSrc}]`);
+        this.playVoiceFile(fallbackSrc, onEnd, null, 0);
+      } else {
+        console.warn(`Voice file load error [${src}]:`, e);
+        cleanup();
+      }
     };
 
-    try {
-      audio.src = src;
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(err => {
-          console.warn('Voice play catch:', err);
-          cleanup();
-        });
+    const doPlay = () => {
+      try {
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(err => {
+            console.warn('HTMLAudioElement play catch:', err);
+            cleanup();
+          });
+        }
+      } catch (err) {
+        console.warn('HTMLAudioElement play exception:', err);
+        cleanup();
       }
-    } catch (err) {
-      console.warn('Voice play exception:', err);
-      cleanup();
-    }
+    };
+
+    // Safariのタップ操作コンテキストを100%保持するため、遅延タイマーを挟まず即座にplay()
+    doPlay();
   }
 
   // 1文字シャボン玉音声: 「あ！」「ぶ！」
@@ -131,19 +264,33 @@ class SoundManager {
     this.playVoiceFile(`/audio/neural/letters/${encoded}.mp3`, onEnd);
   }
 
-  // 50音図鑑音声: 「あ！アイスクリーム！」
+  // 50音図鑑音声: 「あ！アイスクリーム！」 (Gemini Aoede .wav 優先、フォールバック .mp3)
   playTableItem(itemId, onEnd = null) {
-    this.playVoiceFile(`/audio/neural/table/${itemId}.mp3`, onEnd);
+    this.playVoiceFile(
+      `/audio/neural/table/${itemId}.wav`,
+      onEnd,
+      `/audio/neural/table/${itemId}.mp3`
+    );
   }
 
-  // 出題クイズ音声: 「どんぐり だいすき！この どうぶつは？」
-  playQuestion(charId, onEnd = null) {
-    this.playVoiceFile(`/audio/neural/questions/${charId}.mp3`, onEnd);
+  // 出題クイズ音声: 「どんぐり だいすき！この どうぶつは？」 (Gemini Aoede .wav 優先、フォールバック .mp3)
+  playQuestion(charId, onEnd = null, delayMs = 0) {
+    this.playVoiceFile(
+      `/audio/neural/questions/${charId}.wav`,
+      onEnd,
+      `/audio/neural/questions/${charId}.mp3`,
+      delayMs
+    );
   }
 
-  // 単語完成時の褒め言葉: 「せいかい！〇〇！すごーい！」
-  playPraise(charId, onEnd = null) {
-    this.playVoiceFile(`/audio/neural/praises/${charId}.mp3`, onEnd);
+  // 単語完成時の褒め言葉: 「せいかい！〇〇！すごーい！」 (Gemini Aoede .wav 優先、フォールバック .mp3)
+  playPraise(charId, onEnd = null, delayMs = 0) {
+    this.playVoiceFile(
+      `/audio/neural/praises/${charId}.wav`,
+      onEnd,
+      `/audio/neural/praises/${charId}.mp3`,
+      delayMs
+    );
   }
 
   // 違う文字をタッチしたときのリアクション: 「ちがうよ〜？もういっかい！」

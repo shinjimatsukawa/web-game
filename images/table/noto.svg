@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <defs>
+    <!-- ノート表紙グラデーション -->
+    <linearGradient id="notebookCover" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#48cae4"/>
+      <stop offset="100%" stop-color="#0096c7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ページ（紙の厚み） -->
+  <rect x="10" y="5" width="24" height="31" rx="3" fill="#ffffff" stroke="#ced4da" stroke-width="1.5"/>
+  <rect x="9" y="6" width="24" height="30" rx="3" fill="#ffffff"/>
+
+  <!-- ノート表紙 -->
+  <rect x="7" y="5" width="25" height="31" rx="3" fill="url(#notebookCover)" stroke="#0077b6" stroke-width="1.5"/>
+
+  <!-- 背表紙テープ（黒/濃紺の背貼り） -->
+  <path d="M7 5 H12 V36 H7 C5.5 36 5.5 5 7 5 Z" fill="#03045e"/>
+
+  <!-- 白いタイトルラベル枠 -->
+  <rect x="15" y="11" width="14" height="12" rx="2" fill="#ffffff" stroke="#ade8f4" stroke-width="1"/>
+  <!-- ノートの罫線（タイトル欄の文字線） -->
+  <line x1="17" y1="15" x2="27" y2="15" stroke="#ffb703" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="17" y1="19" x2="25" y2="19" stroke="#90e0ef" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- ノート右下に小さな鉛筆 -->
+  <g transform="translate(24, 25) rotate(45)">
+    <rect x="0" y="0" width="4" height="10" rx="0.5" fill="#ffb703"/>
+    <polygon points="0,0 4,0 2,-3" fill="#ffd166"/>
+    <polygon points="1,-1.5 3,-1.5 2,-3" fill="#292f33"/>
+    <rect x="0" y="8" width="4" height="2" fill="#ff758f"/>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <defs>
+    <!-- 赤いルビーのブリリアントカット ファセットグラデーション -->
+    <linearGradient id="rubyTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4d6d"/>
+      <stop offset="100%" stop-color="#d90429"/>
+    </linearGradient>
+    <linearGradient id="rubyFront" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef233c"/>
+      <stop offset="100%" stop-color="#800f2f"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ルビー本体（美しいファセットカット） -->
+  <!-- 下部パビリオンの左右面 -->
+  <polygon points="5,14 20,36 12,14" fill="#a4161a"/>
+  <polygon points="35,14 20,36 28,14" fill="#590d22"/>
+  <!-- 下部中央三角面 -->
+  <polygon points="12,14 20,36 28,14" fill="url(#rubyFront)"/>
+
+  <!-- 上部クラウン（左右面） -->
+  <polygon points="5,14 11,6 12,14" fill="#ff758f"/>
+  <polygon points="35,14 29,6 28,14" fill="#c9184a"/>
+  <!-- 上部クラウン中央面 -->
+  <polygon points="12,14 11,6 29,6 28,14" fill="url(#rubyTop)"/>
+
+  <!-- テーブル面（上面）のハイライト -->
+  <polygon points="13,8 27,8 25,12 15,12" fill="#ffffff" opacity="0.45"/>
+
+  <!-- キラキラ光るスターエフェクト -->
+  <!-- 左上の大スパークル -->
+  <path d="M7 6 Q9 6 9 4 Q9 6 11 6 Q9 6 9 8 Q9 6 7 6 Z" fill="#ffffff"/>
+  <circle cx="9" cy="6" r="0.8" fill="#fff0f3"/>
+  <!-- 右下の小スパークル -->
+  <path d="M31 28 Q32.5 28 32.5 26.5 Q32.5 28 34 28 Q32.5 28 32.5 29.5 Q32.5 28 31 28 Z" fill="#ffffff"/>
+  <!-- 右上の小スパークル -->
+  <path d="M30 4 Q31 4 31 3 Q31 4 32 4 Q31 4 31 5 Q31 4 30 4 Z" fill="#ffffff"/>
+</svg>

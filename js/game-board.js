@@ -74,9 +74,13 @@ class BoardGame {
         const card = document.createElement('button');
         card.className = 'traditional-board-card';
         card.id = `board-card-${data.id}`;
+        const visualHtml = data.imageSrc
+          ? `<img src="${data.imageSrc}" class="trad-svg-img" alt="${data.word}" draggable="false">`
+          : `<span class="trad-emoji">${data.emoji}</span>`;
+
         card.innerHTML = `
           <span class="trad-char">${displayChar}</span>
-          <span class="trad-emoji">${data.emoji}</span>
+          ${visualHtml}
           <span class="trad-word">${data.word}</span>
         `;
 
@@ -118,11 +122,14 @@ class BoardGame {
 
     const displayChar = this.currentMode === 'hira' ? data.hira : data.kata;
     const subChar = this.currentMode === 'hira' ? data.kata : data.hira;
+    const previewVisualHtml = data.imageSrc
+      ? `<img src="${data.imageSrc}" class="preview-svg-img" alt="${data.word}" draggable="false">`
+      : `<div class="preview-emoji">${data.emoji}</div>`;
 
     previewBar.innerHTML = `
       <div class="preview-content pop-in">
         <div class="preview-char">${displayChar}</div>
-        <div class="preview-emoji">${data.emoji}</div>
+        ${previewVisualHtml}
         <div class="preview-text-group">
           <div class="preview-word">${data.word}</div>
           <div class="preview-sound-desc">「${data.sound}」</div>
@@ -141,3 +148,4 @@ class BoardGame {
 }
 
 const boardGame = new BoardGame();
+window.boardGame = boardGame;

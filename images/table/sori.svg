@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <defs>
+    <!-- 木のそりグラデーション -->
+    <linearGradient id="woodGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffb703"/>
+      <stop offset="100%" stop-color="#fb8500"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 雪の地面 -->
+  <path d="M2 34 Q12 31 22 33 Q32 35 38 32 L38 38 L2 38 Z" fill="#e2f1ff"/>
+
+  <!-- ソリのランナー（金属ブレード・下部の滑走部） -->
+  <path d="M4 31 L32 31 Q36 31 38 24 Q39 21 36 21 Q34 22 34 25 L30 29 L6 29 C4 29 3 30 4 31 Z" fill="#6c757d"/>
+
+  <!-- ランナーと座面をつなぐ支柱 -->
+  <rect x="10" y="22" width="3" height="8" rx="1" fill="#495057"/>
+  <rect x="22" y="22" width="3" height="8" rx="1" fill="#495057"/>
+
+  <!-- そりの座面（ウッドボード） -->
+  <rect x="6" y="18" width="23" height="5" rx="2.5" fill="url(#woodGrad)" stroke="#d48b00" stroke-width="1"/>
+  <!-- 座面の背もたれ -->
+  <path d="M6 19 Q4 15 5 12 Q6 10 9 11 L10 18 Z" fill="url(#woodGrad)" stroke="#d48b00" stroke-width="1"/>
+
+  <!-- 引っ張るロープ -->
+  <path d="M35 24 Q37 20 38 15" stroke="#d00000" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <circle cx="38" cy="15" r="2" fill="#d00000"/>
+
+  <!-- キラキラ雪の結晶 -->
+  <path d="M28 8 L32 8 M30 6 L30 10 M29 7 L31 9 M31 7 L29 9" stroke="#90e0ef" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

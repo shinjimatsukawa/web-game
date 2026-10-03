@@ -30,11 +30,11 @@ ITEMS = [
     "praiseText": "せいかい！パトカー！すごーい！"
   },
   {
-    "id": "resukyu", "category": "vehicle", "nameHira": "れすきゅー", "nameKata": "レスキュー",
-    "charsHira": ["れ", "す", "き", "ゅ", "ー"], "charsKata": ["レ", "ス", "キ", "ュ", "ー"],
+    "id": "kyukyusha", "category": "vehicle", "nameHira": "きゅうきゅうしゃ", "nameKata": "キュウキュウシャ",
+    "charsHira": ["き", "ゅ", "う", "き", "ゅ", "う", "し", "ゃ"], "charsKata": ["キ", "ュ", "ウ", "キ", "ュ", "ウ", "シ", "ャ"],
     "emoji": "🚑", "soundType": "horn", "soundText": "ピーポーピーポー！", "themeColor": "#ff758f", "actionType": "zoom-dash", "bgDecor": "🩹",
-    "questionText": "ピーポーピーポー！たすけにいく この くるまは？",
-    "praiseText": "せいかい！レスキュー！すごーい！"
+    "questionText": "ピーポーピーポー！病院へ急ぐ この くるまは？",
+    "praiseText": "せいかい！きゅうきゅうしゃ！すごーい！"
   },
   {
     "id": "basu", "category": "vehicle", "nameHira": "ばす", "nameKata": "バス",
@@ -152,7 +152,7 @@ ITEMS = [
     "id": "kuruma", "category": "vehicle", "nameHira": "くるま", "nameKata": "クルマ",
     "charsHira": ["く", "る", "ま"], "charsKata": ["ク", "ル", "マ"],
     "emoji": "🚗", "soundType": "vroom", "soundText": "ブーーン！ドライブ！", "themeColor": "#ef233c", "actionType": "zoom-dash", "bgDecor": "🚦",
-    "questionText": "ブーーンとおでかけ！この くるまは？",
+    "questionText": "タイヤが４つで ブーーンと走る この 乗り物は？",
     "praiseText": "せいかい！くるま！すごーい！"
   },
   {
@@ -163,25 +163,25 @@ ITEMS = [
     "praiseText": "せいかい！そり！すごーい！"
   },
   {
-    "id": "jipu", "category": "vehicle", "nameHira": "じーぷ", "nameKata": "ジープ",
-    "charsHira": ["じ", "ー", "ぷ"], "charsKata": ["ジ", "ー", "プ"],
-    "emoji": "🚙", "soundType": "vroom", "soundText": "山道もへっちゃら！", "themeColor": "#2b9348", "actionType": "jump", "bgDecor": "🌲",
-    "questionText": "山道もへっちゃら！この くるまは？",
-    "praiseText": "せいかい！ジープ！すごーい！"
+    "id": "jitensha", "category": "vehicle", "nameHira": "じてんしゃ", "nameKata": "ジテンシャ",
+    "charsHira": ["じ", "て", "ん", "し", "ゃ"], "charsKata": ["ジ", "テ", "ン", "シ", "ャ"],
+    "emoji": "🚲", "soundType": "vroom", "soundText": "チリンチリン！", "themeColor": "#2b9348", "actionType": "zoom-dash", "bgDecor": "🔔",
+    "questionText": "チリンチリン！ペダルをこぐ この 乗り物は？",
+    "praiseText": "せいかい！じてんしゃ！すごーい！"
   },
   {
-    "id": "nozomi", "category": "vehicle", "nameHira": "のぞみ", "nameKata": "ノゾミ",
-    "charsHira": ["の", "ぞ", "み"], "charsKata": ["ノ", "ゾ", "ミ"],
+    "id": "shinkansen", "category": "vehicle", "nameHira": "しんかんせん", "nameKata": "シンカンセン",
+    "charsHira": ["し", "ん", "か", "ん", "せ", "ん"], "charsKata": ["シ", "ン", "カ", "ン", "セ", "ン"],
     "emoji": "🚅", "soundType": "jet", "soundText": "新幹線ビュイーン！", "themeColor": "#0077b6", "actionType": "zoom-dash", "bgDecor": "🚄",
-    "questionText": "白くて速い新幹線！この 乗り物は？",
-    "praiseText": "せいかい！のぞみ！すごーい！"
+    "questionText": "白くて速い！線路をビュンビュン走る この 乗り物は？",
+    "praiseText": "せいかい！しんかんせん！すごーい！"
   },
   {
-    "id": "hayabusa", "category": "vehicle", "nameHira": "はやぶさ", "nameKata": "ハヤブサ",
-    "charsHira": ["は", "や", "ぶ", "さ"], "charsKata": ["ハ", "ヤ", "ブ", "サ"],
-    "emoji": "🚄", "soundType": "jet", "soundText": "みどり色の新幹線！", "themeColor": "#55a630", "actionType": "zoom-dash", "bgDecor": "⚡",
-    "questionText": "緑色のかっこいい新幹線！この 乗り物は？",
-    "praiseText": "せいかい！はやぶさ！すごーい！"
+    "id": "monoreru", "category": "vehicle", "nameHira": "ものれーる", "nameKata": "モノレール",
+    "charsHira": ["も", "の", "れ", "ー", "る"], "charsKata": ["モ", "ノ", "レ", "ー", "ル"],
+    "emoji": "🚝", "soundType": "jet", "soundText": "１本のレールをスイスイ！", "themeColor": "#55a630", "actionType": "zoom-dash", "bgDecor": "⚡",
+    "questionText": "１本のレールの上を走る この 乗り物は？",
+    "praiseText": "せいかい！モノレール！すごーい！"
   },
   {
     "id": "kikyu", "category": "vehicle", "nameHira": "ききゅう", "nameKata": "キキュウ",
@@ -240,7 +240,7 @@ ITEMS = [
     "id": "lion", "category": "animal", "nameHira": "らいおん", "nameKata": "ライオン",
     "charsHira": ["ら", "い", "お", "ん"], "charsKata": ["ラ", "イ", "オ", "ン"],
     "emoji": "🦁", "soundType": "roar", "soundText": "ガオオオーッ！", "themeColor": "#f39c12", "actionType": "super-jump", "bgDecor": "👑",
-    "questionText": "百獣の王、ガオー！この どうぶつは？",
+    "questionText": "ガオ〜〜！たてがみが かっこいい この どうぶつは？",
     "praiseText": "せいかい！ライオン！すごーい！"
   },
   {
@@ -282,7 +282,7 @@ ITEMS = [
     "id": "tori", "category": "animal", "nameHira": "とり", "nameKata": "トリ",
     "charsHira": ["と", "り"], "charsKata": ["ト", "リ"],
     "emoji": "🐦", "soundType": "chirp", "soundText": "ピピッ！パタパタ！", "themeColor": "#48cae4", "actionType": "high-jump", "bgDecor": "🌿",
-    "questionText": "ピピピッとお空で歌う この 鳥は？",
+    "questionText": "パタパタお空をとぶ この 生き物は？",
     "praiseText": "せいかい！小鳥さん！すごーい！"
   },
   {
@@ -454,7 +454,7 @@ ITEMS = [
     "id": "meron", "category": "food", "nameHira": "めろん", "nameKata": "メロン",
     "charsHira": ["め", "ろ", "ん"], "charsKata": ["メ", "ロ", "ン"],
     "emoji": "🍈", "soundType": "cheer", "soundText": "あみあみ高級メロン！", "themeColor": "#99d98c", "actionType": "jump", "bgDecor": "🍈",
-    "questionText": "あみあみ模様の高級な この くだものは？",
+    "questionText": "あみあみ模様で まあるい この くだものは？",
     "praiseText": "せいかい！メロン！すごーい！"
   },
   {
@@ -496,14 +496,14 @@ ITEMS = [
     "id": "ame", "category": "food", "nameHira": "あめ", "nameKata": "アメ",
     "charsHira": ["あ", "め"], "charsKata": ["ア", "メ"],
     "emoji": "🍬", "soundType": "cheer", "soundText": "あまーいキャンディ！", "themeColor": "#ffc6ff", "actionType": "jump", "bgDecor": "🍭",
-    "questionText": "あまーいキャンディ！この おやつは？",
+    "questionText": "お口でペロペロ！あま〜い この おやつは？",
     "praiseText": "せいかい！あめ！すごーい！"
   },
   {
     "id": "onigiri", "category": "food", "nameHira": "おにぎり", "nameKata": "オニギリ",
     "charsHira": ["お", "に", "ぎ", "り"], "charsKata": ["オ", "ニ", "ギ", "リ"],
     "emoji": "🍙", "soundType": "cheer", "soundText": "もぐもぐおいしい！", "themeColor": "#f8f9fa", "actionType": "jump", "bgDecor": "🍙",
-    "questionText": "三角海苔のまあるい この ごはんは？",
+    "questionText": "さんかく海苔をまいた ぎゅっぎゅっ この ごはんは？",
     "praiseText": "せいかい！おにぎり！すごーい！"
   },
   {
@@ -517,7 +517,7 @@ ITEMS = [
     "id": "kare", "category": "food", "nameHira": "かれー", "nameKata": "カレー",
     "charsHira": ["か", "れ", "ー"], "charsKata": ["カ", "レ", "ー"],
     "emoji": "🍛", "soundType": "cheer", "soundText": "おいしいカレーライス！", "themeColor": "#e76f51", "actionType": "jump", "bgDecor": "🍛",
-    "questionText": "おいしいカレーライス！この ごはんは？",
+    "questionText": "お肉や お野菜 ゴロゴロ！ごはんと食べる この ごはんは？",
     "praiseText": "せいかい！カレー！すごーい！"
   },
   {
@@ -569,10 +569,10 @@ async def generate():
   print("--- Generating Shortened Praise Audios ---")
   for item in ITEMS:
     p_file = f"audio/neural/praises/{item['id']}.mp3"
-    # 短縮版で常に再生成
-    print(f"Generating praise: {item['id']} -> {item['praiseText']}")
-    comm = edge_tts.Communicate(item['praiseText'], VOICE)
-    await comm.save(p_file)
+    if not os.path.exists(p_file):
+      print(f"Generating praise: {item['id']} -> {item['praiseText']}")
+      comm = edge_tts.Communicate(item['praiseText'], VOICE)
+      await comm.save(p_file)
 
   print("All audios generated successfully!")
 
@@ -587,6 +587,7 @@ async def generate():
       "charsHira": item["charsHira"],
       "charsKata": item["charsKata"],
       "emoji": item["emoji"],
+      "imageSrc": f"/images/characters/{item['id']}.svg",
       "soundType": item["soundType"],
       "soundText": item["soundText"],
       "themeColor": item["themeColor"],

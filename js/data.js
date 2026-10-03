@@ -22,6 +22,7 @@ const CHARACTERS_DATA = [
       "ウ"
     ],
     "emoji": "🚒",
+    "imageSrc": "/images/characters/shobo.svg",
     "soundType": "horn",
     "soundText": "ウ〜カンカン！放水！",
     "themeColor": "#ff4d6d",
@@ -47,6 +48,7 @@ const CHARACTERS_DATA = [
       "ー"
     ],
     "emoji": "🚓",
+    "imageSrc": "/images/characters/patoka.svg",
     "soundType": "horn",
     "soundText": "ウ〜〜！パトロール！",
     "themeColor": "#3a86ff",
@@ -55,31 +57,38 @@ const CHARACTERS_DATA = [
     "questionText": "パトロールしゅっぱつ！この くるまは？"
   },
   {
-    "id": "resukyu",
+    "id": "kyukyusha",
     "category": "vehicle",
-    "nameHira": "れすきゅー",
-    "nameKata": "レスキュー",
+    "nameHira": "きゅうきゅうしゃ",
+    "nameKata": "キュウキュウシャ",
     "charsHira": [
-      "れ",
-      "す",
       "き",
       "ゅ",
-      "ー"
+      "う",
+      "き",
+      "ゅ",
+      "う",
+      "し",
+      "ゃ"
     ],
     "charsKata": [
-      "レ",
-      "ス",
       "キ",
       "ュ",
-      "ー"
+      "ウ",
+      "キ",
+      "ュ",
+      "ウ",
+      "シ",
+      "ャ"
     ],
     "emoji": "🚑",
+    "imageSrc": "/images/characters/kyukyusha.svg",
     "soundType": "horn",
     "soundText": "ピーポーピーポー！",
     "themeColor": "#ff758f",
     "actionType": "zoom-dash",
     "bgDecor": "🩹",
-    "questionText": "ピーポーピーポー！たすけにいく この くるまは？"
+    "questionText": "ピーポーピーポー！病院へ急ぐ この くるまは？"
   },
   {
     "id": "basu",
@@ -95,6 +104,7 @@ const CHARACTERS_DATA = [
       "ス"
     ],
     "emoji": "🚌",
+    "imageSrc": "/images/characters/basu.svg",
     "soundType": "vroom",
     "soundText": "ぷっぷー！乗ってね！",
     "themeColor": "#ffb703",
@@ -120,6 +130,7 @@ const CHARACTERS_DATA = [
       "ー"
     ],
     "emoji": "🚕",
+    "imageSrc": "/images/characters/takushi.svg",
     "soundType": "vroom",
     "soundText": "どこへ行きますか？",
     "themeColor": "#ffd166",
@@ -145,6 +156,7 @@ const CHARACTERS_DATA = [
       "ク"
     ],
     "emoji": "🚚",
+    "imageSrc": "/images/characters/torakku.svg",
     "soundType": "vroom",
     "soundText": "荷物を運ぶよ！",
     "themeColor": "#06d6a0",
@@ -168,6 +180,7 @@ const CHARACTERS_DATA = [
       "プ"
     ],
     "emoji": "🚛",
+    "imageSrc": "/images/characters/danpu.svg",
     "soundType": "vroom",
     "soundText": "荷台がガッターン！",
     "themeColor": "#fb8500",
@@ -195,6 +208,7 @@ const CHARACTERS_DATA = [
       "ー"
     ],
     "emoji": "🚜",
+    "imageSrc": "/images/characters/torakuta.svg",
     "soundType": "vroom",
     "soundText": "畑をたがやすよ！",
     "themeColor": "#ffbe0b",
@@ -220,6 +234,7 @@ const CHARACTERS_DATA = [
       "ン"
     ],
     "emoji": "🏗️",
+    "imageSrc": "/images/characters/kuren.svg",
     "soundType": "vroom",
     "soundText": "ウィーン！たかーい！",
     "themeColor": "#ff006e",
@@ -243,6 +258,7 @@ const CHARACTERS_DATA = [
       "ャ"
     ],
     "emoji": "🚂",
+    "imageSrc": "/images/characters/kisha.svg",
     "soundType": "vroom",
     "soundText": "シュッシュッポッポー！",
     "themeColor": "#2b2d42",
@@ -268,6 +284,7 @@ const CHARACTERS_DATA = [
       "ャ"
     ],
     "emoji": "🚃",
+    "imageSrc": "/images/characters/densha.svg",
     "soundType": "vroom",
     "soundText": "ガタゴトガタゴト！",
     "themeColor": "#52b788",
@@ -293,6 +310,7 @@ const CHARACTERS_DATA = [
       "ツ"
     ],
     "emoji": "🚇",
+    "imageSrc": "/images/characters/chikatetsu.svg",
     "soundType": "vroom",
     "soundText": "地下をびゅーん！",
     "themeColor": "#4895ef",
@@ -318,6 +336,7 @@ const CHARACTERS_DATA = [
       "キ"
     ],
     "emoji": "✈️",
+    "imageSrc": "/images/characters/hikoki.svg",
     "soundType": "jet",
     "soundText": "ビュイーーーッ！",
     "themeColor": "#caf0f8",
@@ -339,6 +358,7 @@ const CHARACTERS_DATA = [
       "リ"
     ],
     "emoji": "🚁",
+    "imageSrc": "/images/characters/heri.svg",
     "soundType": "jet",
     "soundText": "パタパタ空をとぶ！",
     "themeColor": "#e76f51",
@@ -364,6 +384,7 @@ const CHARACTERS_DATA = [
       "ト"
     ],
     "emoji": "🚀",
+    "imageSrc": "/images/characters/roketto.svg",
     "soundType": "jet",
     "soundText": "３・２・１発射！",
     "themeColor": "#ff758f",
@@ -385,6 +406,7 @@ const CHARACTERS_DATA = [
       "ネ"
     ],
     "emoji": "🚢",
+    "imageSrc": "/images/characters/fune.svg",
     "soundType": "horn",
     "soundText": "ボォーーッ！波スイスイ！",
     "themeColor": "#8ecae6",
@@ -408,6 +430,7 @@ const CHARACTERS_DATA = [
       "ト"
     ],
     "emoji": "🚤",
+    "imageSrc": "/images/characters/boto.svg",
     "soundType": "vroom",
     "soundText": "びゅんびゅん走る！",
     "themeColor": "#00b4d8",
@@ -431,6 +454,7 @@ const CHARACTERS_DATA = [
       "ト"
     ],
     "emoji": "⛵",
+    "imageSrc": "/images/characters/yotto.svg",
     "soundType": "vroom",
     "soundText": "風にのってスイスイ！",
     "themeColor": "#90e0ef",
@@ -454,6 +478,7 @@ const CHARACTERS_DATA = [
       "ク"
     ],
     "emoji": "🏍️",
+    "imageSrc": "/images/characters/baiku.svg",
     "soundType": "vroom",
     "soundText": "ブルルン！はやい！",
     "themeColor": "#d90429",
@@ -477,12 +502,13 @@ const CHARACTERS_DATA = [
       "マ"
     ],
     "emoji": "🚗",
+    "imageSrc": "/images/characters/kuruma.svg",
     "soundType": "vroom",
     "soundText": "ブーーン！ドライブ！",
     "themeColor": "#ef233c",
     "actionType": "zoom-dash",
     "bgDecor": "🚦",
-    "questionText": "ブーーンとおでかけ！この くるまは？"
+    "questionText": "タイヤが４つで ブーーンと走る この 乗り物は？"
   },
   {
     "id": "sori",
@@ -498,6 +524,7 @@ const CHARACTERS_DATA = [
       "リ"
     ],
     "emoji": "🛷",
+    "imageSrc": "/images/characters/sori.svg",
     "soundType": "vroom",
     "soundText": "雪の上をシューッ！",
     "themeColor": "#8338ec",
@@ -506,75 +533,90 @@ const CHARACTERS_DATA = [
     "questionText": "雪の上をシューッ！この 乗り物は？"
   },
   {
-    "id": "jipu",
+    "id": "jitensha",
     "category": "vehicle",
-    "nameHira": "じーぷ",
-    "nameKata": "ジープ",
+    "nameHira": "じてんしゃ",
+    "nameKata": "ジテンシャ",
     "charsHira": [
       "じ",
-      "ー",
-      "ぷ"
+      "て",
+      "ん",
+      "し",
+      "ゃ"
     ],
     "charsKata": [
       "ジ",
-      "ー",
-      "プ"
+      "テ",
+      "ン",
+      "シ",
+      "ャ"
     ],
-    "emoji": "🚙",
+    "emoji": "🚲",
+    "imageSrc": "/images/characters/jitensha.svg",
     "soundType": "vroom",
-    "soundText": "山道もへっちゃら！",
+    "soundText": "チリンチリン！",
     "themeColor": "#2b9348",
-    "actionType": "jump",
-    "bgDecor": "🌲",
-    "questionText": "山道もへっちゃら！この くるまは？"
+    "actionType": "zoom-dash",
+    "bgDecor": "🔔",
+    "questionText": "チリンチリン！ペダルをこぐ この 乗り物は？"
   },
   {
-    "id": "nozomi",
+    "id": "shinkansen",
     "category": "vehicle",
-    "nameHira": "のぞみ",
-    "nameKata": "ノゾミ",
+    "nameHira": "しんかんせん",
+    "nameKata": "シンカンセン",
     "charsHira": [
-      "の",
-      "ぞ",
-      "み"
+      "し",
+      "ん",
+      "か",
+      "ん",
+      "せ",
+      "ん"
     ],
     "charsKata": [
-      "ノ",
-      "ゾ",
-      "ミ"
+      "シ",
+      "ン",
+      "カ",
+      "ン",
+      "セ",
+      "ン"
     ],
     "emoji": "🚅",
+    "imageSrc": "/images/characters/shinkansen.svg",
     "soundType": "jet",
     "soundText": "新幹線ビュイーン！",
     "themeColor": "#0077b6",
     "actionType": "zoom-dash",
     "bgDecor": "🚄",
-    "questionText": "白くて速い新幹線！この 乗り物は？"
+    "questionText": "白くて速い！線路をビュンビュン走る この 乗り物は？"
   },
   {
-    "id": "hayabusa",
+    "id": "monoreru",
     "category": "vehicle",
-    "nameHira": "はやぶさ",
-    "nameKata": "ハヤブサ",
+    "nameHira": "ものれーる",
+    "nameKata": "モノレール",
     "charsHira": [
-      "は",
-      "や",
-      "ぶ",
-      "さ"
+      "も",
+      "の",
+      "れ",
+      "ー",
+      "る"
     ],
     "charsKata": [
-      "ハ",
-      "ヤ",
-      "ブ",
-      "サ"
+      "モ",
+      "ノ",
+      "レ",
+      "ー",
+      "ル"
     ],
-    "emoji": "🚄",
+    "emoji": "🚝",
+    "imageSrc": "/images/characters/monoreru.svg",
     "soundType": "jet",
-    "soundText": "みどり色の新幹線！",
+    "soundText": "１本のレールをスイスイ！",
     "themeColor": "#55a630",
     "actionType": "zoom-dash",
     "bgDecor": "⚡",
-    "questionText": "緑色のかっこいい新幹線！この 乗り物は？"
+    "questionText": "１本のレールの上を走る この 乗り物は？"
   },
   {
     "id": "kikyu",
@@ -594,6 +636,7 @@ const CHARACTERS_DATA = [
       "ウ"
     ],
     "emoji": "🎈",
+    "imageSrc": "/images/characters/kikyu.svg",
     "soundType": "jet",
     "soundText": "ふわふわ空をとぶ！",
     "themeColor": "#e0aaff",
@@ -615,6 +658,7 @@ const CHARACTERS_DATA = [
       "タ"
     ],
     "emoji": "🐷",
+    "imageSrc": "/images/characters/buta.svg",
     "soundType": "oink",
     "soundText": "ブヒブヒ〜♪",
     "themeColor": "#ffb3c6",
@@ -636,6 +680,7 @@ const CHARACTERS_DATA = [
       "ヌ"
     ],
     "emoji": "🐶",
+    "imageSrc": "/images/characters/inu.svg",
     "soundType": "bark",
     "soundText": "ワンワン！",
     "themeColor": "#ffd166",
@@ -657,6 +702,7 @@ const CHARACTERS_DATA = [
       "コ"
     ],
     "emoji": "🐱",
+    "imageSrc": "/images/characters/neko.svg",
     "soundType": "meow",
     "soundText": "ニャオ〜ン♪",
     "themeColor": "#f8edeb",
@@ -678,6 +724,7 @@ const CHARACTERS_DATA = [
       "シ"
     ],
     "emoji": "🐮",
+    "imageSrc": "/images/characters/ushi.svg",
     "soundType": "moo",
     "soundText": "モ〜〜〜ッ！",
     "themeColor": "#e9ecef",
@@ -701,6 +748,7 @@ const CHARACTERS_DATA = [
       "ル"
     ],
     "emoji": "🐸",
+    "imageSrc": "/images/characters/kaeru.svg",
     "soundType": "ribbit",
     "soundText": "ケロケロ〜！",
     "themeColor": "#52b788",
@@ -724,6 +772,7 @@ const CHARACTERS_DATA = [
       "ダ"
     ],
     "emoji": "🐼",
+    "imageSrc": "/images/characters/panda.svg",
     "soundType": "squeak",
     "soundText": "笹おいしいな〜",
     "themeColor": "#ced4da",
@@ -749,12 +798,13 @@ const CHARACTERS_DATA = [
       "ン"
     ],
     "emoji": "🦁",
+    "imageSrc": "/images/characters/lion.svg",
     "soundType": "roar",
     "soundText": "ガオオオーッ！",
     "themeColor": "#f39c12",
     "actionType": "super-jump",
     "bgDecor": "👑",
-    "questionText": "百獣の王、ガオー！この どうぶつは？"
+    "questionText": "ガオ〜〜！たてがみが かっこいい この どうぶつは？"
   },
   {
     "id": "tora",
@@ -770,6 +820,7 @@ const CHARACTERS_DATA = [
       "ラ"
     ],
     "emoji": "🐯",
+    "imageSrc": "/images/characters/tora.svg",
     "soundType": "roar",
     "soundText": "ガオッ！しましま！",
     "themeColor": "#e67e22",
@@ -791,6 +842,7 @@ const CHARACTERS_DATA = [
       "ウ"
     ],
     "emoji": "🐘",
+    "imageSrc": "/images/characters/zou.svg",
     "soundType": "trumpet",
     "soundText": "パオオーーン！",
     "themeColor": "#95a5a6",
@@ -812,6 +864,7 @@ const CHARACTERS_DATA = [
       "ル"
     ],
     "emoji": "🐵",
+    "imageSrc": "/images/characters/saru.svg",
     "soundType": "chatter",
     "soundText": "ウキキキッ！",
     "themeColor": "#d35400",
@@ -833,6 +886,7 @@ const CHARACTERS_DATA = [
       "マ"
     ],
     "emoji": "🐻",
+    "imageSrc": "/images/characters/kuma.svg",
     "soundType": "growl",
     "soundText": "クマー！はちみつ！",
     "themeColor": "#795548",
@@ -856,6 +910,7 @@ const CHARACTERS_DATA = [
       "ギ"
     ],
     "emoji": "🐰",
+    "imageSrc": "/images/characters/usagi.svg",
     "soundType": "squeak",
     "soundText": "ぴょんぴょん！",
     "themeColor": "#ffcbf2",
@@ -877,12 +932,13 @@ const CHARACTERS_DATA = [
       "リ"
     ],
     "emoji": "🐦",
+    "imageSrc": "/images/characters/tori.svg",
     "soundType": "chirp",
     "soundText": "ピピッ！パタパタ！",
     "themeColor": "#48cae4",
     "actionType": "high-jump",
     "bgDecor": "🌿",
-    "questionText": "ピピピッとお空で歌う この 鳥は？"
+    "questionText": "パタパタお空をとぶ この 生き物は？"
   },
   {
     "id": "uma",
@@ -898,6 +954,7 @@ const CHARACTERS_DATA = [
       "マ"
     ],
     "emoji": "🐴",
+    "imageSrc": "/images/characters/uma.svg",
     "soundType": "neigh",
     "soundText": "ヒヒーン！パッカパッカ！",
     "themeColor": "#a0522d",
@@ -921,6 +978,7 @@ const CHARACTERS_DATA = [
       "ン"
     ],
     "emoji": "🦒",
+    "imageSrc": "/images/characters/kirin.svg",
     "soundType": "squeak",
     "soundText": "首がたかーい！",
     "themeColor": "#ffb703",
@@ -942,6 +1000,7 @@ const CHARACTERS_DATA = [
       "ニ"
     ],
     "emoji": "🐊",
+    "imageSrc": "/images/characters/wani.svg",
     "soundType": "snap",
     "soundText": "ガブガブッ！",
     "themeColor": "#2d6a4f",
@@ -963,6 +1022,7 @@ const CHARACTERS_DATA = [
       "カ"
     ],
     "emoji": "🦌",
+    "imageSrc": "/images/characters/shika.svg",
     "soundType": "squeak",
     "soundText": "ピョンピョン走る！",
     "themeColor": "#bc6c25",
@@ -984,6 +1044,7 @@ const CHARACTERS_DATA = [
       "ス"
     ],
     "emoji": "🐿️",
+    "imageSrc": "/images/characters/risu.svg",
     "soundType": "squeak",
     "soundText": "どんぐりカリカリ！",
     "themeColor": "#dda15e",
@@ -1007,6 +1068,7 @@ const CHARACTERS_DATA = [
       "ジ"
     ],
     "emoji": "🐑",
+    "imageSrc": "/images/characters/hitsuji.svg",
     "soundType": "baa",
     "soundText": "メェ〜〜メェ〜〜",
     "themeColor": "#f8f9fa",
@@ -1028,6 +1090,7 @@ const CHARACTERS_DATA = [
       "ギ"
     ],
     "emoji": "🐐",
+    "imageSrc": "/images/characters/yagi.svg",
     "soundType": "baa",
     "soundText": "メェ〜！お手紙モグモグ",
     "themeColor": "#e9ecef",
@@ -1051,6 +1114,7 @@ const CHARACTERS_DATA = [
       "ラ"
     ],
     "emoji": "🐨",
+    "imageSrc": "/images/characters/koara.svg",
     "soundType": "squeak",
     "soundText": "木にギューッ！",
     "themeColor": "#adb5bd",
@@ -1074,6 +1138,7 @@ const CHARACTERS_DATA = [
       "ラ"
     ],
     "emoji": "🦍",
+    "imageSrc": "/images/characters/gorira.svg",
     "soundType": "growl",
     "soundText": "ウホウホ！ドラミング！",
     "themeColor": "#343a40",
@@ -1095,6 +1160,7 @@ const CHARACTERS_DATA = [
       "イ"
     ],
     "emoji": "🦏",
+    "imageSrc": "/images/characters/sai.svg",
     "soundType": "growl",
     "soundText": "ツノがかっこいい！",
     "themeColor": "#6c757d",
@@ -1116,6 +1182,7 @@ const CHARACTERS_DATA = [
       "バ"
     ],
     "emoji": "🦛",
+    "imageSrc": "/images/characters/kaba.svg",
     "soundType": "growl",
     "soundText": "大あくび！ア〜ン！",
     "themeColor": "#495057",
@@ -1139,6 +1206,7 @@ const CHARACTERS_DATA = [
       "ダ"
     ],
     "emoji": "🐪",
+    "imageSrc": "/images/characters/rakuda.svg",
     "soundType": "growl",
     "soundText": "コブがポコッ！",
     "themeColor": "#d4a373",
@@ -1162,6 +1230,7 @@ const CHARACTERS_DATA = [
       "ネ"
     ],
     "emoji": "🦊",
+    "imageSrc": "/images/characters/kitsune.svg",
     "soundType": "bark",
     "soundText": "コンコン♪",
     "themeColor": "#f77f00",
@@ -1187,6 +1256,7 @@ const CHARACTERS_DATA = [
       "ン"
     ],
     "emoji": "🐧",
+    "imageSrc": "/images/characters/penguin.svg",
     "soundType": "chirp",
     "soundText": "ヨチヨチ歩き！",
     "themeColor": "#003049",
@@ -1210,6 +1280,7 @@ const CHARACTERS_DATA = [
       "カ"
     ],
     "emoji": "🐬",
+    "imageSrc": "/images/characters/iruka.svg",
     "soundType": "whistle",
     "soundText": "キュイ〜ン！ジャンプ！",
     "themeColor": "#48cae4",
@@ -1233,6 +1304,7 @@ const CHARACTERS_DATA = [
       "ラ"
     ],
     "emoji": "🐳",
+    "imageSrc": "/images/characters/kujira.svg",
     "soundType": "horn",
     "soundText": "プシューッ！潮吹き！",
     "themeColor": "#0077b6",
@@ -1254,6 +1326,7 @@ const CHARACTERS_DATA = [
       "メ"
     ],
     "emoji": "🦈",
+    "imageSrc": "/images/characters/same.svg",
     "soundType": "growl",
     "soundText": "するどい歯！スイスイ！",
     "themeColor": "#1d3557",
@@ -1277,6 +1350,7 @@ const CHARACTERS_DATA = [
       "ゴ"
     ],
     "emoji": "🍎",
+    "imageSrc": "/images/characters/ringo.svg",
     "soundType": "cheer",
     "soundText": "シャキシャキ甘い！",
     "themeColor": "#ff4d6d",
@@ -1300,6 +1374,7 @@ const CHARACTERS_DATA = [
       "ン"
     ],
     "emoji": "🍊",
+    "imageSrc": "/images/characters/mikan.svg",
     "soundType": "cheer",
     "soundText": "ジューシーおいしい！",
     "themeColor": "#ff9e00",
@@ -1323,6 +1398,7 @@ const CHARACTERS_DATA = [
       "ナ"
     ],
     "emoji": "🍌",
+    "imageSrc": "/images/characters/banana.svg",
     "soundType": "cheer",
     "soundText": "もぐもぐあまい！",
     "themeColor": "#ffd166",
@@ -1346,6 +1422,7 @@ const CHARACTERS_DATA = [
       "カ"
     ],
     "emoji": "🍉",
+    "imageSrc": "/images/characters/suika.svg",
     "soundType": "cheer",
     "soundText": "夏はすいか！シャキッ！",
     "themeColor": "#06d6a0",
@@ -1369,6 +1446,7 @@ const CHARACTERS_DATA = [
       "ウ"
     ],
     "emoji": "🍇",
+    "imageSrc": "/images/characters/budo.svg",
     "soundType": "cheer",
     "soundText": "つぶつぶジューシー！",
     "themeColor": "#7209b7",
@@ -1392,6 +1470,7 @@ const CHARACTERS_DATA = [
       "ゴ"
     ],
     "emoji": "🍓",
+    "imageSrc": "/images/characters/ichigo.svg",
     "soundType": "cheer",
     "soundText": "あまくておいしい！",
     "themeColor": "#e63946",
@@ -1415,12 +1494,13 @@ const CHARACTERS_DATA = [
       "ン"
     ],
     "emoji": "🍈",
+    "imageSrc": "/images/characters/meron.svg",
     "soundType": "cheer",
     "soundText": "あみあみ高級メロン！",
     "themeColor": "#99d98c",
     "actionType": "jump",
     "bgDecor": "🍈",
-    "questionText": "あみあみ模様の高級な この くだものは？"
+    "questionText": "あみあみ模様で まあるい この くだものは？"
   },
   {
     "id": "tomato",
@@ -1438,6 +1518,7 @@ const CHARACTERS_DATA = [
       "ト"
     ],
     "emoji": "🍅",
+    "imageSrc": "/images/characters/tomato.svg",
     "soundType": "cheer",
     "soundText": "真っ赤なトマト！",
     "themeColor": "#ef233c",
@@ -1459,6 +1540,7 @@ const CHARACTERS_DATA = [
       "ン"
     ],
     "emoji": "🍞",
+    "imageSrc": "/images/characters/pan.svg",
     "soundType": "cheer",
     "soundText": "焼きたてふかふか！",
     "themeColor": "#f4a261",
@@ -1482,6 +1564,7 @@ const CHARACTERS_DATA = [
       "キ"
     ],
     "emoji": "🎂",
+    "imageSrc": "/images/characters/keki.svg",
     "soundType": "cheer",
     "soundText": "ハッピーバースデー！",
     "themeColor": "#ffb4a2",
@@ -1505,6 +1588,7 @@ const CHARACTERS_DATA = [
       "ス"
     ],
     "emoji": "🍨",
+    "imageSrc": "/images/characters/aisu.svg",
     "soundType": "cheer",
     "soundText": "つめたくておいしい！",
     "themeColor": "#a2d2ff",
@@ -1528,6 +1612,7 @@ const CHARACTERS_DATA = [
       "ン"
     ],
     "emoji": "🍮",
+    "imageSrc": "/images/characters/purin.svg",
     "soundType": "cheer",
     "soundText": "ぷるぷるおいしい！",
     "themeColor": "#ffe3a0",
@@ -1549,12 +1634,13 @@ const CHARACTERS_DATA = [
       "メ"
     ],
     "emoji": "🍬",
+    "imageSrc": "/images/characters/ame.svg",
     "soundType": "cheer",
     "soundText": "あまーいキャンディ！",
     "themeColor": "#ffc6ff",
     "actionType": "jump",
     "bgDecor": "🍭",
-    "questionText": "あまーいキャンディ！この おやつは？"
+    "questionText": "お口でペロペロ！あま〜い この おやつは？"
   },
   {
     "id": "onigiri",
@@ -1574,12 +1660,13 @@ const CHARACTERS_DATA = [
       "リ"
     ],
     "emoji": "🍙",
+    "imageSrc": "/images/characters/onigiri.svg",
     "soundType": "cheer",
     "soundText": "もぐもぐおいしい！",
     "themeColor": "#f8f9fa",
     "actionType": "jump",
     "bgDecor": "🍙",
-    "questionText": "三角海苔のまあるい この ごはんは？"
+    "questionText": "さんかく海苔をまいた ぎゅっぎゅっ この ごはんは？"
   },
   {
     "id": "sushi",
@@ -1595,6 +1682,7 @@ const CHARACTERS_DATA = [
       "シ"
     ],
     "emoji": "🍣",
+    "imageSrc": "/images/characters/sushi.svg",
     "soundType": "cheer",
     "soundText": "へい、おまち！",
     "themeColor": "#f72585",
@@ -1618,12 +1706,13 @@ const CHARACTERS_DATA = [
       "ー"
     ],
     "emoji": "🍛",
+    "imageSrc": "/images/characters/kare.svg",
     "soundType": "cheer",
     "soundText": "おいしいカレーライス！",
     "themeColor": "#e76f51",
     "actionType": "jump",
     "bgDecor": "🍛",
-    "questionText": "おいしいカレーライス！この ごはんは？"
+    "questionText": "お肉や お野菜 ゴロゴロ！ごはんと食べる この ごはんは？"
   },
   {
     "id": "tsuki",
@@ -1639,6 +1728,7 @@ const CHARACTERS_DATA = [
       "キ"
     ],
     "emoji": "🌙",
+    "imageSrc": "/images/characters/tsuki.svg",
     "soundType": "cheer",
     "soundText": "お月さま、ピカピカ！",
     "themeColor": "#ffd166",
@@ -1660,6 +1750,7 @@ const CHARACTERS_DATA = [
       "シ"
     ],
     "emoji": "⭐",
+    "imageSrc": "/images/characters/hoshi.svg",
     "soundType": "cheer",
     "soundText": "きらきらお星さま！",
     "themeColor": "#ffbe0b",
@@ -1681,6 +1772,7 @@ const CHARACTERS_DATA = [
       "ジ"
     ],
     "emoji": "🌈",
+    "imageSrc": "/images/characters/niji.svg",
     "soundType": "cheer",
     "soundText": "きれいな七色の虹！",
     "themeColor": "#b5179e",
@@ -1706,6 +1798,7 @@ const CHARACTERS_DATA = [
       "ウ"
     ],
     "emoji": "☀️",
+    "imageSrc": "/images/characters/taiyo.svg",
     "soundType": "cheer",
     "soundText": "ポカポカお日さま！",
     "themeColor": "#f77f00",
@@ -1736,10 +1829,10 @@ const KANA_TABLE_DATA = [
 
   // さ行
   { id: 'sa', hira: 'さ', kata: 'サ', word: 'さかな', emoji: '🐟', sound: 'さかな！スイスイ！' },
-  { id: 'shi', hira: 'し', kata: 'シ', word: 'しんかんせん', emoji: '🚄', sound: 'しんかんせん！はやーい！' },
+  { id: 'shi', hira: 'し', kata: 'シ', word: 'しまうま', emoji: '🦓', imageSrc: '/images/table/shimauma.svg', sound: 'しまうま！シマシマかっこいい！' },
   { id: 'su', hira: 'す', kata: 'ス', word: 'すいか', emoji: '🍉', sound: 'すいか！あまーい！' },
-  { id: 'se', hira: 'せ', kata: 'セ', word: 'せみ', emoji: '🪲', sound: 'せみ！ミーンミーン！' },
-  { id: 'so', hira: 'そ', kata: 'ソ', word: 'そら', emoji: '🌈', sound: 'にじの そら！きれいだね！' },
+  { id: 'se', hira: 'せ', kata: 'セ', word: 'せみ', emoji: '🪲', imageSrc: '/images/table/semi.svg', sound: 'せみ！ミーンミーン！' },
+  { id: 'so', hira: 'そ', kata: 'ソ', word: 'そり', emoji: '🛷', imageSrc: '/images/table/sori.svg', sound: 'そり！シューッとはしるよ！' },
 
   // た行
   { id: 'ta', hira: 'た', kata: 'タ', word: 'たいよう', emoji: '☀️', sound: 'たいよう！ポカポカ！' },
@@ -1753,7 +1846,7 @@ const KANA_TABLE_DATA = [
   { id: 'ni', hira: 'に', kata: 'ニ', word: 'にじ', emoji: '🌈', sound: 'にじ！７色だね！' },
   { id: 'nu', hira: 'ぬ', kata: 'ヌ', word: 'ぬいぐるみ', emoji: '🧸', sound: 'ぬいぐるみ！ふわふわ！' },
   { id: 'ne', hira: 'ね', kata: 'ネ', word: 'ねこ', emoji: '🐱', sound: 'ねこ！ニャーオ！' },
-  { id: 'no', hira: 'の', kata: 'ノ', word: 'のりまき', emoji: '🍣', sound: 'のりまき！パクッ！' },
+  { id: 'no', hira: 'の', kata: 'ノ', word: 'ノート', emoji: '📓', imageSrc: '/images/table/noto.svg', sound: 'ノート！おえかきしよう！' },
 
   // は行
   { id: 'ha', hira: 'は', kata: 'ハ', word: 'はな', emoji: '🌸', sound: 'おはな！いいにおい！' },
@@ -1765,25 +1858,25 @@ const KANA_TABLE_DATA = [
   // ま行
   { id: 'ma', hira: 'ま', kata: 'マ', word: 'マイク', emoji: '🎤', sound: 'マイク！ラララ〜♪' },
   { id: 'mi', hira: 'み', kata: 'ミ', word: 'みかん', emoji: '🍊', sound: 'みかん！おいしいね！' },
-  { id: 'mu', hira: 'む', kata: 'ム', word: 'むしば', emoji: '🦷', sound: 'はみがき シャカシャカ！' },
+  { id: 'mu', hira: 'む', kata: 'ム', word: 'むらさき', emoji: '🟣', imageSrc: '/images/table/murasaki.svg', sound: 'むらさき！きれいな いろだね！' },
   { id: 'me', hira: 'め', kata: 'メ', word: 'めがね', emoji: '👓', sound: 'めがね！よくみえる！' },
   { id: 'mo', hira: 'も', kata: 'モ', word: 'もも', emoji: '🍑', sound: 'もも！ピンクいろ！' },
 
   // や行
   { id: 'ya', hira: 'や', kata: 'ヤ', word: 'やま', emoji: '⛰️', sound: 'おやま！たかーい！' },
   { id: 'yu', hira: 'ゆ', kata: 'ユ', word: 'ゆきだるま', emoji: '⛄', sound: 'ゆきだるま！コロコロ！' },
-  { id: 'yo', hira: 'よ', kata: 'ヨ', word: 'ようちえん', emoji: '🏫', sound: 'ようちえん！たのしいね！' },
+  { id: 'yo', hira: 'よ', kata: 'ヨ', word: 'ヨット', emoji: '⛵', imageSrc: '/images/table/yotto.svg', sound: 'ヨット！風にのってスイスイ！' },
 
   // ら行
   { id: 'ra', hira: 'ら', kata: 'ラ', word: 'ライオン', emoji: '🦁', sound: 'ライオン！ガオ〜ッ！' },
   { id: 'ri', hira: 'り', kata: 'リ', word: 'りんご', emoji: '🍎', sound: 'まっかな りんご！' },
-  { id: 'ru', hira: 'る', kata: 'ル', word: 'ルビー', emoji: '💎', sound: 'ルビー！キラキラ！' },
+  { id: 'ru', hira: 'る', kata: 'ル', word: 'ルビー', emoji: '💎', imageSrc: '/images/table/ruby.svg', sound: 'ルビー！あかいほうせき！' },
   { id: 're', hira: 'れ', kata: 'レ', word: 'レモン', emoji: '🍋', sound: 'レモン！すっぱーい！' },
   { id: 'ro', hira: 'ろ', kata: 'ロ', word: 'ロケット', emoji: '🚀', sound: 'ロケット！３・２・１発射！' },
 
   // わ行
   { id: 'wa', hira: 'わ', kata: 'ワ', word: 'わに', emoji: '🐊', sound: 'わに！ガブガブ！' },
-  { id: 'wo', hira: 'を', kata: 'ヲ', word: '「手を洗う」のを', emoji: '🖐️', sound: 'てをあらうの を！キレイキレイ！' },
+  { id: 'wo', hira: 'を', kata: 'ヲ', word: '「手を洗う」のを', emoji: '🖐️', imageSrc: '/images/table/te_wo_arau.svg', sound: 'てをあらうの を！キレイキレイ！' },
   { id: 'nn', hira: 'ん', kata: 'ン', word: 'パンダのん', emoji: '🐼', sound: 'パンダの ん！' }
 ];
 

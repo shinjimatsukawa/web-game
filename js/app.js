@@ -21,6 +21,21 @@ class App {
     this.btnModeHira = document.getElementById('btn-mode-hira');
     this.btnModeKata = document.getElementById('btn-mode-kata');
 
+    // レベル（難易度）ボタン群
+    this.diffBtns = {
+      easy: document.getElementById('btn-diff-easy'),
+      normal: document.getElementById('btn-diff-normal'),
+      hard: document.getElementById('btn-diff-hard')
+    };
+    this.currentDifficulty = 'normal';
+    try {
+      const saved = localStorage.getItem('bubble_difficulty');
+      if (saved && ['easy', 'normal', 'hard'].includes(saved)) {
+        this.currentDifficulty = saved;
+      }
+    } catch(e) {}
+    this.updateDifficultyButtons(this.currentDifficulty);
+
     // BGMボタンの初期状態（localStorageから復元された状態を反映）
     this.updateBgmButton(soundManager.isBgmOn);
 
@@ -29,6 +44,11 @@ class App {
     // 初期URLに応じた画面を表示（例: /bubble, /board, /fossil）
     const initialScreen = this.getScreenFromPath(window.location.pathname);
     this.switchScreen(initialScreen, false);
+
+    // 文字あつめの1問目音声をバックグラウンドで先読み（タップ時の即座再生を実現）
+    if (window.bubbleGame && typeof bubbleGame.prepareQueueAndPreloadFirst === 'function') {
+      bubbleGame.prepareQueueAndPreloadFirst();
+    }
   }
 
   // URLパスから画面名を取得
@@ -66,7 +86,15 @@ class App {
     this.btnModeHira.addEventListener('click', () => this.setKanaMode('hira'));
     this.btnModeKata.addEventListener('click', () => this.setKanaMode('kata'));
 
-    // 4. トップ画面のゲーム選択カード
+    // 4. レベル（難易度）切り替え
+    Object.keys(this.diffBtns).forEach(diff => {
+      const btn = this.diffBtns[diff];
+      if (btn) {
+        btn.addEventListener('click', () => this.setDifficulty(diff));
+      }
+    });
+
+    // 5. トップ画面のゲーム選択カード
     document.getElementById('card-game-bubble').addEventListener('click', () => {
       this.handleFirstInteraction();
       this.switchScreen('bubble', true);
@@ -83,13 +111,9 @@ class App {
       this.switchScreen(screen, false);
     });
 
-    // 画面全体のどこかを最初にタッチしたときにもオーディオアンロック＆必要なら出題音声開始
+    // 画面全体のどこかを最初にタッチしたときにオーディオアンロック
     const unlockHandler = () => {
       soundManager.unlock();
-      // もし bubble 画面で直接アクセスして未再生なら、最初のタップで出題音声を再生
-      if (this.currentScreen === 'bubble' && window.bubbleGame && bubbleGame.currentChar && !bubbleGame.isCompleted) {
-        soundManager.playQuestion(bubbleGame.currentChar.id);
-      }
       window.removeEventListener('touchstart', unlockHandler);
       window.removeEventListener('click', unlockHandler);
     };
@@ -125,6 +149,29 @@ class App {
     }
   }
 
+  setDifficulty(diff) {
+    soundManager.playBubblePop();
+    this.currentDifficulty = diff;
+    try {
+      localStorage.setItem('bubble_difficulty', diff);
+    } catch(e) {}
+    this.updateDifficultyButtons(diff);
+
+    const bg = window.bubbleGame || (typeof bubbleGame !== 'undefined' ? bubbleGame : null);
+    if (bg && typeof bg.setDifficulty === 'function') {
+      bg.setDifficulty(diff);
+    }
+  }
+
+  updateDifficultyButtons(diff) {
+    Object.keys(this.diffBtns).forEach(key => {
+      const btn = this.diffBtns[key];
+      if (btn) {
+        btn.classList.toggle('active', key === diff);
+      }
+    });
+  }
+
   switchScreen(screenName, updateHistory = true) {
     if (window.soundManager && typeof soundManager.stopVoice === 'function') {
       soundManager.stopVoice();
@@ -158,6 +205,9 @@ class App {
     if (screenName === 'home') {
       this.btnBackHome.classList.add('hidden');
       this.headerTitle.textContent = '🌟 もじあそび パーク 🌟';
+      if (window.bubbleGame && typeof bubbleGame.prepareQueueAndPreloadFirst === 'function') {
+        bubbleGame.prepareQueueAndPreloadFirst();
+      }
     } else if (screenName === 'bubble') {
       this.btnBackHome.classList.remove('hidden');
       this.headerTitle.textContent = '🚒 うごく！もじあつめ';

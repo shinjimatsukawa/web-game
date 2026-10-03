@@ -5,6 +5,13 @@ class BubbleGame {
     this.container = null;
     this.currentMode = 'hira'; // 'hira' | 'kata'
     this.currentCategory = 'all'; // 'all' | 'vehicle' | 'animal' | 'food'
+    this.currentDifficulty = 'normal'; // 'easy' | 'normal' | 'hard'
+    try {
+      const savedDiff = localStorage.getItem('bubble_difficulty');
+      if (savedDiff && ['easy', 'normal', 'hard'].includes(savedDiff)) {
+        this.currentDifficulty = savedDiff;
+      }
+    } catch (e) {}
     this.characterQueue = [];
     this.lastCharId = null;
     this.currentChar = null;
@@ -13,8 +20,8 @@ class BubbleGame {
     this.isCompleted = false;
     this.activeTimers = [];
 
-    // ステージクリア設定（5問でクリア）
-    this.maxQuestions = 5;
+    // ステージクリア設定（10問でクリア）
+    this.maxQuestions = 10;
     this.clearedCount = 0;
     this.clearedAnimals = [];
   }
@@ -31,6 +38,10 @@ class BubbleGame {
 
   // 進行中のタイマーと音声を完全停止
   stopAllAudioAndTimers() {
+    if (this.questionAudioTimer) {
+      clearTimeout(this.questionAudioTimer);
+      this.questionAudioTimer = null;
+    }
     if (typeof clearTimeout === 'function') {
       this.activeTimers.forEach(id => clearTimeout(id));
     }
@@ -65,14 +76,49 @@ class BubbleGame {
     this.characterQueue = indices;
   }
 
+  // トップ画面表示時などにあらかじめ最初の数問を準備して音声を先読みキャッシュ
+  prepareQueueAndPreloadFirst() {
+    if (this.characterQueue.length === 0) {
+      this.refillQueue();
+    }
+    // 最初の3問の音声をあらかじめ一括で先読みキャッシュ
+    for (let i = 0; i < Math.min(3, this.characterQueue.length); i++) {
+      const char = CHARACTERS_DATA[this.characterQueue[i]];
+      if (char && window.soundManager && typeof soundManager.preloadAudio === 'function') {
+        soundManager.preloadAudio(`/audio/neural/questions/${char.id}.wav`);
+      }
+    }
+  }
+
   setCategory(category) {
     if (this.currentCategory === category) return;
     this.stopAllAudioAndTimers();
+    soundManager.unlock();
     this.currentCategory = category;
     this.clearedCount = 0;
     this.clearedAnimals = [];
     this.refillQueue();
+    this.prepareQueueAndPreloadFirst();
     this.nextCharacter();
+  }
+
+  setDifficulty(diff) {
+    this.stopAllAudioAndTimers();
+    this.currentDifficulty = diff;
+    try {
+      localStorage.setItem('bubble_difficulty', diff);
+    } catch (e) {}
+    if (this.currentChar && this.container) {
+      if (this.isCompleted) {
+        // すでに回答済みの場合は次の問題へ進める
+        this.nextCharacter();
+      } else {
+        // 解答途中の場合は現在の問題の入力状態をリセットして新難易度で再描画
+        this.filledSlots = {};
+        this.isCompleted = false;
+        this.render();
+      }
+    }
   }
 
   init(container, mode = 'hira') {
@@ -81,7 +127,9 @@ class BubbleGame {
     this.currentMode = mode;
     this.clearedCount = 0;
     this.clearedAnimals = [];
-    this.refillQueue();
+    if (this.characterQueue.length === 0) {
+      this.refillQueue();
+    }
     this.nextCharacter();
   }
 
@@ -89,11 +137,14 @@ class BubbleGame {
     this.stopAllAudioAndTimers();
     this.currentMode = mode;
     if (this.currentChar) {
-      this.loadCharacter(this.currentChar, false);
+      this.targetChars = this.currentMode === 'hira' ? this.currentChar.charsHira : this.currentChar.charsKata;
+      this.filledSlots = {};
+      this.isCompleted = false;
+      this.render();
     }
   }
 
-  loadCharacter(charData, playAudio = true) {
+  loadCharacter(charData) {
     this.currentChar = charData;
     this.lastCharId = charData.id;
     this.targetChars = this.currentMode === 'hira' ? this.currentChar.charsHira : this.currentChar.charsKata;
@@ -101,9 +152,19 @@ class BubbleGame {
     this.isCompleted = false;
     this.render();
 
-    // 出題クイズナレーションを即座に自動再生（ユーザー操作コンテキスト内で遅延なく即時実行）
-    if (playAudio && window.soundManager && typeof soundManager.playQuestion === 'function') {
-      soundManager.playQuestion(charData.id);
+    // 次の2問の音声をあらかじめメモリにプリロード（タップ時に即座に聞けるようにキャッシュ）
+    this.preloadNextQuestion();
+  }
+
+  // 次のキャラクターたちの出題音声をあらかじめキャッシュしておく（Safariのタップ再生成功率100%化）
+  preloadNextQuestion() {
+    if (this.characterQueue.length > 0 && window.soundManager && typeof soundManager.preloadAudio === 'function') {
+      for (let i = 0; i < Math.min(2, this.characterQueue.length); i++) {
+        const nextChar = CHARACTERS_DATA[this.characterQueue[i]];
+        if (nextChar) {
+          soundManager.preloadAudio(`/audio/neural/questions/${nextChar.id}.wav`);
+        }
+      }
     }
   }
 
@@ -173,39 +234,26 @@ class BubbleGame {
     bgElem.textContent = this.currentChar.bgDecor;
     stage.appendChild(bgElem);
 
-    // 1. メインキャラクター表示
+    // 1. メインキャラクター表示（イラスト画像をタップで出題ナレーションを何度でも再生）
     const charBox = document.createElement('div');
     charBox.className = 'stage-character-box';
     charBox.id = 'stage-character';
 
-    const qText = this.currentChar.questionText || this.currentChar.soundText;
+    const imgSrc = this.currentChar.imageSrc || `/images/characters/${this.currentChar.id}.svg`;
     charBox.innerHTML = `
-      <div class="character-speech-bubble speech-pop" id="char-speech">
-        <span class="speech-text" id="speech-text">${qText}</span>
-        <button class="btn-replay-question" id="btn-replay-question" type="button" aria-label="もういちど きく">📢</button>
-      </div>
-      <div class="character-avatar ${this.currentChar.actionType}" id="char-avatar">
-        ${this.currentChar.emoji}
+      <div class="character-card-wrap" role="button" tabindex="0" aria-label="${this.currentChar.nameHira}の え。タップすると こえが きこえるよ！">
+        <div class="character-avatar ${this.currentChar.actionType}" id="char-avatar">
+          <img src="${imgSrc}" class="character-img" alt="${this.currentChar.nameHira}" draggable="false"
+               onerror="this.style.display='none'; if(this.nextElementSibling) this.nextElementSibling.style.display='block';">
+          <span class="character-emoji-fallback" style="display:none;">${this.currentChar.emoji}</span>
+        </div>
+        <div class="correct-badge hidden" id="correct-badge">せいかい！💮</div>
       </div>
     `;
 
-    // 📢 スピーカーボタンを押したとき、問いかけ音声をもう一度再生
-    const replayBtn = charBox.querySelector('#btn-replay-question');
-    if (replayBtn) {
-      replayBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.stopAllAudioAndTimers();
-        soundManager.playQuestion(this.currentChar.id);
-        const avatar = document.getElementById('char-avatar');
-        if (avatar) {
-          avatar.classList.add('tap-bounce');
-          setTimeout(() => avatar.classList.remove('tap-bounce'), 400);
-        }
-      });
-    }
-
-    // キャラクター自身をタップしたときも、問いかけ音声を再生（完成後はアクション音）
+    // キャラクター画像をタップしたとき、問いかけ音声を再生（完成後はアクション音）
     charBox.addEventListener('click', () => {
+      soundManager.unlock();
       this.stopAllAudioAndTimers();
       if (this.isCompleted) {
         soundManager.playCharacterAction(this.currentChar.soundType);
@@ -226,9 +274,18 @@ class BubbleGame {
     slotsContainer.className = 'slots-container';
     slotsContainer.id = 'slots-container';
 
+    // 普通以上（normal, hard）は順番通りに入力
+    const isOrdered = this.currentDifficulty !== 'easy';
+    let nextEmptyIndex = -1;
+    if (isOrdered) {
+      nextEmptyIndex = this.targetChars.findIndex((_, idx) => !this.filledSlots[idx]);
+    }
+
     this.targetChars.forEach((targetChar, index) => {
       const slot = document.createElement('div');
-      slot.className = `word-slot ${this.filledSlots[index] ? 'filled' : 'empty'}`;
+      const isFilled = !!this.filledSlots[index];
+      const isNext = isOrdered && index === nextEmptyIndex && !this.isCompleted;
+      slot.className = `word-slot ${isFilled ? 'filled' : 'empty'}${isNext ? ' next-active' : ''}`;
       slot.id = `slot-${index}`;
       slot.textContent = this.filledSlots[index] || '？';
       slotsContainer.appendChild(slot);
@@ -241,10 +298,23 @@ class BubbleGame {
     bubblesArea.className = 'bubbles-area';
     bubblesArea.id = 'bubbles-area';
 
-    // 正解文字 ＋ ダミー文字（2〜3個）をシャッフル
+    // 正解文字 ＋ ダミー文字（難易度に応じて動的調整）をシャッフル
     const distractors = this.currentMode === 'hira' ? RANDOM_DISTRACTORS_HIRA : RANDOM_DISTRACTORS_KATA;
     const dummyPool = distractors.filter(c => !this.targetChars.includes(c));
-    const shuffledDummies = [...dummyPool].sort(() => 0.5 - Math.random()).slice(0, 3);
+
+    // 難易度（レベル）に応じたダミー文字数の設定
+    let dummyCount = 0;
+    if (this.currentDifficulty === 'easy') {
+      dummyCount = 0; // 🐣 かんたん: ダミーなし！正解の文字だけが浮かぶ
+    } else if (this.currentDifficulty === 'normal') {
+      // 🐰 ふつう: 短い単語(2〜3文字)は1個、4文字以上は2個
+      dummyCount = this.targetChars.length <= 3 ? 1 : 2;
+    } else {
+      // 🦁 むずかしい: 3〜4個
+      dummyCount = this.targetChars.length <= 3 ? 3 : 4;
+    }
+
+    const shuffledDummies = [...dummyPool].sort(() => 0.5 - Math.random()).slice(0, dummyCount);
 
     // 未収集の正解文字＋ダミー
     const uncollectedTargets = this.targetChars.filter((c, idx) => !this.filledSlots[idx]);
@@ -252,8 +322,12 @@ class BubbleGame {
 
     bubbleChars.forEach((ch, idx) => {
       const bubble = document.createElement('button');
-      bubble.className = `letter-bubble bubble-float-${(idx % 4) + 1}`;
-      bubble.textContent = ch;
+      const colorNum = (idx % 4) + 1;
+      bubble.className = `letter-bubble bubble-color-${colorNum} bubble-float-${colorNum}`;
+      bubble.innerHTML = `
+        <span class="bubble-letter">${ch}</span>
+        <span class="bubble-shine"></span>
+      `;
 
       bubble.addEventListener('click', () => {
         this.handleBubbleClick(bubble, ch);
@@ -264,32 +338,60 @@ class BubbleGame {
 
     stage.appendChild(bubblesArea);
 
-    // 4. クリア時の「つぎへ」ナビゲーション
+    // 4. クリア時の「つぎへ」および「スキップ」ナビゲーション
     const navBox = document.createElement('div');
-    navBox.className = 'stage-nav-box hidden';
+    navBox.className = 'stage-nav-box';
     navBox.id = 'stage-nav';
     navBox.innerHTML = `
-      <button class="btn-next-friend" id="btn-next-friend">
+      <button class="btn-skip-question" id="btn-skip-question" aria-label="この もんだいを とばす">
+        ⏭️ スキップ
+      </button>
+      <button class="btn-next-friend hidden" id="btn-next-friend">
         つぎの おともだち ➡
       </button>
     `;
-    navBox.querySelector('#btn-next-friend').addEventListener('click', () => {
+    const skipBtn = navBox.querySelector('#btn-skip-question');
+    skipBtn.addEventListener('click', () => {
+      soundManager.unlock();
       soundManager.playBubblePop();
       this.nextCharacter();
     });
+
+    const nextBtn = navBox.querySelector('#btn-next-friend');
+    let nextHandled = false;
+    const handleNextFriend = (e) => {
+      if (nextHandled) return;
+      nextHandled = true;
+      soundManager.unlock();
+      soundManager.playBubblePop();
+      this.nextCharacter();
+    };
+    nextBtn.addEventListener('pointerdown', handleNextFriend);
+    nextBtn.addEventListener('click', handleNextFriend);
     stage.appendChild(navBox);
 
     this.container.appendChild(stage);
   }
 
-  // シャボン玉クリック時（順不同OKの文字スロット判定）
+  // シャボン玉クリック時判定（かんたん: 順不同OK、ふつう・むずかしい: 順番通り）
   handleBubbleClick(bubble, clickedChar) {
     if (this.isCompleted || bubble.classList.contains('bubble-collected')) return;
 
-    // クリックされた文字が、まだ埋まっていない正解文字に含まれるか？
-    const matchedIndex = this.targetChars.findIndex((char, idx) => {
-      return char === clickedChar && !this.filledSlots[idx];
-    });
+    const isOrdered = this.currentDifficulty !== 'easy';
+    let matchedIndex = -1;
+
+    if (isOrdered) {
+      // 順番通りモード: 次に入るべきスロットのインデックスを取得
+      const nextIdx = this.targetChars.findIndex((_, idx) => !this.filledSlots[idx]);
+      if (nextIdx !== -1 && this.targetChars[nextIdx] === clickedChar) {
+        matchedIndex = nextIdx;
+      }
+    } else {
+      // 順不同OKモード: まだ埋まっていない正解文字に含まれるか？
+      matchedIndex = this.targetChars.findIndex((char, idx) => {
+        return char === clickedChar && !this.filledSlots[idx];
+      });
+    }
 
     if (matchedIndex !== -1) {
       // ★ 正解！
@@ -307,9 +409,20 @@ class BubbleGame {
       const targetSlot = document.getElementById(`slot-${matchedIndex}`);
       if (targetSlot) {
         targetSlot.textContent = clickedChar;
-        targetSlot.classList.remove('empty');
+        targetSlot.classList.remove('empty', 'next-active');
         targetSlot.classList.add('filled', 'slot-absorb');
         setTimeout(() => targetSlot.classList.remove('slot-absorb'), 400);
+      }
+
+      // 順番通りモードの場合、次の空きスロットに next-active を付与
+      if (isOrdered) {
+        const nextIdx = this.targetChars.findIndex((_, idx) => !this.filledSlots[idx]);
+        if (nextIdx !== -1) {
+          const nextSlot = document.getElementById(`slot-${nextIdx}`);
+          if (nextSlot) {
+            nextSlot.classList.add('next-active');
+          }
+        }
       }
 
       // すべてのスロットが埋まったかチェック
@@ -408,8 +521,12 @@ class BubbleGame {
       avatar.classList.add('celebration-dance');
     }
 
-    // 吹き出し表示（「せいかい！🎉」）
-    this.showSpeechBubble(`せいかい！🎉 ${this.currentChar.soundText}`);
+    // 正解ミニバッジを表示
+    const badge = document.getElementById('correct-badge');
+    if (badge) {
+      badge.classList.remove('hidden');
+      badge.classList.add('pop-in');
+    }
 
     // ★ 短縮版の褒め言葉（「せいかい！〇〇！すごーい！」）を再生
     this.setTimer(() => {
@@ -417,19 +534,22 @@ class BubbleGame {
       soundManager.playPraise(this.currentChar.id);
     }, 200);
 
-    // 規定問題数（5問）クリアしたか判定
+    // 規定問題数（10問）クリアしたか判定
     if (this.clearedCount >= this.maxQuestions) {
-      // ★ 5問達成！ステージクリア特別演出へ！
+      // ★ 10問達成！ステージクリア特別演出へ！
       this.setTimer(() => {
         this.handleStageClear();
       }, 1900);
     } else {
-      // 通常の「つぎの おともだち ➡」ボタンを表示
-      const nav = document.getElementById('stage-nav');
-      if (nav) {
+      // スキップボタンを隠し、「つぎの おともだち ➡」ボタンを表示
+      const skipBtn = document.getElementById('btn-skip-question');
+      if (skipBtn) skipBtn.style.display = 'none';
+
+      const nextBtn = document.getElementById('btn-next-friend');
+      if (nextBtn) {
         this.setTimer(() => {
-          nav.classList.remove('hidden');
-          nav.classList.add('pop-in');
+          nextBtn.classList.remove('hidden');
+          nextBtn.classList.add('pop-in');
         }, 1200);
       }
     }
@@ -480,6 +600,7 @@ class BubbleGame {
 
     // もう一回あそぶ
     overlay.querySelector('#btn-clear-retry').addEventListener('click', () => {
+      soundManager.unlock();
       this.stopAllAudioAndTimers();
       soundManager.playBubblePop();
       overlay.remove();
@@ -506,3 +627,4 @@ class BubbleGame {
 }
 
 const bubbleGame = new BubbleGame();
+window.bubbleGame = bubbleGame;
