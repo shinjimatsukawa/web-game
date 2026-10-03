@@ -5,21 +5,25 @@ const CHARACTERS_DATA = [
   {
     "id": "shobo",
     "category": "vehicle",
-    "nameHira": "しょうぼう",
-    "nameKata": "ショウボウ",
+    "nameHira": "しょうぼうしゃ",
+    "nameKata": "ショウボウシャ",
     "charsHira": [
       "し",
       "ょ",
       "う",
       "ぼ",
-      "う"
+      "う",
+      "し",
+      "ゃ"
     ],
     "charsKata": [
       "シ",
       "ョ",
       "ウ",
       "ボ",
-      "ウ"
+      "ウ",
+      "シ",
+      "ャ"
     ],
     "emoji": "🚒",
     "imageSrc": "/images/characters/shobo.svg",
@@ -162,31 +166,35 @@ const CHARACTERS_DATA = [
     "themeColor": "#06d6a0",
     "actionType": "zoom-dash",
     "bgDecor": "📦",
-    "questionText": "荷物をいっぱい運ぶ この くるまは？"
+    "questionText": "お荷物をいっぱい積んで運ぶ この くるまは？"
   },
   {
     "id": "danpu",
     "category": "vehicle",
-    "nameHira": "だんぷ",
-    "nameKata": "ダンプ",
+    "nameHira": "だんぷかー",
+    "nameKata": "ダンプカー",
     "charsHira": [
       "だ",
       "ん",
-      "ぷ"
+      "ぷ",
+      "か",
+      "ー"
     ],
     "charsKata": [
       "ダ",
       "ン",
-      "プ"
+      "プ",
+      "カ",
+      "ー"
     ],
     "emoji": "🚛",
     "imageSrc": "/images/characters/danpu.svg",
     "soundType": "vroom",
-    "soundText": "荷台がガッターン！",
+    "soundText": "荷台がガッターン！土をザーッ！",
     "themeColor": "#fb8500",
     "actionType": "dance-butt",
     "bgDecor": "🪨",
-    "questionText": "荷台がガッターン！この くるまは？"
+    "questionText": "荷台を上げて土をザーッと落とす この くるまは？"
   },
   {
     "id": "torakuta",
@@ -219,28 +227,32 @@ const CHARACTERS_DATA = [
   {
     "id": "kuren",
     "category": "vehicle",
-    "nameHira": "くれーん",
-    "nameKata": "クレーン",
+    "nameHira": "くれーんしゃ",
+    "nameKata": "クレーンシャ",
     "charsHira": [
       "く",
       "れ",
       "ー",
-      "ん"
+      "ん",
+      "し",
+      "ゃ"
     ],
     "charsKata": [
       "ク",
       "レ",
       "ー",
-      "ン"
+      "ン",
+      "シ",
+      "ャ"
     ],
     "emoji": "🏗️",
     "imageSrc": "/images/characters/kuren.svg",
     "soundType": "vroom",
-    "soundText": "ウィーン！たかーい！",
+    "soundText": "ウィーン！たかーく持ち上げるよ！",
     "themeColor": "#ff006e",
     "actionType": "super-jump",
     "bgDecor": "🧱",
-    "questionText": "重いものを高く持ち上げる この くるまは？"
+    "questionText": "重いものを高く持ち上げる この 工事の くるまは？"
   },
   {
     "id": "kisha",
@@ -291,32 +303,6 @@ const CHARACTERS_DATA = [
     "actionType": "zoom-dash",
     "bgDecor": "🛤️",
     "questionText": "線路をガタゴト走る この 乗り物は？"
-  },
-  {
-    "id": "chikatetsu",
-    "category": "vehicle",
-    "nameHira": "ちかてつ",
-    "nameKata": "チカテツ",
-    "charsHira": [
-      "ち",
-      "か",
-      "て",
-      "つ"
-    ],
-    "charsKata": [
-      "チ",
-      "カ",
-      "テ",
-      "ツ"
-    ],
-    "emoji": "🚇",
-    "imageSrc": "/images/characters/chikatetsu.svg",
-    "soundType": "vroom",
-    "soundText": "地下をびゅーん！",
-    "themeColor": "#4895ef",
-    "actionType": "zoom-dash",
-    "bgDecor": "🚇",
-    "questionText": "地下をビュンビュン走る この 乗り物は？"
   },
   {
     "id": "hikoki",
@@ -589,34 +575,6 @@ const CHARACTERS_DATA = [
     "actionType": "zoom-dash",
     "bgDecor": "🚄",
     "questionText": "白くて速い！線路をビュンビュン走る この 乗り物は？"
-  },
-  {
-    "id": "monoreru",
-    "category": "vehicle",
-    "nameHira": "ものれーる",
-    "nameKata": "モノレール",
-    "charsHira": [
-      "も",
-      "の",
-      "れ",
-      "ー",
-      "る"
-    ],
-    "charsKata": [
-      "モ",
-      "ノ",
-      "レ",
-      "ー",
-      "ル"
-    ],
-    "emoji": "🚝",
-    "imageSrc": "/images/characters/monoreru.svg",
-    "soundType": "jet",
-    "soundText": "１本のレールをスイスイ！",
-    "themeColor": "#55a630",
-    "actionType": "zoom-dash",
-    "bgDecor": "⚡",
-    "questionText": "１本のレールの上を走る この 乗り物は？"
   },
   {
     "id": "kikyu",
@@ -1500,7 +1458,7 @@ const CHARACTERS_DATA = [
     "themeColor": "#99d98c",
     "actionType": "jump",
     "bgDecor": "🍈",
-    "questionText": "あみあみ模様で まあるい この くだものは？"
+    "questionText": "あまくてジューシー！みどりの この くだものは？"
   },
   {
     "id": "tomato",

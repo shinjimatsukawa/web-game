@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <defs>
+    <!-- 新幹線の光沢グラデーション -->
+    <linearGradient id="shinkansenBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="65%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <linearGradient id="blueStripe" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+
+  <!-- スピード感のある風のライン -->
+  <path d="M1 17 L8 17 M2 22 L11 22 M1 27 L6 27" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- 線路レール（地面） -->
+  <path d="M0 37 H44" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M4 37 L2 41 M12 37 L10 41 M20 37 L18 41 M28 37 L26 41 M36 37 L34 41" stroke="#64748b" stroke-width="1.5"/>
+
+  <!-- 車輪・台車カバー（グレー） -->
+  <rect x="5" y="32" width="37" height="4" rx="2" fill="#334155"/>
+  <circle cx="10" cy="34" r="2" fill="#64748b"/>
+  <circle cx="16" cy="34" r="2" fill="#64748b"/>
+  <circle cx="28" cy="34" r="2" fill="#64748b"/>
+  <circle cx="34" cy="34" r="2" fill="#64748b"/>
+
+  <!-- 新幹線本体（先頭車両・ノーズが右向きに伸びるロングノーズ流線型） -->
+  <path d="M5 14 H24 Q36 15 42 27 C43 29 42 33 40 33 H5 C4 33 4 14 5 14 Z" 
+        fill="url(#shinkansenBody)" stroke="#94a3b8" stroke-width="0.8"/>
+
+  <!-- ブルーのシンボルストライプ（帯） -->
+  <path d="M5 28 H38 Q40 28 41 29 C40.5 31 38 31 38 31 H5 Z" fill="url(#blueStripe)"/>
+  <path d="M5 25 H33 Q36 25 38 27 L37 28 H5 Z" fill="url(#blueStripe)"/>
+
+  <!-- 運転席フロントガラス（流線型ブラック・ブルー） -->
+  <path d="M29 17 Q34 18 36 23 L32 23 Q29 20 27 18 Z" fill="#0f172a"/>
+  <path d="M29.5 18 Q33 19 34.5 22" stroke="#38bdf8" stroke-width="0.8" fill="none" opacity="0.8"/>
+
+  <!-- 客席の四角い窓 -->
+  <rect x="7" y="18" width="4.5" height="4" rx="1" fill="#1e293b"/>
+  <rect x="13.5" y="18" width="4.5" height="4" rx="1" fill="#1e293b"/>
+  <rect x="20" y="18" width="4.5" height="4" rx="1" fill="#1e293b"/>
+
+  <!-- ヘッドライト（先端で光るイエローライト） -->
+  <ellipse cx="40" cy="30" rx="1.5" ry="1" fill="#facc15"/>
+  <path d="M40 30 L43.5 29 M40 30 L43.5 31" stroke="#fef08a" stroke-width="0.8"/>
+
+  <!-- 屋根のハイライト -->
+  <path d="M6 15 H24" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

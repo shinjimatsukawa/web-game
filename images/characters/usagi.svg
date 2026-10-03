@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <defs>
+    <linearGradient id="bunnyWhite" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#000000" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <!-- 草原の地面（足元） -->
+  <path d="M2 36 Q10 33 20 35 Q30 37 38 34 L38 39 L2 39 Z" fill="#86efac" opacity="0.7"/>
+
+  <!-- まあるい尻尾（左後ろ） -->
+  <circle cx="6" cy="27" r="3.5" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+
+  <!-- うさぎの後ろ足（横座り・もも） -->
+  <ellipse cx="14" cy="29" rx="6.5" ry="5" fill="url(#bunnyWhite)" stroke="#cbd5e1" stroke-width="1.2"/>
+  <ellipse cx="15" cy="33.5" rx="5" ry="2.2" fill="url(#bunnyWhite)" stroke="#cbd5e1" stroke-width="1.2"/>
+
+  <!-- うさぎの胴体（ぽってり丸い横向きボディ） -->
+  <path d="M10 28 C8 21 12 16 20 18 C26 20 28 26 26 31 C23 34 13 34 10 28 Z" 
+        fill="url(#bunnyWhite)" stroke="#cbd5e1" stroke-width="1.2"/>
+
+  <!-- 前足（ちょこんと前に出している） -->
+  <ellipse cx="26" cy="32" rx="2.8" ry="4.2" fill="url(#bunnyWhite)" stroke="#cbd5e1" stroke-width="1.2" transform="rotate(-15 26 32)"/>
+
+  <!-- 耳（長い2本のピンと立ったお耳・ピンクの内側） -->
+  <!-- 左耳（奥） -->
+  <path d="M22 15 C20 7 19 0.5 22 0 C24.5 0 26.5 6 25 14 Z" fill="url(#bunnyWhite)" stroke="#cbd5e1" stroke-width="1.2"/>
+  <path d="M22 13 C21.5 7 21 1.5 22.5 1 C23.5 1 24.5 6 24 12 Z" fill="#fbcfe8"/>
+  <!-- 右耳（手前） -->
+  <path d="M25 16 C25 7 26 1 29.5 0.5 C31.5 0.5 32 7 29.5 16 Z" fill="url(#bunnyWhite)" stroke="#cbd5e1" stroke-width="1.2"/>
+  <path d="M26.5 14 C26.5 7 27.5 2.5 29.5 2 C30.5 2 31 7 29.5 14 Z" fill="#f472b6"/>
+
+  <!-- 頭部（丸い輪郭） -->
+  <path d="M19 20 C17 14 21 11 26 12 C32 13 36 17 36 21 C36 25 32 27 27 26 C21 26 19 24 19 20 Z" 
+        fill="url(#bunnyWhite)" stroke="#cbd5e1" stroke-width="1.2"/>
+
+  <!-- つぶらな黒い瞳とハイライト -->
+  <circle cx="28.5" cy="18" r="2.4" fill="#1e293b"/>
+  <circle cx="27.8" cy="17.2" r="0.9" fill="#ffffff"/>
+
+  <!-- ほっぺのチーク（ピンク） -->
+  <ellipse cx="26.5" cy="22.5" rx="3" ry="1.8" fill="#fda4af" opacity="0.7"/>
+
+  <!-- 鼻先（ピンクの小さな三角）と口元 -->
+  <polygon points="35.5,21 37,21 36.2,22.2" fill="#f43f5e"/>
+  <path d="M35 22.5 Q36 23.5 37 22.5" stroke="#94a3b8" stroke-width="0.8" fill="none"/>
+
+  <!-- ひげ -->
+  <line x1="33" y1="21" x2="38.5" y2="20" stroke="#94a3b8" stroke-width="0.8" stroke-linecap="round"/>
+  <line x1="33" y1="23" x2="38.5" y2="24" stroke="#94a3b8" stroke-width="0.8" stroke-linecap="round"/>
+</svg>

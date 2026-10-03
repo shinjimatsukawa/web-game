@@ -16,8 +16,8 @@ ITEMS = [
   # 🚒 はたらくくるま・乗り物（25種類）
   # ----------------------------------------------------
   {
-    "id": "shobo", "category": "vehicle", "nameHira": "しょうぼう", "nameKata": "ショウボウ",
-    "charsHira": ["し", "ょ", "う", "ぼ", "う"], "charsKata": ["シ", "ョ", "ウ", "ボ", "ウ"],
+    "id": "shobo", "category": "vehicle", "nameHira": "しょうぼうしゃ", "nameKata": "ショウボウシャ",
+    "charsHira": ["し", "ょ", "う", "ぼ", "う", "し", "ゃ"], "charsKata": ["シ", "ョ", "ウ", "ボ", "ウ", "シ", "ャ"],
     "emoji": "🚒", "soundType": "horn", "soundText": "ウ〜カンカン！放水！", "themeColor": "#ff4d6d", "actionType": "zoom-dash", "bgDecor": "💦",
     "questionText": "ウ〜カンカン！火をけす この くるまは？",
     "praiseText": "せいかい！しょうぼうしゃ！すごーい！"
@@ -54,14 +54,14 @@ ITEMS = [
     "id": "torakku", "category": "vehicle", "nameHira": "とらっく", "nameKata": "トラック",
     "charsHira": ["と", "ら", "っ", "く"], "charsKata": ["ト", "ラ", "ッ", "ク"],
     "emoji": "🚚", "soundType": "vroom", "soundText": "荷物を運ぶよ！", "themeColor": "#06d6a0", "actionType": "zoom-dash", "bgDecor": "📦",
-    "questionText": "荷物をいっぱい運ぶ この くるまは？",
+    "questionText": "お荷物をいっぱい積んで運ぶ この くるまは？",
     "praiseText": "せいかい！トラック！すごーい！"
   },
   {
-    "id": "danpu", "category": "vehicle", "nameHira": "だんぷ", "nameKata": "ダンプ",
-    "charsHira": ["だ", "ん", "ぷ"], "charsKata": ["ダ", "ン", "プ"],
+    "id": "danpu", "category": "vehicle", "nameHira": "だんぷかー", "nameKata": "ダンプカー",
+    "charsHira": ["だ", "ん", "ぷ", "か", "ー"], "charsKata": ["ダ", "ン", "プ", "カ", "ー"],
     "emoji": "🚛", "soundType": "vroom", "soundText": "荷台がガッターン！", "themeColor": "#fb8500", "actionType": "dance-butt", "bgDecor": "🪨",
-    "questionText": "荷台がガッターン！この くるまは？",
+    "questionText": "荷台を上げて土をザーッと落とす この くるまは？",
     "praiseText": "せいかい！ダンプカー！すごーい！"
   },
   {
@@ -72,10 +72,10 @@ ITEMS = [
     "praiseText": "せいかい！トラクター！すごーい！"
   },
   {
-    "id": "kuren", "category": "vehicle", "nameHira": "くれーん", "nameKata": "クレーン",
-    "charsHira": ["く", "れ", "ー", "ん"], "charsKata": ["ク", "レ", "ー", "ン"],
+    "id": "kuren", "category": "vehicle", "nameHira": "くれーんしゃ", "nameKata": "クレーンシャ",
+    "charsHira": ["く", "れ", "ー", "ん", "し", "ゃ"], "charsKata": ["ク", "レ", "ー", "ン", "シ", "ャ"],
     "emoji": "🏗️", "soundType": "vroom", "soundText": "ウィーン！たかーい！", "themeColor": "#ff006e", "actionType": "super-jump", "bgDecor": "🧱",
-    "questionText": "重いものを高く持ち上げる この くるまは？",
+    "questionText": "重いものを高く持ち上げる この 工事の くるまは？",
     "praiseText": "せいかい！クレーン車！すごーい！"
   },
   {
@@ -93,12 +93,6 @@ ITEMS = [
     "praiseText": "せいかい！でんしゃ！すごーい！"
   },
   {
-    "id": "chikatetsu", "category": "vehicle", "nameHira": "ちかてつ", "nameKata": "チカテツ",
-    "charsHira": ["ち", "か", "て", "つ"], "charsKata": ["チ", "カ", "テ", "ツ"],
-    "emoji": "🚇", "soundType": "vroom", "soundText": "地下をびゅーん！", "themeColor": "#4895ef", "actionType": "zoom-dash", "bgDecor": "🚇",
-    "questionText": "地下をビュンビュン走る この 乗り物は？",
-    "praiseText": "せいかい！ちかてつ！すごーい！"
-  },
   {
     "id": "hikoki", "category": "vehicle", "nameHira": "ひこうき", "nameKata": "ヒコウキ",
     "charsHira": ["ひ", "こ", "う", "き"], "charsKata": ["ヒ", "コ", "ウ", "キ"],
@@ -177,12 +171,6 @@ ITEMS = [
     "praiseText": "せいかい！しんかんせん！すごーい！"
   },
   {
-    "id": "monoreru", "category": "vehicle", "nameHira": "ものれーる", "nameKata": "モノレール",
-    "charsHira": ["も", "の", "れ", "ー", "る"], "charsKata": ["モ", "ノ", "レ", "ー", "ル"],
-    "emoji": "🚝", "soundType": "jet", "soundText": "１本のレールをスイスイ！", "themeColor": "#55a630", "actionType": "zoom-dash", "bgDecor": "⚡",
-    "questionText": "１本のレールの上を走る この 乗り物は？",
-    "praiseText": "せいかい！モノレール！すごーい！"
-  },
   {
     "id": "kikyu", "category": "vehicle", "nameHira": "ききゅう", "nameKata": "キキュウ",
     "charsHira": ["き", "き", "ゅ", "う"], "charsKata": ["キ", "キ", "ュ", "ウ"],
@@ -454,7 +442,7 @@ ITEMS = [
     "id": "meron", "category": "food", "nameHira": "めろん", "nameKata": "メロン",
     "charsHira": ["め", "ろ", "ん"], "charsKata": ["メ", "ロ", "ン"],
     "emoji": "🍈", "soundType": "cheer", "soundText": "あみあみ高級メロン！", "themeColor": "#99d98c", "actionType": "jump", "bgDecor": "🍈",
-    "questionText": "あみあみ模様で まあるい この くだものは？",
+    "questionText": "あまくてジューシー！みどりの この くだものは？",
     "praiseText": "せいかい！メロン！すごーい！"
   },
   {

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <defs>
+    <!-- メロン果肉のグラデーション（皮側の淡い緑から中心部のジューシーな黄緑） -->
+    <linearGradient id="melonFlesh" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="60%" stop-color="#bef264"/>
+      <stop offset="100%" stop-color="#fef08a"/>
+    </linearGradient>
+    <linearGradient id="melonRind" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#15803d"/>
+      <stop offset="50%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- メロンの外皮（緑色の三日月ベース） -->
+  <path d="M4 14 C6 30 34 32 36 14 C34 35 6 33 4 14 Z" fill="url(#melonRind)" stroke="#14532d" stroke-width="0.8"/>
+  
+  <!-- 網目模様（外皮の白いネット） -->
+  <path d="M7 23 Q12 28 20 28 Q28 28 33 23" stroke="#bbf7d0" stroke-width="1" fill="none" opacity="0.6"/>
+  <path d="M10 26 Q14 31 20 31 Q26 31 30 26" stroke="#bbf7d0" stroke-width="1" fill="none" opacity="0.6"/>
+  <path d="M11 22 L13 29 M17 23 L18 31 M23 23 L22 31 M29 22 L27 29" stroke="#bbf7d0" stroke-width="0.8" opacity="0.6"/>
+
+  <!-- 薄い白い皮と果肉の境目 -->
+  <path d="M5 14 C8 28 32 28 35 14 C33 29 7 29 5 14 Z" fill="#dcfce7"/>
+
+  <!-- メロンの美味しい果肉（ジューシーな三日月カット） -->
+  <path d="M6 14 C9 26 31 26 34 14 Q20 20 6 14 Z" fill="url(#melonFlesh)"/>
+
+  <!-- 種の入るくぼみ（少しオレンジがかった部分） -->
+  <path d="M12 16 C15 19 25 19 28 16 Q20 18 12 16 Z" fill="#fdba74" opacity="0.85"/>
+
+  <!-- メロンの種（小さな粒々） -->
+  <ellipse cx="15" cy="16.8" rx="1.2" ry="0.6" fill="#c2410c" transform="rotate(-15 15 16.8)"/>
+  <ellipse cx="18" cy="17.4" rx="1.2" ry="0.6" fill="#c2410c" transform="rotate(5 18 17.4)"/>
+  <ellipse cx="21" cy="17.5" rx="1.2" ry="0.6" fill="#c2410c" transform="rotate(-5 21 17.5)"/>
+  <ellipse cx="24" cy="17" rx="1.2" ry="0.6" fill="#c2410c" transform="rotate(15 24 17)"/>
+
+  <!-- つやつやハイライト -->
+  <path d="M9 16 Q14 21 20 21" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.6"/>
+</svg>

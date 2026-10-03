@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文字集め問題レビューコンソール (全75問) - もじあそび パーク</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root {
+      --primary: #ff4d6d;
+      --primary-light: #fff0f3;
+      --primary-hover: #ff3358;
+      --secondary: #3a86ff;
+      --secondary-light: #edf2ff;
+      --success: #38b000;
+      --success-light: #e8f5e9;
+      --warning: #ffb703;
+      --warning-light: #fff8e1;
+      --danger: #d90429;
+      --danger-light: #ffebee;
+      --bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --text: #2b2d42;
+      --text-muted: #6c757d;
+      --border: #e9ecef;
+      --shadow-sm: 0 2px 4px rgba(0,0,0,0.04);
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --radius: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Maru Gothic ProN", "Rounded Mplus 1c", "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+
+    /* ヘッダー */
+    header.top-header {
+      background: #ffffff;
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .header-title-area h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-title-area p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #f1f3f5;
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      color: #fff;
+    }
+
+    .btn-outline-primary {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-outline-primary:hover {
+      background: var(--primary-light);
+    }
+
+    /* コントロール・フィルターバー */
+    .filter-panel {
+      max-width: 1200px;
+      margin: 20px auto 16px;
+      padding: 0 20px;
+    }
+
+    .filter-card {
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill-btn {
+      border: 1px solid #dee2e6;
+      background: #fff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .pill-btn:hover {
+      border-color: #adb5bd;
+    }
+
+    .pill-btn.active {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+
+    .pill-btn[data-cat="vehicle"].active {
+      background: #2b7fff;
+      border-color: #2b7fff;
+    }
+    .pill-btn[data-cat="animal"].active {
+      background: #38b000;
+      border-color: #38b000;
+    }
+    .pill-btn[data-cat="food"].active {
+      background: #ff758f;
+      border-color: #ff758f;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 14px 8px 36px;
+      font-size: 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #ced4da;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .stats-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px dashed var(--border);
+      padding-top: 10px;
+    }
+
+    .stat-badge {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* メインコンテンツエリア */
+    main.main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* グリッドビュー */
+    .grid-view {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    /* テーブルビュー */
+    .table-view-container {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    .review-table th {
+      background: #f8f9fa;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border);
+      font-weight: 700;
+      color: #495057;
+      white-space: nowrap;
+    }
+
+    .review-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    .review-table tr:hover {
+      background: #fafbfe;
+    }
+
+    /* カードデザイン */
+    .card-item {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 2px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      position: relative;
+    }
+
+    .card-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-item.status-ok {
+      border-color: #70e000;
+    }
+    .card-item.status-warn {
+      border-color: #ffb703;
+    }
+    .card-item.status-danger {
+      border-color: #ff4d6d;
+    }
+
+    .card-header {
+      padding: 12px 16px;
+      background: #fdfdfd;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .card-index {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #adb5bd;
+    }
+
+    .card-category-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #e9ecef;
+      color: #495057;
+    }
+
+    .cat-vehicle { background: #e0f2fe; color: #0369a1; }
+    .cat-animal  { background: #dcfce7; color: #15803d; }
+    .cat-food    { background: #ffe4e6; color: #be123c; }
+
+    .card-body {
+      padding: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      flex: 1;
+    }
+
+    .image-box {
+      width: 100px;
+      height: 100px;
+      border-radius: 16px;
+      background: #f8f9fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      border: 1px solid #e9ecef;
+      overflow: hidden;
+      transition: transform 0.15s;
+    }
+
+    .image-box:hover {
+      transform: scale(1.04);
+    }
+
+    .image-box img {
+      width: 82%;
+      height: 82%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+
+    .image-zoom-hint {
+      position: absolute;
+      bottom: 2px;
+      right: 4px;
+      font-size: 0.7rem;
+      opacity: 0.6;
+    }
+
+    .card-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .word-title {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .word-hira {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .word-kata {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .char-bubbles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .char-bubble {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #ced4da;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+
+    /* 問題文吹き出し */
+    .question-bubble {
+      background: #fff4e6;
+      border: 2px solid #ffd8a8;
+      border-radius: 12px;
+      padding: 10px 12px;
+      position: relative;
+      margin-top: 4px;
+    }
+
+    .question-bubble::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 16px;
+      border-width: 0 8px 8px 8px;
+      border-style: solid;
+      border-color: transparent transparent #ffd8a8 transparent;
+    }
+
+    .question-label {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #d9480f;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2px;
+    }
+
+    .question-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #792e00;
+      line-height: 1.4;
+    }
+
+    /* 音声試聴バー */
+    .audio-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .btn-audio {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: 999px;
+      border: 1px solid #ced4da;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .btn-audio:hover {
+      background: #e9ecef;
+    }
+
+    .btn-audio.playing {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.03); }
+    }
+
+    /* レビューアクションエリア */
+    .card-footer {
+      padding: 12px 16px;
+      background: #fdfdfd;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .review-status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .status-btn-group {
+      display: flex;
+      gap: 4px;
+    }
+
+    .status-btn {
+      padding: 4px 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border-radius: 6px;
+      border: 1px solid #dee2e6;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .status-btn.active[data-status="ok"] {
+      background: #38b000;
+      color: #fff;
+      border-color: #38b000;
+    }
+
+    .status-btn.active[data-status="warn"] {
+      background: #ffb703;
+      color: #333;
+      border-color: #ffb703;
+    }
+
+    .status-btn.active[data-status="danger"] {
+      background: #d90429;
+      color: #fff;
+      border-color: #d90429;
+    }
+
+    .memo-input {
+      width: 100%;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      resize: vertical;
+      min-height: 34px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .memo-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(255, 77, 109, 0.15);
+    }
+
+    /* モーダル */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-window {
+      background: #fff;
+      border-radius: 20px;
+      max-width: 640px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      overflow: hidden;
+      animation: modalPop 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #999;
+      line-height: 1;
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-body textarea {
+      width: 100%;
+      height: 280px;
+      padding: 12px;
+      font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 0.85rem;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    /* 画像プレビューモーダル */
+    .image-preview-content {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .image-preview-content img {
+      max-width: 260px;
+      max-height: 260px;
+      object-fit: contain;
+    }
+
+    /* 空表示 */
+    .empty-message {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      .grid-view {
+        grid-template-columns: 1fr;
+      }
+      .card-body {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .word-title {
+        justify-content: center;
+      }
+      .char-bubbles {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- トップヘッダー -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="header-title-area">
+        <h1>🔍 文字あつめ 問題・画像・答え レビュー</h1>
+        <p id="header-desc">全73問のキャラクターイラスト、問題文クイズ、正解文字、音声を一括チェック</p>
+      </div>
+      <div class="header-actions">
+        <a href="index.html" class="btn">🎮 ゲームを起動</a>
+        <a href="REVIEW_CHARACTERS.md" class="btn" target="_blank" title="GitHub Markdown版を表示">📄 Markdown版</a>
+        <button id="btn-export" class="btn btn-primary">📋 レビュー結果コピー</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- コントロール・フィルターバー -->
+  <div class="filter-panel">
+    <div class="filter-card">
+      <div class="filter-row">
+        <!-- カテゴリ切り替え -->
+        <div class="pill-group" id="category-pills">
+          <button class="pill-btn active" data-cat="all">ぜんぶ (<span id="cat-count-all">73</span>)</button>
+          <button class="pill-btn" data-cat="vehicle">🚗 のりもの (<span id="cat-count-vehicle">23</span>)</button>
+          <button class="pill-btn" data-cat="animal">🦁 どうぶつ (<span id="cat-count-animal">30</span>)</button>
+          <button class="pill-btn" data-cat="food">🍎 たべもの (<span id="cat-count-food">20</span>)</button>
+        </div>
+
+        <!-- 表示切り替え -->
+        <div class="pill-group" id="view-mode-pills">
+          <button class="pill-btn active" data-view="grid">🔲 カード表示</button>
+          <button class="pill-btn" data-view="table">📋 テーブル表示</button>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <!-- 文字数フィルター -->
+        <div class="pill-group" id="length-pills">
+          <button class="pill-btn active" data-len="all">文字数: すべて</button>
+          <button class="pill-btn" data-len="2">2文字</button>
+          <button class="pill-btn" data-len="3">3文字</button>
+          <button class="pill-btn" data-len="4">4文字</button>
+          <button class="pill-btn" data-len="5plus">5文字以上</button>
+        </div>
+
+        <!-- ステータスフィルター -->
+        <div class="pill-group" id="status-pills">
+          <button class="pill-btn active" data-status="all">状態: すべて</button>
+          <button class="pill-btn" data-status="pending">未チェック</button>
+          <button class="pill-btn" data-status="ok">✅ OK</button>
+          <button class="pill-btn" data-status="warn">🟡 要確認</button>
+          <button class="pill-btn" data-status="danger">🔴 要修正</button>
+        </div>
+
+        <!-- 検索ボックス -->
+        <div class="search-box">
+          <span class="search-icon">🔎</span>
+          <input type="text" id="search-input" class="search-input" placeholder="名前・ひらがな・問題文・IDで検索...">
+        </div>
+      </div>
+
+      <!-- サマリーステータス -->
+      <div class="stats-bar">
+        <span>表示中: <span id="stat-shown-count" class="stat-badge">73</span> / <span id="stat-total-count">73</span>問</span>
+        <span>✅ OK: <span id="stat-ok-count" class="stat-badge">0</span></span>
+        <span>🟡 要確認: <span id="stat-warn-count" class="stat-badge">0</span></span>
+        <span>🔴 要修正: <span id="stat-danger-count" class="stat-badge">0</span></span>
+        <span>⚪ 未チェック: <span id="stat-pending-count" class="stat-badge">73</span></span>
+        <button id="btn-clear-reviews" class="btn" style="margin-left:auto; padding:2px 10px; font-size:0.75rem;">🗑️ レビュー初期化</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- メインコンテンツ -->
+  <main class="main-content">
+    <div id="content-container" class="grid-view">
+      <!-- JavaScriptで動的生成 -->
+    </div>
+  </main>
+
+  <!-- レビュー結果出力モーダル -->
+  <div id="export-modal" class="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>📋 レビュー結果（Markdown形式）</h3>
+        <button class="modal-close" id="btn-close-export">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:10px;">
+          GitHubのIssueやPull Request、コミットメッセージにそのまま貼り付けられるMarkdown形式です。
+        </p>
+        <textarea id="export-textarea" readonly></textarea>
+        <div style="margin-top:14px; display:flex; justify-content:flex-end; gap:10px;">
+          <button id="btn-copy-clipboard" class="btn btn-primary">📋 クリップボードにコピー</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 画像拡大モーダル -->
+  <div id="image-modal" class="modal-overlay">
+    <div class="modal-window" style="max-width:400px;">
+      <div class="modal-header">
+        <h3 id="image-modal-title">画像プレビュー</h3>
+        <button class="modal-close" id="btn-close-image">&times;</button>
+      </div>
+      <div class="image-preview-content">
+        <img id="image-modal-img" src="" alt="拡大画像">
+        <p id="image-modal-caption" style="margin-top:12px; font-weight:700;"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 共通オーディオ要素 -->
+  <audio id="review-audio-player" preload="auto"></audio>
+
+  <!-- データファイル読み込み -->
+  <script src="js/data.js?v=26"></script>
+
+  <script>
+    (function() {
+      // データの検証
+      const characters = (typeof CHARACTERS_DATA !== 'undefined') ? CHARACTERS_DATA : [];
+      if (characters.length === 0) {
+        document.getElementById('content-container').innerHTML = 
+          '<div class="empty-message">⚠️ js/data.js からキャラクターデータを読み込めませんでした。</div>';
+        return;
+      }
+
+      // ローカルストレージキー
+      const STORAGE_KEY = 'bubble_characters_review_data';
+
+      // 状態管理
+      let reviews = {};
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) reviews = JSON.parse(saved);
+      } catch (e) {
+        reviews = {};
+      }
+
+      let currentCategory = 'all';
+      let currentLength = 'all';
+      let currentStatus = 'all';
+      let currentSearch = '';
+      let currentView = 'grid'; // 'grid' | 'table'
+
+      const audioPlayer = document.getElementById('review-audio-player');
+      let currentPlayingBtn = null;
+
+      // 共通音声再生制御
+      function playAudio(url, btn) {
+        if (currentPlayingBtn === btn && !audioPlayer.paused) {
+          audioPlayer.pause();
+          btn.classList.remove('playing');
+          currentPlayingBtn = null;
+          return;
+        }
+
+        if (currentPlayingBtn) {
+          currentPlayingBtn.classList.remove('playing');
+        }
+
+        audioPlayer.src = url;
+        audioPlayer.play().then(() => {
+          btn.classList.add('playing');
+          currentPlayingBtn = btn;
+        }).catch(err => {
+          console.warn('Audio playback failed:', err);
+          alert('音声ファイルを再生できませんでした: ' + url);
+        });
+
+        audioPlayer.onended = () => {
+          btn.classList.remove('playing');
+          currentPlayingBtn = null;
+        };
+      }
+
+      // レビュー保存
+      function saveReview(id, status, memo) {
+        if (!reviews[id]) reviews[id] = {};
+        if (status !== undefined) reviews[id].status = status;
+        if (memo !== undefined) reviews[id].memo = memo;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
+        updateStats();
+      }
+
+      // 集計の更新
+      function updateStats() {
+        let okCount = 0;
+        let warnCount = 0;
+        let dangerCount = 0;
+
+        characters.forEach(c => {
+          const rev = reviews[c.id];
+          const st = rev ? rev.status : null;
+          if (st === 'ok') okCount++;
+          else if (st === 'warn') warnCount++;
+          else if (st === 'danger') dangerCount++;
+        });
+
+        const pendingCount = characters.length - (okCount + warnCount + dangerCount);
+
+        const totalEl = document.getElementById('stat-total-count');
+        if (totalEl) totalEl.textContent = characters.length;
+        document.getElementById('stat-ok-count').textContent = okCount;
+        document.getElementById('stat-warn-count').textContent = warnCount;
+        document.getElementById('stat-danger-count').textContent = dangerCount;
+        document.getElementById('stat-pending-count').textContent = pendingCount;
+
+        // カテゴリ別件数
+        const vCount = characters.filter(c => c.category === 'vehicle').length;
+        const aCount = characters.filter(c => c.category === 'animal').length;
+        const fCount = characters.filter(c => c.category === 'food').length;
+        const elAll = document.getElementById('cat-count-all');
+        const elVeh = document.getElementById('cat-count-vehicle');
+        const elAni = document.getElementById('cat-count-animal');
+        const elFoo = document.getElementById('cat-count-food');
+        if (elAll) elAll.textContent = characters.length;
+        if (elVeh) elVeh.textContent = vCount;
+        if (elAni) elAni.textContent = aCount;
+        if (elFoo) elFoo.textContent = fCount;
+      }
+
+      // フィルタリング処理
+      function getFilteredCharacters() {
+        return characters.filter(item => {
+          // カテゴリ
+          if (currentCategory !== 'all' && item.category !== currentCategory) {
+            return false;
+          }
+
+          // 文字数
+          const charLen = item.charsHira.length;
+          if (currentLength === '2' && charLen !== 2) return false;
+          if (currentLength === '3' && charLen !== 3) return false;
+          if (currentLength === '4' && charLen !== 4) return false;
+          if (currentLength === '5plus' && charLen < 5) return false;
+
+          // ステータス
+          const rev = reviews[item.id] || {};
+          const st = rev.status || 'pending';
+          if (currentStatus !== 'all') {
+            if (currentStatus === 'pending' && rev.status) return false;
+            if (currentStatus !== 'pending' && rev.status !== currentStatus) return false;
+          }
+
+          // 検索キーワード
+          if (currentSearch.trim() !== '') {
+            const q = currentSearch.trim().toLowerCase();
+            const textMatch = 
+              item.id.toLowerCase().includes(q) ||
+              item.nameHira.toLowerCase().includes(q) ||
+              item.nameKata.toLowerCase().includes(q) ||
+              (item.questionText && item.questionText.toLowerCase().includes(q)) ||
+              (item.soundText && item.soundText.toLowerCase().includes(q));
+            if (!textMatch) return false;
+          }
+
+          return true;
+        });
+      }
+
+      // レンダリング
+      function render() {
+        const filtered = getFilteredCharacters();
+        document.getElementById('stat-shown-count').textContent = filtered.length;
+
+        const container = document.getElementById('content-container');
+        if (filtered.length === 0) {
+          container.className = '';
+          container.innerHTML = '<div class="empty-message">🔍 該当する問題が見つかりませんでした。条件を変更してください。</div>';
+          return;
+        }
+
+        if (currentView === 'grid') {
+          container.className = 'grid-view';
+          container.innerHTML = filtered.map((c, idx) => {
+            const rev = reviews[c.id] || {};
+            const st = rev.status || 'pending';
+            const memo = rev.memo || '';
+            const imgPath = c.imageSrc ? c.imageSrc.replace(/^\//, '') : '';
+            const questionAudioPath = `audio/neural/questions/${c.id}.wav`;
+            const praiseAudioPath = `audio/neural/praises/${c.id}.wav`;
+
+            const catMap = {
+              vehicle: { label: '🚗 のりもの', cls: 'cat-vehicle' },
+              animal:  { label: '🦁 どうぶつ', cls: 'cat-animal' },
+              food:    { label: '🍎 たべもの', cls: 'cat-food' }
+            };
+            const catInfo = catMap[c.category] || { label: c.category, cls: '' };
+
+            const statusClass = st === 'ok' ? 'status-ok' : (st === 'warn' ? 'status-warn' : (st === 'danger' ? 'status-danger' : ''));
+
+            return `
+              <div class="card-item ${statusClass}" data-id="${c.id}">
+                <div class="card-header">
+                  <span class="card-index">#${characters.indexOf(c) + 1} (${c.id})</span>
+                  <span class="card-category-badge ${catInfo.cls}">${catInfo.label}</span>
+                </div>
+                <div class="card-body">
+                  <div class="image-box" onclick="window.previewImage('${imgPath}?v=26', '${c.nameHira} (${c.nameKata})')">
+                    <img src="${imgPath}?v=26" alt="${c.nameHira}" loading="lazy">
+                    <span class="image-zoom-hint">🔍</span>
+                  </div>
+                  <div class="card-info">
+                    <div class="word-title">
+                      <span class="word-hira">${c.nameHira}</span>
+                      <span class="word-kata">${c.nameKata}</span>
+                      <span style="font-size:0.75rem; color:#888;">(${c.charsHira.length}文字)</span>
+                    </div>
+
+                    <div class="char-bubbles">
+                      ${c.charsHira.map(ch => `<span class="char-bubble">${ch}</span>`).join('')}
+                    </div>
+
+                    <div class="question-bubble">
+                      <div class="question-label">
+                        <span>📢 出題問題文</span>
+                        <span>${c.questionText ? c.questionText.length : 0}文字</span>
+                      </div>
+                      <div class="question-text">${c.questionText || '（問題文未設定）'}</div>
+                    </div>
+
+                    <div style="font-size:0.78rem; color:#6c757d; margin-top:2px;">
+                      ${c.bgDecor || ''} ${c.soundText || ''} <span style="opacity:0.6;">[${c.actionType || ''}]</span>
+                    </div>
+
+                    <div class="audio-controls">
+                      <button class="btn-audio" onclick="window.playQuestionAudio('${questionAudioPath}', this)">
+                        📢 出題音声
+                      </button>
+                      <button class="btn-audio" onclick="window.playPraiseAudio('${praiseAudioPath}', this)">
+                        🎉 正解褒め音声
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card-footer">
+                  <div class="review-status-bar">
+                    <span style="font-size:0.75rem; font-weight:700; color:#6c757d;">レビュー判定:</span>
+                    <div class="status-btn-group">
+                      <button class="status-btn ${st === 'ok' ? 'active' : ''}" data-status="ok" onclick="window.setCardStatus('${c.id}', 'ok')">✅ OK</button>
+                      <button class="status-btn ${st === 'warn' ? 'active' : ''}" data-status="warn" onclick="window.setCardStatus('${c.id}', 'warn')">🟡 要確認</button>
+                      <button class="status-btn ${st === 'danger' ? 'active' : ''}" data-status="danger" onclick="window.setCardStatus('${c.id}', 'danger')">🔴 要修正</button>
+                    </div>
+                  </div>
+                  <textarea class="memo-input" placeholder="修正案・気づいた点（自動保存）..." oninput="window.setCardMemo('${c.id}', this.value)">${memo}</textarea>
+                </div>
+              </div>
+            `;
+          }).join('');
+        } else {
+          // テーブルビュー
+          container.className = 'table-view-container';
+          container.innerHTML = `
+            <table class="review-table">
+              <thead>
+                <tr>
+                  <th style="width:40px; text-align:center;">No</th>
+                  <th style="width:70px; text-align:center;">画像</th>
+                  <th style="width:130px;">答えの文字</th>
+                  <th>出題問題文</th>
+                  <th style="width:110px;">構成文字</th>
+                  <th style="width:140px;">音声試聴</th>
+                  <th style="width:160px;">レビュー判定</th>
+                  <th style="min-width:180px;">メモ</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${filtered.map(c => {
+                  const rev = reviews[c.id] || {};
+                  const st = rev.status || 'pending';
+                  const memo = rev.memo || '';
+                  const imgPath = c.imageSrc ? c.imageSrc.replace(/^\//, '') : '';
+                  const qAudio = `audio/neural/questions/${c.id}.wav`;
+                  const pAudio = `audio/neural/praises/${c.id}.wav`;
+
+                  return `
+                    <tr data-id="${c.id}">
+                      <td style="text-align:center; font-weight:700; color:#888;">${characters.indexOf(c) + 1}</td>
+                      <td style="text-align:center;">
+                        <img src="${imgPath}?v=26" style="width:48px; height:48px; object-fit:contain; cursor:pointer;" onclick="window.previewImage('${imgPath}?v=26', '${c.nameHira}')" alt="${c.nameHira}">
+                      </td>
+                      <td>
+                        <strong style="font-size:1rem;">${c.nameHira}</strong><br>
+                        <small style="color:#666;">${c.nameKata} (${c.charsHira.length}字)</small>
+                      </td>
+                      <td>
+                        <div style="font-weight:700; color:#b43e00;">${c.questionText}</div>
+                        <small style="color:#888;">${c.bgDecor || ''} ${c.soundText || ''}</small>
+                      </td>
+                      <td>
+                        ${c.charsHira.map(ch => `<span style="display:inline-block; padding:1px 5px; margin:1px; background:#e9ecef; border-radius:4px; font-weight:700; font-size:0.8rem;">${ch}</span>`).join('')}
+                      </td>
+                      <td>
+                        <div style="display:flex; flex-direction:column; gap:4px;">
+                          <button class="btn-audio" onclick="window.playQuestionAudio('${qAudio}', this)">📢 出題</button>
+                          <button class="btn-audio" onclick="window.playPraiseAudio('${pAudio}', this)">🎉 正解</button>
+                        </div>
+                      </td>
+                      <td>
+                        <div class="status-btn-group">
+                          <button class="status-btn ${st === 'ok' ? 'active' : ''}" data-status="ok" onclick="window.setCardStatus('${c.id}', 'ok')">OK</button>
+                          <button class="status-btn ${st === 'warn' ? 'active' : ''}" data-status="warn" onclick="window.setCardStatus('${c.id}', 'warn')">要確認</button>
+                          <button class="status-btn ${st === 'danger' ? 'active' : ''}" data-status="danger" onclick="window.setCardStatus('${c.id}', 'danger')">要修正</button>
+                        </div>
+                      </td>
+                      <td>
+                        <textarea class="memo-input" style="height:34px; font-size:0.78rem;" placeholder="メモ..." oninput="window.setCardMemo('${c.id}', this.value)">${memo}</textarea>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          `;
+        }
+      }
+
+      // グローバル関数公開
+      window.previewImage = function(src, title) {
+        document.getElementById('image-modal-img').src = src;
+        document.getElementById('image-modal-caption').textContent = title;
+        document.getElementById('image-modal').classList.add('active');
+      };
+
+      window.playQuestionAudio = function(path, btn) {
+        playAudio(path, btn);
+      };
+
+      window.playPraiseAudio = function(path, btn) {
+        playAudio(path, btn);
+      };
+
+      window.setCardStatus = function(id, status) {
+        const current = reviews[id] ? reviews[id].status : null;
+        const newStatus = (current === status) ? null : status;
+        saveReview(id, newStatus, undefined);
+        render();
+      };
+
+      window.setCardMemo = function(id, val) {
+        saveReview(id, undefined, val);
+      };
+
+      // イベントリスナー設定
+      document.querySelectorAll('#category-pills .pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#category-pills .pill-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.dataset.cat;
+          render();
+        });
+      });
+
+      document.querySelectorAll('#view-mode-pills .pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#view-mode-pills .pill-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentView = btn.dataset.view;
+          render();
+        });
+      });
+
+      document.querySelectorAll('#length-pills .pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#length-pills .pill-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentLength = btn.dataset.len;
+          render();
+        });
+      });
+
+      document.querySelectorAll('#status-pills .pill-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#status-pills .pill-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentStatus = btn.dataset.status;
+          render();
+        });
+      });
+
+      const searchInput = document.getElementById('search-input');
+      searchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value;
+        render();
+      });
+
+      // レビュー初期化
+      document.getElementById('btn-clear-reviews').addEventListener('click', () => {
+        if (confirm('すべてのレビュー判定とメモを初期化しますか？')) {
+          reviews = {};
+          localStorage.removeItem(STORAGE_KEY);
+          updateStats();
+          render();
+        }
+      });
+
+      // エクスポートモーダル
+      const exportModal = document.getElementById('export-modal');
+      const exportTextarea = document.getElementById('export-textarea');
+
+      document.getElementById('btn-export').addEventListener('click', () => {
+        let md = '# 📝 文字集め問題 レビュー結果\n\n';
+        
+        let okItems = [];
+        let warnItems = [];
+        let dangerItems = [];
+        let memoItems = [];
+
+        characters.forEach(c => {
+          const rev = reviews[c.id];
+          if (!rev) return;
+          const status = rev.status;
+          const memo = rev.memo ? rev.memo.trim() : '';
+
+          if (status === 'danger') {
+            dangerItems.push({ c, memo });
+          } else if (status === 'warn') {
+            warnItems.push({ c, memo });
+          } else if (status === 'ok') {
+            okItems.push({ c, memo });
+          }
+
+          if (memo && status !== 'danger' && status !== 'warn') {
+            memoItems.push({ c, memo });
+          }
+        });
+
+        md += `## 📊 集計\n`;
+        md += `- 🔴 要修正: ${dangerItems.length}件\n`;
+        md += `- 🟡 要確認: ${warnItems.length}件\n`;
+        md += `- ✅ OK: ${okItems.length}件\n\n`;
+
+        if (dangerItems.length > 0) {
+          md += `## 🔴 要修正 (${dangerItems.length}件)\n`;
+          dangerItems.forEach(({ c, memo }) => {
+            md += `- **${c.nameHira}** (\`${c.id}\`): 問題文「${c.questionText}」\n`;
+            if (memo) md += `  - 指摘: ${memo}\n`;
+          });
+          md += '\n';
+        }
+
+        if (warnItems.length > 0) {
+          md += `## 🟡 要確認 (${warnItems.length}件)\n`;
+          warnItems.forEach(({ c, memo }) => {
+            md += `- **${c.nameHira}** (\`${c.id}\`): 問題文「${c.questionText}」\n`;
+            if (memo) md += `  - メモ: ${memo}\n`;
+          });
+          md += '\n';
+        }
+
+        if (dangerItems.length === 0 && warnItems.length === 0) {
+          md += `指摘事項はありませんでした（全問題チェック済み、または未チェック）。\n`;
+        }
+
+        exportTextarea.value = md;
+        exportModal.classList.add('active');
+      });
+
+      document.getElementById('btn-close-export').addEventListener('click', () => {
+        exportModal.classList.remove('active');
+      });
+
+      document.getElementById('btn-close-image').addEventListener('click', () => {
+        document.getElementById('image-modal').classList.remove('active');
+      });
+
+      [exportModal, document.getElementById('image-modal')].forEach(m => {
+        m.addEventListener('click', (e) => {
+          if (e.target === m) m.classList.remove('active');
+        });
+      });
+
+      document.getElementById('btn-copy-clipboard').addEventListener('click', () => {
+        exportTextarea.select();
+        navigator.clipboard.writeText(exportTextarea.value).then(() => {
+          const btn = document.getElementById('btn-copy-clipboard');
+          const original = btn.textContent;
+          btn.textContent = '✅ コピー完了！';
+          setTimeout(() => { btn.textContent = original; }, 2000);
+        });
+      });
+
+      // 初期化
+      updateStats();
+      render();
+    })();
+  </script>
+</body>
+</html>
