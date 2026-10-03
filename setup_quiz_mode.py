@@ -58,11 +58,11 @@ ITEMS = [
     "praiseText": "せいかい！トラック！すごーい！"
   },
   {
-    "id": "danpu", "category": "vehicle", "nameHira": "だんぷかー", "nameKata": "ダンプカー",
-    "charsHira": ["だ", "ん", "ぷ", "か", "ー"], "charsKata": ["ダ", "ン", "プ", "カ", "ー"],
-    "emoji": "🚛", "soundType": "vroom", "soundText": "荷台がガッターン！", "themeColor": "#fb8500", "actionType": "dance-butt", "bgDecor": "🪨",
-    "questionText": "荷台を上げて土をザーッと落とす この くるまは？",
-    "praiseText": "せいかい！ダンプカー！すごーい！"
+    "id": "shoberu", "category": "vehicle", "nameHira": "しょべるかー", "nameKata": "ショベルカー",
+    "charsHira": ["し", "ょ", "べ", "る", "か", "ー"], "charsKata": ["シ", "ョ", "ベ", "ル", "カ", "ー"],
+    "emoji": "🚜", "soundType": "vroom", "soundText": "ガガガ！土をほるよ！", "themeColor": "#fb8500", "actionType": "dance-butt", "bgDecor": "🪨",
+    "questionText": "土を ホリホリ！あなを ほる この 工事の くるまは？",
+    "praiseText": "せいかい！ショベルカー！すごーい！"
   },
   {
     "id": "torakuta", "category": "vehicle", "nameHira": "とらくたー", "nameKata": "トラクター",
@@ -92,7 +92,6 @@ ITEMS = [
     "questionText": "線路をガタゴト走る この 乗り物は？",
     "praiseText": "せいかい！でんしゃ！すごーい！"
   },
-  {
   {
     "id": "hikoki", "category": "vehicle", "nameHira": "ひこうき", "nameKata": "ヒコウキ",
     "charsHira": ["ひ", "こ", "う", "き"], "charsKata": ["ヒ", "コ", "ウ", "キ"],
@@ -170,7 +169,6 @@ ITEMS = [
     "questionText": "白くて速い！線路をビュンビュン走る この 乗り物は？",
     "praiseText": "せいかい！しんかんせん！すごーい！"
   },
-  {
   {
     "id": "kikyu", "category": "vehicle", "nameHira": "ききゅう", "nameKata": "キキュウ",
     "charsHira": ["き", "き", "ゅ", "う"], "charsKata": ["キ", "キ", "ュ", "ウ"],

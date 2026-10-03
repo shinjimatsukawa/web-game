@@ -169,32 +169,34 @@ const CHARACTERS_DATA = [
     "questionText": "お荷物をいっぱい積んで運ぶ この くるまは？"
   },
   {
-    "id": "danpu",
+    "id": "shoberu",
     "category": "vehicle",
-    "nameHira": "だんぷかー",
-    "nameKata": "ダンプカー",
+    "nameHira": "しょべるかー",
+    "nameKata": "ショベルカー",
     "charsHira": [
-      "だ",
-      "ん",
-      "ぷ",
+      "し",
+      "ょ",
+      "べ",
+      "る",
       "か",
       "ー"
     ],
     "charsKata": [
-      "ダ",
-      "ン",
-      "プ",
+      "シ",
+      "ョ",
+      "ベ",
+      "ル",
       "カ",
       "ー"
     ],
-    "emoji": "🚛",
-    "imageSrc": "/images/characters/danpu.svg",
+    "emoji": "🚜",
+    "imageSrc": "/images/characters/shoberu.svg",
     "soundType": "vroom",
-    "soundText": "荷台がガッターン！土をザーッ！",
+    "soundText": "ガガガ！土をほるよ！",
     "themeColor": "#fb8500",
     "actionType": "dance-butt",
     "bgDecor": "🪨",
-    "questionText": "荷台を上げて土をザーッと落とす この くるまは？"
+    "questionText": "土を ホリホリ！あなを ほる この 工事の くるまは？"
   },
   {
     "id": "torakuta",
