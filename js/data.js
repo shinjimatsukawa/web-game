@@ -1816,7 +1816,7 @@ const KANA_TABLE_DATA = [
   // あ行
   { id: 'a', hira: 'あ', kata: 'ア', word: 'アイス', emoji: '🍦', sound: 'アイスクリーム！' },
   { id: 'i', hira: 'い', kata: 'イ', word: 'いぬ', emoji: '🐶', sound: 'いぬ！ワンワン！' },
-  { id: 'u', hira: 'う', kata: 'ウ', word: 'うさぎ', emoji: '🐰', sound: 'うさぎ！ピョンピョン！' },
+  { id: 'u', hira: 'う', kata: 'ウ', word: 'うさぎ', emoji: '🐰', imageSrc: '/images/table/usagi.svg', sound: 'うさぎ！ピョンピョン！' },
   { id: 'e', hira: 'え', kata: 'エ', word: 'えんぴつ', emoji: '✏️', sound: 'えんぴつ！カキカキ！' },
   { id: 'o', hira: 'お', kata: 'オ', word: 'おにぎり', emoji: '🍙', sound: 'おにぎり！モグモグ！' },
 
@@ -1829,9 +1829,9 @@ const KANA_TABLE_DATA = [
 
   // さ行
   { id: 'sa', hira: 'さ', kata: 'サ', word: 'さかな', emoji: '🐟', sound: 'さかな！スイスイ！' },
-  { id: 'shi', hira: 'し', kata: 'シ', word: 'しまうま', emoji: '🦓', imageSrc: '/images/table/shimauma.svg', sound: 'しまうま！シマシマかっこいい！' },
+  { id: 'shi', hira: 'し', kata: 'シ', word: 'しんごう', emoji: '🚦', imageSrc: '/images/table/shingo.svg', sound: 'しんごうき！あおは すすめ！' },
   { id: 'su', hira: 'す', kata: 'ス', word: 'すいか', emoji: '🍉', sound: 'すいか！あまーい！' },
-  { id: 'se', hira: 'せ', kata: 'セ', word: 'せみ', emoji: '🪲', imageSrc: '/images/table/semi.svg', sound: 'せみ！ミーンミーン！' },
+  { id: 'se', hira: 'せ', kata: 'セ', word: 'せんぷうき', emoji: '🌀', imageSrc: '/images/table/sempuki.svg', sound: 'せんぷうき！すずしいね〜！' },
   { id: 'so', hira: 'そ', kata: 'ソ', word: 'そり', emoji: '🛷', imageSrc: '/images/table/sori.svg', sound: 'そり！シューッとはしるよ！' },
 
   // た行
@@ -1876,7 +1876,7 @@ const KANA_TABLE_DATA = [
 
   // わ行
   { id: 'wa', hira: 'わ', kata: 'ワ', word: 'わに', emoji: '🐊', sound: 'わに！ガブガブ！' },
-  { id: 'wo', hira: 'を', kata: 'ヲ', word: '「手を洗う」のを', emoji: '🖐️', imageSrc: '/images/table/te_wo_arau.svg', sound: 'てをあらうの を！キレイキレイ！' },
+  { id: 'wo', hira: 'を', kata: 'ヲ', word: 'ほんをよむ', emoji: '📖', imageSrc: '/images/table/hon_wo_yomu.svg', sound: 'ほんをよむの、を！たのしいね！' },
   { id: 'nn', hira: 'ん', kata: 'ン', word: 'パンダのん', emoji: '🐼', sound: 'パンダの ん！' }
 ];
 

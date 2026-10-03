@@ -15,6 +15,7 @@ echo "📍 ターゲット: ${REMOTE_HOST}:${REMOTE_DIR}"
 echo "📦 [1/3] フロントエンドコード (HTML, CSS, JS) を同期中..."
 rsync -avz \
   index.html \
+  review.html \
   manifest.json \
   favicon.ico \
   favicon.svg \

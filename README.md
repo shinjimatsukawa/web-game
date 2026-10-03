@@ -20,6 +20,10 @@ iPadのSafariで直感的に遊べる、4歳前後のお子様向け知育Webゲ
   - 🦁 **むずかしい**: ダミー文字 3〜4個
 - **カテゴリ**: くるま (25種) / どうぶつ (30種) / たべもの (20種) / ぜんぶ (75種)
 
+> 🔍 **問題・画像・問題文のレビュー**:
+> - 📄 **GitHubレビュー用一覧 (Markdown)**: [REVIEW_CHARACTERS.md](REVIEW_CHARACTERS.md)
+> - 🎧 **ブラウザ動的レビューツール (音声試聴・メモ保存)**: [review.html](review.html)
+
 ### 2. 📖 おしゃべり 50おんずかん
 - あ行〜わ行の50音表。
 - 文字カードをタッチすると大きくポップアップし、「あ！ アイスクリーム！」と高品質AI音声で読み上げ。
@@ -45,6 +49,8 @@ iPadのSafariで直感的に遊べる、4歳前後のお子様向け知育Webゲ
 ```text
 web-game/
 ├── index.html                   # メインHTML（SPA構成）
+├── review.html                  # 文字集め問題・画像・音声レビューツール
+├── REVIEW_CHARACTERS.md         # GitHubレビュー用マークダウン一覧 (全75問)
 ├── server.py                    # ポート8090配信用 軽量HTTPサーバー
 ├── kids-game.service            # systemd サービス定義ファイル
 ├── deploy.sh                    # Raspberry Pi 4 向け自動デプロイスクリプト

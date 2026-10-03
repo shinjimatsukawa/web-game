@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
+  <defs>
+    <!-- 本のカバーグラデーション（あざやかなスカイブルー・オレンジ） -->
+    <linearGradient id="bookCover" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="pageGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 楽しいキラキラ効果 -->
+  <path d="M20 2 L21 5 L24 6 L21 7 L20 10 L19 7 L16 6 L19 5 Z" fill="#fbbf24"/>
+  <circle cx="6" cy="10" r="1.5" fill="#f43f5e"/>
+  <circle cx="34" cy="9" r="1.5" fill="#10b981"/>
+
+  <!-- 本の背表紙・外カバー（開いた状態） -->
+  <path d="M4 14 C12 11 18 13 20 16 C22 13 28 11 36 14 L36 34 C28 31 22 33 20 36 C18 33 12 31 4 34 Z" 
+        fill="url(#bookCover)" stroke="#1e3a8a" stroke-width="1.2" stroke-linejoin="round"/>
+
+  <!-- 見開きページ（厚み・下層ページ） -->
+  <path d="M4.5 13.5 C12.5 11 18 13 20 15.5 C22 13 27.5 11 35.5 13.5 L35.5 32.5 C27.5 30 22 32 20 34.5 C18 32 12.5 30 4.5 32.5 Z" 
+        fill="#e2e8f0"/>
+
+  <!-- 見開きページ（白い本紙・上層ページ） -->
+  <!-- 左ページ -->
+  <path d="M5 12.5 C12.5 10 18 12 20 14.5 L20 33.5 C18 31 12.5 29 5 31.5 Z" 
+        fill="url(#pageGrad)" stroke="#cbd5e1" stroke-width="0.8"/>
+  <!-- 右ページ -->
+  <path d="M35 12.5 C27.5 10 22 12 20 14.5 L20 33.5 C22 31 27.5 29 35 31.5 Z" 
+        fill="url(#pageGrad)" stroke="#cbd5e1" stroke-width="0.8"/>
+
+  <!-- 本の中身：絵本の可愛いイラストと文字 -->
+  <!-- 左ページ：お日さまとりんごの絵 -->
+  <circle cx="12" cy="18" r="3.5" fill="#fbbf24" stroke="#f59e0b" stroke-width="0.6"/>
+  <circle cx="12" cy="26" r="3" fill="#ef4444"/>
+  <path d="M12 23 Q13 21 14 22" stroke="#15803d" stroke-width="0.8" fill="none"/>
+
+  <!-- 右ページ：楽しそうなお星さまとテキスト線 -->
+  <polygon points="28,15 29,18 32,18 29.5,20 30.5,23 28,21 25.5,23 26.5,20 24,18 27,18" fill="#facc15"/>
+  <!-- テキスト行の模したライン -->
+  <rect x="23" y="24" width="10" height="1.5" rx="0.7" fill="#94a3b8"/>
+  <rect x="23" y="27.5" width="8" height="1.5" rx="0.7" fill="#94a3b8"/>
+
+  <!-- 中央の栞（しおりリボン） -->
+  <path d="M20 15 L20 35 L22 38 L20 36 L18 38 Z" fill="#ef4444"/>
+</svg>
