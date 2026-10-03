@@ -1,0 +1,15 @@
+# Python virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs & temp
+*.log
+/tmp/
+
+# Audio tests / experiments
+audio/gemini_test/
