@@ -1,67 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
-  <defs>
-    <!-- ダンプカーのイエロー -->
-    <linearGradient id="dumpYellow" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#fde047"/>
-      <stop offset="100%" stop-color="#eab308"/>
-    </linearGradient>
-    <linearGradient id="bedMetal" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#94a3b8"/>
-      <stop offset="100%" stop-color="#64748b"/>
-    </linearGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+  <!-- シャーシフレーム -->
+  <rect x="2" y="24" width="32" height="4" rx="1.5" fill="#292F33"/>
 
-  <!-- 地面 -->
-  <line x1="2" y1="41" x2="42" y2="41" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- 車輪（大きなタイヤ3つ） -->
+  <circle cx="6" cy="27" r="4.5" fill="#292F33"/>
+  <circle cx="6" cy="27" r="2" fill="#CCD6DD"/>
+  <circle cx="17" cy="27" r="4.5" fill="#292F33"/>
+  <circle cx="17" cy="27" r="2" fill="#CCD6DD"/>
+  <circle cx="28" cy="27" r="4.5" fill="#292F33"/>
+  <circle cx="28" cy="27" r="2" fill="#CCD6DD"/>
 
-  <!-- こぼれ落ちた土砂・小石（ザーッ！） -->
-  <path d="M2 37 Q5 33 9 37 Q11 41 2 41 Z" fill="#78350f"/>
-  <circle cx="4" cy="36" r="1.5" fill="#a16207"/>
-  <circle cx="7" cy="34" r="1.2" fill="#78350f"/>
-  <circle cx="5" cy="39" r="1" fill="#451a03"/>
-  <circle cx="8" cy="38" r="1.3" fill="#b45309"/>
+  <!-- 運転席キャビン（前方・右側・黄色） -->
+  <path d="M22 13 H28 C30 13 32 15 32 17 L32 25 H22 Z" fill="#FFCC4D"/>
+  <!-- 窓ガラス（水色） -->
+  <path d="M24 15 H28 C29.5 15 30.5 16 30.5 17.5 L30.5 20 H24 Z" fill="#55ACEE"/>
+  <!-- ヘッドライト -->
+  <circle cx="31.5" cy="22" r="1" fill="#FFAC33"/>
+  <!-- バンパー -->
+  <rect x="30" y="23" width="3" height="3" rx="0.5" fill="#66757F"/>
 
-  <!-- 車輪・タイヤ（大きなオフロードタイヤ） -->
-  <!-- 前輪 -->
-  <circle cx="34" cy="36" r="4.5" fill="#1e293b"/>
-  <circle cx="34" cy="36" r="2.2" fill="#94a3b8"/>
-  <circle cx="34" cy="36" r="0.8" fill="#475569"/>
-  <!-- 後輪（ダブルタイヤ） -->
-  <circle cx="16" cy="36" r="4.5" fill="#1e293b"/>
-  <circle cx="16" cy="36" r="2.2" fill="#94a3b8"/>
-  <circle cx="16" cy="36" r="0.8" fill="#475569"/>
+  <!-- ダンプカーの頑丈な荷台（後部・斜めに上がったダンプベッド形状） -->
+  <!-- 左が高く傾斜したダンプ特有の荷台ボックス -->
+  <path d="M2 9 L20 12 L19 24 H2 Z" fill="#FB8500"/>
+  <!-- 荷台の補強リブ（ストライプライン） -->
+  <line x1="7" y1="10" x2="7" y2="24" stroke="#D97706" stroke-width="1.2"/>
+  <line x1="13" y1="11" x2="13" y2="24" stroke="#D97706" stroke-width="1.2"/>
 
-  <!-- シャーシフレーム（車体下部） -->
-  <rect x="12" y="32" width="25" height="3" rx="1" fill="#334155"/>
+  <!-- 荷台に乗っている土砂・小石（山盛り） -->
+  <path d="M3 9 Q10 5 19 12 Z" fill="#8D6E63"/>
+  <circle cx="8" cy="7.5" r="1.2" fill="#6D4C41"/>
+  <circle cx="13" cy="8.5" r="1.5" fill="#5D4037"/>
 
-  <!-- 運転席キャビン（前方・右側） -->
-  <path d="M26 19 H35 Q39 19 39 23 L39 33 H26 Z" fill="url(#dumpYellow)" stroke="#ca8a04" stroke-width="0.8"/>
-  <!-- 窓ガラス -->
-  <path d="M29 21 H35 Q37.5 21 37.5 24 L37.5 27 H29 Z" fill="#38bdf8"/>
-  <!-- フロントグリル & バンパー -->
-  <rect x="38" y="28" width="2" height="4" rx="0.5" fill="#475569"/>
-  <circle cx="38" cy="27" r="1" fill="#facc15"/> <!-- ライト -->
-
-  <!-- 油圧シリンダー（荷台を持ち上げるピストンロッド） -->
-  <line x1="22" y1="32" x2="19" y2="20" stroke="#cbd5e1" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="22" y1="32" x2="20" y2="24" stroke="#475569" stroke-width="3.5" stroke-linecap="round"/>
-
-  <!-- 荷台ヒンジ支点 -->
-  <circle cx="13" cy="28" r="1.8" fill="#1e293b"/>
-
-  <!-- 傾いた荷台（斜め上にガッターンと上がっている！） -->
-  <!-- 回転中心 (13, 28) で約 -28度 傾斜 -->
-  <g transform="rotate(-28 13 28)">
-    <!-- 荷台の箱 -->
-    <path d="M6 14 H28 L27 26 H8 Z" fill="url(#bedMetal)" stroke="#334155" stroke-width="0.8"/>
-    <!-- あおり（側面の補強リブ） -->
-    <line x1="12" y1="16" x2="13" y2="24" stroke="#334155" stroke-width="0.8"/>
-    <line x1="18" y1="16" x2="19" y2="24" stroke="#334155" stroke-width="0.8"/>
-    <line x1="23" y1="16" x2="23.5" y2="24" stroke="#334155" stroke-width="0.8"/>
-    <!-- 荷台の中の土砂（滑り落ちていく様子） -->
-    <path d="M7 16 Q14 18 25 21 L26 25 H8 Z" fill="#78350f"/>
-    <!-- 荷台から滑り落ちる土煙・石 -->
-    <circle cx="4" cy="22" r="1.5" fill="#a16207"/>
-    <circle cx="2" cy="25" r="1.8" fill="#78350f"/>
-  </g>
+  <!-- キャブと荷台の間の油圧シリンダー -->
+  <rect x="19.5" y="16" width="2" height="8" rx="0.5" fill="#99AAB5"/>
 </svg>

@@ -227,32 +227,28 @@ const CHARACTERS_DATA = [
   {
     "id": "kuren",
     "category": "vehicle",
-    "nameHira": "くれーんしゃ",
-    "nameKata": "クレーンシャ",
+    "nameHira": "くれーん",
+    "nameKata": "クレーン",
     "charsHira": [
       "く",
       "れ",
       "ー",
-      "ん",
-      "し",
-      "ゃ"
+      "ん"
     ],
     "charsKata": [
       "ク",
       "レ",
       "ー",
-      "ン",
-      "シ",
-      "ャ"
+      "ン"
     ],
     "emoji": "🏗️",
     "imageSrc": "/images/characters/kuren.svg",
     "soundType": "vroom",
-    "soundText": "ウィーン！たかーく持ち上げるよ！",
+    "soundText": "ウィーン！たかーい！",
     "themeColor": "#ff006e",
     "actionType": "super-jump",
     "bgDecor": "🧱",
-    "questionText": "重いものを高く持ち上げる この 工事の くるまは？"
+    "questionText": "工事現場で ウィーン！重いものを 高く持ち上げる これは？"
   },
   {
     "id": "kisha",

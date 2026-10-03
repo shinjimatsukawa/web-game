@@ -1,52 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40">
   <defs>
-    <!-- 新幹線の光沢グラデーション -->
-    <linearGradient id="shinkansenBody" x1="0%" y1="0%" x2="0%" y2="100%">
+    <!-- 新幹線ボディのグラデーション（清潔感のあるホワイト〜パールグレー） -->
+    <linearGradient id="shinkansenWhite" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="65%" stop-color="#f1f5f9"/>
-      <stop offset="100%" stop-color="#cbd5e1"/>
+      <stop offset="70%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
     </linearGradient>
-    <linearGradient id="blueStripe" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#1d4ed8"/>
-      <stop offset="100%" stop-color="#2563eb"/>
+    <linearGradient id="shinkansenBlue" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
     </linearGradient>
   </defs>
 
-  <!-- スピード感のある風のライン -->
-  <path d="M1 17 L8 17 M2 22 L11 22 M1 27 L6 27" stroke="#93c5fd" stroke-width="1.2" stroke-linecap="round" opacity="0.8"/>
+  <!-- スピード線（ビュンビュン走る演出） -->
+  <line x1="2" y1="18" x2="6" y2="18" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="1" y1="24" x2="5" y2="24" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="34" y1="18" x2="38" y2="18" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="35" y1="24" x2="39" y2="24" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round"/>
 
-  <!-- 線路レール（地面） -->
-  <path d="M0 37 H44" stroke="#94a3b8" stroke-width="2"/>
-  <path d="M4 37 L2 41 M12 37 L10 41 M20 37 L18 41 M28 37 L26 41 M36 37 L34 41" stroke="#64748b" stroke-width="1.5"/>
+  <!-- 線路レール（地面・正面パース） -->
+  <line x1="0" y1="38" x2="40" y2="38" stroke="#94a3b8" stroke-width="1.5"/>
+  <polygon points="12,38 28,38 26,34 14,34" fill="#cbd5e1"/>
+  <line x1="11" y1="38" x2="14" y2="34" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="29" y1="38" x2="26" y2="34" stroke="#64748b" stroke-width="1.5"/>
 
-  <!-- 車輪・台車カバー（グレー） -->
-  <rect x="5" y="32" width="37" height="4" rx="2" fill="#334155"/>
-  <circle cx="10" cy="34" r="2" fill="#64748b"/>
-  <circle cx="16" cy="34" r="2" fill="#64748b"/>
-  <circle cx="28" cy="34" r="2" fill="#64748b"/>
-  <circle cx="34" cy="34" r="2" fill="#64748b"/>
+  <!-- スカート（排障器・車体下部） -->
+  <path d="M11 32 L13 36 H27 L29 32 Z" fill="#64748b"/>
 
-  <!-- 新幹線本体（先頭車両・ノーズが右向きに伸びるロングノーズ流線型） -->
-  <path d="M5 14 H24 Q36 15 42 27 C43 29 42 33 40 33 H5 C4 33 4 14 5 14 Z" 
-        fill="url(#shinkansenBody)" stroke="#94a3b8" stroke-width="0.8"/>
+  <!-- 新幹線車体（正面・ロングノーズフォルム） -->
+  <path d="M14 6 C17 5 23 5 26 6 C29 8 32 14 32 24 C32 31 29 34 27 34 H13 C11 34 8 31 8 24 C8 14 11 8 14 6 Z" 
+        fill="url(#shinkansenWhite)" stroke="#94a3b8" stroke-width="1"/>
 
-  <!-- ブルーのシンボルストライプ（帯） -->
-  <path d="M5 28 H38 Q40 28 41 29 C40.5 31 38 31 38 31 H5 Z" fill="url(#blueStripe)"/>
-  <path d="M5 25 H33 Q36 25 38 27 L37 28 H5 Z" fill="url(#blueStripe)"/>
+  <!-- 新幹線の青いシンボルライン（フロントから側面へ流れるブルー帯） -->
+  <path d="M9.5 25 C13 27 27 27 30.5 25 L30.8 28 C26 30 14 30 9.2 28 Z" fill="url(#shinkansenBlue)"/>
+  <path d="M11 30 C15 31.5 25 31.5 29 30 L28.5 32 C24 33 16 33 11.5 32 Z" fill="url(#shinkansenBlue)"/>
 
-  <!-- 運転席フロントガラス（流線型ブラック・ブルー） -->
-  <path d="M29 17 Q34 18 36 23 L32 23 Q29 20 27 18 Z" fill="#0f172a"/>
-  <path d="M29.5 18 Q33 19 34.5 22" stroke="#38bdf8" stroke-width="0.8" fill="none" opacity="0.8"/>
+  <!-- 運転席フロントガラス（上部・ブラック＆スカイブルー） -->
+  <path d="M14 10 C16 9.5 24 9.5 26 10 C27.5 12 28 15 28 16 C25 17 15 17 12 16 C12 15 12.5 12 14 10 Z" 
+        fill="#1e293b"/>
+  <!-- フロントガラスの反射ハイライト -->
+  <path d="M15 11 Q20 10.5 25 11 L24.5 13 Q20 12.5 15.5 13 Z" fill="#38bdf8" opacity="0.8"/>
 
-  <!-- 客席の四角い窓 -->
-  <rect x="7" y="18" width="4.5" height="4" rx="1" fill="#1e293b"/>
-  <rect x="13.5" y="18" width="4.5" height="4" rx="1" fill="#1e293b"/>
-  <rect x="20" y="18" width="4.5" height="4" rx="1" fill="#1e293b"/>
+  <!-- ノーズ中央のエンブレム・ノーズライン -->
+  <line x1="20" y1="17" x2="20" y2="23" stroke="#cbd5e1" stroke-width="1" stroke-linecap="round"/>
 
-  <!-- ヘッドライト（先端で光るイエローライト） -->
-  <ellipse cx="40" cy="30" rx="1.5" ry="1" fill="#facc15"/>
-  <path d="M40 30 L43.5 29 M40 30 L43.5 31" stroke="#fef08a" stroke-width="0.8"/>
+  <!-- 左右のヘッドライト（ピカーッと光る黄色い目） -->
+  <ellipse cx="14" cy="22" rx="2.5" ry="1.8" fill="#facc15" stroke="#eab308" stroke-width="0.5"/>
+  <circle cx="13.5" cy="21.5" r="0.8" fill="#ffffff"/>
+  <ellipse cx="26" cy="22" rx="2.5" ry="1.8" fill="#facc15" stroke="#eab308" stroke-width="0.5"/>
+  <circle cx="25.5" cy="21.5" r="0.8" fill="#ffffff"/>
 
-  <!-- 屋根のハイライト -->
-  <path d="M6 15 H24" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- 屋根の架線集電器（パンタグラフカバー） -->
+  <rect x="18" y="3" width="4" height="3" rx="1" fill="#3b82f6"/>
 </svg>

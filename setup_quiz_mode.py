@@ -72,10 +72,10 @@ ITEMS = [
     "praiseText": "せいかい！トラクター！すごーい！"
   },
   {
-    "id": "kuren", "category": "vehicle", "nameHira": "くれーんしゃ", "nameKata": "クレーンシャ",
-    "charsHira": ["く", "れ", "ー", "ん", "し", "ゃ"], "charsKata": ["ク", "レ", "ー", "ン", "シ", "ャ"],
+    "id": "kuren", "category": "vehicle", "nameHira": "くれーん", "nameKata": "クレーン",
+    "charsHira": ["く", "れ", "ー", "ん"], "charsKata": ["ク", "レ", "ー", "ン"],
     "emoji": "🏗️", "soundType": "vroom", "soundText": "ウィーン！たかーい！", "themeColor": "#ff006e", "actionType": "super-jump", "bgDecor": "🧱",
-    "questionText": "重いものを高く持ち上げる この 工事の くるまは？",
+    "questionText": "工事現場で ウィーン！重いものを 高く持ち上げる これは？",
     "praiseText": "せいかい！クレーン車！すごーい！"
   },
   {
