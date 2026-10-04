@@ -1,43 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .rabbit-outline {
+        stroke: #2d1e18;
+        stroke-width: 3.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .rabbit-detail {
+        stroke: #2d1e18;
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+
+  <!-- 奥の耳（左耳） -->
+  <path d="M 36 29 C 29 16 35 4 44 5 C 51 6 53 17 48 27 Z" 
+        fill="#ffffff" class="rabbit-outline"/>
+
   <!-- まあるい尻尾（右後ろ） -->
-  <circle cx="31.2" cy="26.8" r="2.8" fill="#CCD6DD"/>
-  <circle cx="30.8" cy="26.4" r="2.6" fill="#FFFFFF"/>
+  <path d="M 86 73 C 94 72 97 82 90 85 C 84 87 81 81 85 73 Z" 
+        fill="#ffffff" class="rabbit-outline"/>
 
-  <!-- 奥の耳（左耳・陰影として少しグレー寄り） -->
-  <path fill="#CCD6DD" d="M13 10 C10 4.5 11.8 0.8 15.2 1.2 C17.8 1.5 18.8 5.5 17 10 Z"/>
+  <!-- うさぎの全体ボディ（もっちり丸い雪見だいふく体型） -->
+  <path d="M 44 28 C 50 28 60 36 69 41 C 80 47 88 56 89 67 C 90 77 86 86 78 88 C 66 90 34 90 23 88 C 17 86 16 77 18 70 C 14 65 10 57 10 49 C 10 39 16 30 26 26 C 35 23 41 26 44 28 Z" 
+        fill="#ffffff" class="rabbit-outline"/>
 
-  <!-- ボディ下部・背面のベース（立体感を出すための柔らかな影レイヤー） -->
-  <path fill="#E1E8ED" d="M15 10 C18 10 22 13 25 15 C29 17 32 20 32.5 24 C33 28 31 31 28 32 C23.5 32.5 12 32.5 7.5 32 C5.5 31.5 5 28 6 25.5 C4.5 24 3.2 21 3.2 18 C3.2 14 5.5 10.8 9.2 9.5 C12.2 8.5 14 9.5 15 10 Z"/>
+  <!-- 手前の耳（右耳・ピンクの内側） -->
+  <path d="M 42 33 C 39 18 46 9 55 10 C 63 11 64 20 58 33 C 53 43 49 41 42 33 Z" 
+        fill="#ffffff" class="rabbit-outline"/>
+  <!-- 耳の内側の優しいピンク（Twemojiピンク #F4ABBA） -->
+  <path d="M 46 27 C 44 19 48 14 53 15 C 57 16 58 22 55 29 C 52 34 49 33 46 27 Z" 
+        fill="#f4abba"/>
 
-  <!-- うさぎのメインボディ（手前の真っ白なおもちフォルム） -->
-  <path fill="#FFFFFF" d="M15 10.5 C17.5 10.5 21.5 13.5 24.5 15.5 C28.2 17.5 31 20.5 31.5 24 C31.8 26.5 30.5 29 27.5 30 C23 30.5 12 30.5 8 30 C6.5 29.5 6 27 6.8 25 C5.6 23.5 4.2 20.8 4.2 18 C4.2 14.5 6.2 11.5 9.8 10.2 C12.5 9.2 14.2 10 15 10.5 Z"/>
+  <!-- 首元のほんのりとした立体感シャドウ -->
+  <path d="M 18 64 C 26 62 36 57 43 49" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" fill="none"/>
 
-  <!-- あご下のふんわり影（頭部と胴体の境目の立体感） -->
-  <path fill="#CCD6DD" opacity="0.6" d="M 7.5 24.5 C 10 25.5 13 24 15 21 C 13.5 21.5 10.5 22.5 7.5 24.5 Z"/>
+  <!-- 鼻先（ちっちゃなピンクのお鼻） -->
+  <ellipse cx="9.5" cy="48" rx="1.6" ry="1.3" fill="#f4abba"/>
+  <!-- ちっちゃな口元（ちょこんと丸い） -->
+  <path d="M 9.5 49.5 C 9.5 51.5 8 52 7.5 51.5" fill="none" stroke="#2d1e18" stroke-width="1.8" stroke-linecap="round"/>
 
-  <!-- 手前の耳（右耳・メインの白） -->
-  <path fill="#FFFFFF" d="M15 11 C13.8 5.2 16.2 2.2 19.5 2.6 C22.2 3.0 22.8 6.5 20.8 11.2 C18.8 15 17.2 14.5 15 11 Z"/>
-  <!-- 耳の内側の優しいピンク（Twemoji のウサギ耳ピンク #F4ABBA） -->
-  <path fill="#F4ABBA" d="M16.5 9.5 C15.6 6.2 17.0 4.5 18.8 4.7 C20.3 4.9 20.6 7.2 19.6 9.8 C18.3 12 17.3 11.5 16.5 9.5 Z"/>
+  <!-- ほっぺのふんわりチーク（優しいピンク） -->
+  <ellipse cx="20" cy="56" rx="5" ry="3.2" fill="#f4abba" opacity="0.6"/>
 
-  <!-- ほっぺのふんわりチーク（ピンク #F4ABBA） -->
-  <ellipse cx="7" cy="20" rx="2.0" ry="1.3" fill="#F4ABBA" opacity="0.75"/>
+  <!-- クリッとした大きな黒目＋キラキラハイライト（愛らしい表情の決め手） -->
+  <ellipse cx="23" cy="43" rx="4.8" ry="5.6" fill="#2d1e18"/>
+  <circle cx="21.2" cy="41" r="2.0" fill="#ffffff"/>
+  <circle cx="24.5" cy="45" r="1.0" fill="#ffffff"/>
 
-  <!-- クリッとした黒い瞳（Twemoji の黒 #292F33）とハイライト -->
-  <ellipse cx="8" cy="15.5" rx="1.6" ry="1.9" fill="#292F33"/>
-  <circle cx="7.4" cy="14.9" r="0.7" fill="#FFFFFF"/>
-  <circle cx="8.6" cy="16.3" r="0.35" fill="#FFFFFF"/>
+  <!-- 前足（ちょこんと揃えた可愛い足） -->
+  <path d="M 22 80 C 21 83 24 87 28 86 C 32 86 32 81 28 81" 
+        fill="none" class="rabbit-detail"/>
+  <path d="M 27 82 C 26 85 29 88 33 87 C 37 87 37 82 33 82" 
+        fill="none" class="rabbit-detail"/>
 
-  <!-- 鼻先（ちっちゃなピンク #F4ABBA） -->
-  <ellipse cx="3.4" cy="17.2" rx="0.7" ry="0.5" fill="#F4ABBA"/>
-
-  <!-- 前足（ちょこんと揃えた可愛い前足） -->
-  <ellipse cx="7.8" cy="30.2" rx="1.6" ry="1.0" fill="#CCD6DD"/>
-  <ellipse cx="7.6" cy="29.9" rx="1.4" ry="0.8" fill="#FFFFFF"/>
-  <ellipse cx="10.4" cy="30.5" rx="1.6" ry="1.0" fill="#CCD6DD"/>
-  <ellipse cx="10.2" cy="30.2" rx="1.4" ry="0.8" fill="#FFFFFF"/>
-
-  <!-- 後ろ足（ももの丸み・ふっくらした面） -->
-  <path fill="#CCD6DD" opacity="0.7" d="M 20 27 C 18 28.5 19 30.5 22 30.5 C 24.5 30.5 26 29 25 27.5 C 23.5 26.5 21.5 26 20 27 Z"/>
-  <ellipse cx="22.5" cy="29.5" rx="2.0" ry="1.0" fill="#FFFFFF"/>
+  <!-- 後ろ足（ももの丸み） -->
+  <path d="M 58 78 C 48 78 46 85 52 87 C 60 88 65 84 64 80" 
+        fill="none" class="rabbit-detail"/>
 </svg>

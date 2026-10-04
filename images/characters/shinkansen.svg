@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60">
-  <!-- 車体下のメカニカル影（底面の立体感） -->
+  <!-- 地面の影（車体下の影） -->
   <path d="M 14 51 L 95 31 L 95 29 L 43 47 C 32 51 20 52 14 51 Z" fill="#292F33" opacity="0.6"/>
 
   <!-- 車体下部の青いスカート（排障器・ブルー帯）: #1D4ED8 -->
@@ -31,30 +31,43 @@
   <path d="M 8 34 C 6.5 36.5 6.5 39.5 8 41.5 C 10 40 12 37 12 35 C 10 34.5 9 34.2 8 34 Z" 
         fill="#CCD6DD" opacity="0.5"/>
 
-  <!-- 運転席フロントガラス（Twemojiの水色 #55ACEE、シャドウ #3B88C3） -->
-  <path d="M 23 25 C 28 20 38 21 42 22 C 43 25 41 30 38 31 C 28 32 23 30 23 25 Z" 
-        fill="#3B88C3"/>
-  <path d="M 23.8 25.3 C 28.5 20.8 37.8 21.8 41.2 22.8 C 42.2 25.3 40.8 29.3 37.8 30.3 C 28.8 31.3 24.3 29.8 23.8 25.3 Z" 
-        fill="#55ACEE"/>
-  <!-- フロントガラスの反射ライン -->
-  <path d="M 26 24.5 Q 32 22.5 37 23.5" stroke="#ffffff" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85"/>
-
   <!-- 楕円形の黄色いヘッドライト: #FFCC4D + 芯 #FFF9C4 -->
   <ellipse cx="33" cy="35" rx="4.2" ry="3.2" fill="#FFCC4D"/>
   <ellipse cx="33" cy="35" rx="2.5" ry="1.8" fill="#FFF9C4"/>
 
-  <!-- 乗務員室ドア（さりげない境界ライン） -->
-  <path d="M 49 22 L 56 23 L 52.5 39.5 L 45.5 37.5 Z" fill="#CCD6DD" opacity="0.3"/>
-  <rect x="50" y="25" width="4.5" height="6.5" rx="1" fill="#55ACEE"/>
+  <!-- 運転席フロントガラス（流線型新幹線らしいシャープなキャノピー） -->
+  <path d="M 20 26 C 26 21 35 21 44 22 C 45 23 43 27 39 28 C 30 29 23 28.5 20 26 Z" fill="#1e293b"/>
+  <path d="M 21.5 25.8 C 26.5 21.8 34.5 21.8 42.5 22.8 C 42.5 24 41 26.5 38 27.2 C 30 28 24 27.5 21.5 25.8 Z" fill="#55ACEE"/>
+  <!-- 光沢反射ライン -->
+  <path d="M 24 24 Q 31 22.5 38 23.5" stroke="#ffffff" stroke-width="1.0" fill="none" stroke-linecap="round" opacity="0.9"/>
 
-  <!-- 客席の窓（均整の取れたクリーンな角丸四角形、Twemojiの水色 #55ACEE） -->
-  <path d="M 60 23.5 L 66.5 24.5 L 64.5 36.5 L 58 35 Z" fill="#55ACEE"/>
-  <path d="M 68.5 25 L 74.5 26 L 72.5 34.5 L 67.5 33.5 Z" fill="#55ACEE"/>
-  <path d="M 76.5 26 L 81.5 26.8 L 80.5 33 L 75.5 32.5 Z" fill="#55ACEE"/>
-  <path d="M 83.5 27 L 87.5 27.5 L 86.5 32 L 82.5 31.5 Z" fill="#55ACEE"/>
-  <path d="M 89 27.7 L 92.5 28.2 L 92 31.2 L 88.5 30.8 Z" fill="#55ACEE"/>
+  <!-- 乗務員室ドア（自然な境界ライン＆小さな窓） -->
+  <line x1="47" y1="20.5" x2="44" y2="37.5" stroke="#CCD6DD" stroke-width="1.0" stroke-linecap="round"/>
+  <rect x="48" y="23" width="3.2" height="4.8" rx="0.8" fill="#55ACEE"/>
 
-  <!-- 窓の光沢ハイライト -->
-  <line x1="60.5" y1="24.5" x2="66" y2="25.3" stroke="#ffffff" stroke-width="0.8" opacity="0.7" stroke-linecap="round"/>
-  <line x1="69" y1="25.8" x2="74" y2="26.6" stroke="#ffffff" stroke-width="0.8" opacity="0.7" stroke-linecap="round"/>
+  <!-- 客席の自然な窓並び（小さめで整然とした新幹線らしい窓） -->
+  <!-- 窓1 (手前) -->
+  <rect x="54" y="23.5" width="4.8" height="5.5" rx="1.0" fill="#55ACEE"/>
+  <rect x="54.5" y="24" width="3.8" height="1.2" rx="0.5" fill="#ffffff" opacity="0.6"/>
+
+  <!-- 窓2 -->
+  <rect x="61" y="24.2" width="4.5" height="5.0" rx="1.0" fill="#55ACEE"/>
+  <rect x="61.5" y="24.6" width="3.5" height="1.1" rx="0.5" fill="#ffffff" opacity="0.6"/>
+
+  <!-- 窓3 -->
+  <rect x="67.5" y="24.8" width="4.2" height="4.5" rx="0.9" fill="#55ACEE"/>
+  <rect x="68" y="25.2" width="3.2" height="1.0" rx="0.5" fill="#ffffff" opacity="0.6"/>
+
+  <!-- 窓4 -->
+  <rect x="73.5" y="25.4" width="3.8" height="4.0" rx="0.8" fill="#55ACEE"/>
+  <rect x="74" y="25.7" width="2.8" height="0.9" rx="0.4" fill="#ffffff" opacity="0.6"/>
+
+  <!-- 窓5 -->
+  <rect x="79" y="25.9" width="3.5" height="3.6" rx="0.7" fill="#55ACEE"/>
+
+  <!-- 窓6 (奥) -->
+  <rect x="84.2" y="26.4" width="3.0" height="3.2" rx="0.6" fill="#55ACEE"/>
+
+  <!-- 屋根のスマートなハイライト曲線 -->
+  <path d="M 38 17.5 Q 55 18.5 85 26.5" stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.8"/>
 </svg>
