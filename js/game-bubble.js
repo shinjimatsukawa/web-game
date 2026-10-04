@@ -81,11 +81,17 @@ class BubbleGame {
     if (this.characterQueue.length === 0) {
       this.refillQueue();
     }
-    // 最初の3問の音声をあらかじめ一括で先読みキャッシュ
+    // 現在表示中の問題があれば最優先で先読み
+    if (this.currentChar && window.soundManager && typeof soundManager.preloadAudio === 'function') {
+      soundManager.preloadAudio(`/audio/neural/questions/${this.currentChar.id}.wav`);
+      soundManager.preloadAudio(`/audio/neural/praises/${this.currentChar.id}.wav`);
+    }
+    // 出題待ちの先頭3問の音声をあらかじめ一括で先読みキャッシュ
     for (let i = 0; i < Math.min(3, this.characterQueue.length); i++) {
       const char = CHARACTERS_DATA[this.characterQueue[i]];
       if (char && window.soundManager && typeof soundManager.preloadAudio === 'function') {
         soundManager.preloadAudio(`/audio/neural/questions/${char.id}.wav`);
+        soundManager.preloadAudio(`/audio/neural/praises/${char.id}.wav`);
       }
     }
   }
@@ -98,7 +104,6 @@ class BubbleGame {
     this.clearedCount = 0;
     this.clearedAnimals = [];
     this.refillQueue();
-    this.prepareQueueAndPreloadFirst();
     this.nextCharacter();
   }
 
@@ -152,17 +157,24 @@ class BubbleGame {
     this.isCompleted = false;
     this.render();
 
-    // 次の2問の音声をあらかじめメモリにプリロード（タップ時に即座に聞けるようにキャッシュ）
+    // 1. 今表示されているキャラクターの出題音声＆褒め音声を最優先でプリロード
+    if (window.soundManager && typeof soundManager.preloadAudio === 'function') {
+      soundManager.preloadAudio(`/audio/neural/questions/${charData.id}.wav`);
+      soundManager.preloadAudio(`/audio/neural/praises/${charData.id}.wav`);
+    }
+
+    // 2. 次の2問の音声もあらかじめメモリにプリロード（タップ時に即座に聞けるようにキャッシュ）
     this.preloadNextQuestion();
   }
 
-  // 次のキャラクターたちの出題音声をあらかじめキャッシュしておく（Safariのタップ再生成功率100%化）
+  // 次のキャラクターたちの出題音声・褒め音声をあらかじめキャッシュしておく（Safariのタップ再生成功率100%化）
   preloadNextQuestion() {
     if (this.characterQueue.length > 0 && window.soundManager && typeof soundManager.preloadAudio === 'function') {
       for (let i = 0; i < Math.min(2, this.characterQueue.length); i++) {
         const nextChar = CHARACTERS_DATA[this.characterQueue[i]];
         if (nextChar) {
           soundManager.preloadAudio(`/audio/neural/questions/${nextChar.id}.wav`);
+          soundManager.preloadAudio(`/audio/neural/praises/${nextChar.id}.wav`);
         }
       }
     }

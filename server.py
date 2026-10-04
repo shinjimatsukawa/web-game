@@ -41,6 +41,10 @@ class KidsGameHandler(http.server.SimpleHTTPRequestHandler):
         # iPad Safari対応のMIMEタイプ明示
         if path.endswith('.m4a'):
             return 'audio/mp4'
+        if path.endswith('.wav'):
+            return 'audio/wav'
+        if path.endswith('.mp3'):
+            return 'audio/mpeg'
         if path.endswith('.js'):
             return 'application/javascript; charset=utf-8'
         if path.endswith('.css'):
