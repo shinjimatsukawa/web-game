@@ -1,59 +1,60 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60">
-  <defs>
-    <style>
-      .outline { stroke: #231f20; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-      .thin-line { stroke: #231f20; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-    </style>
-  </defs>
+  <!-- 車体下のメカニカル影（底面の立体感） -->
+  <path d="M 14 51 L 95 31 L 95 29 L 43 47 C 32 51 20 52 14 51 Z" fill="#292F33" opacity="0.6"/>
 
-  <!-- 車体下部の青いスカート（帯） -->
+  <!-- 車体下部の青いスカート（排障器・ブルー帯）: #1D4ED8 -->
   <path d="M 7 42 C 6 45 8 50 16 53 C 24 56 36 54 44 49 L 95 28 L 94 25 L 43 45 C 33 49 18 51 10 47 C 7 45 6 43 7 42 Z" 
-        fill="#1d4ed8" stroke="#231f20" stroke-width="2.2" stroke-linejoin="round"/>
-  <!-- 車体下のダークグレー影 -->
-  <path d="M 40 48 L 54 43 L 44 47 Z" fill="#475569"/>
+        fill="#1d4ed8"/>
+  <!-- スカートのダークトーン底面（立体感） -->
+  <path d="M 10 48 C 18 52 33 51 44 47 L 95 27 L 95 28.5 L 44 49 C 36 54 24 56 16 53 C 12 51 9 49 10 48 Z" 
+        fill="#1e40af"/>
 
-  <!-- 新幹線のメイン車体（ホワイト） -->
-  <path d="M 6 41 C 5 36 8 30 19 25 C 27 21 34 16 43 16 C 53 16 75 25 96 27 L 7 42 Z" 
-        fill="#ffffff"/>
-  <!-- 車体全体のアウトライン -->
-  <path d="M 6 41 C 5 36 8 30 19 25 C 27 21 34 16 43 16 C 53 16 75 25 96 27 L 43 45 C 33 49 18 51 10 47 C 7 45 6 43 6 41 Z" 
-        fill="none" class="outline"/>
+  <!-- 新幹線車体のベース（陰影・サイドパネル）: #E1E8ED -->
+  <path d="M 6 41 C 5 36 8 30 19 25 C 27 21 34 16 43 16 C 53 16 75 25 96 27 L 95 28 L 43 45 C 33 49 18 51 10 47 C 7 45 6 43 6 41 Z" 
+        fill="#E1E8ED"/>
 
-  <!-- 黄色のストライプ帯（青帯のすぐ上） -->
-  <path d="M 7 42 C 15 47 30 46 43 42 L 95 25 L 95 27 L 43 44 C 30 48 15 49 7 44 Z" 
-        fill="#facc15" stroke="#231f20" stroke-width="1.2"/>
+  <!-- 屋根・上面のホワイトパネル（手前〜屋根の明るい白）: #FFFFFF -->
+  <path d="M 6 40 C 5.2 35.5 8 30 18.5 25 C 26 21 33 16 43 16 C 52 16 74 24.5 95 26.5 L 94 25.5 C 73 23.5 52 15 42 15 C 32 15 25 20 17 24 C 7 29 4.5 35 5 40 Z" 
+        fill="#FFFFFF"/>
 
-  <!-- ノーズ先端の丸いキャップ（先頭ノーズライン） -->
-  <path d="M 8 33 C 6 36 6 40 8 43 C 14 47 24 45 25 39 C 26 33 16 30 8 33 Z" 
-        fill="#ffffff" class="thin-line"/>
+  <!-- 車体側面のハイライトパネル（ホワイト） -->
+  <path d="M 8 38 C 12 34 22 28 35 24 C 50 20 70 23 94 26 L 94 27 C 70 24 50 21 35 25 C 22 29 12 35 8 38 Z" 
+        fill="#FFFFFF" opacity="0.9"/>
 
-  <!-- 運転席フロントガラス（水色・黒枠） -->
+  <!-- 黄色のストライプ帯（青帯のすぐ上）: #FFCC4D -->
+  <path d="M 7.2 42.2 C 15 47 30 46 43 42 L 95 25 L 95 26.5 L 43 43.5 C 30 47.5 15 48.5 7.2 43.8 Z" 
+        fill="#FFCC4D"/>
+
+  <!-- ノーズ先端の丸みキャップ（ホワイト・陰影 #CCD6DD） -->
+  <path d="M 8 33 C 6 36 6 40 8 42.5 C 13 45.5 22 44.5 24 39 C 25 34 16 31 8 33 Z" 
+        fill="#FFFFFF"/>
+  <path d="M 8 34 C 6.5 36.5 6.5 39.5 8 41.5 C 10 40 12 37 12 35 C 10 34.5 9 34.2 8 34 Z" 
+        fill="#CCD6DD" opacity="0.5"/>
+
+  <!-- 運転席フロントガラス（Twemojiの水色 #55ACEE、シャドウ #3B88C3） -->
   <path d="M 23 25 C 28 20 38 21 42 22 C 43 25 41 30 38 31 C 28 32 23 30 23 25 Z" 
-        fill="#c7e6fc" class="thin-line"/>
-  <!-- フロントガラスの光沢反射ライン -->
-  <path d="M 26 25 Q 32 23 38 24" stroke="#ffffff" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        fill="#3B88C3"/>
+  <path d="M 23.8 25.3 C 28.5 20.8 37.8 21.8 41.2 22.8 C 42.2 25.3 40.8 29.3 37.8 30.3 C 28.8 31.3 24.3 29.8 23.8 25.3 Z" 
+        fill="#55ACEE"/>
+  <!-- フロントガラスの反射ライン -->
+  <path d="M 26 24.5 Q 32 22.5 37 23.5" stroke="#ffffff" stroke-width="1.4" fill="none" stroke-linecap="round" opacity="0.85"/>
 
-  <!-- 楕円形の黄色いヘッドライト -->
-  <ellipse cx="33" cy="35" rx="4.2" ry="3.2" fill="#fef08a" class="thin-line"/>
-  <!-- ライト内部のライン -->
-  <ellipse cx="33" cy="35" rx="2.4" ry="1.6" fill="#facc15"/>
+  <!-- 楕円形の黄色いヘッドライト: #FFCC4D + 芯 #FFF9C4 -->
+  <ellipse cx="33" cy="35" rx="4.2" ry="3.2" fill="#FFCC4D"/>
+  <ellipse cx="33" cy="35" rx="2.5" ry="1.8" fill="#FFF9C4"/>
 
-  <!-- ドア（乗務員室ドア） -->
-  <path d="M 49 22 L 57 23 L 53 40 L 45 38 Z" fill="#ffffff" class="thin-line"/>
-  <rect x="50.5" y="25" width="4.5" height="6.5" rx="1" fill="#c7e6fc" class="thin-line"/>
+  <!-- 乗務員室ドア（さりげない境界ライン） -->
+  <path d="M 49 22 L 56 23 L 52.5 39.5 L 45.5 37.5 Z" fill="#CCD6DD" opacity="0.3"/>
+  <rect x="50" y="25" width="4.5" height="6.5" rx="1" fill="#55ACEE"/>
 
-  <!-- 客席の四角い窓（奥へ遠近感で小さくなる並び） -->
-  <!-- 窓1 -->
-  <path d="M 60 23.5 L 67 24.5 L 65 37 L 58 35.5 Z" fill="#c7e6fc" class="thin-line"/>
-  <!-- 窓2 -->
-  <path d="M 69 25 L 75 26 L 73 35 L 68 34 Z" fill="#c7e6fc" class="thin-line"/>
-  <!-- 窓3 -->
-  <path d="M 77 26 L 82 26.8 L 81 33.5 L 76 33 Z" fill="#c7e6fc" class="thin-line"/>
-  <!-- 窓4 -->
-  <path d="M 84 27 L 88 27.5 L 87 32.5 L 83 32 Z" fill="#c7e6fc" class="thin-line"/>
-  <!-- 窓5 -->
-  <path d="M 89.5 27.7 L 93 28.2 L 92.5 31.5 L 89 31.2 Z" fill="#c7e6fc" class="thin-line"/>
+  <!-- 客席の窓（均整の取れたクリーンな角丸四角形、Twemojiの水色 #55ACEE） -->
+  <path d="M 60 23.5 L 66.5 24.5 L 64.5 36.5 L 58 35 Z" fill="#55ACEE"/>
+  <path d="M 68.5 25 L 74.5 26 L 72.5 34.5 L 67.5 33.5 Z" fill="#55ACEE"/>
+  <path d="M 76.5 26 L 81.5 26.8 L 80.5 33 L 75.5 32.5 Z" fill="#55ACEE"/>
+  <path d="M 83.5 27 L 87.5 27.5 L 86.5 32 L 82.5 31.5 Z" fill="#55ACEE"/>
+  <path d="M 89 27.7 L 92.5 28.2 L 92 31.2 L 88.5 30.8 Z" fill="#55ACEE"/>
 
-  <!-- 屋根のハイライト曲線 -->
-  <path d="M 38 18 Q 55 19 85 27" stroke="#ffffff" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <!-- 窓の光沢ハイライト -->
+  <line x1="60.5" y1="24.5" x2="66" y2="25.3" stroke="#ffffff" stroke-width="0.8" opacity="0.7" stroke-linecap="round"/>
+  <line x1="69" y1="25.8" x2="74" y2="26.6" stroke="#ffffff" stroke-width="0.8" opacity="0.7" stroke-linecap="round"/>
 </svg>
